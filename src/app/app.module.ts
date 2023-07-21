@@ -7,6 +7,7 @@ import { LoginComponent } from './modules/authentication/screens/login/login.com
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedComponentsModule } from './modules/shared-components/shared-components.module';
 import { AuthenticationModule } from './modules/authentication/authentication.module';
+import { MasterLayoutModule } from './modules/master-layout/master-layout.module';
 
 @NgModule({
   declarations: [
@@ -17,8 +18,9 @@ import { AuthenticationModule } from './modules/authentication/authentication.mo
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    AuthenticationModule,
-    SharedComponentsModule
+    MasterLayoutModule
+    // AuthenticationModule,
+    // SharedComponentsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

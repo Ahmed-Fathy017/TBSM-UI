@@ -59,6 +59,12 @@ export class LoginComponent implements OnInit {
   
       if (this.loginForm.valid) {
         if (userNameControl && passwordControl) {
+          this.isProcessing = true;
+
+          setTimeout(() => {
+            this.isProcessing = false;
+            this.router.navigate(['dashboard']);
+          }, 2000);
           // let username = userNameControl.value;
           // let password = passwordControl.value;
           // let tokenRequestDTO: TokenRequestDTO = new TokenRequestDTO();

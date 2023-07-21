@@ -1,0 +1,56 @@
+<div class="container-fluid">
+    <app-page-header [pageTitle]="firstPageTitle"></app-page-header>
+
+    <div class="container ">
+        <div class=" row mb-2 ">
+            <div class="col-md-12 col-lg-12 col-xl-12">
+
+                <label for="warehouseName" class="mb-1 d-flex justify-content-end">اسم المستودع</label>
+                <input id="warehouseName" class="form-control" type="text">
+            </div>
+        </div>
+
+        <div class=" row mb-2 d-flex flex-row-reverse">
+            <div class="col-md-6 col-lg-6 col-xl-6">
+
+                <label for="userName" class="mb-1 d-flex justify-content-end">اسم المستخدم</label>
+                <input id="userName" class="form-control" type="text">
+            </div>
+
+            <div class="col-md-6 col-lg-6 col-xl-6">
+
+                <label for="password" class="mb-1 d-flex justify-content-end">كلمه السر</label>
+                <input id="password" class="form-control" type="text">
+            </div>
+
+        </div>
+
+
+        <div class=" row mb-2 d-flex flex-row-reverse">
+
+            <div class="col-md-6 col-lg-6 col-xl-6">
+
+                <label for="package" class="mb-1 d-flex justify-content-end">الباقات</label>
+
+                <select id="package" class="form-select" name="" id="">
+                    <option value="">Select</option>
+                </select>
+            </div>
+
+            <div class="col-md-6 col-lg-6 col-xl-6">
+
+                <div class="btn">
+                    <app-loading-button [processing]="isProcessing">
+                        انشاء
+                    </app-loading-button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <app-page-header [pageTitle]="secondPageTitle"></app-page-header>
+
+    <div class="container">
+    </div>
+
+</div>

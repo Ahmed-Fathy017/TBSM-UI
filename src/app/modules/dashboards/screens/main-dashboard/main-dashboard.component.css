@@ -1,0 +1,18 @@
+.card {
+    background-color: #F6F6FB;
+    border: none;
+    width: 244px;
+    height: 190px;
+
+}
+
+.card .icon {
+    color: #F15A60;
+    background-color: white;
+    Width: 30px;
+    Height: 30px;
+}
+
+.card-title {
+    color: #2B2F42;
+}

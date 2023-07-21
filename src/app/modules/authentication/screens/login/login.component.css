@@ -16,7 +16,7 @@
 }
 
 .login .back {
-    color: #C3A572;
+    color: #100F37;
     position: fixed;
     cursor: pointer;
 }
@@ -48,12 +48,12 @@
 
 .login .loginform .form {
     padding: 2rem 0rem;
-    width: 85%;
+    width: 60%;
     margin: auto;
 }
 
 .login .loginform .form h2 {
-    color: #C3A572;
+    color: #100F37;
     font-weight: bold;
 }
 
@@ -64,7 +64,7 @@
     border-radius: 5px;
     padding: 0.5rem 1rem;
     margin: 0.5rem 0rem;
-    box-shadow: 3px 3px 5px #dbdbdb;
+    /* box-shadow: 3px 3px 5px #dbdbdb; */
     outline: none;
 }
 
@@ -97,19 +97,20 @@
 
 .login .loginform .form .forgetpw:hover {
     cursor: pointer;
-    color: #C3A572;
+    color: #100F37;
     text-decoration: underline;
 }
 
 .login .loginform .form .btn {
     width: 100%;
     color: #ffffff;
-    background-image: linear-gradient(to right, #C3A572, #bba887);
+    background-color: #F15A60;
     margin: 1rem 0rem;
+    border-radius: 12px;
 }
 
 .login .logintxt {
-    background-color: #C3A572;
+    background-color: #100F37;
     color: #ffffff;
     min-height: 100vh;
     text-align: center;
@@ -141,6 +142,11 @@
 .login p {
     color: #d32815;
     margin-bottom: 0.2rem;
+}
+
+.block {
+    display: block;
+    color: #100F37;
 }
 
 
@@ -207,7 +213,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        color: #C3A572;
+        color: #100F37;
         margin: 2rem 0rem;
         text-align: center;
     }

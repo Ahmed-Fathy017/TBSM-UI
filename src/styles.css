@@ -1,0 +1,10 @@
+/************ Fonts ************/
+
+@font-face {
+    font-family: AppFont;
+    src: url("../src/assets/fonts/Almarai-Regular.ttf") format("opentype");
+}
+
+* { 
+    font-family: AppFont;
+  }

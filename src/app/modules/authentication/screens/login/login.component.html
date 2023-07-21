@@ -1,37 +1,58 @@
-
 <div class="login">
     <div class="container-fluid">
         <div class="row">
             <div class="logo">
-                <h1><span>Hotel</span></h1>
+                <h1><span>TBSM</span></h1>
             </div>
             <div class="col-12 col-md-6 loginform">
                 <div class="container">
                     <div class="form">
-                        <h2>Login</h2>
-                        <form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()">
-                            <input type="text" placeholder="User Name" formControlName="userName" [ngClass]="{'inputerror': loginForm.controls.userName.errors && loginForm.controls.userName.touched}" />
+                        <div class="header d-flex flex-column align-items-center fw-bold">
+                            <span class="block mb-2"> 👋 مرحباً بك في اداره المستودعات </span>
+                            <span class="block">الرجاء تسجيل الدخول إلى
+                                حسابك وبدء المغامرة</span>
+                        </div>
+                        <h2 class="d-flex align-items-center justify-content-center"></h2>
+                        <form class="mt-5" [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()">
+                            <div>
 
-                            <div class="errors" *ngIf="loginForm.controls.userName.errors && loginForm.controls.userName.touched">
-                                <p *ngIf="loginForm.controls.userName.errors.required">
-                                    <i class="fas fa-exclamation-circle"></i> User Name is Required
-                                </p>
-                            </div>
-                            <input type="password" placeholder="Password" #password formControlName="password" [ngClass]="{'inputerror': loginForm.controls.password.errors && loginForm.controls.password.touched}" />
-                            <div class="eye">
-                                <i class="far fa-eye-slash hidden" #hidden (click)="togglePassword()"></i>
-                                <i class="far fa-eye show" #show (click)="togglePassword()"></i>
-                            </div>
-                            <div class="errors" *ngIf="loginForm.controls.password.errors && loginForm.controls.password.touched">
-                                <p *ngIf="loginForm.controls.password.errors.required">
-                                    <i class="fas fa-exclamation-circle"></i> Password is Required
-                                </p>
+                                <label for="username" class="d-flex flex-row-reverse">اسم المستخدم</label>
+                                <input type="text" id="username" placeholder="User Name" formControlName="userName"
+                                    [ngClass]="{'inputerror': loginForm.controls.userName.errors && loginForm.controls.userName.touched}" />
+
+                                <div class="errors"
+                                    *ngIf="loginForm.controls.userName.errors && loginForm.controls.userName.touched">
+                                    <p *ngIf="loginForm.controls.userName.errors.required">
+                                        <i class="fas fa-exclamation-circle"></i> User Name is Required
+                                    </p>
+                                </div>
                             </div>
 
-                            <label *ngIf="showMessage" class="alert alert-danger col-12" role="alert">{{message}}</label>
+                            <div>
+                                <label for="password" class="d-flex flex-row-reverse">الرقم السري</label>
+
+                                <input type="password" id="password" placeholder="Password" #password
+                                    formControlName="password"
+                                    [ngClass]="{'inputerror': loginForm.controls.password.errors && loginForm.controls.password.touched}" />
+                                <div class="eye">
+                                    <i class="far fa-eye-slash hidden" #hidden (click)="togglePassword()"></i>
+                                    <i class="far fa-eye show" #show (click)="togglePassword()"></i>
+                                </div>
+                                <div class="errors"
+                                    *ngIf="loginForm.controls.password.errors && loginForm.controls.password.touched">
+                                    <p *ngIf="loginForm.controls.password.errors.required">
+                                        <i class="fas fa-exclamation-circle"></i> Password is Required
+                                    </p>
+                                </div>
+                            </div>
+
+
+
+                            <label *ngIf="showMessage" class="alert alert-danger col-12"
+                                role="alert">{{message}}</label>
                             <div class="btn">
-                                <app-loading-button [processing]="isProcessing" [formValid]="loginForm.valid">
-                                    Login
+                                <app-loading-button [processing]="isProcessing" [formValid]="loginForm.valid" >
+                                    تسجيل الدخول
                                 </app-loading-button>
                             </div>
                         </form>
@@ -39,9 +60,7 @@
                 </div>
             </div>
             <div class="col-12 col-md-6 logintxt">
-                <h1><span style="font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif">Le Riad Hotel de
-            Charme</span></h1>
-
+                <img src="assets/images/logo.svg" alt="logo">
             </div>
         </div>
     </div>

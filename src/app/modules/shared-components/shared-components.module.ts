@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LoadingButtonComponent } from './components/loading-button/loading-button.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { LoadingDotsComponent } from './components/loading-dots/loading-dots.component';
+import { PageHeaderComponent } from './components/page-header/page-header.component';
 
 
 
@@ -10,7 +11,8 @@ import { LoadingDotsComponent } from './components/loading-dots/loading-dots.com
   declarations: [
     LoadingButtonComponent,
     LoadingComponent,
-    LoadingDotsComponent
+    LoadingDotsComponent,
+    PageHeaderComponent
   ],
   imports: [
     CommonModule,
@@ -19,7 +21,8 @@ import { LoadingDotsComponent } from './components/loading-dots/loading-dots.com
   exports : [
     LoadingButtonComponent,
     LoadingComponent,
-    LoadingDotsComponent
+    LoadingDotsComponent,
+    PageHeaderComponent
   ]
 })
 export class SharedComponentsModule { }
