@@ -1,0 +1,4 @@
+<button class="loadingbtn" [disabled]="processing || this.disabled" (click)="tirggerOnClickEvent()">
+  <div class="loader" *ngIf="processing"></div>
+  <ng-content></ng-content>
+</button>

@@ -1,0 +1,48 @@
+
+<div class="login">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="logo">
+                <h1><span>Hotel</span></h1>
+            </div>
+            <div class="col-12 col-md-6 loginform">
+                <div class="container">
+                    <div class="form">
+                        <h2>Login</h2>
+                        <form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()">
+                            <input type="text" placeholder="User Name" formControlName="userName" [ngClass]="{'inputerror': loginForm.controls.userName.errors && loginForm.controls.userName.touched}" />
+
+                            <div class="errors" *ngIf="loginForm.controls.userName.errors && loginForm.controls.userName.touched">
+                                <p *ngIf="loginForm.controls.userName.errors.required">
+                                    <i class="fas fa-exclamation-circle"></i> User Name is Required
+                                </p>
+                            </div>
+                            <input type="password" placeholder="Password" #password formControlName="password" [ngClass]="{'inputerror': loginForm.controls.password.errors && loginForm.controls.password.touched}" />
+                            <div class="eye">
+                                <i class="far fa-eye-slash hidden" #hidden (click)="togglePassword()"></i>
+                                <i class="far fa-eye show" #show (click)="togglePassword()"></i>
+                            </div>
+                            <div class="errors" *ngIf="loginForm.controls.password.errors && loginForm.controls.password.touched">
+                                <p *ngIf="loginForm.controls.password.errors.required">
+                                    <i class="fas fa-exclamation-circle"></i> Password is Required
+                                </p>
+                            </div>
+
+                            <label *ngIf="showMessage" class="alert alert-danger col-12" role="alert">{{message}}</label>
+                            <div class="btn">
+                                <app-loading-button [processing]="isProcessing" [formValid]="loginForm.valid">
+                                    Login
+                                </app-loading-button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 logintxt">
+                <h1><span style="font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif">Le Riad Hotel de
+            Charme</span></h1>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,220 @@
+.login {
+    background-color: #fafafa;
+    min-height: 100vh;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login .logo {
+    display: none;
+}
+
+.login .logo {
+    display: none;
+}
+
+.login .back {
+    color: #C3A572;
+    position: fixed;
+    cursor: pointer;
+}
+
+.login .or p {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #8e8e8e;
+    line-height: 0.1em;
+    margin: 10px 0 20px;
+}
+
+.login .or {
+    margin: 2rem 0rem;
+}
+
+.login .or p span {
+    background: #fafafa;
+    padding: 0 1rem;
+    color: #8e8e8e;
+}
+
+.login .col-md-6 {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login .loginform .form {
+    padding: 2rem 0rem;
+    width: 85%;
+    margin: auto;
+}
+
+.login .loginform .form h2 {
+    color: #C3A572;
+    font-weight: bold;
+}
+
+.login .loginform .form input {
+    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0rem;
+    box-shadow: 3px 3px 5px #dbdbdb;
+    outline: none;
+}
+
+.login .loginform .form .eye {
+    text-align: end;
+    height: 0;
+}
+
+.login .loginform .form i.show,
+.login .loginform .form i.hidden {
+    color: #8e8e8e;
+    text-align: end;
+    position: relative;
+    top: -2.5rem;
+    padding-right: 1rem;
+}
+
+.login .loginform .form i:hover {
+    cursor: pointer;
+}
+
+.login .loginform .form i.show {
+    display: none;
+}
+
+.login .loginform .form .forgetpw {
+    color: #8e8e8e;
+    text-align: end;
+}
+
+.login .loginform .form .forgetpw:hover {
+    cursor: pointer;
+    color: #C3A572;
+    text-decoration: underline;
+}
+
+.login .loginform .form .btn {
+    width: 100%;
+    color: #ffffff;
+    background-image: linear-gradient(to right, #C3A572, #bba887);
+    margin: 1rem 0rem;
+}
+
+.login .logintxt {
+    background-color: #C3A572;
+    color: #ffffff;
+    min-height: 100vh;
+    text-align: center;
+}
+
+.login .logintxt h1 {
+    font-weight: bold;
+    margin: 0;
+}
+
+.login .logintxt h1 span {
+    font-style: italic;
+}
+
+.login .logintxt h3 {
+    margin: 1rem 0rem;
+    width: 80%;
+}
+
+
+/* validation */
+
+.login .loginform .form input.inputerror {
+    border-color: #d32815;
+    box-shadow: 0px 0px 5px #ea8276;
+}
+
+.login .errors p,
+.login p {
+    color: #d32815;
+    margin-bottom: 0.2rem;
+}
+
+
+/* media query */
+
+@media (max-width: 800px) {
+    .login .loginform .form {
+        width: 100%;
+        padding: 0;
+    }
+    .login .logintxt h1 {
+        font-size: 2rem;
+    }
+    .login .logintxt h2 {
+        font-size: 1.5rem;
+    }
+    .login .loginform .container {
+        padding: 0.5rem;
+    }
+    .login .logintxt h1 {
+        font-size: 2rem;
+    }
+    .login .loginform .form h2 {
+        margin-bottom: 1rem;
+    }
+    .login .logintxt h3 {
+        margin: 0.5rem 0rem;
+        font-size: 1rem;
+    }
+    .login .logintxt .signup {
+        padding: 0.3rem 1rem;
+        font-size: 0.9rem;
+    }
+    .login .loginform p.signup {
+        margin-top: 1rem;
+    }
+    .login .loginform .form .btn {
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .login .logintxt {
+        display: none;
+    }
+    .login .loginform .form .forgetpw {
+        display: none;
+    }
+    /* .login {
+    background-image: url("../../../../../assets/images/loginbg.png"), url("../../../../../assets/images/loginbg2.png");
+    background-position: top right, bottom left;
+    background-size: 50%, 50%;
+    background-repeat: no-repeat no-repeat;
+  } */
+    .login {
+        background-position: top;
+        background-size: 150% 50%;
+        background-repeat: no-repeat;
+    }
+    .login .logo {
+        position: absolute;
+        top: 0;
+        height: 25vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color: #C3A572;
+        margin: 2rem 0rem;
+        text-align: center;
+    }
+    .login .logo h1 {
+        font-weight: 700;
+    }
+    .login .loginform .container {
+        padding-top: 10rem;
+    }
+}
