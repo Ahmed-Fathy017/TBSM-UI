@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { MasterLayoutRoutingModule } from './master-layout-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { WarehousesModule } from '../warehouses/warehouses.module';
+import { PackagesModule } from '../packages/packages.module';
 
 
 
@@ -24,7 +25,8 @@ import { WarehousesModule } from '../warehouses/warehouses.module';
     ReactiveFormsModule,
     DashboardsModule,
     MasterLayoutRoutingModule,
-    WarehousesModule
+    WarehousesModule,
+    PackagesModule
   ]
 })
 export class MasterLayoutModule { }

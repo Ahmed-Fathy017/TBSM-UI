@@ -16,6 +16,11 @@ const routes: Routes = [
         path: 'warehouses',
         loadChildren: () => import('../warehouses/warehouses-routing.module').then(m => m.WarehouseRoutingModule)
       },
+
+      {
+        path: 'packages',
+        loadChildren: () => import('../packages/packages-routing.module').then(m => m.PackagesRoutingModule)
+      },
       // { path: 'warehouses', component: WarehousesManagementComponent},
     ]
   },

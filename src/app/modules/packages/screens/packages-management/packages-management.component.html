@@ -1,0 +1,95 @@
+<div class="container-fluid">
+    <app-page-header [pageTitle]="firstPageTitle"></app-page-header>
+
+    <div class="container ">
+        <div class=" row mb-2 ">
+            <div class="col-md-12 col-lg-12 col-xl-12">
+
+                <label for="warehouseName" class="mb-1 d-flex justify-content-end">اسم الباقة</label>
+                <input id="warehouseName" class="form-control" type="text">
+            </div>
+        </div>
+
+        <div class=" row mb-2 d-flex flex-row-reverse">
+            <div class="col-md-4 col-lg-4 col-xl-4">
+
+                <label for="settings01" class="mb-1 d-flex justify-content-end">اعداد الثلاجات</label>
+                <input id="settings01" class="form-control" type="text">
+            </div>
+
+            <div class="col-md-4 col-lg-4 col-xl-4">
+
+                <label for="settings02" class="mb-1 d-flex justify-content-end">اعداد المنتجات</label>
+                <input id="settings02" class="form-control" type="text">
+            </div>
+
+            <div class="col-md-4 col-lg-4 col-xl-4">
+
+                <label for="settings03" class="mb-1 d-flex justify-content-end">اعداد الاقسام</label>
+                <input id="settings03" class="form-control" type="text">
+            </div>
+
+        </div>
+
+        <div class=" row mb-2 d-flex flex-row-reverse">
+
+            <div class="col-md-4 col-lg-4 col-xl-4 d-flex flex-row-reverse">
+
+                <input class="form-check-input ms-2" type="checkbox" value="" id="flexCheckIndeterminate01">
+                <label class="form-check-label" for="flexCheckIndeterminate01">
+                    تنبيه بتغيير درجه الحراره
+                </label>
+            </div>
+
+            <div class="col-md-4 col-lg-4 col-xl-4 d-flex flex-row-reverse">
+                <input class="form-check-input ms-2" type="checkbox" value="" id="flexCheckIndeterminate02">
+                <label class="form-check-label" for="flexCheckIndeterminate02">
+                    ميزه طلب الامداد الخارجي
+                </label>
+            </div>
+
+        </div>
+
+
+        <div class=" row mb-2 d-flex">
+
+
+            <div class="col-md-6 col-lg-6 col-xl-6">
+
+                <div class="btn">
+                    <app-loading-button [processing]="isProcessing">
+                        انشاء
+                    </app-loading-button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <app-page-header [pageTitle]="secondPageTitle"></app-page-header>
+
+    <div class="container warehouses">
+        <div class="row g-2 mb-2">
+            <div class="warehouse-card col-md-12 col-lg-12 col-xl-12 d-flex justify-content-between rounded-4 border px-4 py-3 mb-3"
+                *ngFor="let package of packages">
+
+                <div class="d-flex">
+
+                    <div class="mx-2 delete d-flex justify-content-center align-items-center"><i
+                            class="fa-solid fa-trash-can"></i></div>
+
+                    <div class="mx-2 edit d-flex justify-content-center align-items-center"><i
+                            class="fa-solid fa-pen-to-square"></i></div>
+                    <div class="mx-2 view d-flex justify-content-center align-items-center"><i
+                            class="fa-solid fa-eye"></i></div>
+
+                </div>
+
+                <div>
+                    {{package}}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
