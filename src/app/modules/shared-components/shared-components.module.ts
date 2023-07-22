@@ -4,7 +4,9 @@ import { LoadingButtonComponent } from './components/loading-button/loading-butt
 import { LoadingComponent } from './components/loading/loading.component';
 import { LoadingDotsComponent } from './components/loading-dots/loading-dots.component';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -16,7 +18,8 @@ import { PageHeaderComponent } from './components/page-header/page-header.compon
   ],
   imports: [
     CommonModule,
-    
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(), // ToastrModule added
   ],
   exports : [
     LoadingButtonComponent,

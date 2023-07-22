@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-main-dashboard',
@@ -18,9 +19,10 @@ export class MainDashboardComponent implements OnInit {
     {count: 20, title: 'جميع الطلبات'}
   ]
 
-  constructor() { }
+  constructor(private toastr: ToastrService) { }
 
   ngOnInit(): void {
+    this.toastr.success('Hello world!', '');
   }
 
 }
