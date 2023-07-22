@@ -1,25 +1,37 @@
 <!-- nav-bar -->
 
-<nav class="navbar navbar-expand-lg navbar-light  mb-2 border-bottom">
-    <div class="container">
-        <a class="navbar-brand" href="#">Navbar</a>
+<nav class="navbar navbar-light border-bottom d-flex flex-row-reverse">
+    <!-- <button class="navbar-toggler ms-3" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button> -->
+    <div class="container d-flex flex-row-reverse">
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown"
-            aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-            <ul class="navbar-nav">
-                <li class="nav-item dropdown d-flex justify-content-between">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        الاداره العليا
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarDarkDropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">تسجيل الخروج</a></li>
-                    </ul>
-                </li>
-            </ul>
+        <div class="d-flex flex-row-reverse">
+
+            <div class="avatar-small ms-2">
+                <img class="avatar-img rounded-circle"
+                    src="https://i.insider.com/5c007f32499ade0d21195b72?width=1100&format=jpeg&auto=webp" />
+            </div>
+            <div class="dropdown">
+                <button class="btn  dropdown-toggle " type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    الاداره العليا
+                </button>
+                <ul class="dropdown-menu dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                    <li><a class="dropdown-item active" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Separated link</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div>
+            aaaa
         </div>
     </div>
 </nav>
