@@ -3,7 +3,8 @@
     border: none;
     width: 244px;
     height: 190px;
-
+    color: white;
+    cursor: pointer;
 }
 
 .card .icon {
@@ -13,7 +14,12 @@
     Height: 30px;
 }
 
-.card-title {
-    color: #2B2F42;
+.card:hover {
+    opacity: 0.9;
 }
 
+.logs {
+    background-color: #F6F6FB;
+    height: 200px;
+    overflow: auto;
+}

@@ -1,0 +1,21 @@
+<div class="container-fluid mb-5">
+    <app-page-header [pageTitle]="pageTitle"></app-page-header>
+
+    <div class="container">
+        <div class="row d-flex justify-content-center d-flex flex-row-reverse">
+            <div class="card col-md-12 col-lg-4 col-xl-4 rounded-4 py-3 px-4 mx-4 my-4 d-flex  align-items-end justify-content-around"
+                *ngFor="let card of cards" [class]="card.visibility" [ngStyle]="{'background-color': card.backgroundColor}">
+
+                <div class="icon rounded-2 d-flex align-items-center justify-content-center"><i [class]="card.iconClass"></i></div>
+                <div class="h3 mb-0">{{card.count}}</div>
+                <div class="card-title">{{card.title}}</div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container logs p-4 d-flex flex-column align-items-end">
+        <p *ngFor="let log of logs">{{log}}</p>
+    </div>
+
+</div>

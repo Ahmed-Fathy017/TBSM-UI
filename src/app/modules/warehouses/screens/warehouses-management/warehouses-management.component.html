@@ -50,7 +50,29 @@
 
     <app-page-header [pageTitle]="secondPageTitle"></app-page-header>
 
-    <div class="container">
+    <div class="container warehouses">
+        <div class="row g-2 mb-2">
+            <div class="warehouse-card col-md-12 col-lg-12 col-xl-12 d-flex justify-content-between rounded-4 border px-4 py-3 mb-3"
+                *ngFor="let warehouse of warehouses">
+
+                <div class="d-flex">
+
+                    <div class="mx-2 delete d-flex justify-content-center align-items-center"><i
+                            class="fa-solid fa-trash-can"></i></div>
+
+                    <div class="mx-2 edit d-flex justify-content-center align-items-center"><i
+                            class="fa-solid fa-pen-to-square"></i></div>
+                    <div class="mx-2 view d-flex justify-content-center align-items-center"><i
+                            class="fa-solid fa-eye"></i></div>
+
+                </div>
+
+                <div>
+                    {{warehouse}}
+                </div>
+
+            </div>
+        </div>
     </div>
 
 </div>

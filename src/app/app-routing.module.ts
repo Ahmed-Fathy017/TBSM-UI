@@ -13,7 +13,7 @@ const routes: Routes = [];
 
     // Register the secured routes in the master-layout module (requires login)
     {
-      path: 'entry',
+      path: '',
       loadChildren: () => import('../app/modules/master-layout/master-layout-routing.module').then(m => m.MasterLayoutRoutingModule)
     },
   ]),],

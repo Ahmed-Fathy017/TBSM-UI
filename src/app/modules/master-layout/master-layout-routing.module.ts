@@ -11,7 +11,12 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: MainDashboardComponent},
-      { path: 'warehouses', component: WarehousesManagementComponent},
+
+      {
+        path: 'warehouses',
+        loadChildren: () => import('../warehouses/warehouses-routing.module').then(m => m.WarehouseRoutingModule)
+      },
+      // { path: 'warehouses', component: WarehousesManagementComponent},
     ]
   },
 
