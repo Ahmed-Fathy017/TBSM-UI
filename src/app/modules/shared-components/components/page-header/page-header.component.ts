@@ -8,10 +8,14 @@ import { Component, Input, OnInit } from '@angular/core';
 export class PageHeaderComponent implements OnInit {
 
   @Input('pageTitle') pageTitle!: string;
+  @Input('coloredPageTitle') coloredPageTitle!: string;
   
   constructor() { }
 
   ngOnInit(): void {
+
+    if (this.coloredPageTitle)
+      this.pageTitle + `${this.coloredPageTitle}`;
   }
 
 }

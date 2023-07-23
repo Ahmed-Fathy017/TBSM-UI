@@ -1,13 +1,15 @@
 <!-- nav-bar -->
 
-<nav class="navbar navbar-light border-bottom d-flex flex-row-reverse">
-    <!-- <button class="navbar-toggler ms-3" type="button" data-toggle="collapse" data-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button> -->
-    <div class="container d-flex flex-row-reverse">
 
-        <div class="d-flex flex-row-reverse">
+<nav class="navbar navbar-light border-bottom d-flex flex-row-reverse">
+
+    <div class="container d-flex flex-row-reverse">
+        
+        <div class="d-flex flex-row-reverse justify-content-between">
+
+            <div class="header-menu ms-3 d-flex align-items-center">
+                <span (click)="toggleSideNav()" class="menu-icon material-icons"><i class="fa-solid fa-bars"></i></span>
+            </div>
 
             <div class="avatar-small ms-2">
                 <img class="avatar-img rounded-circle"

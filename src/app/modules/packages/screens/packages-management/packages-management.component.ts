@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PackagesManagementComponent implements OnInit {
 
-  firstPageTitle: string = 'الرئيسية  /  الباقات  /  انشاء باقه';
+  firstPageTitle: string = 'الرئيسية  /  الباقات /';
+  coloredPageTitle : string = 'انشاء باقه'
   secondPageTitle: string = 'جميع الباقات';
 
   packages: string[] = ['الباقه الاولي', 'الباقه الاولي', 'الباقه الاولي', 'الباقه الاولي'];

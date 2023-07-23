@@ -22,7 +22,7 @@ export class MainDashboardComponent implements OnInit {
   constructor(private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.toastr.success('Hello world!', '');
+    // this.toastr.success('Hello world!', '');
   }
 
 }

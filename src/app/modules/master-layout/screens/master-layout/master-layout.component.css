@@ -1,0 +1,14 @@
+.menu-items button {
+    color: white;
+    border: none;
+    width: 100%;
+}
+
+.menu-items {
+    border-right: 4px solid transparent;
+}
+
+.menu-items:hover {
+    background-color: #F3F6F92B;
+    border-right: 4px solid #F15A60;
+}

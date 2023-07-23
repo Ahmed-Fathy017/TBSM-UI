@@ -14,5 +14,11 @@
   border-radius: 50%!important;
   }
 
+  .menu-icon {
+    font-size: 1.4rem;
+    /* padding: 18px; */
+    cursor: pointer;
+}
+
 
   

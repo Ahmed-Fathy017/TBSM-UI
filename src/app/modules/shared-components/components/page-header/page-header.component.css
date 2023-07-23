@@ -1,4 +1,9 @@
-.background {
+.pageTitle {
     background-color: #F6F6FB;
     color: #100F37;
+    font-weight: 700;
+}
+
+.colored-text {
+    color: #F15A60;
 }
