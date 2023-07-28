@@ -2,6 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { LoginRequest } from '../../models/login-request';
+import { AuthenticationService } from '../../remote-services/authentication.service';
+import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 
 @Component({
   selector: 'app-login',
@@ -14,8 +17,11 @@ export class LoginComponent implements OnInit {
     @ViewChild('hidden') hidden: any;
     @ViewChild('show') show: any;
     @ViewChild('password') password: any;
+
     subscription = new Subscription();
+
     message: string = '';
+
     showMessage: boolean = false;
     isProcessing: boolean = false;
     returnURL: string = '';
@@ -30,7 +36,9 @@ export class LoginComponent implements OnInit {
     /*************** Constructor **********************/
     constructor(
       private activatedRoute: ActivatedRoute,
-      private router: Router
+      private router: Router,
+      private authenticationService: AuthenticationService,
+      private localStore: LocalService
     ) {  }
   
     /*************** Events  **********************/
@@ -54,6 +62,7 @@ export class LoginComponent implements OnInit {
         if (control)
           control.markAsTouched({ onlySelf: true });
       });
+
       let userNameControl = this.loginForm.get('userName');
       let passwordControl = this.loginForm.get('password');
   
@@ -61,24 +70,26 @@ export class LoginComponent implements OnInit {
         if (userNameControl && passwordControl) {
           this.isProcessing = true;
 
-          setTimeout(() => {
-            this.isProcessing = false;
-            this.router.navigate(['dashboard']);
-          }, 2000);
-          // let username = userNameControl.value;
-          // let password = passwordControl.value;
-          // let tokenRequestDTO: TokenRequestDTO = new TokenRequestDTO();
-          // tokenRequestDTO.Username = username.trim();
-          // tokenRequestDTO.Password = password;
-          // this.isProcessing = true;
-          // this.login(tokenRequestDTO);
+          // setTimeout(() => {
+          //   this.isProcessing = false;
+          //   this.router.navigate(['dashboard']);
+          // }, 2000);
+
+          let username = userNameControl.value;
+          let password = passwordControl.value;
+
+          let requestDTO: LoginRequest = new LoginRequest();
+          requestDTO.username = username!.trim();
+          requestDTO.password = password!;
+          
+          this.isProcessing = true;
+          this.login(requestDTO);
         }
       }
     }
   
-  
-  
     /*************** Functions **********************/
+
     // show&hide password
     togglePassword() {
       this.show.nativeElement.classList.toggle('show');
@@ -93,32 +104,34 @@ export class LoginComponent implements OnInit {
     }
   
     // login
-    // login(tokenRequestDTO: TokenRequestDTO) {
-    //   this.hideErrorMessage();
-    //   let tokenReqSubscription = this.authRemoteService
-    //     .login(tokenRequestDTO)
-    //     .subscribe(
-    //       (loginResult) => {
-    //         let successResponse = loginResult as BaseSuccessResponse;
-    //         let auth: AuthInfoModel = new AuthInfoModel();
-    //         auth.userName = tokenRequestDTO.Username;
-    //         auth.token = successResponse.Data.AccessToken;
-    //         auth.refreshToken = successResponse.Data.RefreshTokenString;
-    //         auth.tokenExpiryTime = successResponse.Data.RefreshTokenExpiry;
+    login(requestDTO: LoginRequest) {
+      this.hideErrorMessage();
+      let tokenReqSubscription = this.authenticationService
+        .login(requestDTO)
+        .subscribe(
+          (response: any) => {
+            this.router.navigate(['dashboard']);
+
+            // let successResponse = loginResult as BaseSuccessResponse;
+            // let auth: AuthInfoModel = new AuthInfoModel();
+            // auth.userName = tokenRequestDTO.Username;
+            // auth.token = successResponse.Data.AccessToken;
+            // auth.refreshToken = successResponse.Data.RefreshTokenString;
+            // auth.tokenExpiryTime = successResponse.Data.RefreshTokenExpiry;
   
-    //         // set the authentication values to the AuthInfoModel object in the app shared object
-    //         this.sharedObject.setAuthInfo(auth);
-    //         this.getUserProfile();
+            // set the authentication values to the AuthInfoModel object in the app shared object
+            // this.sharedObject.setAuthInfo(auth);
+            // this.getUserProfile();
   
-    //       },
-    //       (error: BaseErrorResponse) => {
-    //         this.isProcessing = false;
-    //         this.showErrorMessage(error.Message);
-    //       }
-    //     );
+          },
+          (error: any) => {
+            this.isProcessing = false;
+            this.showErrorMessage(error.error.message);
+          }
+        );
   
-    //   this.subscription.add(tokenReqSubscription);
-    // }
+      this.subscription.add(tokenReqSubscription);
+    }
   
     // tryGetUserProfile() {
     //   let authInfo = this.sharedObject.getAuthInfo();

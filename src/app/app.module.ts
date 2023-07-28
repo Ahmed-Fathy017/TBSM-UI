@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedComponentsModule } from './modules/shared-components/shared-components.module';
 import { AuthenticationModule } from './modules/authentication/authentication.module';
 import { MasterLayoutModule } from './modules/master-layout/master-layout.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { MasterLayoutModule } from './modules/master-layout/master-layout.module
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    MasterLayoutModule
+    MasterLayoutModule,
+    HttpClientModule
     // AuthenticationModule,
     // SharedComponentsModule
   ],
