@@ -2,50 +2,54 @@
     <app-page-header [pageTitle]="firstPageTitle" [coloredPageTitle]="coloredPageTitle"></app-page-header>
 
     <div class="container ">
-        <div class=" row mb-2 ">
-            <div class="col-md-12 col-lg-12 col-xl-12">
+        <form action="" [formGroup]="createWarehouseForm">
 
-                <label for="warehouseName" class="mb-1 d-flex justify-content-end">اسم المستودع</label>
-                <input id="warehouseName" class="form-control" type="text">
-            </div>
-        </div>
+            <div class=" row mb-2 ">
+                <div class="col-md-12 col-lg-12 col-xl-12">
 
-        <div class=" row mb-2 d-flex flex-row-reverse">
-            <div class="col-md-6 col-lg-6 col-xl-6">
-
-                <label for="userName" class="mb-1 d-flex justify-content-end">اسم المستخدم</label>
-                <input id="userName" class="form-control" type="text">
-            </div>
-
-            <div class="col-md-6 col-lg-6 col-xl-6">
-
-                <label for="password" class="mb-1 d-flex justify-content-end">كلمه السر</label>
-                <input id="password" class="form-control" type="text">
-            </div>
-
-        </div>
-
-
-        <div class=" row mb-2 d-flex flex-row-reverse">
-
-            <div class="col-md-6 col-lg-6 col-xl-6">
-
-                <label for="package" class="mb-1 d-flex justify-content-end">الباقات</label>
-
-                <select id="package" class="form-select" name="" id="">
-                    <option value="">Select</option>
-                </select>
-            </div>
-
-            <div class="col-md-6 col-lg-6 col-xl-6">
-
-                <div class="btn">
-                    <app-loading-button [processing]="isProcessing">
-                        انشاء
-                    </app-loading-button>
+                    <label for="warehouseName" class="mb-1 d-flex justify-content-end">اسم المستودع</label>
+                    <input id="warehouseName" class="form-control" type="text" formControlName="warehouseName">
                 </div>
             </div>
-        </div>
+
+            <div class=" row mb-2 d-flex flex-row-reverse">
+                <div class="col-md-6 col-lg-6 col-xl-6">
+
+                    <label for="userName" class="mb-1 d-flex justify-content-end">اسم المستخدم</label>
+                    <input id="userName" class="form-control" type="text" formControlName="username">
+                </div>
+
+                <div class="col-md-6 col-lg-6 col-xl-6">
+
+                    <label for="password" class="mb-1 d-flex justify-content-end">كلمه السر</label>
+                    <input id="password" class="form-control" type="password" formControlName="password">
+                </div>
+
+            </div>
+
+
+            <div class=" row mb-2 d-flex flex-row-reverse">
+
+                <div class="col-md-6 col-lg-6 col-xl-6">
+
+                    <label for="package" class="mb-1 d-flex justify-content-end">الباقات</label>
+
+                    <select id="package" class="form-select" name="" id="" formControlName="package">
+                        <!-- <option value="">Select</option> -->
+                        <option *ngFor="let package of packages" [value]="package.id">{{package.name}}</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6 col-lg-6 col-xl-6">
+
+                    <div class="btn" (click)="onCreateButtonClick()">
+                        <app-loading-button [processing]="isProcessing">
+                            انشاء
+                        </app-loading-button>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 
     <app-page-header [pageTitle]="secondPageTitle"></app-page-header>
@@ -59,13 +63,14 @@
 
                 <div class="d-flex">
 
-                    <div class="mx-2 delete d-flex justify-content-center align-items-center"><i
+                    <div class="mx-2 delete d-flex justify-content-center align-items-center" data-bs-toggle="modal"
+                        data-bs-target="#deleteWarehouseModal" (click)="onDeleteButtonClick(warehouse.id)"><i
                             class="fa-solid fa-trash-can"></i></div>
-
-                    <div class="mx-2 edit d-flex justify-content-center align-items-center"><i
-                            class="fa-solid fa-pen-to-square"></i></div>
-                    <div class="mx-2 view d-flex justify-content-center align-items-center"><i
-                            class="fa-solid fa-eye"></i></div>
+                    <div class="mx-2 edit d-flex justify-content-center align-items-center" data-bs-toggle="modal"
+                        data-bs-target="#editWarehouseModal"><i class="fa-solid fa-pen-to-square"></i></div>
+                    <div class="mx-2 view d-flex justify-content-center align-items-center"
+                        (click)="onViewButtonClick(warehouse.id)"><i class="fa-solid fa-eye"></i>
+                    </div>
 
                 </div>
 
@@ -77,4 +82,88 @@
         </div>
     </div>
 
+</div>
+
+
+<!-- modals -->
+
+<!-- edit warehouse modal -->
+<div class="modal fade" id="editWarehouseModal" tabindex="-1" aria-labelledby="editWarehouseModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header d-flex flex-row-reverse justify-content-between">
+                <div>
+                    <h5 class="modal-title" id="editWarehouseModalLabel">تعديل</h5>
+                </div>
+
+                <div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+            </div>
+            <div class="modal-body mt-2">
+                <form action="" class="row">
+                    <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
+                        <label for="warehouseNameEdit" class="mb-1 d-flex justify-content-end">اسم المستودع</label>
+                        <input id="warehouseNameEdit" class="form-control" type="text">
+                    </div>
+                    <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
+                        <label for="userNameEdit" class="mb-1 d-flex justify-content-end">اسم المستخدم</label>
+                        <input id="userNameEdit" class="form-control" type="text">
+                    </div>
+                    <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
+                        <label for="passwordEdit" class="mb-1 d-flex justify-content-end">كلمه السر</label>
+                        <input id="passwordEdit" class="form-control" type="text">
+                    </div>
+                    <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
+                        <label for="packageEdit" class="mb-1 d-flex justify-content-end">الباقات</label>
+
+                        <select id="packageEdit" class="form-select" name="" id="">
+                            <option value="">Select</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer mb-4">
+                <button type="button" class="btn  modal-btn m-0 py-2" data-bs-dismiss="modal">حفظ التغيرات</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- delete warehouse modal -->
+<div class="modal fade" id="deleteWarehouseModal" tabindex="-1" aria-labelledby="deleteWarehouseModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body mt-4">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-2 deletion-label d-flex justify-content-center">
+                        <i class="fa-solid fa-trash-can px-2 py-3"></i>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center mt-4">
+                    <p class="h5 fw-bold">هل ترغب ف حذف المستودع {{selectedWarehouse?.warehouse_name}}؟</p>
+                </div>
+
+            </div>
+
+            <div class="mt-4 mb-5 d-flex align-items-center justify-content-center">
+                <div class="row m-0 d-flex flex-row-reverse justify-content-between  w-75 align-items-center">
+                    <div class="col-md-6 col-lg-6 col-xl-6 mb-2">
+                        <button type="button" class="btn-primary modal-btn  py-2" data-bs-dismiss="modal"
+                            (click)="onDeleteConfirmationButtonClick()">حذف</button>
+                    </div>
+
+                    <div class="col-md-6 col-lg-6 col-xl-6 mb-2">
+                        <button type="button" class="btn-secondary modal-cancel-btn py-2"
+                            data-bs-dismiss="modal">الغاء</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -4,6 +4,7 @@ import { WarehousesManagementComponent } from './screens/warehouses-management/w
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
 import { WarehouseDetailsComponent } from './screens/warehouse-details/warehouse-details.component';
 import { WarehousesService } from './remote-services/warehouses.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -14,7 +15,8 @@ import { WarehousesService } from './remote-services/warehouses.service';
   ],
   imports: [
     CommonModule,
-    SharedComponentsModule
+    SharedComponentsModule,
+    ReactiveFormsModule
   ], providers: [
     WarehousesService
   ]

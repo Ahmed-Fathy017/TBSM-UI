@@ -5,6 +5,69 @@
     src: url("../src/assets/fonts/Almarai-Regular.ttf") format("opentype");
 }
 
-* { 
+* {
     font-family: AppFont;
-  }
+}
+
+/************ Modals ************/
+
+.modal-btn {
+    border: 0;
+    background-color: #F15A60;
+    border-radius: 12px;
+    color: white;
+    border: none;
+    width: 100%;
+}
+
+.modal-cancel-btn {
+    border: 0;
+    border-radius: 12px;
+    color: #100F37;
+    border: 0.5px solid #100F37;
+    width: 100%;
+}
+
+.modal .deletion-label{
+    background-color: #F15A6021;
+}
+
+.modal .deletion-label i {
+    font-size: 2.5rem;
+    color: #F15A60;
+}
+
+.modal-dialog {
+    color: #100F37;
+}
+
+.modal-footer {
+    border: none;
+    margin-top: 0;
+}
+
+/************ Errors ************/
+
+/* input.ng-touched.ng-invalid {
+    border: 0.1px solid red;
+} */
+
+/************ Bootstrap Shadows Removal ************/
+
+textarea:focus, 
+textarea.form-control:focus, 
+input.form-control:focus, 
+input.form-select:focus
+input[type=text]:focus, 
+input[type=password]:focus, 
+input[type=email]:focus, 
+input[type=number]:focus, 
+[type=text].form-control:focus, 
+[type=password].form-control:focus, 
+[type=email].form-control:focus, 
+[type=tel].form-control:focus,
+[type=select].form-select:focus,  
+[contenteditable].form-control:focus {
+  box-shadow: inset 0 -1px 0 #ddd;
+  border-color: #DEE2E6;
+}
