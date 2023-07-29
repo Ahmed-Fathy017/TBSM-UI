@@ -10,11 +10,15 @@ import { LocalService } from 'src/app/modules/shared-components/services/local.s
 })
 export class NavBarComponent implements OnInit {
 
+
+  userName: string = '';
+
   constructor(private navService: NavigationService,
     private router: Router,
     private localService: LocalService) { }
 
   ngOnInit(): void {
+    this.userName = this.localService.getData('username');
   }
 
   toggleSideNav() {

@@ -114,7 +114,9 @@ export class LoginComponent implements OnInit {
             console.log(response)
 
             this.localStore.saveData('token', response.auth_data.access_token);
-
+            this.localStore.saveData('username', response.data.username);
+            this.localStore.saveData('type', response.data.type);
+            this.localStore.saveData('id', String(response.data.id));
 
             // let successResponse = loginResult as BaseSuccessResponse;
             // let auth: AuthInfoModel = new AuthInfoModel();
