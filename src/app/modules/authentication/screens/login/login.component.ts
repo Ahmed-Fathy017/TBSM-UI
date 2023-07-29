@@ -110,7 +110,11 @@ export class LoginComponent implements OnInit {
         .login(requestDTO)
         .subscribe(
           (response: any) => {
-            this.router.navigate(['dashboard']);
+
+            console.log(response)
+
+            this.localStore.saveData('token', response.auth_data.access_token);
+
 
             // let successResponse = loginResult as BaseSuccessResponse;
             // let auth: AuthInfoModel = new AuthInfoModel();
@@ -122,6 +126,9 @@ export class LoginComponent implements OnInit {
             // set the authentication values to the AuthInfoModel object in the app shared object
             // this.sharedObject.setAuthInfo(auth);
             // this.getUserProfile();
+
+            this.router.navigate(['dashboard']);
+            this.isProcessing = false;
   
           },
           (error: any) => {

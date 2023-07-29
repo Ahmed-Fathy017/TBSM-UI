@@ -4,6 +4,7 @@ import { LoginComponent } from './screens/login/login.component';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationService } from './remote-services/authentication.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 
 
@@ -18,7 +19,8 @@ import { AuthenticationService } from './remote-services/authentication.service'
     ReactiveFormsModule,
   ],
   providers: [
-    AuthenticationService
+    AuthenticationService,
+    JwtHelperService
   ]
 })
 export class AuthenticationModule { }

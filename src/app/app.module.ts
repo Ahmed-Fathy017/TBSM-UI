@@ -8,7 +8,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedComponentsModule } from './modules/shared-components/shared-components.module';
 import { AuthenticationModule } from './modules/authentication/authentication.module';
 import { MasterLayoutModule } from './modules/master-layout/master-layout.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './core/interceptors/auth-interceptor.service';
+import { AuthenticationService } from './modules/authentication/remote-services/authentication.service';
+import { JwtHelperService, JwtModule, JwtModuleOptions } from '@auth0/angular-jwt';
+import { environment } from 'src/environments/environment';
+
+const JWT_Module_Options: JwtModuleOptions = {
+  config: {
+      // tokenGetter: yourTokenGetter,
+      allowedDomains: [environment.apiUrl]
+  }
+};
 
 @NgModule({
   declarations: [
@@ -20,11 +31,20 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     MasterLayoutModule,
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot(JWT_Module_Options)
     // AuthenticationModule,
     // SharedComponentsModule
   ],
-  providers: [],
+  providers: [
+    AuthenticationService,
+    JwtHelperService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
