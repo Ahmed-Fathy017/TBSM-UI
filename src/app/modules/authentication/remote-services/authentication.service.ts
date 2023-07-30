@@ -32,6 +32,7 @@ export class AuthenticationService extends AbstractRemoteService {
   // ...
   isAuthenticated(): boolean {
     const token = this.localService.getData('token');
+
     // Check whether the token is expired and return
     // true or false
     return !this.jwtHelper.isTokenExpired(token);

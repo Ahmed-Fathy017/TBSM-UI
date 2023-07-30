@@ -5,6 +5,7 @@ import { PackagesRoutingModule } from './packages-routing.module';
 import { PackagesManagementComponent } from './screens/packages-management/packages-management.component';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
 import { PackagesService } from './remote-services/packages.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { PackagesService } from './remote-services/packages.service';
   imports: [
     CommonModule,
     PackagesRoutingModule,
-    SharedComponentsModule
+    SharedComponentsModule,
+    ReactiveFormsModule
   ], providers: [
     PackagesService
   ]
