@@ -35,7 +35,7 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
 
     let subscription = this.dashboardsService.getAdminDashboardData().subscribe(
       (response: any) => {
-        this.setupViewData(response.data);
+        this.cards = response.data;
         this.isLoading = false;
       }, (error: any) => {
         this.toastr.error(error.error.message);

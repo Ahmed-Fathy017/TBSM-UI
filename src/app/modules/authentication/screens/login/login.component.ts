@@ -111,8 +111,6 @@ export class LoginComponent implements OnInit {
         .subscribe(
           (response: any) => {
 
-            console.log(response)
-
             this.localStore.saveData('token', response.auth_data.access_token);
             this.localStore.saveData('username', response.data.username);
             this.localStore.saveData('type', response.data.type);

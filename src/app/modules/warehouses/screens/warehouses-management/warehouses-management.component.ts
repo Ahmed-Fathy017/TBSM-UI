@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { Warehouse } from '../../models/warehouse';
 import { WarehousesService } from '../../remote-services/warehouses.service';
 import { Subscription } from 'rxjs';
@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PackagesService } from 'src/app/modules/packages/remote-services/packages.service';
 import { Package } from 'src/app/modules/packages/models/package';
+import { ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-warehouses-management',
@@ -27,16 +28,18 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
   createWarehouseForm = new FormGroup({
     warehouseName: new FormControl('', [Validators.required]),
     username: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required, Validators.minLength(4)]),
     package: new FormControl('', [Validators.required]),
   });
 
-  upodateWarehouseForm = new FormGroup({
+  updateWarehouseForm = new FormGroup({
     warehouseName: new FormControl('', [Validators.required]),
     username: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
+    password: new FormControl(''),
     package: new FormControl('', [Validators.required]),
   });
+
+  @ViewChild('updateModalCloseButtonRef') updateModalCloseButtonRef!: ElementRef;
 
   selectedWarehouse?: Warehouse;
 
@@ -65,9 +68,41 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
     this.router.navigate([`warehouses/warehouse/${id}`])
   }
 
+  onUpdateButtonClick(id: number) {
+    this.selectedWarehouse = this.warehouses.find(i => i.id == id);
+
+    this.fetchSelectedWarehouseDataIntoModal();
+  }
+
+  onUpdateConfirmationClick() {
+    // the password is not required to be entered, 
+    // so if entered validation is set to min length of 4 characters
+    if (this.updateWarehouseForm.controls.password.value)
+      this.updateWarehouseForm.controls.password.setValidators([Validators.minLength(4)]);
+    else
+      this.updateWarehouseForm.controls.password.clearValidators();
+
+
+    if (this.updateWarehouseForm.valid) {
+      this.isLoading = true;
+
+      let requestDTO = new Warehouse();
+
+        requestDTO.id= this.selectedWarehouse!.id;
+        requestDTO.warehouse_name = this.updateWarehouseForm.controls.warehouseName.value!;
+        requestDTO.username = this.updateWarehouseForm.controls.username.value!;
+        requestDTO.password = this.updateWarehouseForm.controls.password.value!;
+        requestDTO.package_id = parseInt(this.updateWarehouseForm.controls.package.value!);
+      
+      
+      this.updateWarehouse(requestDTO);
+      this.updateModalCloseButtonRef.nativeElement.click();
+    } else
+      this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
+  }
+
   onDeleteButtonClick(id: number) {
     this.selectedWarehouse = this.warehouses.find(i => i.id == id);
-    console.log(this.selectedWarehouse)
   }
 
   onDeleteConfirmationButtonClick() {
@@ -83,7 +118,7 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
       warehouse.warehouse_name = this.createWarehouseForm.controls.warehouseName.value!;
       warehouse.username = this.createWarehouseForm.controls.username.value!;
       warehouse.password = this.createWarehouseForm.controls.password.value!;
-      warehouse.package_id = this.createWarehouseForm.controls.package.value!;
+      warehouse.package_id = parseInt(this.createWarehouseForm.controls.package.value!);
 
       this.isProcessing = true;
       this.isLoading = true;
@@ -97,7 +132,6 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     let subscription = this.warehousesService.getWarehouses().subscribe(
       (response: any) => {
-        console.log(response)
         this.warehouses = response.data;
         this.isLoading = false;
         this.isProcessing = false;
@@ -126,7 +160,6 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
   createWarehouse(warehouse: Warehouse) {
     let subscribtion = this.warehousesService.createWarehouse(warehouse).subscribe(
       (response: any) => {
-        console.log(response)
         this.toastr.success(response.message);
 
         this.warehouses = response.data;
@@ -142,18 +175,47 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
     this.subscription.add(subscribtion);
   }
 
+  fetchSelectedWarehouseDataIntoModal() {
+    if (this.selectedWarehouse) {
+      this.selectedWarehouse.package_id = this.selectedWarehouse.package.id;
+      this.updateWarehouseForm.controls.warehouseName.setValue(this.selectedWarehouse.warehouse_name);
+      this.updateWarehouseForm.controls.username.setValue(this.selectedWarehouse.username);
+      this.updateWarehouseForm.controls.password.setValue(this.selectedWarehouse.password);
+      this.updateWarehouseForm.controls.package.setValue(String(this.selectedWarehouse.package.id));
+    }
+  }
+
+  updateWarehouse(requestDTO: Warehouse) {
+
+    let subscription = this.warehousesService.updateWarehouse(requestDTO).subscribe(
+      (response: any) => {
+        this.toastr.success(response.message);
+
+        let updatedWarehouse = this.warehouses.find(i => i.id == requestDTO.id);
+        Object.assign(updatedWarehouse!, response.data);
+
+        this.isLoading = false;
+      }, (error: any) => {
+
+        this.isProcessing = false;
+        this.isLoading = false;
+        this.toastr.error(error.errors[0].value, error.error.message);
+      }
+    );
+
+    this.subscription.add(subscription);
+  }
+
 
   deleteWarehouse() {
     let subscription = this.warehousesService.deleteWarehouse(this.selectedWarehouse!.id).subscribe(
       (response: any) => {
-        console.log(response)
         this.toastr.success(response.message);
         this.warehouses = response.data;
         this.isLoading = false;
       }, (error: any) => {
         this.isLoading = false;
         this.toastr.error(error.errors[0].value, error.error.message);
-
       }
     );
 

@@ -8,5 +8,5 @@ export class Warehouse {
     type!: string;
     created_at!: string;
     package!: Package;
-    package_id!: string;
+    package_id!: number;
 }

@@ -24,6 +24,12 @@ export class WarehousesService extends AbstractRemoteService {
     return this.http.post(apiUrl, requestDTO);
   }
 
+  updateWarehouse(requestDTO: Warehouse) {
+    let apiUrl = this.apiURl + `super_admin/update_warehouse/${requestDTO.id}`;
+
+    return this.http.post(apiUrl, requestDTO);
+  }
+
   deleteWarehouse(id: number) {
     let apiUrl = this.apiURl + `super_admin/delete_warehouse/${id}`;
 
