@@ -10,7 +10,7 @@ import { LocalService } from 'src/app/modules/shared-components/services/local.s
 })
 export class NavBarComponent implements OnInit {
 
-
+  lang: string = '';
   userName: string = '';
 
   constructor(private navService: NavigationService,
@@ -18,7 +18,13 @@ export class NavBarComponent implements OnInit {
     private localService: LocalService) { }
 
   ngOnInit(): void {
+    this.lang = this.localService.getData('lang') || 'ar';
     this.userName = this.localService.getData('username');
+  }
+
+  changeLanguage(event: any) {
+    this.localService.saveData('lang', event.target.value);
+    window.location.reload();
   }
 
   toggleSideNav() {

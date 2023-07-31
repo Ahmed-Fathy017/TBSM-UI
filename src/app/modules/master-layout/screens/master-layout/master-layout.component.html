@@ -1,23 +1,25 @@
-<app-side-nav [sidenavTemplateRef]="navContent" [navWidth]="250" [duration]="0.5"></app-side-nav>
+<div [dir]="'dir' | translate">
+    <app-side-nav [sidenavTemplateRef]="navContent" [navWidth]="250" [duration]="0.5"></app-side-nav>
 
-<ng-template #navContent>
-    <div class="container-fluid d-flex flex-column p-0">
-        <div class="menu-items mb-2">
-            <button type="button" class="btn d-flex flex-row justify-content-end align-items-center"
-                [routerLink]="['/dashboard']">الرئيسية<i class="fa-solid fa-chart-line ms-2"></i></button>
+    <ng-template #navContent>
+        <div class="container-fluid d-flex flex-column p-0">
+            <div class="menu-items mb-2">
+                <button type="button" class="btn d-flex flex-row align-items-center" [routerLink]="['/dashboard']"> <i
+                        class="fa-solid fa-chart-line mx-1"></i>الرئيسية</button>
+            </div>
+
+            <div class="menu-items mb-2">
+                <button type="button" class="btn d-flex flex-row  align-items-center" [routerLink]="['/warehouses']"> <i
+                        class="fa-solid fa-warehouse mx-2">المستودعات</i></button>
+            </div>
+
+            <div class="menu-items mb-2">
+                <button type="button" class="btn d-flex flex-row  align-items-center" [routerLink]="['/packages']"> <i
+                        class="fa-solid fa-circle-dollar-to-slot mx-2">الباقات</i></button>
+            </div>
         </div>
+    </ng-template>
 
-        <div class="menu-items mb-2">
-            <button type="button" class="btn d-flex flex-row justify-content-end align-items-center"
-                [routerLink]="['/warehouses']">المستودعات <i class="fa-solid fa-warehouse ms-2"></i></button>
-        </div>
-
-        <div class="menu-items mb-2">
-            <button type="button" class="btn d-flex flex-row justify-content-end align-items-center"
-                [routerLink]="['/packages']">الباقات <i class="fa-solid fa-circle-dollar-to-slot ms-2"></i></button>
-        </div>
-    </div>
-</ng-template>
-
-<app-nav-bar></app-nav-bar>
-<router-outlet></router-outlet>
+    <app-nav-bar></app-nav-bar>
+    <router-outlet></router-outlet>
+</div>

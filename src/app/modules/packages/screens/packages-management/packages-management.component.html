@@ -6,45 +6,45 @@
             <div class=" row mb-2 ">
                 <div class="col-md-12 col-lg-12 col-xl-12">
 
-                    <label for="warehouseName" class="mb-1 d-flex justify-content-end">اسم الباقة</label>
+                    <label for="warehouseName" class="mb-1 d-flex">اسم الباقة</label>
                     <input id="warehouseName" class="form-control" type="text" formControlName="packageName">
                 </div>
             </div>
 
-            <div class=" row mb-2 d-flex flex-row-reverse">
+            <div class=" row mb-2 d-flex">
                 <div class="col-md-4 col-lg-4 col-xl-4">
 
-                    <label for="settings01" class="mb-1 d-flex justify-content-end">اعداد الثلاجات</label>
+                    <label for="settings01" class="mb-1 d-flex ">اعداد الثلاجات</label>
                     <input id="settings01" class="form-control" type="number" formControlName="refrigeratorSetting">
                 </div>
 
                 <div class="col-md-4 col-lg-4 col-xl-4">
 
-                    <label for="settings02" class="mb-1 d-flex justify-content-end">اعداد المنتجات</label>
+                    <label for="settings02" class="mb-1 d-flex ">اعداد المنتجات</label>
                     <input id="settings02" class="form-control" type="number" formControlName="productSetting">
                 </div>
 
                 <div class="col-md-4 col-lg-4 col-xl-4">
 
-                    <label for="settings03" class="mb-1 d-flex justify-content-end">اعداد الاقسام</label>
+                    <label for="settings03" class="mb-1 d-flex">اعداد الاقسام</label>
                     <input id="settings03" class="form-control" type="number" formControlName="departmentSetting">
                 </div>
 
             </div>
 
-            <div class=" row mb-2 d-flex flex-row-reverse">
+            <div class=" row mb-2 d-flex">
 
-                <div class="col-md-4 col-lg-4 col-xl-4 d-flex flex-row-reverse">
+                <div class="col-md-4 col-lg-4 col-xl-4 d-flex">
 
-                    <input class="form-check-input ms-2" type="checkbox" value="" id="flexCheckIndeterminate01"
+                    <input class="form-check-input mx-2" type="checkbox" value="" id="flexCheckIndeterminate01"
                         formControlName="temperatureAlert">
                     <label class="form-check-label" for="flexCheckIndeterminate01">
                         تنبيه بتغيير درجه الحراره
                     </label>
                 </div>
 
-                <div class="col-md-4 col-lg-4 col-xl-4 d-flex flex-row-reverse">
-                    <input class="form-check-input ms-2" type="checkbox" value="" id="flexCheckIndeterminate02"
+                <div class="col-md-4 col-lg-4 col-xl-4 d-flex">
+                    <input class="form-check-input mx-2" type="checkbox" value="" id="flexCheckIndeterminate02"
                         formControlName="externalSupply">
                     <label class="form-check-label" for="flexCheckIndeterminate02">
                         ميزه طلب الامداد الخارجي
@@ -54,7 +54,7 @@
             </div>
 
 
-            <div class=" row mb-2 d-flex">
+            <div class=" row mb-2 d-flex justify-content-end">
 
 
                 <div class="col-md-6 col-lg-6 col-xl-6">
@@ -78,7 +78,9 @@
         <div class="row g-2 mb-2">
             <div class="package-card col-md-12 col-lg-12 col-xl-12 d-flex justify-content-between rounded-4 border px-4 py-3 mb-3"
                 *ngFor="let package of packages">
-
+                <div>
+                    {{package.name}}
+                </div>
                 <div class="d-flex">
 
                     <div class="mx-2 delete d-flex justify-content-center align-items-center" data-bs-toggle="modal"
@@ -88,10 +90,6 @@
                     <!-- <div class="mx-2 view d-flex justify-content-center align-items-center"><i
                             class="fa-solid fa-eye"></i></div> -->
 
-                </div>
-
-                <div>
-                    {{package.name}}
                 </div>
 
             </div>
@@ -107,7 +105,7 @@
 <div class="modal fade" id="editPackageModal" tabindex="-1" aria-labelledby="editPackageModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header d-flex flex-row-reverse justify-content-between">
+            <div class="modal-header d-flex justify-content-between">
                 <div>
                     <h5 class="modal-title" id="editWarehouseModalLabel">تعديل</h5>
                 </div>
@@ -135,9 +133,9 @@
                         <input id="settings03" class="form-control" type="number" formControlName="departmentSetting">
                     </div>
 
-                    <div class=" row mb-2 d-flex flex-row-reverse">
+                    <div class=" row mb-2 d-flex">
 
-                        <div class="col-md-6 col-lg- col-xl-6 d-flex flex-row-reverse">
+                        <div class="col-md-6 col-lg- col-xl-6 d-flex">
 
                             <input class="form-check-input ms-2" type="checkbox" value="" id="flexCheckIndeterminate01"
                                 formControlName="temperatureAlert">
@@ -146,7 +144,7 @@
                             </label>
                         </div>
 
-                        <div class="col-md-6 col-lg- col-xl-6 d-flex flex-row-reverse">
+                        <div class="col-md-6 col-lg- col-xl-6 d-flex">
                             <input class="form-check-input ms-2" type="checkbox" value="" id="flexCheckIndeterminate02"
                                 formControlName="externalSupply">
                             <label class="form-check-label" for="flexCheckIndeterminate02">
@@ -186,7 +184,7 @@
             </div>
 
             <div class="mt-4 mb-5 d-flex align-items-center justify-content-center">
-                <div class="row m-0 d-flex flex-row-reverse justify-content-between  w-75 align-items-center">
+                <div class="row m-0 d-flex justify-content-between  w-75 align-items-center">
                     <div class="col-md-6 col-lg-6 col-xl-6 mb-2">
                         <button type="button" class="btn-primary modal-btn  py-2" data-bs-dismiss="modal"
                             (click)="onDeleteConfirmationButtonClick()">حذف</button>

@@ -1,11 +1,11 @@
 <!-- nav-bar -->
 
 
-<nav class="navbar navbar-light border-bottom d-flex flex-row-reverse">
+<nav class="navbar navbar-light border-bottom d-flex ">
 
-    <div class="container d-flex flex-row-reverse">
-        
-        <div class="d-flex flex-row-reverse justify-content-between">
+    <div class="container d-flex ">
+
+        <div class="d-flex  justify-content-between">
 
             <div class="header-menu ms-3 d-flex align-items-center">
                 <span (click)="toggleSideNav()" class="menu-icon material-icons"><i class="fa-solid fa-bars"></i></span>
@@ -22,13 +22,17 @@
                 </button>
                 <ul class="dropdown-menu dropdown-menu" aria-labelledby="dropdownMenuButton2">
                     <li (click)="onLogoutClick()"><a class="dropdown-item active">تسجيل الخروج</a></li>
-                    
+
                 </ul>
             </div>
         </div>
 
-        <div>
-            Language
+        <div class="d-flex justify-content-around align-items-center lang-container">
+            <i class="fa-solid fa-globe"></i>
+            <select name="" id="" (change)="changeLanguage($event)" class="form-select lang fw-bold">
+                <option value="ar" [selected]="lang == 'ar'">عربي</option>
+                <option value="en" [selected]="lang == 'en'">English</option>
+            </select>
         </div>
     </div>
 </nav>

@@ -3,6 +3,7 @@ import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { NavigationService } from '../../services/navigation.service';
 import { SideNavDirection } from '../../models/side-nav-direction';
+import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 
 @Component({
   selector: 'app-side-nav',
@@ -18,10 +19,16 @@ export class SideNavComponent implements OnInit {
   @Input() navWidth: number = window.innerWidth;
   @Input() direction: SideNavDirection = SideNavDirection.Right;
 
-  constructor(private navService: NavigationService) { }
+  constructor(
+    private navService: NavigationService,
+    private localService: LocalService) { }
 
   ngOnInit(): void {
     this.showSideNav = this.navService.getShowNav();
+
+    console.log(this.localService.getData('lang'))
+
+    this.direction = this.localService.getData('lang') == 'ar' || null || undefined || ' '? SideNavDirection.Right : SideNavDirection.Left;
   }
 
   onSidebarClose() {

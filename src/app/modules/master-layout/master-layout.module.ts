@@ -12,6 +12,7 @@ import { WarehousesModule } from '../warehouses/warehouses.module';
 import { PackagesModule } from '../packages/packages.module';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { NavigationService } from './services/navigation.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -29,7 +30,8 @@ import { NavigationService } from './services/navigation.service';
     DashboardsModule,
     MasterLayoutRoutingModule,
     WarehousesModule,
-    PackagesModule
+    PackagesModule,
+    TranslateModule,
   ], providers: [
     NavigationService
   ]

@@ -8,16 +8,26 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedComponentsModule } from './modules/shared-components/shared-components.module';
 import { AuthenticationModule } from './modules/authentication/authentication.module';
 import { MasterLayoutModule } from './modules/master-layout/master-layout.module';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './core/interceptors/auth-interceptor.service';
 import { AuthenticationService } from './modules/authentication/remote-services/authentication.service';
 import { JwtHelperService, JwtModule, JwtModuleOptions } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
+
+export function httpTranslateLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 const JWT_Module_Options: JwtModuleOptions = {
   config: {
-      // tokenGetter: yourTokenGetter,
-      allowedDomains: [environment.apiUrl]
+    tokenGetter: tokenGetter,
+    allowedDomains: [environment.apiUrl]
   }
 };
 
@@ -32,7 +42,18 @@ const JWT_Module_Options: JwtModuleOptions = {
     ReactiveFormsModule,
     MasterLayoutModule,
     HttpClientModule,
-    JwtModule.forRoot(JWT_Module_Options)
+
+    // adding JwtModule
+    JwtModule.forRoot(JWT_Module_Options),
+
+    // adding TranslateModule to our imports array along with a configuration object
+    TranslateModule.forRoot({
+      loader: {
+      provide: TranslateLoader,
+      useFactory: httpTranslateLoaderFactory,
+      deps: [HttpClient]
+      }
+      }) 
     // AuthenticationModule,
     // SharedComponentsModule
   ],
@@ -45,6 +66,9 @@ const JWT_Module_Options: JwtModuleOptions = {
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [
+    TranslateModule
+  ]
 })
 export class AppModule { }

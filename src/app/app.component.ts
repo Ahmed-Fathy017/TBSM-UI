@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { LocalService } from './modules/shared-components/services/local.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'TBSM';
+
+  constructor(
+    private translateService: TranslateService,
+    private localService: LocalService) {
+    this.translateService.setDefaultLang('ar');
+    this.translateService.use(localService.getData('lang') || 'ar');
+  }
+
+  translate(event: any) {
+    this.translateService.use(event.target.value)
+  }
 }
