@@ -9,16 +9,19 @@
             </div>
 
             <div class="menu-items mb-2">
-                <button type="button" class="btn d-flex flex-row  align-items-center" [routerLink]="['/warehouses']"> <i
-                        class="fa-solid fa-warehouse mx-2">المستودعات</i></button>
+                <button type="button" class="btn d-flex flex-row align-items-center" [routerLink]="['/warehouses']"> <i
+                        class="fa-solid fa-warehouse mx-1"></i>المستودعات</button>
             </div>
 
             <div class="menu-items mb-2">
-                <button type="button" class="btn d-flex flex-row  align-items-center" [routerLink]="['/packages']"> <i
-                        class="fa-solid fa-circle-dollar-to-slot mx-2">الباقات</i></button>
+                <button type="button" class="btn d-flex flex-row align-items-center" [routerLink]="['/packages']"> <i
+                        class="fa-solid fa-circle-dollar-to-slot mx-1"></i>الباقات</button>
             </div>
+
         </div>
     </ng-template>
+
+    
 
     <app-nav-bar></app-nav-bar>
     <router-outlet></router-outlet>

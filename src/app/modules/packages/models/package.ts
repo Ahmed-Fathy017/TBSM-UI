@@ -8,8 +8,8 @@ export class Package {
     external_supply: boolean;
     created_at: string;
 
-    ar: { name: string };
-    en: { name: string };
+    // ar: { name: string };
+    // en: { name: string };
 
     constructor() {
         this.id = 0;
@@ -21,8 +21,8 @@ export class Package {
         this.external_supply = false;
         this.created_at = '';
 
-        this.ar = { name: '' };
-        this.en = { name: '' };
+        // this.ar = { name: '' };
+        // this.en = { name: '' };
     }
 }
 

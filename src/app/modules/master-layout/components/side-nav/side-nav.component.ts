@@ -28,7 +28,8 @@ export class SideNavComponent implements OnInit {
 
     console.log(this.localService.getData('lang'))
 
-    this.direction = this.localService.getData('lang') == 'ar' || null || undefined || ' '? SideNavDirection.Right : SideNavDirection.Left;
+    this.direction = this.localService.getData('lang') === 'en' ? SideNavDirection.Left : SideNavDirection.Right;
+    console.log(this.direction)
   }
 
   onSidebarClose() {

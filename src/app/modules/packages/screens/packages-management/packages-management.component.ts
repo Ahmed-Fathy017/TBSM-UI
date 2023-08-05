@@ -79,8 +79,7 @@ export class PackagesManagementComponent implements OnInit, OnDestroy {
       let requestDTO = new Package();
 
       requestDTO.id = this.selectedPackage!.id;
-      requestDTO.ar.name = this.updatePackageForm.controls.packageName.value!;
-      requestDTO.en.name = this.updatePackageForm.controls.packageName.value!;
+      requestDTO.name = this.updatePackageForm.controls.packageName.value!;
       requestDTO.refrigerator_numbers = parseInt(this.updatePackageForm.controls.refrigeratorSetting.value!);
       requestDTO.categories_numbers = parseInt(this.updatePackageForm.controls.departmentSetting.value!);
       requestDTO.products_numbers = parseInt(this.updatePackageForm.controls.productSetting.value!);
@@ -107,8 +106,7 @@ export class PackagesManagementComponent implements OnInit, OnDestroy {
 
       let requestDTO = new Package();
 
-      requestDTO.ar.name = this.createPackageForm.controls.packageName.value!;
-      requestDTO.en.name = this.createPackageForm.controls.packageName.value!;
+      requestDTO.name = this.createPackageForm.controls.packageName.value!;
       requestDTO.refrigerator_numbers = parseInt(this.createPackageForm.controls.refrigeratorSetting.value!);
       requestDTO.categories_numbers = parseInt(this.createPackageForm.controls.departmentSetting.value!);
       requestDTO.products_numbers = parseInt(this.createPackageForm.controls.productSetting.value!);
@@ -117,6 +115,8 @@ export class PackagesManagementComponent implements OnInit, OnDestroy {
 
       this.isProcessing = true;
       this.isLoading = true;
+
+      console.log(requestDTO)
 
       this.createPackage(requestDTO);
     } else
@@ -140,7 +140,6 @@ export class PackagesManagementComponent implements OnInit, OnDestroy {
   }
 
   createPackage(requestDTO: Package) {
-    console.log(requestDTO)
     let subscribtion = this.packagesService.createPackage(requestDTO).subscribe(
       (response: any) => {
         this.toastr.success(response.message);
@@ -170,8 +169,6 @@ export class PackagesManagementComponent implements OnInit, OnDestroy {
   }
 
   updatePackage(requestDTO: Package) {
-
-    console.log(requestDTO)
 
     let subscription = this.packagesService.updatePackage(requestDTO).subscribe(
       (response: any) => {
