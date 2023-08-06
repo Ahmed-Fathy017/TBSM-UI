@@ -1,6 +1,46 @@
 {
-    "dir":"ltr",
-    "AdminDashboardScreen" : {
+    "dir": "ltr",
+    "NavBar": {
+        "Logout": "Logout"
+    },
+    "SideNav": {
+        "Home": "Home",
+        "Warehouses": "Warehouses",
+        "Packages": "Packages"
+    },
+    "AdminDashboardScreen": {
         "Home": "Home"
-    } 
+    },
+    "WarehousesManagementScreen": {
+        "PrimaryTitle": "Home / Warehouses /",
+        "ColoredPrimaryTitle": "Create Warehouse",
+        "SecondaryPageTitle": "All Warehouses",
+        "WarehouseName": "Warehouse Name",
+        "Username": "Username",
+        "Password": "Password",
+        "Packages": "Packages"
+    },
+    "WarehouseDetailsScreen": {
+        "PrimaryTitle": "Home / Warehouses /",
+        "ColoredPrimaryTitle": "Warehouse One"
+    },
+    "PackagesManagementScreen": {
+        "PrimaryTitle": "Home / Packages /",
+        "ColoredPrimaryTitle": "Create Package",
+        "SecondaryPageTitle": "All Packages",
+        "PackageName": "Package Name",
+        "RefrigeratorsNumber": "Referigerators Number",
+        "ProductsNumber": "Products Number",
+        "DepartmentsNumber": "Departments Number",
+        "TemperatureChangeAlert": "Temperature Change Alert",
+        "ExternalSupplyPrivilage": "External Supply Privilage"
+    },
+    "Modal": {
+        "CreateButton": "Create",
+        "EditModalHeader": "Edit",
+        "SaveChangesButton": "Save Changes",
+        "DeletionConsentMessage": "Do you want to delete",
+        "DeleteButton": "Delete",
+        "CancelButton": "Cancel"
+    }
 }

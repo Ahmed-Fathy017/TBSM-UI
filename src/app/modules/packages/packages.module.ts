@@ -6,6 +6,7 @@ import { PackagesManagementComponent } from './screens/packages-management/packa
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
 import { PackagesService } from './remote-services/packages.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     PackagesRoutingModule,
     SharedComponentsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule
   ], providers: [
     PackagesService
   ]

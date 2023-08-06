@@ -5,6 +5,7 @@ import { SharedComponentsModule } from '../shared-components/shared-components.m
 import { WarehouseDetailsComponent } from './screens/warehouse-details/warehouse-details.component';
 import { WarehousesService } from './remote-services/warehouses.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -16,7 +17,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     SharedComponentsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule
   ], providers: [
     WarehousesService
   ]

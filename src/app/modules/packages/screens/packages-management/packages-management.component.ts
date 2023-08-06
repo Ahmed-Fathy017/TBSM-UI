@@ -14,9 +14,9 @@ export class PackagesManagementComponent implements OnInit, OnDestroy {
 
   subscription = new Subscription();
 
-  firstPageTitle: string = 'الرئيسية  /  الباقات /';
-  coloredPageTitle: string = 'انشاء باقه'
-  secondPageTitle: string = 'جميع الباقات';
+  firstPageTitle: string = 'PackagesManagementScreen.PrimaryTitle';
+  coloredPageTitle: string = 'PackagesManagementScreen.ColoredPrimaryTitle'
+  secondPageTitle: string = 'PackagesManagementScreen.SecondaryPageTitle';
 
   @ViewChild('updateModalCloseButtonRef') updateModalCloseButtonRef!: ElementRef;
 
@@ -83,8 +83,8 @@ export class PackagesManagementComponent implements OnInit, OnDestroy {
       requestDTO.refrigerator_numbers = parseInt(this.updatePackageForm.controls.refrigeratorSetting.value!);
       requestDTO.categories_numbers = parseInt(this.updatePackageForm.controls.departmentSetting.value!);
       requestDTO.products_numbers = parseInt(this.updatePackageForm.controls.productSetting.value!);
-      requestDTO.heat_alert = this.updatePackageForm.controls.temperatureAlert.value!;
-      requestDTO.external_supply = this.updatePackageForm.controls.externalSupply.value!;
+      requestDTO.heat_alert = this.updatePackageForm.controls.temperatureAlert.value! == true ? 1 : 0;
+      requestDTO.external_supply = this.updatePackageForm.controls.externalSupply.value! == true ? 1 : 0;
 
       this.updatePackage(requestDTO);
       this.updateModalCloseButtonRef.nativeElement.click();
@@ -110,8 +110,8 @@ export class PackagesManagementComponent implements OnInit, OnDestroy {
       requestDTO.refrigerator_numbers = parseInt(this.createPackageForm.controls.refrigeratorSetting.value!);
       requestDTO.categories_numbers = parseInt(this.createPackageForm.controls.departmentSetting.value!);
       requestDTO.products_numbers = parseInt(this.createPackageForm.controls.productSetting.value!);
-      requestDTO.heat_alert = this.createPackageForm.controls.temperatureAlert.value!;
-      requestDTO.external_supply = this.createPackageForm.controls.externalSupply.value!;
+      requestDTO.heat_alert = this.createPackageForm.controls.temperatureAlert.value!  == true ? 1 : 0;
+      requestDTO.external_supply = this.createPackageForm.controls.externalSupply.value!  == true ? 1 : 0;
 
       this.isProcessing = true;
       this.isLoading = true;
@@ -163,8 +163,8 @@ export class PackagesManagementComponent implements OnInit, OnDestroy {
       this.updatePackageForm.controls.refrigeratorSetting.setValue(String(this.selectedPackage.refrigerator_numbers));
       this.updatePackageForm.controls.productSetting.setValue(String(this.selectedPackage.products_numbers));
       this.updatePackageForm.controls.departmentSetting.setValue(String(this.selectedPackage.categories_numbers));
-      this.updatePackageForm.controls.temperatureAlert.setValue(this.selectedPackage.heat_alert);
-      this.updatePackageForm.controls.externalSupply.setValue(this.selectedPackage.external_supply);
+      this.updatePackageForm.controls.temperatureAlert.setValue(this.selectedPackage.heat_alert == 1 ? true : false);
+      this.updatePackageForm.controls.externalSupply.setValue(this.selectedPackage.external_supply == 1 ? true : false);
     }
   }
 

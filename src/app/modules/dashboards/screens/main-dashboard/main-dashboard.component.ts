@@ -13,7 +13,8 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
 
   subscription = new Subscription();
 
-  pageTitle: string = 'الرئيسية';
+  // pageTitle: string = 'الرئيسية';
+  pageTitle: string = 'AdminDashboardScreen.Home';
 
   cards: AdminDashboardCard[] = [];
 

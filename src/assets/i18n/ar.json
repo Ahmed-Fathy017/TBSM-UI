@@ -1,6 +1,46 @@
 {
-    "dir":"rtl",
-    "AdminDashboardScreen" : {
+    "dir": "rtl",
+    "NavBar" : {
+        "Logout": "تسجيل الخروج"
+    },
+    "SideNav": {
+        "Home": "الرئيسية",
+        "Warehouses": "المستودعات",
+        "Packages": "الباقات"
+    },
+    "AdminDashboardScreen": {
         "Home": "الرئيسية"
-    } 
+    },
+    "WarehousesManagementScreen": {
+        "PrimaryTitle": "الرئيسية / المستودعات /",
+        "ColoredPrimaryTitle": "انشاء مستودع",
+        "SecondaryPageTitle": "جميع المستودعات",
+        "WarehouseName": "اسم المستودع",
+        "Username": "اسم المستخدم",
+        "Password": "كلمه السر",
+        "Packages": "الباقات"
+    },
+    "WarehouseDetailsScreen": {
+        "PrimaryTitle": "الرئيسية / المستودعات /",
+        "ColoredPrimaryTitle": "المستودع الاول"
+    },
+    "PackagesManagementScreen" : {
+        "PrimaryTitle": "الرئيسية / الباقات /",
+        "ColoredPrimaryTitle": "انشاء باقة",
+        "SecondaryPageTitle": "جميع الباقات",
+        "PackageName": "اسم الباقة",
+        "RefrigeratorsNumber": "اعداد الثلاجات",
+        "ProductsNumber": "اعداد المنتجات",
+        "DepartmentsNumber": "اعداد الافسام",
+        "TemperatureChangeAlert": "تنبيه بتغيير درجه الحراره",
+        "ExternalSupplyPrivilage": "ميزه طلب الامداد الخارجي"
+    },
+    "Modal": {
+        "CreateButton":"انشاء",
+        "EditModalHeader": "تعديل",
+        "SaveChangesButton": "حفظ التغيرات",
+        "DeletionConsentMessage": "هل ترغب ف حذف المستودع",
+        "DeleteButton": "حذف",
+        "CancelButton": "الغاء"
+    }
 }

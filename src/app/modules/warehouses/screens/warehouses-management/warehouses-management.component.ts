@@ -18,9 +18,9 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
 
   subscription = new Subscription();
 
-  firstPageTitle: string = 'الرئيسية / المستودعات /';
-  coloredPageTitle: string = 'انشاء مستودع'
-  secondPageTitle: string = 'جميع المستودعات';
+  firstPageTitle: string = 'WarehousesManagementScreen.PrimaryTitle';
+  coloredPageTitle: string = 'WarehousesManagementScreen.ColoredPrimaryTitle'
+  secondPageTitle: string = 'WarehousesManagementScreen.SecondaryPageTitle';
 
   warehouses: Warehouse[] = [];
   packages: Package[] = [];

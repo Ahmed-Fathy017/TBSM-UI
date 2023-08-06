@@ -21,7 +21,8 @@
                     {{userName}}
                 </button>
                 <ul class="dropdown-menu dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                    <li (click)="onLogoutClick()"><a class="dropdown-item active">تسجيل الخروج</a></li>
+                    <li (click)="onLogoutClick()"><a class="dropdown-item active">{{'NavBar.Logout' | translate}}</a>
+                    </li>
 
                 </ul>
             </div>
@@ -30,7 +31,7 @@
         <div class="d-flex justify-content-around align-items-center lang-container ">
             <i class="fa-solid fa-globe"></i>
             <select name="" id="" (change)="changeLanguage($event)" class="form-select lang fw-bold">
-                <option  value="ar" [selected]="lang == 'ar'">عربي</option>
+                <option value="ar" [selected]="lang == 'ar'">عربي</option>
                 <option value="en" [selected]="lang == 'en'">English</option>
             </select>
         </div>

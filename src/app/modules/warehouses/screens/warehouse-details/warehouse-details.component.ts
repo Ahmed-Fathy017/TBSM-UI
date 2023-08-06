@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./warehouse-details.component.css']
 })
 export class WarehouseDetailsComponent implements OnInit {
-  pageTitle: string = 'الرئيسية / المستودعات / المستودع الاول';
+  pageTitle: string = 'WarehouseDetailsScreen.PrimaryTitle';
+  coloredPageTitle: string = 'WarehouseDetailsScreen.ColoredPrimaryTitle'
 
   cards: any[] = [
     { count: 10, title: 'منتجات نفذ كميتها', backgroundColor: '#0D99FF', iconClass: 'fa-solid fa-box', visibility: 'visible' },

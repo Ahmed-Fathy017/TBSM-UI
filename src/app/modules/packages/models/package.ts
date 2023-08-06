@@ -4,8 +4,8 @@ export class Package {
     refrigerator_numbers: number;
     products_numbers: number;
     categories_numbers: number;
-    heat_alert: boolean;
-    external_supply: boolean;
+    heat_alert: number;
+    external_supply: number;
     created_at: string;
 
     // ar: { name: string };
@@ -17,8 +17,8 @@ export class Package {
         this.refrigerator_numbers = 0;
         this.products_numbers = 0;
         this.categories_numbers = 0;
-        this.heat_alert = false;
-        this.external_supply = false;
+        this.heat_alert = 0;
+        this.external_supply = 0;
         this.created_at = '';
 
         // this.ar = { name: '' };
