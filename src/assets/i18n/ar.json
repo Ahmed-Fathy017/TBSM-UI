@@ -56,6 +56,19 @@
         "From": "من",
         "To": "الى"
     },
+    "UsersManagementScreen": { 
+        "PrimaryTitle": "الرئيسية /",
+        "ColoredPrimaryTitle": "المستخدمين",
+        "SecondaryPageTitle": "جميع المستخدمين",
+        "Email": "البريد الالكتروني",
+        "EnglishUsername": "الاسم بالانجليزية",
+        "Username": "الاسم",
+        "Password": "كلمه السر",
+        "Packages": "الباقات",
+        "Status":"الحالة",
+        "Properties":"الخصائص",
+        "CreateAccount":"انشاء حساب"
+    },
     "Modal": {
         "CreateButton":"انشاء",
         "EditModalHeader": "تعديل",

@@ -1,0 +1,26 @@
+.btn {
+    color: #ffffff;
+    background-color: #F15A60;
+    border-radius: 12px;
+    width: 100%;
+    margin-top: 1.65rem;
+}
+
+.btn:active {
+    background-color: #F15A60;
+    color: white;
+}
+
+th {
+    background-color: #F6F6FB;
+    color: #F15A60;
+}
+
+tr td:last-child .delete,
+tr td:last-child .edit {
+    padding: 5px;
+}
+
+i {
+    font-size: 0.7rem;
+}

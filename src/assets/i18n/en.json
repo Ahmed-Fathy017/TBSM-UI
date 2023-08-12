@@ -56,6 +56,19 @@
         "From": "From",
         "To": "To"
     },
+    "UsersManagementScreen": { 
+        "PrimaryTitle": "Home /",
+        "ColoredPrimaryTitle": "Users",
+        "SecondaryPageTitle": "All Users",
+        "Email": "Email",
+        "EnglishUsername": "Username in English",
+        "Username": "Username",
+        "Password": "Password",
+        "Packages": "Packages",
+        "Status":"Status",
+        "Properties":"Properties",
+        "CreateAccount":"Create Account"
+    },
     "Modal": {
         "CreateButton": "Create",
         "EditModalHeader": "Edit",

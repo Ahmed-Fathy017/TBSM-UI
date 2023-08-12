@@ -16,6 +16,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { RolesModule } from '../roles/roles.module';
 import { DepartmentsModule } from '../departments/departments.module';
 import { RefrigeratorsManagementModule } from '../refrigerators-management/refrigerators-management.module';
+import { UsersModule } from '../users/users.module';
 
 
 
@@ -37,7 +38,8 @@ import { RefrigeratorsManagementModule } from '../refrigerators-management/refri
     TranslateModule,
     RolesModule,
     DepartmentsModule,
-    RefrigeratorsManagementModule
+    RefrigeratorsManagementModule,
+    UsersModule
   ], providers: [
     NavigationService
   ]

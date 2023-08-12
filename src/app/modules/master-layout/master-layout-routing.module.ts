@@ -7,6 +7,7 @@ import { WarehousesManagementComponent } from '../warehouses/screens/warehouses-
 import { RolesManagementComponent } from '../roles/screens/roles-management/roles-management.component';
 import { DepartmentsManagementComponent } from '../departments/screens/departments-management/departments-management.component';
 import { RefrigeratorsManagementComponent } from '../refrigerators-management/screens/refrigerators-management/refrigerators-management.component';
+import { UsersManagementComponent } from '../users/screens/users-management/users-management.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,7 @@ const routes: Routes = [
       { path: 'roles', component: RolesManagementComponent},
       { path: 'departments', component: DepartmentsManagementComponent},
       { path: 'refrigerators', component: RefrigeratorsManagementComponent},
+      { path: 'users', component: UsersManagementComponent},
 
     ]
   },
