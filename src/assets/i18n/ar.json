@@ -35,6 +35,27 @@
         "TemperatureChangeAlert": "تنبيه بتغيير درجه الحراره",
         "ExternalSupplyPrivilage": "ميزه طلب الامداد الخارجي"
     },
+    "RolesManagementScreen": {
+        "PrimaryTitle": "الرئيسية /",
+        "ColoredPrimaryTitle": "الادوار",
+        "SecondaryPageTitle": "جميع الادوار",
+        "RoleName": "اسم الدور"
+    },
+    "DepartmentsManagementScreen": { 
+        "PrimaryTitle": "الرئيسية /",
+        "ColoredPrimaryTitle": "الاقسام",
+        "SecondaryPageTitle": "جميع الاقسام",
+        "DepartmentName": "اسم القسم"
+    },
+    "RefrigeratorsManagementScreen": { 
+        "PrimaryTitle": "الرئيسية /",
+        "ColoredPrimaryTitle": "الثلاجات",
+        "SecondaryPageTitle": "جميع الثلاجات",
+        "RefrigeratorName": "اسم الثلاجة",
+        "Temperature": "درجة الحرارة",
+        "From": "من",
+        "To": "الى"
+    },
     "Modal": {
         "CreateButton":"انشاء",
         "EditModalHeader": "تعديل",

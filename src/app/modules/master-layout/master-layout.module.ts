@@ -13,6 +13,9 @@ import { PackagesModule } from '../packages/packages.module';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { NavigationService } from './services/navigation.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { RolesModule } from '../roles/roles.module';
+import { DepartmentsModule } from '../departments/departments.module';
+import { RefrigeratorsManagementModule } from '../refrigerators-management/refrigerators-management.module';
 
 
 
@@ -32,6 +35,9 @@ import { TranslateModule } from '@ngx-translate/core';
     WarehousesModule,
     PackagesModule,
     TranslateModule,
+    RolesModule,
+    DepartmentsModule,
+    RefrigeratorsManagementModule
   ], providers: [
     NavigationService
   ]

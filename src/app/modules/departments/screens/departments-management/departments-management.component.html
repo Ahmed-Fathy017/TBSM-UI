@@ -2,45 +2,14 @@
     <app-page-header [pageTitle]="firstPageTitle" [coloredPageTitle]="coloredPageTitle"></app-page-header>
 
     <div class="container ">
-        <form action="" [formGroup]="createWarehouseForm">
+        <form action="" [formGroup]="createDepartmentForm">
 
             <div class=" row mb-2 ">
-                <div class="col-md-12 col-lg-12 col-xl-12">
+                <div class="col-md-6 col-lg-6 col-xl-6">
 
-                    <label for="warehouseName" class="mb-1 d-flex">{{'WarehousesManagementScreen.WarehouseName' |
+                    <label for="warehouseName" class="mb-1 d-flex">{{'DepartmentsManagementScreen.DepartmentName' |
                         translate}} </label>
-                    <input id="warehouseName" class="form-control" type="text" formControlName="warehouseName">
-                </div>
-            </div>
-
-            <div class=" row mb-2 d-flex ">
-                <div class="col-md-6 col-lg-6 col-xl-6">
-
-                    <label for="userName" class="mb-1 d-flex">{{'WarehousesManagementScreen.Username' | translate}}
-                    </label>
-                    <input id="userName" class="form-control" type="text" formControlName="username">
-                </div>
-
-                <div class="col-md-6 col-lg-6 col-xl-6">
-
-                    <label for="password" class="mb-1 d-flex"> {{'WarehousesManagementScreen.Password' | translate}}
-                    </label>
-                    <input id="password" class="form-control" type="password" formControlName="password">
-                </div>
-
-            </div>
-
-
-            <div class=" row mb-2 d-flex ">
-
-                <div class="col-md-6 col-lg-6 col-xl-6">
-
-                    <label for="package" class="mb-1 d-flex">{{'WarehousesManagementScreen.Packages' | translate}}
-                    </label>
-
-                    <select id="package" class="form-select" name="" id="" formControlName="package">
-                        <option *ngFor="let package of packages" [value]="package.id">{{package.name}}</option>
-                    </select>
+                    <input id="warehouseName" class="form-control" type="text" formControlName="departmentName">
                 </div>
 
                 <div class="col-md-6 col-lg-6 col-xl-6">
@@ -59,29 +28,24 @@
 
     <app-loading *ngIf="isLoading"></app-loading>
 
-    <div class="container list warehouses" *ngIf="!isLoading">
+    <div class="container list departments" *ngIf="!isLoading">
         <div class="row g-2 mb-2">
             <div class="item-card col-md-12 col-lg-12 col-xl-12 d-flex justify-content-between rounded-4 border px-4 py-3 mb-3"
-                *ngFor="let warehouse of warehouses">
+                *ngFor="let department of departments">
 
                 <div>
-                    {{warehouse.warehouse_name}}
+                    {{department}}
                 </div>
 
                 <div class="d-flex">
-                    <div class="mx-2 view d-flex justify-content-center align-items-center"
-                        (click)="onViewButtonClick(warehouse.id)"><i class="fa-solid fa-eye"></i>
-                    </div>
-                    <div class="mx-2 edit d-flex justify-content-center align-items-center" data-bs-toggle="modal"
-                        data-bs-target="#editWarehouseModal" (click)="onUpdateButtonClick(warehouse.id)"><i
-                            class="fa-solid fa-pen-to-square"></i></div>
-
                     <div class="mx-2 delete d-flex justify-content-center align-items-center" data-bs-toggle="modal"
-                        data-bs-target="#deleteWarehouseModal" (click)="onDeleteButtonClick(warehouse.id)"><i
+                        data-bs-target="#deleteWarehouseModal" (click)="onDeleteButtonClick('department.id')"><i
                             class="fa-solid fa-trash-can"></i></div>
+                    <div class="mx-2 edit d-flex justify-content-center align-items-center" data-bs-toggle="modal"
+                        data-bs-target="#editWarehouseModal" (click)="onUpdateButtonClick('department.id')"><i
+                            class="fa-solid fa-pen-to-square"></i></div>
+                    
                 </div>
-
-
 
             </div>
         </div>
@@ -93,7 +57,7 @@
 <!-- modals -->
 
 <!-- edit warehouse modal -->
-<div class="modal fade" id="editWarehouseModal" tabindex="-1" aria-labelledby="editWarehouseModalLabel"
+<!-- <div class="modal fade" id="editWarehouseModal" tabindex="-1" aria-labelledby="editWarehouseModalLabel"
     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -140,11 +104,11 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 
 <!-- delete warehouse modal -->
-<div class="modal fade" id="deleteWarehouseModal" tabindex="-1" aria-labelledby="deleteWarehouseModalLabel"
+<!-- <div class="modal fade" id="deleteWarehouseModal" tabindex="-1" aria-labelledby="deleteWarehouseModalLabel"
     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -156,8 +120,7 @@
                 </div>
 
                 <div class="d-flex justify-content-center mt-4">
-                    <p class="h5 fw-bold">{{'Modal.DeletionConsentMessage' | translate}}
-                        {{selectedWarehouse?.warehouse_name}}</p>
+                    <p class="h5 fw-bold">{{'Modal.DeletionConsentMessage' | translate}} {{selectedWarehouse?.warehouse_name}}</p>
                 </div>
 
             </div>
@@ -178,4 +141,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

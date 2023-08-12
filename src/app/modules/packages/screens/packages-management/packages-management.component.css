@@ -11,34 +11,7 @@
     color: white;
 }
 
-.package-card {
-    height: 60px;
-    box-shadow: 0px 4px 4px 0px #F6F6FB;
-}
-
-.delete {
-    cursor: pointer;
-    width: 25px;
-    color: #F15A60;
-    background-color: #F15A6021;
-}
-
-.edit {
-    cursor: pointer;
-    width: 25px;
-    color: #FFCD29;
-    background-color: #FFCD2930;
-}
-
-.view {
-    cursor: pointer;
-    width: 25px;
-    color: #100F37;
-    background-color: #100F3717;
-}
-
 .packages {
-    overflow:auto;
     height: 150px;
 }
 
@@ -46,7 +19,4 @@
     box-shadow: none;
 }
 
-.form-check-input:checked {
-    background-color: #F15A60;
-    border-color: #F15A60;
-}
+

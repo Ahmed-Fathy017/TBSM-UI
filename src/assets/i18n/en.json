@@ -35,6 +35,27 @@
         "TemperatureChangeAlert": "Temperature Change Alert",
         "ExternalSupplyPrivilage": "External Supply Privilage"
     },
+    "RolesManagementScreen": {
+        "PrimaryTitle": "Home / ",
+        "ColoredPrimaryTitle": "Roles",
+        "SecondaryPageTitle": "All Roles",
+        "RoleName": "Role Name"
+    },
+    "DepartmentsManagementScreen": {
+        "PrimaryTitle": "Home / ",
+        "ColoredPrimaryTitle": "Departments",
+        "SecondaryPageTitle": "All Departments",
+        "DepartmentName": "Department Name"
+    },
+    "RefrigeratorsManagementScreen": { 
+        "PrimaryTitle": "Home /",
+        "ColoredPrimaryTitle": "Refrigerators",
+        "SecondaryPageTitle": "All Refrigerators",
+        "RefrigeratorName": "Refrigerator Name",
+        "Temperature": "Temperature",
+        "From": "From",
+        "To": "To"
+    },
     "Modal": {
         "CreateButton": "Create",
         "EditModalHeader": "Edit",
