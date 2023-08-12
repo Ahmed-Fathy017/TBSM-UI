@@ -12,3 +12,15 @@
     background-color: #F3F6F92B;
     border-right: 4px solid #F15A60;
 }
+
+
+/* .body {
+    width: calc(100% - 5rem);
+    height: 100vh;
+    margin-left: 5rem;
+    z-index: 0;
+    position: relative;
+    top: 0;
+    transition: all .5s ease ;
+    padding:3rem;
+} */

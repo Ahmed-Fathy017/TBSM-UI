@@ -17,6 +17,8 @@ import { RolesModule } from '../roles/roles.module';
 import { DepartmentsModule } from '../departments/departments.module';
 import { RefrigeratorsManagementModule } from '../refrigerators-management/refrigerators-management.module';
 import { UsersModule } from '../users/users.module';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -24,7 +26,8 @@ import { UsersModule } from '../users/users.module';
   declarations: [
     MasterLayoutComponent,
     NavBarComponent,
-    SideNavComponent
+    SideNavComponent,
+    SidenavComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +42,8 @@ import { UsersModule } from '../users/users.module';
     RolesModule,
     DepartmentsModule,
     RefrigeratorsManagementModule,
-    UsersModule
+    UsersModule,
+    BrowserAnimationsModule
   ], providers: [
     NavigationService
   ]

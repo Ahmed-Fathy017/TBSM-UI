@@ -15,6 +15,7 @@ import { JwtHelperService, JwtModule, JwtModuleOptions } from '@auth0/angular-jw
 import { environment } from 'src/environments/environment';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -42,7 +43,8 @@ const JWT_Module_Options: JwtModuleOptions = {
     ReactiveFormsModule,
     MasterLayoutModule,
     HttpClientModule,
-
+    BrowserAnimationsModule,
+    
     // adding JwtModule
     JwtModule.forRoot(JWT_Module_Options),
 
