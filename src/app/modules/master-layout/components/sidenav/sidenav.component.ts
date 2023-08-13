@@ -1,6 +1,8 @@
 import { Component, Output, EventEmitter, HostListener, OnInit } from '@angular/core';
-import { navbarData } from '../../models/nav-data';
+import { adminNavbarData, userNavbarData } from '../../models/nav-data';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { LocalService } from 'src/app/modules/shared-components/services/local.service';
+import { UserTypes } from 'src/app/modules/authentication/models/user-types';
 
 @Component({
   selector: 'app-sidenav',
@@ -27,8 +29,22 @@ export class SidenavComponent implements OnInit {
 
   collapsed = false;
   screenWidth = 0;
-  navData = navbarData;
+  navData = adminNavbarData;
+  lang!: string;
 
+  constructor(private localService: LocalService) {
+
+    if (localService.getData('type') === UserTypes.ADMIN)
+      this.navData = adminNavbarData;
+    else
+      this.navData = userNavbarData;
+  }
+
+  ngOnInit(): void {
+    this.screenWidth = window.innerWidth;
+    this.lang = this.localService.getData('lang') === 'en' ? 'en' : 'ar';
+
+  }
 
   @HostListener('window.resize', ['event'])
   onResize(event: any) {
@@ -39,15 +55,28 @@ export class SidenavComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-    this.screenWidth = window.innerWidth;
-  }
+  // @HostListener('window:click', ['$event'])
+  // onClick(event: any) {
+  //   // console.log(this.collapsed)
+  //   // if (this.collapsed)
+  //   //   this.collapsed = false;
+  //   // this.onToggleSideNav.emit({ collapsed: this.collapsed, screenWidth: this.screenWidth });
 
+  //   if (!this.collapsed)
+  //     this.toggleCollapse()
+  // }
 
   toggleCollapse() {
     this.collapsed = !this.collapsed;
     this.onToggleSideNav.emit({ collapsed: this.collapsed, screenWidth: this.screenWidth });
   }
+
+  // toggleCollapsee() {
+  //   if (this.collapsed) {
+  //     this.collapsed = !this.collapsed;
+  //   this.onToggleSideNav.emit({ collapsed: this.collapsed, screenWidth: this.screenWidth });
+  //   }
+  // }
 
   closeSideNav() {
     this.collapsed = false;

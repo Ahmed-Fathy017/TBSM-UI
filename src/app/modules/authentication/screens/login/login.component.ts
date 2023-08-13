@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { LoginRequest } from '../../models/login-request';
 import { AuthenticationService } from '../../remote-services/authentication.service';
 import { LocalService } from 'src/app/modules/shared-components/services/local.service';
+import { UserTypes } from '../../models/user-types';
 
 @Component({
   selector: 'app-login',
@@ -13,198 +14,157 @@ import { LocalService } from 'src/app/modules/shared-components/services/local.s
 })
 export class LoginComponent implements OnInit {
 
-    /*************** Variables **********************/
-    @ViewChild('hidden') hidden: any;
-    @ViewChild('show') show: any;
-    @ViewChild('password') password: any;
+  /*************** Variables **********************/
+  @ViewChild('hidden') hidden: any;
+  @ViewChild('show') show: any;
+  @ViewChild('password') password: any;
 
-    subscription = new Subscription();
+  subscription = new Subscription();
 
-    message: string = '';
+  message: string = '';
 
-    showMessage: boolean = false;
-    isProcessing: boolean = false;
-    returnURL: string = '';
-  
-    loginForm = new FormGroup({
-      userName: new FormControl('', [
-        Validators.required,
-      ]),
-      password: new FormControl('', Validators.required),
+  showMessage: boolean = false;
+  isProcessing: boolean = false;
+  returnURL: string = '';
+
+  loginForm = new FormGroup({
+    userName: new FormControl('', [
+      Validators.required,
+    ]),
+    password: new FormControl('', Validators.required),
+  });
+
+  /*************** Constructor **********************/
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private authenticationService: AuthenticationService,
+    private localStore: LocalService
+  ) { }
+
+  /*************** Events  **********************/
+  ngOnInit(): void {
+
+    // this.activatedRoute.queryParams.subscribe(params => {
+    //   this.returnURL = params['returnUrl'];
+    // });
+
+    // this.tryGetUserProfile();
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  onSubmit() {
+
+    Object.keys(this.loginForm.controls).forEach(field => {
+      const control = this.loginForm.get(field);
+      if (control)
+        control.markAsTouched({ onlySelf: true });
     });
-  
-    /*************** Constructor **********************/
-    constructor(
-      private activatedRoute: ActivatedRoute,
-      private router: Router,
-      private authenticationService: AuthenticationService,
-      private localStore: LocalService
-    ) {  }
-  
-    /*************** Events  **********************/
-    ngOnInit(): void {
-  
-      // this.activatedRoute.queryParams.subscribe(params => {
-      //   this.returnURL = params['returnUrl'];
-      // });
-  
-      // this.tryGetUserProfile();
+
+    let userNameControl = this.loginForm.get('userName');
+    let passwordControl = this.loginForm.get('password');
+
+    if (this.loginForm.valid) {
+      if (userNameControl && passwordControl) {
+        this.isProcessing = true;
+
+        // setTimeout(() => {
+        //   this.isProcessing = false;
+        //   this.router.navigate(['dashboard']);
+        // }, 2000);
+
+        let username = userNameControl.value;
+        let password = passwordControl.value;
+
+        let requestDTO: LoginRequest = new LoginRequest();
+        requestDTO.username = username!.trim();
+        requestDTO.password = password!;
+
+        this.isProcessing = true;
+        this.login(requestDTO);
+      }
     }
-  
-    ngOnDestroy() {
-      this.subscription.unsubscribe();
+  }
+
+  /*************** Functions **********************/
+
+  // show&hide password
+  togglePassword() {
+    this.show.nativeElement.classList.toggle('show');
+    this.show.nativeElement.classList.toggle('hidden');
+    this.hidden.nativeElement.classList.toggle('show');
+    this.hidden.nativeElement.classList.toggle('hidden');
+    if (this.password.nativeElement.type === 'password') {
+      this.password.nativeElement.type = 'text';
+    } else if (this.password.nativeElement.type === 'text') {
+      this.password.nativeElement.type = 'password';
     }
-  
-    onSubmit() {
-  
-      Object.keys(this.loginForm.controls).forEach(field => {
-        const control = this.loginForm.get(field);
-        if (control)
-          control.markAsTouched({ onlySelf: true });
-      });
+  }
 
-      let userNameControl = this.loginForm.get('userName');
-      let passwordControl = this.loginForm.get('password');
-  
-      if (this.loginForm.valid) {
-        if (userNameControl && passwordControl) {
-          this.isProcessing = true;
+  // login
+  login(requestDTO: LoginRequest) {
+    this.hideErrorMessage();
+    let tokenReqSubscription = this.authenticationService
+      .login(requestDTO)
+      .subscribe(
+        (response: any) => {
+          this.localStore.saveData('token', response.auth_data.access_token);
+          this.localStore.saveData('username', response.data.username);
+          this.localStore.saveData('type', response.data.type);
+          this.localStore.saveData('id', String(response.data.id));
 
-          // setTimeout(() => {
-          //   this.isProcessing = false;
-          //   this.router.navigate(['dashboard']);
-          // }, 2000);
+          let lang = this.localStore.getData('lang');
+          this.localStore.saveData('lang', lang === 'en' ? 'en' : 'ar');
 
-          let username = userNameControl.value;
-          let password = passwordControl.value;
+          this.navigateToHomePage()
 
-          let requestDTO: LoginRequest = new LoginRequest();
-          requestDTO.username = username!.trim();
-          requestDTO.password = password!;
-          
-          this.isProcessing = true;
-          this.login(requestDTO);
+          this.isProcessing = false;
+
+        },
+        (error: any) => {
+          this.isProcessing = false;
+          this.showErrorMessage(error.error.message);
         }
-      }
-    }
-  
-    /*************** Functions **********************/
+      );
 
-    // show&hide password
-    togglePassword() {
-      this.show.nativeElement.classList.toggle('show');
-      this.show.nativeElement.classList.toggle('hidden');
-      this.hidden.nativeElement.classList.toggle('show');
-      this.hidden.nativeElement.classList.toggle('hidden');
-      if (this.password.nativeElement.type === 'password') {
-        this.password.nativeElement.type = 'text';
-      } else if (this.password.nativeElement.type === 'text') {
-        this.password.nativeElement.type = 'password';
-      }
-    }
-  
-    // login
-    login(requestDTO: LoginRequest) {
-      this.hideErrorMessage();
-      let tokenReqSubscription = this.authenticationService
-        .login(requestDTO)
-        .subscribe(
-          (response: any) => {
+    this.subscription.add(tokenReqSubscription);
+  }
 
-            this.localStore.saveData('token', response.auth_data.access_token);
-            this.localStore.saveData('username', response.data.username);
-            this.localStore.saveData('type', response.data.type);
-            this.localStore.saveData('id', String(response.data.id));
+  navigateToHomePage() {
+    if (this.localStore.getData('type') === UserTypes.ADMIN)
+      this.router.navigate(['dashboard']);
+    else
+      this.router.navigate(['warehouses/home']);
+  }
 
-            // let successResponse = loginResult as BaseSuccessResponse;
-            // let auth: AuthInfoModel = new AuthInfoModel();
-            // auth.userName = tokenRequestDTO.Username;
-            // auth.token = successResponse.Data.AccessToken;
-            // auth.refreshToken = successResponse.Data.RefreshTokenString;
-            // auth.tokenExpiryTime = successResponse.Data.RefreshTokenExpiry;
-  
-            // set the authentication values to the AuthInfoModel object in the app shared object
-            // this.sharedObject.setAuthInfo(auth);
-            // this.getUserProfile();
+  showErrorMessage(message: string) {
+    this.message = message;
+    this.showMessage = true;
+  }
 
-            this.router.navigate(['dashboard']);
-            this.isProcessing = false;
-  
-          },
-          (error: any) => {
-            this.isProcessing = false;
-            this.showErrorMessage(error.error.message);
-          }
-        );
-  
-      this.subscription.add(tokenReqSubscription);
-    }
-  
-    // tryGetUserProfile() {
-    //   let authInfo = this.sharedObject.getAuthInfo();
-  
-    //   if (ObjectUtilities.HasValue(authInfo.userName) && authInfo.userName != '')
-    //     this.redirectTolandingPage();
-    // }
-  
-    // getUserProfile() {
-    //   let getUserProfileSubscription = this.authRemoteService.getUserProfile().subscribe(
-    //     (result) => {
-    //       let successGetUserProfileResponse = result as BaseSuccessResponse;
-    //       let userModel: UserInfoModel =
-    //         successGetUserProfileResponse.Data as UserInfoModel;
-  
-    //       // set the user info values to the AuthInfoModel object in the app shared object
-    //       this.sharedObject.setUserInfo(userModel);
-    //       let authInfo = this.sharedObject.getAuthInfo();
-  
-    //       if (successGetUserProfileResponse.Data.AuthorizedUiComponents && successGetUserProfileResponse.Data.AuthorizedUiComponents.length > 0) {
-    //         authInfo.AuthorizedUiComponents = successGetUserProfileResponse.Data.AuthorizedUiComponents;
-    //         this.sharedObject.setAuthInfo(authInfo);
-  
-    //         // redirect to the landing screen
-    //         this.redirectTolandingPage();
-    //       }
-    //       else {
-    //         this.showErrorMessage("Invalid User Profile");
-    //       }
-    //       this.isProcessing = false;
-  
-    //     },
-    //     (error: BaseErrorResponse) => {
-    //       this.isProcessing = false;
-    //       this.showErrorMessage(error.Message);
-    //     }
-    //   );
-    //   this.subscription.add(getUserProfileSubscription);
-    // }
-  
-  
-    showErrorMessage(message: string) {
-      this.message = message;
-      this.showMessage = true;
-    }
-  
-    hideErrorMessage() {
-      this.showMessage = false;
-    }
-  
-    redirectTolandingPage() {
-  
-      // if (ObjectUtilities.HasValue(this.returnURL) && this.returnURL != '')
-      //   this.router.navigateByUrl(this.returnURL);
-      // else
-        this.router.navigateByUrl('/menu');
-    }
-  
-    //forget password
-    forgetpassword() {
-      this.router.navigate(['/forgetpassword']);
-    }
-  
-    //signup
-    signup() {
-      // this.router.navigate(['/signup']);
-    }
+  hideErrorMessage() {
+    this.showMessage = false;
+  }
+
+  redirectTolandingPage() {
+
+    // if (ObjectUtilities.HasValue(this.returnURL) && this.returnURL != '')
+    //   this.router.navigateByUrl(this.returnURL);
+    // else
+    this.router.navigateByUrl('/menu');
+  }
+
+  //forget password
+  forgetpassword() {
+    this.router.navigate(['/forgetpassword']);
+  }
+
+  //signup
+  signup() {
+    // this.router.navigate(['/signup']);
+  }
 
 }

@@ -5,7 +5,8 @@ import { WarehouseDetailsComponent } from "./screens/warehouse-details/warehouse
 
 const routes: Routes = [
     {path: '', component: WarehousesManagementComponent},
-    {path: 'warehouse/:id', component: WarehouseDetailsComponent}
+    {path: 'warehouse/:id', component: WarehouseDetailsComponent},
+    {path: 'home', component: WarehouseDetailsComponent}
   
   
   ];

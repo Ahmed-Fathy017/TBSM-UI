@@ -7,12 +7,15 @@
         </button> -->
     </div>
 
-    <ul class="sidenav-nav">
-        <li class="sidenav-nav-item" *ngFor="let data of navData">
-            <a href="" class="sidenav-nav-link" [routerLink]="data.routeLink" routerLinkActive="active"
-                [routerLinkActiveOptions]="{exact: true}">
+    <ul class="sidenav-nav mt-4">
+        <li class="sidenav-nav-item " *ngFor="let data of navData">
+            <a href="" class="sidenav-nav-link"
+                [ngClass]="lang === 'ar'? 'sidenav-nav-link-padding-right': 'sidenav-nav-link-padding-left'"
+                [routerLink]="data.routeLink" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <i class="sidenav-link-icon" [class]="data.icon"></i>
-                <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">{{data.label | translate}}</span>
+                <span class="sidenav-link-text m-0" @fadeInOut *ngIf="collapsed">{{data.label | translate}}</span>
+                <span class="tooltiptext p-2" @fadeInOut *ngIf="!collapsed">{{data.label | translate}}</span>
+
             </a>
         </li>
     </ul>

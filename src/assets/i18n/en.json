@@ -6,7 +6,11 @@
     "SideNav": {
         "Home": "Home",
         "Warehouses": "Warehouses",
-        "Packages": "Packages"
+        "Packages": "Packages",
+        "Roles":"Roles",
+        "Departments":"Departments",
+        "Refrigerators":"Refrigerators",
+        "Users":"Users"
     },
     "AdminDashboardScreen": {
         "Home": "Home"

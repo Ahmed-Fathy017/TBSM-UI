@@ -47,13 +47,13 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
     this.subscription.add(subscription);
   }
 
-  setupViewData(data: any) {
-    this.cards.push(data.roles_count);
-    this.cards.push(data.warehouses_count);
-    this.cards.push(data.categories_count);
-    this.cards.push(data.users_count);
-    this.cards.push(data.refrigerators_count);
-    this.cards.push(data.orders_count);
-  }
+  // setupViewData(data: any) {
+  //   this.cards.push(data.roles_count);
+  //   this.cards.push(data.warehouses_count);
+  //   this.cards.push(data.categories_count);
+  //   this.cards.push(data.users_count);
+  //   this.cards.push(data.refrigerators_count);
+  //   this.cards.push(data.orders_count);
+  // }
 
 }

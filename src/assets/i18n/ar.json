@@ -6,7 +6,11 @@
     "SideNav": {
         "Home": "الرئيسية",
         "Warehouses": "المستودعات",
-        "Packages": "الباقات"
+        "Packages": "الباقات",
+        "Roles":"الادوار",
+        "Departments":"الاقسام",
+        "Refrigerators":"الثلاجات",
+        "Users":"المستخدمين"
     },
     "AdminDashboardScreen": {
         "Home": "الرئيسية"

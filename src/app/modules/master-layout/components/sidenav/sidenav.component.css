@@ -7,11 +7,9 @@
     width: 5rem;
 
     height: 100vh;
-    /* box-shadow: 0.063rem 0 1.25rem 0 grey; */
 
     .logo-container {
         display: flex;
-        /* flex-direction: column; */
         align-items: center;
         padding: 0.938rem 0.938rem 0 0.938rem;
         width: 100%;
@@ -24,12 +22,11 @@
             min-width: 3rem;
             border-radius: 0.313rem;
             padding: 0.313rem;
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 900;
             cursor: pointer;
             border: none;
         }
-
 
         .logo-text {
             margin-left: 1.5rem;
@@ -58,12 +55,12 @@
 }
 
 .sidenav-collapsed {
-    width: 16.5625rem;
+    width: 14rem;
 }
 
 .sidenav-nav {
     list-style: none;
-    padding: 0.938rem;
+    padding: 0rem;
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -75,17 +72,28 @@
         width: 100%;
         margin-bottom: 0.625rem;
 
+
+
         .sidenav-nav-link {
             display: flex;
             align-items: center;
-            height: 3rem;
+            /* justify-content: center; */
+            height: 2.5rem;
             color: #fff;
             text-decoration: none;
-            border-radius: 0.625rem;
+
+            /* border-radius: 0.625rem; */
             transition: all .3s ease;
+            /* border-right: 4px solid transparent; */
+
+
+
 
             .sidenav-link-icon {
-                font-size: 22px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 17px;
                 width: 2rem;
                 min-width: 2rem;
                 margin: 0 0.5rem;
@@ -93,7 +101,8 @@
             }
 
             .sidenav-link-text {
-                margin-left: 1.5rem;
+                margin-left: 0.9rem;
+                font-size: 0.95rem;
             }
         }
     }
@@ -101,22 +110,54 @@
 
 .sidenav-nav-item:hover {
     .sidenav-nav-link {
-        background-color: #fff;
-        color: #100F37;
+        background-color: #F3F6F92B;
+        /* color: #100F37; */
     }
 
 }
 
 .active {
-    background-color: #fff;
+    background-color: #F3F6F92B;
 
-    .sidenav-link-icon,
+    /* .sidenav-link-icon,
     .sidenav-link-text {
         color: #100F37;
-    }
+    } */
 }
 
 img {
     width: 75px;
 }
 
+
+.sidenav-nav-link-padding-right {
+    padding-right: 1rem;
+    padding-left: 0rem;
+}
+
+.sidenav-nav-link-padding-left {
+    padding-right: 0rem;
+    padding-left: 1rem;
+}
+
+
+/* tooltips */
+.tooltiptext {
+    visibility: hidden;
+    background-color: #F15A60;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    font-size: 0.9rem;
+
+    /* Position the tooltip */
+    position: relative;
+    z-index: 1;
+    left: 20px;
+    right: 20px;
+}
+
+.sidenav-nav-item:hover .tooltiptext {
+    visibility: visible;
+    /* transition: all .3s ease; */
+}
