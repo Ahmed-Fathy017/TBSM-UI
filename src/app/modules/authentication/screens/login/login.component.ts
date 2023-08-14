@@ -116,9 +116,6 @@ export class LoginComponent implements OnInit {
           this.localStore.saveData('type', response.data.type);
           this.localStore.saveData('id', String(response.data.id));
 
-          let lang = this.localStore.getData('lang');
-          this.localStore.saveData('lang', lang === 'en' ? 'en' : 'ar');
-
           this.navigateToHomePage()
 
           this.isProcessing = false;
@@ -148,23 +145,4 @@ export class LoginComponent implements OnInit {
   hideErrorMessage() {
     this.showMessage = false;
   }
-
-  redirectTolandingPage() {
-
-    // if (ObjectUtilities.HasValue(this.returnURL) && this.returnURL != '')
-    //   this.router.navigateByUrl(this.returnURL);
-    // else
-    this.router.navigateByUrl('/menu');
-  }
-
-  //forget password
-  forgetpassword() {
-    this.router.navigate(['/forgetpassword']);
-  }
-
-  //signup
-  signup() {
-    // this.router.navigate(['/signup']);
-  }
-
 }

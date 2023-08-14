@@ -72,7 +72,13 @@ input[type=number]:focus,
   border-color: #DEE2E6;
 }
 
+/************ Bootstrap Checkboxes Color Edit ************/
 .form-check-input:checked {
+    background-color: #F15A60;
+    border-color: #F15A60;
+}
+
+input[type=checkbox]:checked {
     background-color: #F15A60;
     border-color: #F15A60;
 }

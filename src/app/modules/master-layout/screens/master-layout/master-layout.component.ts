@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 
 @Component({
   selector: 'app-master-layout',
@@ -10,7 +11,7 @@ export class MasterLayoutComponent implements OnInit {
   isSideNavCollapsed = false;
   screenwidth = 0;
 
-  constructor() { }
+  constructor(private localService: LocalService) { }
 
   ngOnInit(): void {
   }
@@ -21,14 +22,14 @@ export class MasterLayoutComponent implements OnInit {
 
   }
 
-  getBodyClass(): string {
-    let styleClass = '';
-    if (this.isSideNavCollapsed && this.screenwidth > 768)
-      styleClass = 'body-trimmed'
-    else if (this.isSideNavCollapsed && this.screenwidth <= 768 && this.screenwidth > 0)
-      styleClass = 'body-md-screen'
-    return styleClass;
-  }
+  // getBodyClass(): string {
+  //   let styleClass = '';
+  //   if (this.isSideNavCollapsed && this.screenwidth > 768)
+  //     styleClass = 'body-trimmed'
+  //   else if (this.isSideNavCollapsed && this.screenwidth <= 768 && this.screenwidth > 0)
+  //     styleClass = 'body-md-screen'
+  //   return styleClass;
+  // }
 
 }
 

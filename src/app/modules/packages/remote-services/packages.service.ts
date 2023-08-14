@@ -19,7 +19,6 @@ export class PackagesService extends AbstractRemoteService{
   }
 
   createPackage(requestDTO: Package) {
-    console.log(requestDTO)
     let apiUrl = this.apiURl + `super_admin/add_package`;
 
     return this.http.post(apiUrl, requestDTO);

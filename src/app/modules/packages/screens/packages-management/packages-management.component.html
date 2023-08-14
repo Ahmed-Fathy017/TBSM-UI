@@ -146,17 +146,17 @@
 
                         <div class="col-md-6 col-lg- col-xl-6 d-flex">
 
-                            <input class="form-check-input mx-1" type="checkbox" value="" id="flexCheckIndeterminate01"
+                            <input class="form-check-input mx-1" type="checkbox" value="" id="flexCheckIndeterminate03"
                                 formControlName="temperatureAlert">
-                            <label class="form-check-label" for="flexCheckIndeterminate01">
+                            <label class="form-check-label" for="flexCheckIndeterminate03">
                                 {{'PackagesManagementScreen.TemperatureChangeAlert' | translate}}
                             </label>
                         </div>
 
                         <div class="col-md-6 col-lg- col-xl-6 d-flex">
-                            <input class="form-check-input mx-1" type="checkbox" value="" id="flexCheckIndeterminate02"
+                            <input class="form-check-input mx-1" type="checkbox" value="" id="flexCheckIndeterminate04"
                                 formControlName="externalSupply">
-                            <label class="form-check-label" for="flexCheckIndeterminate02">
+                            <label class="form-check-label" for="flexCheckIndeterminate04">
                                 {{'PackagesManagementScreen.ExternalSupplyPrivilage' | translate}}
                             </label>
                         </div>
@@ -187,7 +187,8 @@
                 </div>
 
                 <div class="d-flex justify-content-center mt-4">
-                    <p class="h5 fw-bold">{{'Modal.DeletionConsentMessage' | translate}} {{selectedPackage?.name}}</p>
+                    <p class="h5 fw-bold">{{'Modal.DeletionConsentMessage' | translate}}
+                        {{'PackagesManagementScreen.EntityName' | translate}} {{selectedPackage?.name}}</p>
                 </div>
 
             </div>

@@ -40,6 +40,7 @@
         "ExternalSupplyPrivilage": "External Supply Privilage"
     },
     "RolesManagementScreen": {
+        "EntityName": "Role",
         "PrimaryTitle": "Home / ",
         "ColoredPrimaryTitle": "Roles",
         "SecondaryPageTitle": "All Roles",

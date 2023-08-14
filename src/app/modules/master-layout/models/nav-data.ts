@@ -30,7 +30,7 @@ export const userNavbarData = [
     },
     {
         routeLink: 'departments',
-        icon: 'fa-sharp fa-solid fa-grid',
+        icon: 'fa-solid fa-border-all',
         label: 'SideNav.Departments'
     },
     {

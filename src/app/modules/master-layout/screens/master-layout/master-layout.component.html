@@ -1,9 +1,9 @@
 
 
-<div [dir]="'dir' | translate">
-    <app-side-nav [sidenavTemplateRef]="navContent" [navWidth]="250" [duration]="0.5"></app-side-nav>
+<div>
+    <!-- <app-side-nav [sidenavTemplateRef]="navContent" [navWidth]="250" [duration]="0.5"></app-side-nav> -->
 
-    <app-sidenav [dir]="'dir' | translate" (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
+    <app-sidenav (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
     <ng-template #navContent>
         <div class="container-fluid d-flex flex-column p-0">
             <div class="menu-items mb-2">

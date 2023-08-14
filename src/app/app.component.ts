@@ -13,8 +13,9 @@ export class AppComponent {
   constructor(
     private translateService: TranslateService,
     private localService: LocalService) {
-    this.translateService.setDefaultLang('ar');
-    this.translateService.use(localService.getData('lang') || 'ar');
+      this.translateService.setDefaultLang('ar');
+      this.translateService.use(localService.getData('lang') || 'ar');
+      this.localService.saveData('lang', localService.getData('lang') || 'ar');
   }
 
   translate(event: any) {

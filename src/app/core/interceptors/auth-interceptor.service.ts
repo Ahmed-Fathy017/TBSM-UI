@@ -18,8 +18,10 @@ export class AuthInterceptor implements HttpInterceptor {
       headers: req.headers
         .set('Authorization', `Bearer ${this.localService.getData('token')}`)
         .set('Content-Type', 'application/json')
-        .set('Accept-Language', this.localService.getData('lang'))
+        .set('Accept-Language', this.localService.getData('lang') || 'ar')
     });
+
+    console.log("interceptor", this.localService.getData('lang'))
 
     return next.handle(req);
   }

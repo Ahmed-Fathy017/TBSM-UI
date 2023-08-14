@@ -116,8 +116,6 @@ export class PackagesManagementComponent implements OnInit, OnDestroy {
       this.isProcessing = true;
       this.isLoading = true;
 
-      console.log(requestDTO)
-
       this.createPackage(requestDTO);
     } else
       this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');

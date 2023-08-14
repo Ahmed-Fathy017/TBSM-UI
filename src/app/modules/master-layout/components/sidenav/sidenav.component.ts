@@ -38,11 +38,13 @@ export class SidenavComponent implements OnInit {
       this.navData = adminNavbarData;
     else
       this.navData = userNavbarData;
+
+    this.lang = localService.getData('lang') || 'ar';
+
   }
 
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;
-    this.lang = this.localService.getData('lang') === 'en' ? 'en' : 'ar';
 
   }
 
@@ -55,28 +57,10 @@ export class SidenavComponent implements OnInit {
     }
   }
 
-  // @HostListener('window:click', ['$event'])
-  // onClick(event: any) {
-  //   // console.log(this.collapsed)
-  //   // if (this.collapsed)
-  //   //   this.collapsed = false;
-  //   // this.onToggleSideNav.emit({ collapsed: this.collapsed, screenWidth: this.screenWidth });
-
-  //   if (!this.collapsed)
-  //     this.toggleCollapse()
-  // }
-
   toggleCollapse() {
     this.collapsed = !this.collapsed;
     this.onToggleSideNav.emit({ collapsed: this.collapsed, screenWidth: this.screenWidth });
   }
-
-  // toggleCollapsee() {
-  //   if (this.collapsed) {
-  //     this.collapsed = !this.collapsed;
-  //   this.onToggleSideNav.emit({ collapsed: this.collapsed, screenWidth: this.screenWidth });
-  //   }
-  // }
 
   closeSideNav() {
     this.collapsed = false;
