@@ -1,3 +1,1 @@
-<div [dir]="'dir' | translate" >
-    <router-outlet [dir]="'dir' | translate"></router-outlet>
-</div>
+<router-outlet *ngIf="translationsLoaded"></router-outlet>

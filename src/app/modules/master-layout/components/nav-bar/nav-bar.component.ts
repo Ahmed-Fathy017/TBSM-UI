@@ -15,10 +15,9 @@ export class NavBarComponent implements OnInit {
 
   constructor(private navService: NavigationService,
     private router: Router,
-    private localService: LocalService) { 
+    private localService: LocalService) {
     this.lang = this.localService.getData('lang') || 'ar';
-
-    }
+  }
 
   ngOnInit(): void {
     this.userName = this.localService.getData('username');
