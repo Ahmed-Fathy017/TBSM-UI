@@ -49,6 +49,7 @@
         "RoleName": "اسم الدور"
     },
     "DepartmentsManagementScreen": { 
+        "EntityName": "القسم",
         "PrimaryTitle": "الرئيسية /",
         "ColoredPrimaryTitle": "الاقسام",
         "SecondaryPageTitle": "جميع الاقسام",

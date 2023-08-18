@@ -47,6 +47,7 @@
         "RoleName": "Role Name"
     },
     "DepartmentsManagementScreen": {
+        "EntityName": "Department",
         "PrimaryTitle": "Home / ",
         "ColoredPrimaryTitle": "Departments",
         "SecondaryPageTitle": "All Departments",
