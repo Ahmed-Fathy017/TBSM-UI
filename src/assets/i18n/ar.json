@@ -56,6 +56,7 @@
         "DepartmentName": "اسم القسم"
     },
     "RefrigeratorsManagementScreen": { 
+        "EntityName": "الثلاجة",
         "PrimaryTitle": "الرئيسية /",
         "ColoredPrimaryTitle": "الثلاجات",
         "SecondaryPageTitle": "جميع الثلاجات",

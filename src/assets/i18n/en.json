@@ -54,6 +54,7 @@
         "DepartmentName": "Department Name"
     },
     "RefrigeratorsManagementScreen": { 
+        "EntityName": "Refrigerator",
         "PrimaryTitle": "Home /",
         "ColoredPrimaryTitle": "Refrigerators",
         "SecondaryPageTitle": "All Refrigerators",

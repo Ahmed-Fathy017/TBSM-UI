@@ -14,13 +14,14 @@
 
                 <div class="col-md-3 col-lg-3 col-xl-3">
                     <div class="input-group mb-3">
-                        <label for="warehouseName" class="mb-1 d-flex col-12">{{'RefrigeratorsManagementScreen.Temperature' |
+                        <label for="warehouseName"
+                            class="mb-1 d-flex col-12">{{'RefrigeratorsManagementScreen.Temperature' |
                             translate}} </label>
                         <div class="input-group-prepend">
                             <span class="input-group-text">{{'RefrigeratorsManagementScreen.From' |
                                 translate}}</span>
                         </div>
-                       
+
                         <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)">
                         <div class="input-group-append">
                             <span class="input-group-text">C°</span>
@@ -28,16 +29,17 @@
                     </div>
                 </div>
 
-               
+
                 <div class="col-md-3 col-lg-3 col-xl-3">
                     <div class="input-group mb-3">
-                        <label for="warehouseName" class="mb-1 d-flex col-12">{{'RefrigeratorsManagementScreen.Temperature' |
+                        <label for="warehouseName"
+                            class="mb-1 d-flex col-12">{{'RefrigeratorsManagementScreen.Temperature' |
                             translate}} </label>
                         <div class="input-group-prepend">
                             <span class="input-group-text">{{'RefrigeratorsManagementScreen.To' |
                                 translate}}</span>
                         </div>
-                       
+
                         <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)">
                         <div class="input-group-append">
                             <span class="input-group-text">C°</span>
@@ -48,7 +50,7 @@
 
             </div>
 
-            
+
 
             <div class="row mb-2 d-flex justify-content-end">
                 <div class="col-md-6 col-lg-6 col-xl-6">
@@ -73,16 +75,17 @@
                 *ngFor="let refrigerator of refrigerators">
 
                 <div>
-                    {{refrigerator}}
+                    {{refrigerator.name}}
                 </div>
 
                 <div class="d-flex">
-                    <div class="mx-2 delete d-flex justify-content-center align-items-center" data-bs-toggle="modal"
-                        data-bs-target="#deleteWarehouseModal" (click)="onDeleteButtonClick('Refrigerator.id')"><i
-                            class="fa-solid fa-trash-can"></i></div>
+                    <div class="mx-4 d-flex justify-content-center align-items-center">20°</div>
                     <div class="mx-2 edit d-flex justify-content-center align-items-center" data-bs-toggle="modal"
-                        data-bs-target="#editWarehouseModal" (click)="onUpdateButtonClick('Refrigerator.id')"><i
+                        data-bs-target="#editModal" (click)="onUpdateButtonClick(refrigerator.id)"><i
                             class="fa-solid fa-pen-to-square"></i></div>
+                    <div class="mx-2 delete d-flex justify-content-center align-items-center" data-bs-toggle="modal"
+                        data-bs-target="#deleteModal" (click)="onDeleteButtonClick(refrigerator.id)"><i
+                            class="fa-solid fa-trash-can"></i></div>
 
                 </div>
 
@@ -95,14 +98,14 @@
 
 <!-- modals -->
 
-<!-- edit warehouse modal -->
-<!-- <div class="modal fade" id="editWarehouseModal" tabindex="-1" aria-labelledby="editWarehouseModalLabel"
+<!-- edit modal -->
+<!-- <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel"
     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header d-flex  justify-content-between">
                 <div>
-                    <h5 class="modal-title" id="editWarehouseModalLabel">{{'Modal.EditModalHeader' | translate}} </h5>
+                    <h5 class="modal-title" id="editModalLabel">{{'Modal.EditModalHeader' | translate}} </h5>
                 </div>
 
                 <div>
@@ -146,8 +149,8 @@
 </div> -->
 
 
-<!-- delete warehouse modal -->
-<!-- <div class="modal fade" id="deleteWarehouseModal" tabindex="-1" aria-labelledby="deleteWarehouseModalLabel"
+<!-- delete modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -159,7 +162,8 @@
                 </div>
 
                 <div class="d-flex justify-content-center mt-4">
-                    <p class="h5 fw-bold">{{'Modal.DeletionConsentMessage' | translate}} {{selectedWarehouse?.warehouse_name}}</p>
+                    <p class="h5 fw-bold">{{'Modal.DeletionConsentMessage' | translate}} {{'RefrigeratorsManagementScreen.EntityName' |
+                        translate}} {{selectedRefrigerator.name}}</p>
                 </div>
 
             </div>
@@ -180,4 +184,4 @@
             </div>
         </div>
     </div>
-</div> -->
+</div>

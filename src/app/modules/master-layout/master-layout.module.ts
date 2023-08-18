@@ -15,10 +15,10 @@ import { NavigationService } from './services/navigation.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { RolesModule } from '../roles/roles.module';
 import { DepartmentsModule } from '../departments/departments.module';
-import { RefrigeratorsManagementModule } from '../refrigerators-management/refrigerators-management.module';
 import { UsersModule } from '../users/users.module';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RefrigeratorsModule } from '../refrigerators/refrigerators.module';
 
 
 
@@ -41,7 +41,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     TranslateModule,
     RolesModule,
     DepartmentsModule,
-    RefrigeratorsManagementModule,
+    RefrigeratorsModule,
     UsersModule,
     BrowserAnimationsModule
   ], providers: [

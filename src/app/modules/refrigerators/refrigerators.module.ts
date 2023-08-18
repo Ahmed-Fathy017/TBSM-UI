@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RefrigeratorsManagementComponent } from './screens/refrigerators-management/refrigerators-management.component';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
-import { TranslateModule } from '@ngx-translate/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
+import { RefrigeratorsManagementComponent } from './screens/refrigerators-management/refrigerators-management.component';
 
 
 
@@ -18,4 +18,4 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule
   ]
 })
-export class RefrigeratorsManagementModule { }
+export class RefrigeratorsModule { }

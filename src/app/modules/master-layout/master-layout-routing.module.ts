@@ -3,11 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { MasterLayoutComponent } from './screens/master-layout/master-layout.component';
 import { AuthGuardService } from '../authentication/services/auth-guard.service';
 import { MainDashboardComponent } from '../dashboards/screens/main-dashboard/main-dashboard.component';
-import { WarehousesManagementComponent } from '../warehouses/screens/warehouses-management/warehouses-management.component';
 import { RolesManagementComponent } from '../roles/screens/roles-management/roles-management.component';
 import { DepartmentsManagementComponent } from '../departments/screens/departments-management/departments-management.component';
-import { RefrigeratorsManagementComponent } from '../refrigerators-management/screens/refrigerators-management/refrigerators-management.component';
 import { UsersManagementComponent } from '../users/screens/users-management/users-management.component';
+import { RefrigeratorsManagementComponent } from '../refrigerators/screens/refrigerators-management/refrigerators-management.component';
 
 const routes: Routes = [
   {
