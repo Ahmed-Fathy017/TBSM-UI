@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { AbstractRemoteService } from '../../shared-components/remote-services/abstract-remote-service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Warehouse } from '../models/warehouse';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class WarehousesService extends AbstractRemoteService {
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient,
+   ) {
     super()
   }
 
@@ -17,6 +19,8 @@ export class WarehousesService extends AbstractRemoteService {
 
     return this.http.get(apiUrl);
   }
+
+
 
   createWarehouse(requestDTO: Warehouse) {
     let apiUrl = this.apiURl + `super_admin/add_warehouse`;
@@ -34,5 +38,20 @@ export class WarehousesService extends AbstractRemoteService {
     let apiUrl = this.apiURl + `super_admin/delete_warehouse/${id}`;
 
     return this.http.post(apiUrl, {});
+  }
+
+  // generic api, can be used for both admin user and warehouse user
+  getWarehouse(id?: number) {
+    let apiUrl = this.apiURl + `warehouse/main`;
+
+    if (id) {
+      let httpHeaders: HttpHeaders = new HttpHeaders();
+      // warehouse id should be added to headers
+      // httpHeaders.append('Accept-Language', 'ar');
+      let options = { headers: httpHeaders };
+      return this.http.get(apiUrl, options);
+    }
+
+    return this.http.get(apiUrl);
   }
 }

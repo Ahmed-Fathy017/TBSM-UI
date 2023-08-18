@@ -23,3 +23,14 @@
     height: 200px;
     overflow: auto;
 }
+
+
+@media (max-width: 819px) {
+    /* Styles for screens less than 820 pixels wide */
+    /* Add your CSS rules here */
+    .card:last-child {
+        /* Styles for the last child element of .cards */
+        /* Add your CSS rules here */
+        display: none !important;
+      }
+  }
