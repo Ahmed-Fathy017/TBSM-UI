@@ -4,6 +4,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { Package } from 'src/app/modules/packages/models/package';
 import { PackagesService } from 'src/app/modules/packages/remote-services/packages.service';
+import { Role } from 'src/app/modules/roles/models/role';
+import { RolesService } from 'src/app/modules/roles/remote-services/roles.service';
 
 @Component({
   selector: 'app-users-management',
@@ -20,7 +22,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
 
   @ViewChild('updateModalCloseButtonRef') updateModalCloseButtonRef!: ElementRef;
 
-  packages: Package[] = [];
+  roles: Role[] = [];
 
   // page loading
   isLoading: boolean = false;
@@ -32,19 +34,20 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
     email: new FormControl('', [Validators.required]),
     username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
-    package: new FormControl('', [Validators.required])
+    role: new FormControl('', [Validators.required])
   });
 
   updateUserForm = new FormGroup({
     email: new FormControl('', [Validators.required]),
     username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
-    package: new FormControl('', [Validators.required])
+    role: new FormControl('', [Validators.required])
   });
 
   constructor(
     private toastr: ToastrService,
-    private packagesService: PackagesService,
+    private rolesService: RolesService,
+    
   ) {
 
 
@@ -52,7 +55,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    this.loadPackages();
+    this.getRoles();
   }
 
   ngOnDestroy(): void {
@@ -72,10 +75,10 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
   }
 
 
-  loadPackages() {
-    let subscription = this.packagesService.getPackages().subscribe(
+  getRoles() {
+    let subscription = this.rolesService.getRoles().subscribe(
       (response: any) => {
-        this.packages = response.data;
+        this.roles = response.data;
       }, (error: any) => {
         this.toastr.error(error.errors[0].value, error.error.message);
       }

@@ -35,11 +35,11 @@
 
                 <div class="col-md-6 col-lg-6 col-xl-6">
 
-                    <label for="package" class="mb-1 d-flex">{{'UsersManagementScreen.Packages' | translate}}
+                    <label for="role01" class="mb-1 d-flex">{{'UsersManagementScreen.Roles' | translate}}
                     </label>
 
-                    <select id="package" class="form-select" name="" id="" formControlName="package">
-                        <option *ngFor="let package of packages" [value]="package.id">{{package.name}}</option>
+                    <select id="role01" class="form-select" name="" id="" formControlName="role">
+                        <option *ngFor="let role of roles" [value]="role.id">{{role.name}}</option>
                     </select>
                 </div>
 
@@ -66,7 +66,7 @@
                 <tr>
                     <th scope="col" class="text-center">{{'UsersManagementScreen.Email' | translate}}</th>
                     <th scope="col" class="text-center">{{'UsersManagementScreen.Username' | translate}}</th>
-                    <th scope="col" class="text-center">{{'UsersManagementScreen.Packages' | translate}}</th>
+                    <th scope="col" class="text-center">{{'UsersManagementScreen.Roles' | translate}}</th>
                     <th scope="col" class="text-center">{{'UsersManagementScreen.Status' | translate}}</th>
                     <th scope="col" class="text-center">{{'UsersManagementScreen.Properties' | translate}}</th>
                 </tr>
