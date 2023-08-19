@@ -1,0 +1,78 @@
+<div class="container-fluid">
+    <app-page-header [pageTitle]="firstPageTitle" [coloredPageTitle]="coloredPageTitle"></app-page-header>
+
+    <div class="container ">
+        <form [formGroup]="createProductForm">
+            <div class=" row mb-2">
+                <div class="col-md-6 col-lg-6 col-xl-6">
+
+                    <label for="name01" class="mb-1 d-flex">{{'CreateProductScreen.Name' |
+                        translate}}</label>
+                    <input id="name01" class="form-control" type="text" formControlName="name">
+                </div>
+
+                <div class="col-md-6 col-lg-6 col-xl-6">
+
+                    <label for="department01" class="mb-1 d-flex">{{'CreateProductScreen.Department' |
+                        translate}}</label>
+                    <select id="department01" class="form-select" formControlName="deparmtent">
+                        <option *ngFor="let department of departments" [value]="department.id">
+                            {{department.name}}
+                        </option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class=" row mb-2 d-flex">
+
+                <div class="col-md-6 col-lg-6 col-xl-6">
+
+                    <label for="quantity01" class="mb-1 d-flex">{{'CreateProductScreen.Quantity' |
+                        translate}}</label>
+                    <input id="quantity01" class="form-control" type="number" formControlName="quantity">
+                </div>
+
+                <div class="col-md-6 col-lg-6 col-xl-6">
+
+                    <label for="refrigerator01" class="mb-1 d-flex">{{'CreateProductScreen.Refrigerator' |
+                        translate}}</label>
+                    <select id="refrigerator01" class="form-select" formControlName="refrigerator">
+                        <option *ngFor="let refrigerator of refrigerators" [value]="refrigerator.id">
+                            {{refrigerator.name}}
+                        </option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class=" row mb-2 d-flex">
+
+                <div class="col-md-4 col-lg-4 col-xl-4 d-flex">
+                    <input class="form-check-input mx-2" type="checkbox" value="" id="flexCheckIndeterminate01"
+                        formControlName="externalSupply">
+                    <label class="form-check-label" for="flexCheckIndeterminate01">
+                        {{'CreateProductScreen.ExternalSupply' | translate}}
+                    </label>
+                </div>
+
+            </div>
+
+            <app-page-header [pageTitle]="secondPageTitle"></app-page-header>
+
+            <div class=" row mb-2 d-flex justify-content-end">
+
+                <div class="col-md-6 col-lg-6 col-xl-6">
+
+                    <div class="btn" (click)="onCreateButtonClick()">
+                        <app-loading-button [processing]="isProcessing">
+                            {{'Modal.CreateButton' | translate}}
+                        </app-loading-button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+</div>

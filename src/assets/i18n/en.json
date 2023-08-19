@@ -7,10 +7,10 @@
         "Home": "Home",
         "Warehouses": "Warehouses",
         "Packages": "Packages",
-        "Roles":"Roles",
-        "Departments":"Departments",
-        "Refrigerators":"Refrigerators",
-        "Users":"Users"
+        "Roles": "Roles",
+        "Departments": "Departments",
+        "Refrigerators": "Refrigerators",
+        "Users": "Users"
     },
     "AdminDashboardScreen": {
         "Home": "Home"
@@ -53,7 +53,7 @@
         "SecondaryPageTitle": "All Departments",
         "DepartmentName": "Department Name"
     },
-    "RefrigeratorsManagementScreen": { 
+    "RefrigeratorsManagementScreen": {
         "EntityName": "Refrigerator",
         "PrimaryTitle": "Home /",
         "ColoredPrimaryTitle": "Refrigerators",
@@ -63,7 +63,7 @@
         "From": "From",
         "To": "To"
     },
-    "UsersManagementScreen": { 
+    "UsersManagementScreen": {
         "PrimaryTitle": "Home /",
         "ColoredPrimaryTitle": "Users",
         "SecondaryPageTitle": "All Users",
@@ -72,9 +72,21 @@
         "Username": "Username",
         "Password": "Password",
         "Roles": "ٌRoles",
-        "Status":"Status",
-        "Properties":"Properties",
-        "CreateAccount":"Create Account"
+        "Status": "Status",
+        "Properties": "Properties",
+        "CreateAccount": "Create Account"
+    },
+    "CreateProductScreen": {
+        "PrimaryTitle": "Home / Products /",
+        "ColoredPrimaryTitle": "Create Product",
+        "SecondaryPageTitle": "Other Properties",
+        "Name": "Name",
+        "Department": "Department",
+        "Quantity": "Quantity",
+        "Refrigerator": "Refrigerator",
+        "ExternalSupply": "External Supply Request",
+        "Number": "Loot Number",
+        "Properties": "Other Properties"
     },
     "Modal": {
         "CreateButton": "Create",

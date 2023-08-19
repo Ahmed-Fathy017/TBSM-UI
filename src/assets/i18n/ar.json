@@ -78,6 +78,18 @@
         "Properties":"الخصائص",
         "CreateAccount":"انشاء حساب"
     },
+    "CreateProductScreen": {
+        "PrimaryTitle": "الرئيسية / المنتجات /",
+        "ColoredPrimaryTitle": "انشاء منتج",
+        "SecondaryPageTitle": "خصائص اخرى",
+        "Name":"الاسم",
+        "Department":"القسم",
+        "Quantity":"الكمية",
+        "Refrigerator":"الثلاجة",
+        "ExternalSupply": "طلب سلاسل امداد خارجية",
+        "Number":"اللوت نامبر",
+        "Properties":"خصائص اخرى"
+    },
     "Modal": {
         "CreateButton":"انشاء",
         "EditModalHeader": "تعديل",

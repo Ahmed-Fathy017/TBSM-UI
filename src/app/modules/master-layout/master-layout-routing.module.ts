@@ -31,6 +31,11 @@ const routes: Routes = [
       { path: 'refrigerators', component: RefrigeratorsManagementComponent},
       { path: 'users', component: UsersManagementComponent},
 
+      {
+        path: 'products',
+        loadChildren: () => import('../products/products-routing.module').then(m => m.ProductsRoutingModule)
+      },
+
     ]
   },
 

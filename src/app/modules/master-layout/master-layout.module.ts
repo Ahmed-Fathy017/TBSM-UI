@@ -19,6 +19,7 @@ import { UsersModule } from '../users/users.module';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RefrigeratorsModule } from '../refrigerators/refrigerators.module';
+import { ProductsModule } from '../products/products.module';
 
 
 
@@ -43,7 +44,8 @@ import { RefrigeratorsModule } from '../refrigerators/refrigerators.module';
     DepartmentsModule,
     RefrigeratorsModule,
     UsersModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ProductsModule
   ], providers: [
     NavigationService
   ]
