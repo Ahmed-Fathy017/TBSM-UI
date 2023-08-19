@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
@@ -19,11 +19,11 @@ export class RefrigeratorsManagementComponent implements OnInit, OnDestroy {
 
   createRefrigeratorForm = new FormGroup({
     refrigeratorName: new FormControl('', [Validators.required]),
-    fromTemperature: new FormControl(0, [Validators.required]),
-    toTemperature: new FormControl(0, [Validators.required])
+    fromTemperature: new FormControl('', [Validators.required]),
+    toTemperature: new FormControl('', [Validators.required])
   });
 
-  updateDRefrigeratorForm = new FormGroup({
+  updateRefrigeratorForm = new FormGroup({
     refrigeratorName: new FormControl('', [Validators.required]),
     fromTemperature: new FormControl('', [Validators.required]),
     toTemperature: new FormControl('', [Validators.required])
@@ -39,6 +39,7 @@ export class RefrigeratorsManagementComponent implements OnInit, OnDestroy {
   refrigerators: Refrigerator[] = [];
   selectedRefrigerator: Refrigerator = new Refrigerator();
 
+  @ViewChild('updateModalCloseButtonRef') updateModalCloseButtonRef!: ElementRef;
 
   constructor(
     private toastr: ToastrService,
@@ -60,8 +61,8 @@ export class RefrigeratorsManagementComponent implements OnInit, OnDestroy {
       let requestDTO = new Refrigerator();
 
       requestDTO.name = this.createRefrigeratorForm.controls.refrigeratorName.value!;
-      requestDTO.temperature_from = this.createRefrigeratorForm.controls.fromTemperature.value!;
-      requestDTO.temperature_to = this.createRefrigeratorForm.controls.toTemperature.value!;
+      requestDTO.temperature_from = parseFloat(this.createRefrigeratorForm.controls.fromTemperature.value!);
+      requestDTO.temperature_to = parseFloat(this.createRefrigeratorForm.controls.toTemperature.value!);
 
       this.isProcessing = true;
       this.isLoading = true;
@@ -73,7 +74,24 @@ export class RefrigeratorsManagementComponent implements OnInit, OnDestroy {
 
   onUpdateButtonClick(id: number) {
     this.selectedRefrigerator = this.refrigerators.find(i => i.id == id)!;
+    this.fetchSelectedRefrigeratorDataIntoModal();
+  }
 
+  onUpdateConfirmationClick() {
+    if (this.updateRefrigeratorForm.valid) {
+      this.isLoading = true;
+
+      let requestDTO = new Refrigerator();
+
+      requestDTO.id = this.selectedRefrigerator!.id;
+      requestDTO.name = this.updateRefrigeratorForm.controls.refrigeratorName.value!;
+      requestDTO.temperature_from = parseFloat(this.updateRefrigeratorForm.controls.fromTemperature.value!);
+      requestDTO.temperature_to = parseFloat(this.updateRefrigeratorForm.controls.toTemperature.value!);
+
+      this.updateRefrigerator(requestDTO);
+      this.updateModalCloseButtonRef.nativeElement.click();
+    } else
+      this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
   }
 
   onDeleteButtonClick(id: number) {
@@ -117,6 +135,33 @@ export class RefrigeratorsManagementComponent implements OnInit, OnDestroy {
     );
 
     this.subscription.add(subscribtion);
+  }
+
+  fetchSelectedRefrigeratorDataIntoModal() {
+    if (this.selectedRefrigerator) {
+      this.updateRefrigeratorForm.controls.refrigeratorName.setValue(this.selectedRefrigerator.name);
+      this.updateRefrigeratorForm.controls.fromTemperature.setValue(String(this.selectedRefrigerator.temperature_from));
+      this.updateRefrigeratorForm.controls.toTemperature.setValue(String(this.selectedRefrigerator.temperature_to));
+    }
+  }
+
+  updateRefrigerator(requestDTO: Refrigerator) {
+    let subscription = this.refrigeratorsService.updateRefrigerator(requestDTO).subscribe(
+      (response: any) => {
+        this.toastr.success(response.message);
+
+        let updatedRefrigerator = this.refrigerators.find(i => i.id == requestDTO.id);
+        Object.assign(updatedRefrigerator!, response.data);
+
+        this.isLoading = false;
+      }, (error: any) => {
+
+        this.isLoading = false;
+        this.toastr.error(error.errors[0].value, error.error.message);
+      }
+    );
+
+    this.subscription.add(subscription);
   }
 
 

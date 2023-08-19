@@ -7,14 +7,15 @@
             <div class=" row mb-1 ">
                 <div class="col-md-6 col-lg-6 col-xl-6">
 
-                    <label for="warehouseName" class="mb-1 d-flex">{{'RefrigeratorsManagementScreen.RefrigeratorName' |
+                    <label for="refrigeratorName01"
+                        class="mb-1 d-flex">{{'RefrigeratorsManagementScreen.RefrigeratorName' |
                         translate}} </label>
-                    <input id="warehouseName" class="form-control" type="text" formControlName="refrigeratorName">
+                    <input id="refrigeratorName01" class="form-control" type="text" formControlName="refrigeratorName">
                 </div>
 
                 <div class="col-md-3 col-lg-3 col-xl-3">
                     <div class="input-group mb-3">
-                        <label for="warehouseName"
+                        <label for="refrigeratorFromTemp01"
                             class="mb-1 d-flex col-12">{{'RefrigeratorsManagementScreen.Temperature' |
                             translate}} </label>
                         <div class="input-group-prepend">
@@ -22,7 +23,8 @@
                                 translate}}</span>
                         </div>
 
-                        <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)">
+                        <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)"
+                            formControlName="fromTemperature">
                         <div class="input-group-append">
                             <span class="input-group-text">C°</span>
                         </div>
@@ -32,7 +34,7 @@
 
                 <div class="col-md-3 col-lg-3 col-xl-3">
                     <div class="input-group mb-3">
-                        <label for="warehouseName"
+                        <label for="refrigeratorToTemp01"
                             class="mb-1 d-flex col-12">{{'RefrigeratorsManagementScreen.Temperature' |
                             translate}} </label>
                         <div class="input-group-prepend">
@@ -40,7 +42,8 @@
                                 translate}}</span>
                         </div>
 
-                        <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)">
+                        <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)"
+                            formControlName="toTemperature">
                         <div class="input-group-append">
                             <span class="input-group-text">C°</span>
                         </div>
@@ -99,8 +102,7 @@
 <!-- modals -->
 
 <!-- edit modal -->
-<!-- <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header d-flex  justify-content-between">
@@ -113,29 +115,56 @@
                 </div>
             </div>
             <div class="modal-body mt-2">
-                <form action="" class="row" [formGroup]="updateWarehouseForm">
-                    <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
-                        <label for="warehouseNameEdit" class="mb-1 d-flex"> {{'WarehousesManagementScreen.WarehouseName'
-                            | translate}} </label>
-                        <input id="warehouseNameEdit" class="form-control" type="text" formControlName="warehouseName">
-                    </div>
-                    <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
-                        <label for="userNameEdit" class="mb-1 d-flex"> {{'WarehousesManagementScreen.Username' |
-                            translate}}</label>
-                        <input id="userNameEdit" class="form-control" type="text" formControlName="username">
-                    </div>
-                    <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
-                        <label for="passwordEdit" class="mb-1 d-flex"> {{'WarehousesManagementScreen.Password' |
-                            translate}}</label>
-                        <input id="passwordEdit" class="form-control" type="text" formControlName="password">
-                    </div>
-                    <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
-                        <label for="packageEdit" class="mb-1 d-flex">{{'WarehousesManagementScreen.Packages' |
-                            translate}}</label>
+                <form action="" [formGroup]="updateRefrigeratorForm">
 
-                        <select id="packageEdit" class="form-select" name="" id="" formControlName="package">
-                            <option *ngFor="let package of packages" [value]="package.id">{{package.name}}</option>
-                        </select>
+                    <div class=" row mb-1 ">
+                        <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
+
+                            <label for="refrigeratorName02"
+                                class="mb-1 d-flex">{{'RefrigeratorsManagementScreen.RefrigeratorName' |
+                                translate}} </label>
+                            <input id="refrigeratorName02" class="form-control" type="text"
+                                formControlName="refrigeratorName">
+                        </div>
+
+                        <div class="col-md-12 col-lg-12 col-xl-12">
+                            <div class="input-group mb-3">
+                                <label for="refrigeratorFromTemp02"
+                                    class="mb-1 d-flex col-12">{{'RefrigeratorsManagementScreen.Temperature' |
+                                    translate}} </label>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">{{'RefrigeratorsManagementScreen.From' |
+                                        translate}}</span>
+                                </div>
+
+                                <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)"
+                                    formControlName="fromTemperature">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">C°</span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-12 col-lg-12 col-xl-12">
+                            <div class="input-group mb-3">
+                                <label for="refrigeratorToTemp02"
+                                    class="mb-1 d-flex col-12">{{'RefrigeratorsManagementScreen.Temperature' |
+                                    translate}} </label>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">{{'RefrigeratorsManagementScreen.To' |
+                                        translate}}</span>
+                                </div>
+
+                                <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)"
+                                    formControlName="toTemperature">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">C°</span>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
                 </form>
             </div>
@@ -146,12 +175,11 @@
             </div>
         </div>
     </div>
-</div> -->
+</div>
 
 
 <!-- delete modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body mt-4">
@@ -162,7 +190,8 @@
                 </div>
 
                 <div class="d-flex justify-content-center mt-4">
-                    <p class="h5 fw-bold">{{'Modal.DeletionConsentMessage' | translate}} {{'RefrigeratorsManagementScreen.EntityName' |
+                    <p class="h5 fw-bold">{{'Modal.DeletionConsentMessage' | translate}}
+                        {{'RefrigeratorsManagementScreen.EntityName' |
                         translate}} {{selectedRefrigerator.name}}</p>
                 </div>
 
