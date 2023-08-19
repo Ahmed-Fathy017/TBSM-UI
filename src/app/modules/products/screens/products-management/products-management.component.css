@@ -1,0 +1,89 @@
+.btn {
+    color: #ffffff;
+    background-color: #F15A60;
+    border-radius: 12px;
+    width: 100%;
+    margin-top: 1.65rem;
+}
+
+.btn:active {
+    background-color: #F15A60;
+    color: white;
+}
+
+.packages {
+    height: 150px;
+}
+
+.form-check-input {
+    box-shadow: none;
+}
+
+
+.title {
+    background-color: #F6F6FB;
+    color: #100F37;
+    font-weight: 700;
+}
+
+.small-item-card {
+    box-shadow: 0px 4px 4px 0px #F6F6FB;
+}
+
+.item-card {
+    height: 70px;
+}
+
+.stat {
+    font-size: 0.9rem;
+}
+
+
+@media only screen and (max-width: 819px) {
+
+    /* Styles for screens less than 820 pixels wide */
+    /* Add your CSS rules here */
+    .item-card {
+        height: 280px;
+    }
+
+    .title {
+        margin-bottom: 10px !important;
+    }
+
+    .stat {
+        margin-bottom: 10px;
+    }
+
+    .stat:last-child {
+        margin-bottom: 15px !important;
+    }
+
+    .small-item-card:first-child {
+        margin-top: 10px;
+    }
+
+    .small-item-card {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    .actions {
+        justify-content: center !important;
+    }
+}
+
+@media only screen and (max-width: 990px) {
+
+    /* Styles for screens less than 820 pixels wide */
+    /* Add your CSS rules here */
+    /* .item-card {
+        height: 120px;
+    }
+
+
+    .actions {
+        justify-content: center !important;
+        margin-top: 10px;
+    } */
+}

@@ -114,3 +114,17 @@ input[type=checkbox]:checked {
     color: #100F37;
     background-color: #100F3717;
 }
+
+.code {
+    cursor: pointer;
+    width: 25px;
+    color: #757575;
+    background-color: #75757530;
+}
+
+.upload {
+    cursor: pointer;
+    width: 25px;
+    color: #14AE5C;
+    background-color: #4ECB7130;
+}
