@@ -20,9 +20,14 @@ export class ProductsManagementComponent implements OnInit, OnDestroy {
 
   @ViewChild('updateModalCloseButtonRef') updateModalCloseButtonRef!: ElementRef;
 
+  itemsCountPerPage: number = 3;
+
   list = [
     {
       title: "علم الدم",
+      pagesCount:0,
+      pages:[1],
+      selectedPage:1,
       products: [
         { name: "شيبس", quantity: "5", refrigerator: "B", code: "345898" },
         { name: "شيبس", quantity: "5", refrigerator: "B", code: "345898" },
@@ -46,6 +51,9 @@ export class ProductsManagementComponent implements OnInit, OnDestroy {
     },
     {
       title: "علم الدم",
+      pagesCount:0,
+      pages:[1],
+      selectedPage:1,
       products: [
         { name: "شيبس", quantity: "5", refrigerator: "B", code: "345898" },
         { name: "شيبس", quantity: "5", refrigerator: "B", code: "345898" },
@@ -92,6 +100,10 @@ export class ProductsManagementComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+    this.list.map(i => {
+      i.pagesCount = Math.ceil(i.products.length / this.itemsCountPerPage);
+      i.pages = Array.from({length: i.pagesCount}, (_, index) => index + 1);
+    })
   }
 
   ngOnDestroy(): void {
