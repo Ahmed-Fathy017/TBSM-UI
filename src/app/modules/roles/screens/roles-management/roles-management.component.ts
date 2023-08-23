@@ -89,6 +89,8 @@ export class RolesManagementComponent implements OnInit, OnDestroy {
         this.permissions = response.data;
         this.permissions.map(i => i.checked = false);
         this.isLoadingPermissions = false;
+        console.log(this.permissions)
+
       }, (error: any) => {
         this.toastr.error(error.error.message);
         this.isLoadingPermissions = false;

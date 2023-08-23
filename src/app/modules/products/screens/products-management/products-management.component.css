@@ -63,9 +63,9 @@
 }
 
 .page-item:hover a {
-    /* background-color: #F15A6021; */
     color: #F15A60;
     border-bottom: 2px solid #F15A60;
+    border-width: 2px;
 }
 
 .active-page {
@@ -73,7 +73,11 @@
     border-bottom: 2px solid #F15A60 !important;
 }
 
-@media only screen and (max-width: 819px) {
+i {
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 767px) {
 
     /* Styles for screens less than 820 pixels wide */
     /* Add your CSS rules here */
@@ -103,21 +107,24 @@
     }
 
     .actions {
-        justify-content: center !important;
+        justify-content: end !important;
+        
     }
 }
 
-@media (max-width: 990px) {
+@media (max-width: 990px) and (min-width: 767px) {
 
     /* Styles for screens less than 820 pixels wide */
     /* Add your CSS rules here */
-    /* .item-card {
+    .item-card {
         height: 120px;
     }
 
 
     .actions {
-        justify-content: center !important;
+        justify-content: end !important;
+        padding: 0 130px;
         margin-top: 10px;
-    } */
+
+    }
 }

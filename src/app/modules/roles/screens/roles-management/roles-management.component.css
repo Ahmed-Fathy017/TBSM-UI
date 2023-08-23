@@ -19,6 +19,15 @@
     /* margin-left: 1rem; */
 }
 
+.permission-card {
+    width: 32%;
+}
+
 .roles {
     height: 300px;
+}
+
+
+.permissions .header {
+    background-color: #100F37;
 }
