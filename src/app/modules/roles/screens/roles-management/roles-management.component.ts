@@ -5,6 +5,7 @@ import { RolesService } from '../../remote-services/roles.service';
 import { ToastrService } from 'ngx-toastr';
 import { Role } from '../../models/role';
 import { Permission } from '../../models/permission';
+import { PermissionGroup } from '../../models/permission-group';
 
 @Component({
   selector: 'app-roles-management',
@@ -24,7 +25,7 @@ export class RolesManagementComponent implements OnInit, OnDestroy {
     roleName: new FormControl('', [Validators.required])
   });
 
-  permissions: Permission[] = [];
+  permissionGroups: PermissionGroup[] = [];
   roles: Role[] = [];
   selectedRole!: Role;
 
@@ -59,7 +60,11 @@ export class RolesManagementComponent implements OnInit, OnDestroy {
       let role = new Role();
 
       role.name = this.createRoleForm.controls.roleName.value!;
-      role.permissions = this.permissions.filter(i => i.checked).map(i => i.id);
+
+      // flattening the array into ids
+      this.permissionGroups.forEach(group => {
+        role.permissions.push(...group.permissions.filter(i => i.checked).map(i => i.id));
+      });
 
 
       this.isLoadingRoles = true;
@@ -86,10 +91,17 @@ export class RolesManagementComponent implements OnInit, OnDestroy {
     this.isLoadingPermissions = true;
     let subscription = this.rolesService.getPermissions().subscribe(
       (response: any) => {
-        this.permissions = response.data;
-        this.permissions.map(i => i.checked = false);
+        this.permissionGroups = response.data;
+
+        // setting checked property for both the groups and the
+        // permissions to be false by default
+        this.permissionGroups.forEach(group => {
+          group.checked = false;
+          group.permissions.map(i => i.checked = false);
+        });
+
         this.isLoadingPermissions = false;
-        console.log(this.permissions)
+        console.log(this.permissionGroups)
 
       }, (error: any) => {
         this.toastr.error(error.error.message);
@@ -150,5 +162,29 @@ export class RolesManagementComponent implements OnInit, OnDestroy {
     );
 
     this.subscription.add(subscribtion);
+  }
+
+  reevaluateGroupCheckbox(groupName: string, permissionId: string) {
+    let group = this.permissionGroups.find(i => i.group_name === groupName);
+    if (group) {
+      let permission = group.permissions.find(i => i.id === permissionId);
+
+      if (permission)
+        permission.checked = !permission.checked;
+
+      group.checked = group.permissions.every(i => i.checked);
+
+    }
+  }
+
+  reevaluateGroupPermissionsCheckboxes(groupName: string) {
+    let group = this.permissionGroups.find(i => i.group_name === groupName);
+    if (group) {
+      if (group.checked)
+        group.permissions.map(i => i.checked = false);
+      else 
+        group.permissions.map(i => i.checked = true);
+      group.checked = !group.checked;
+    }
   }
 }
