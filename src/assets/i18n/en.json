@@ -64,12 +64,13 @@
         "To": "To"
     },
     "UsersManagementScreen": {
+        "EntityName": "User",
         "PrimaryTitle": "Home /",
         "ColoredPrimaryTitle": "Users",
         "SecondaryPageTitle": "All Users",
-        "Email": "Email",
-        "EnglishUsername": "Username in English",
         "Username": "Username",
+        "EnglishFullName": "Name in English",
+        "FullName": "Name",
         "Password": "Password",
         "Roles": "ٌRoles",
         "Status": "Status",

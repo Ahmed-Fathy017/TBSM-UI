@@ -8,6 +8,7 @@ import { ProductsManagementComponent } from './screens/products-management/produ
 import { CreateProductComponent } from './screens/create-product/create-product.component';
 import { WithdrawProductComponent } from './screens/withdraw-product/withdraw-product.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { ProductsService } from './remote-services/products.service';
 
 
 @NgModule({
@@ -23,6 +24,9 @@ import { TranslateModule } from '@ngx-translate/core';
     FormsModule,
     ReactiveFormsModule,
     TranslateModule
+  ],
+  providers: [
+    ProductsService
   ]
 })
 export class ProductsModule { }

@@ -6,6 +6,8 @@ import { Package } from 'src/app/modules/packages/models/package';
 import { PackagesService } from 'src/app/modules/packages/remote-services/packages.service';
 import { Role } from 'src/app/modules/roles/models/role';
 import { RolesService } from 'src/app/modules/roles/remote-services/roles.service';
+import { UsersService } from '../../remote-services/users.service';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-users-management',
@@ -23,6 +25,8 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
   @ViewChild('updateModalCloseButtonRef') updateModalCloseButtonRef!: ElementRef;
 
   roles: Role[] = [];
+  users: User[] = [];
+  selectedUser: User = new User();
 
   // page loading
   isLoading: boolean = false;
@@ -31,31 +35,30 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
   isProcessing: boolean = false;
 
   createUserForm = new FormGroup({
-    email: new FormControl('', [Validators.required]),
     username: new FormControl('', [Validators.required]),
+    fullname: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
     role: new FormControl('', [Validators.required])
   });
 
   updateUserForm = new FormGroup({
-    email: new FormControl('', [Validators.required]),
     username: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
+    fullname: new FormControl('', [Validators.required]),
+    password: new FormControl(''),
     role: new FormControl('', [Validators.required])
   });
 
   constructor(
     private toastr: ToastrService,
     private rolesService: RolesService,
-    
+    private usersService: UsersService
   ) {
-
 
   }
 
-
   ngOnInit(): void {
     this.getRoles();
+    this.getUsers();
   }
 
   ngOnDestroy(): void {
@@ -63,17 +66,54 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
   }
 
   onCreateButtonClick() {
+    if (this.createUserForm.valid) {
 
+      let requestDTO = new User();
+
+      requestDTO.username = this.createUserForm.controls.username.value!;
+      requestDTO.fullname = this.createUserForm.controls.fullname.value!;
+      requestDTO.password = this.createUserForm.controls.password.value!;
+      requestDTO.role_id = parseInt(this.createUserForm.controls.role.value!);
+
+      this.isProcessing = true;
+      this.isLoading = true;
+
+      this.createUser(requestDTO);
+    } else
+      this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
   }
 
-  onDeleteButtonClick(id: string) {
-
+  onDeleteButtonClick(id: number) {
+    this.selectedUser = this.users.find(i => i.id == id)!;
   }
 
-  onUpdateButtonClick(id: string) {
-
+  onDeleteConfirmationButtonClick() {
+    this.isLoading = true;
+    this.deleteUser();
   }
 
+  onUpdateButtonClick(id: number) {
+    this.selectedUser = this.users.find(i => i.id == id)!;
+    this.fetchSelectedDataIntoModal();
+  }
+
+  onUpdateConfirmationClick() {
+    if (this.updateUserForm.valid) {
+      this.isLoading = true;
+
+      let requestDTO = new User();
+
+      requestDTO.id = this.selectedUser!.id;
+      requestDTO.fullname = this.updateUserForm.controls.fullname.value!;
+      requestDTO.username = this.updateUserForm.controls.username.value!;
+      requestDTO.password = this.updateUserForm.controls.password.value!;
+      requestDTO.role_id = parseInt(this.updateUserForm.controls.role.value!);
+
+      this.updateUser(requestDTO);
+      this.updateModalCloseButtonRef.nativeElement.click();
+    } else
+      this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
+  }
 
   getRoles() {
     let subscription = this.rolesService.getRoles().subscribe(
@@ -86,4 +126,85 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
 
     this.subscription.add(subscription);
   }
+
+  getUsers() {
+    this.isLoading = true;
+
+    let subscription = this.usersService.getUsers().subscribe(
+      (response: any) => {
+        this.users = response.data;
+        console.log(this.users)
+
+        this.isLoading = false;
+      }, (error: any) => {
+        this.isLoading = false;
+        this.toastr.error(error.errors[0].value, error.error.message);
+      }
+    );
+
+    this.subscription.add(subscription);
+  }
+
+  createUser(requestDTO: User) {
+    let subscribtion = this.usersService.createUser(requestDTO).subscribe(
+      (response: any) => {
+        this.toastr.success(response.message);
+
+        this.users = response.data;
+        this.isProcessing = false;
+        this.isLoading = false;
+      }, (error: any) => {
+        this.isProcessing = false;
+        this.isLoading = false;
+        this.toastr.error(error.errors[0].value, error.error.message);
+      }
+    );
+
+    this.subscription.add(subscribtion);
+  }
+
+  fetchSelectedDataIntoModal() {
+    if (this.selectedUser) {
+      this.updateUserForm.controls.username.setValue(this.selectedUser.username);
+      this.updateUserForm.controls.fullname.setValue(this.selectedUser.fullname);
+      this.updateUserForm.controls.role.setValue(String(this.selectedUser.role_id ?? this.selectedUser.role.id));
+    }
+  }
+
+  updateUser(requestDTO: User) {
+    let subscription = this.usersService.updateUser(requestDTO).subscribe(
+      (response: any) => {
+        this.toastr.success(response.message);
+
+        let updatedRefrigerator = this.users.find(i => i.id == requestDTO.id);
+        Object.assign(updatedRefrigerator!, response.data);
+
+        this.isLoading = false;
+      }, (error: any) => {
+
+        this.isLoading = false;
+        this.toastr.error(error.errors[0].value, error.error.message);
+      }
+    );
+
+    this.subscription.add(subscription);
+  }
+
+
+  deleteUser() {
+    let subscription = this.usersService.deleteUser(this.selectedUser.id).subscribe(
+      (response: any) => {
+        this.toastr.success(response.message);
+        console.log(response.data)
+        this.users = response.data;
+        this.isLoading = false;
+      }, (error: any) => {
+        this.isLoading = false;
+        this.toastr.error(error.errors[0].value, error.error.message);
+      }
+    );
+
+    this.subscription.add(subscription);
+  }
+
 }

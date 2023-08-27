@@ -7,18 +7,18 @@
             <div class=" row mb-2 ">
                 <div class="col-md-12 col-lg-12 col-xl-12">
 
-                    <label for="warehouseName" class="mb-1 d-flex">{{'UsersManagementScreen.Email' |
+                    <label for="username" class="mb-1 d-flex">{{'UsersManagementScreen.Username' |
                         translate}} </label>
-                    <input id="warehouseName" class="form-control" type="text" formControlName="email">
+                    <input id="username" class="form-control" type="text" formControlName="username">
                 </div>
             </div>
 
             <div class=" row mb-2 d-flex ">
                 <div class="col-md-6 col-lg-6 col-xl-6">
 
-                    <label for="userName" class="mb-1 d-flex">{{'UsersManagementScreen.EnglishUsername' | translate}}
+                    <label for="fullname" class="mb-1 d-flex">{{'UsersManagementScreen.EnglishFullName' | translate}}
                     </label>
-                    <input id="userName" class="form-control" type="text" formControlName="username">
+                    <input id="fullname" class="form-control" type="text" formControlName="fullname">
                 </div>
 
                 <div class="col-md-6 col-lg-6 col-xl-6">
@@ -35,10 +35,10 @@
 
                 <div class="col-md-6 col-lg-6 col-xl-6">
 
-                    <label for="role01" class="mb-1 d-flex">{{'UsersManagementScreen.Roles' | translate}}
+                    <label for="role" class="mb-1 d-flex">{{'UsersManagementScreen.Roles' | translate}}
                     </label>
 
-                    <select id="role01" class="form-select" name="" id="" formControlName="role">
+                    <select id="role" class="form-select" name="" id="" formControlName="role">
                         <option *ngFor="let role of roles" [value]="role.id">{{role.name}}</option>
                     </select>
                 </div>
@@ -59,26 +59,28 @@
 
     <app-loading *ngIf="isLoading"></app-loading>
 
-    <div class="container">
+    <div class="container" *ngIf="!isLoading">
 
         <table class=" table table-bordered">
             <thead>
                 <tr>
-                    <th scope="col" class="text-center">{{'UsersManagementScreen.Email' | translate}}</th>
                     <th scope="col" class="text-center">{{'UsersManagementScreen.Username' | translate}}</th>
+                    <th scope="col" class="text-center">{{'UsersManagementScreen.FullName' | translate}}</th>
                     <th scope="col" class="text-center">{{'UsersManagementScreen.Roles' | translate}}</th>
                     <th scope="col" class="text-center">{{'UsersManagementScreen.Status' | translate}}</th>
                     <th scope="col" class="text-center">{{'UsersManagementScreen.Properties' | translate}}</th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="text-center">
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
+
+                <tr class="text-center" *ngFor="let user of users">
+                    <td>{{user.username}}</td>
+                    <td>{{user.fullname}}</td>
+                    <td>{{user.role.role}}</td>
                     <td>
                         <div>
-                            <i class="fa-solid fa-circle-check" style="color: #198526;" *ngIf="true; else xmark"></i>
+                            <i class="fa-solid fa-circle-check" style="color: #198526;"
+                                *ngIf="user.status; else xmark"></i>
                             <ng-template #xmark>
                                 <i class="fa-solid fa-circle-xmark" style="color: #f50505;"></i>
                             </ng-template>
@@ -88,66 +90,12 @@
                         <div class="d-flex justify-content-center">
 
                             <div class="mx-2 edit d-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#editWarehouseModal"
-                                (click)="onUpdateButtonClick('warehouse.id')"><i class="fa-solid fa-pen-to-square"></i>
+                                data-bs-toggle="modal" data-bs-target="#editModal"
+                                (click)="onUpdateButtonClick(user.id)"><i class="fa-solid fa-pen-to-square"></i>
                             </div>
                             <div class="mx-2 delete d-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#deleteWarehouseModal"
-                                (click)="onDeleteButtonClick('warehouse.id')"><i class="fa-solid fa-trash-can"></i>
-                            </div>
-                        </div>
-
-                    </td>
-                </tr>
-                <tr class="text-center">
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td >
-                        <div >
-                            <i class="fa-solid fa-circle-check" style="color: #198526;" *ngIf="true; else xmark"></i>
-                            <ng-template #xmark>
-                                <i class="fa-solid fa-circle-xmark" style="color: #f50505;"></i>
-                            </ng-template>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="d-flex justify-content-center">
-
-                            <div class="mx-2 edit d-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#editWarehouseModal"
-                                (click)="onUpdateButtonClick('warehouse.id')"><i class="fa-solid fa-pen-to-square"></i>
-                            </div>
-                            <div class="mx-2 delete d-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#deleteWarehouseModal"
-                                (click)="onDeleteButtonClick('warehouse.id')"><i class="fa-solid fa-trash-can"></i>
-                            </div>
-                        </div>
-
-                    </td>
-                </tr>
-                <tr class="text-center">
-                    <td>3</td>
-                    <td>Larry the Bird</td>
-                    <td>@twitter</td>
-                    <td>
-                        <div >
-                            <i class="fa-solid fa-circle-check" style="color: #198526;" *ngIf="false; else xmark"></i>
-                            <ng-template #xmark>
-                                <i class="fa-solid fa-circle-xmark" style="color: #f50505;"></i>
-                            </ng-template>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="d-flex justify-content-center">
-
-                            <div class="mx-2 edit d-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#editWarehouseModal"
-                                (click)="onUpdateButtonClick('warehouse.id')"><i class="fa-solid fa-pen-to-square"></i>
-                            </div>
-                            <div class="mx-2 delete d-flex justify-content-center align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#deleteWarehouseModal"
-                                (click)="onDeleteButtonClick('warehouse.id')"><i class="fa-solid fa-trash-can"></i>
+                                data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                (click)="onDeleteButtonClick(user.id)"><i class="fa-solid fa-trash-can"></i>
                             </div>
                         </div>
 
@@ -157,47 +105,18 @@
         </table>
     </div>
 
-    <!-- <div class="container list warehouses" *ngIf="!isLoading">
-        <div class="row g-2 mb-2">
-            <div class="item-card col-md-12 col-lg-12 col-xl-12 d-flex justify-content-between rounded-4 border px-4 py-3 mb-3"
-                *ngFor="let warehouse of warehouses">
-
-                <div>
-                    {{warehouse.warehouse_name}}
-                </div>
-
-                <div class="d-flex">
-                    <div class="mx-2 view d-flex justify-content-center align-items-center"
-                        (click)="onViewButtonClick(warehouse.id)"><i class="fa-solid fa-eye"></i>
-                    </div>
-                    <div class="mx-2 edit d-flex justify-content-center align-items-center" data-bs-toggle="modal"
-                        data-bs-target="#editWarehouseModal" (click)="onUpdateButtonClick(warehouse.id)"><i
-                            class="fa-solid fa-pen-to-square"></i></div>
-
-                    <div class="mx-2 delete d-flex justify-content-center align-items-center" data-bs-toggle="modal"
-                        data-bs-target="#deleteWarehouseModal" (click)="onDeleteButtonClick(warehouse.id)"><i
-                            class="fa-solid fa-trash-can"></i></div>
-                </div>
-
-
-
-            </div>
-        </div>
-    </div> -->
-
 </div>
 
 
 <!-- modals -->
 
-<!-- edit warehouse modal -->
-<!-- <div class="modal fade" id="editWarehouseModal" tabindex="-1" aria-labelledby="editWarehouseModalLabel"
-    aria-hidden="true">
+<!-- edit modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header d-flex  justify-content-between">
                 <div>
-                    <h5 class="modal-title" id="editWarehouseModalLabel">{{'Modal.EditModalHeader' | translate}} </h5>
+                    <h5 class="modal-title" id="editModalLabel">{{'Modal.EditModalHeader' | translate}} </h5>
                 </div>
 
                 <div>
@@ -205,30 +124,44 @@
                 </div>
             </div>
             <div class="modal-body mt-2">
-                <form action="" class="row" [formGroup]="updateWarehouseForm">
-                    <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
-                        <label for="warehouseNameEdit" class="mb-1 d-flex"> {{'WarehousesManagementScreen.WarehouseName'
-                            | translate}} </label>
-                        <input id="warehouseNameEdit" class="form-control" type="text" formControlName="warehouseName">
-                    </div>
-                    <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
-                        <label for="userNameEdit" class="mb-1 d-flex"> {{'WarehousesManagementScreen.Username' |
-                            translate}}</label>
-                        <input id="userNameEdit" class="form-control" type="text" formControlName="username">
-                    </div>
-                    <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
-                        <label for="passwordEdit" class="mb-1 d-flex"> {{'WarehousesManagementScreen.Password' |
-                            translate}}</label>
-                        <input id="passwordEdit" class="form-control" type="text" formControlName="password">
-                    </div>
-                    <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
-                        <label for="packageEdit" class="mb-1 d-flex">{{'WarehousesManagementScreen.Packages' |
-                            translate}}</label>
+                <form action="" [formGroup]="updateUserForm">
 
-                        <select id="packageEdit" class="form-select" name="" id="" formControlName="package">
-                            <option *ngFor="let package of packages" [value]="package.id">{{package.name}}</option>
-                        </select>
+                    <div class=" row mb-2 d-flex ">
+                        <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
+
+                            <label for="username01" class="mb-1 d-flex">{{'UsersManagementScreen.Username' |
+                                translate}} </label>
+                            <input id="username01" class="form-control" type="text" formControlName="username">
+                        </div>
+
+                        <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
+
+                            <label for="fullname01" class="mb-1 d-flex">{{'UsersManagementScreen.EnglishFullName' |
+                                translate}}
+                            </label>
+                            <input id="fullname01" class="form-control" type="text" formControlName="fullname">
+                        </div>
+
+                        <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
+
+                            <label for="password01" class="mb-1 d-flex"> {{'UsersManagementScreen.Password' |
+                                translate}}
+                            </label>
+                            <input id="password01" class="form-control" type="password" formControlName="password">
+                        </div>
+
+
+                        <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
+
+                            <label for="role01" class="mb-1 d-flex">{{'UsersManagementScreen.Roles' | translate}}
+                            </label>
+
+                            <select id="role01" class="form-select" name="" id="" formControlName="role">
+                                <option *ngFor="let role of roles" [value]="role.id">{{role.name}}</option>
+                            </select>
+                        </div>
                     </div>
+
                 </form>
             </div>
             <div class="modal-footer mb-4 border-0">
@@ -238,12 +171,12 @@
             </div>
         </div>
     </div>
-</div> -->
+</div>
 
 
-<!-- delete warehouse modal -->
-<!-- <div class="modal fade" id="deleteWarehouseModal" tabindex="-1" aria-labelledby="deleteWarehouseModalLabel"
-    aria-hidden="true">
+
+<!-- delete modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body mt-4">
@@ -255,7 +188,8 @@
 
                 <div class="d-flex justify-content-center mt-4">
                     <p class="h5 fw-bold">{{'Modal.DeletionConsentMessage' | translate}}
-                        {{selectedWarehouse?.warehouse_name}}</p>
+                        {{'UsersManagementScreen.EntityName' |
+                        translate}} {{selectedUser.username}}</p>
                 </div>
 
             </div>
@@ -276,4 +210,4 @@
             </div>
         </div>
     </div>
-</div> -->
+</div>

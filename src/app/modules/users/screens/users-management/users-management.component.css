@@ -21,6 +21,11 @@ tr td:last-child .edit {
     padding: 5px;
 }
 
+.table-body {
+    height: 100px;
+    overflow: auto;
+}
+
 i {
     font-size: 0.7rem;
 }

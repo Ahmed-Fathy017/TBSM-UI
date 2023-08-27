@@ -6,6 +6,7 @@ import { Department } from 'src/app/modules/departments/models/department';
 import { DepartmentsService } from 'src/app/modules/departments/remote-services/departments.service';
 import { Refrigerator } from 'src/app/modules/refrigerators/models/refrigerator';
 import { RefrigeratorsService } from 'src/app/modules/refrigerators/remote-services/refrigerators.service';
+import { WarehousesService } from 'src/app/modules/warehouses/remote-services/warehouses.service';
 
 @Component({
   selector: 'app-create-product',
@@ -42,6 +43,7 @@ export class CreateProductComponent implements OnInit, OnDestroy {
     private toastr: ToastrService,
     private departmentsService: DepartmentsService,
     private refrigeratorsService: RefrigeratorsService,
+    private warehouseService: WarehousesService
   ) {
 
 
@@ -50,6 +52,7 @@ export class CreateProductComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getDepartments();
     this.getRefrigerators();
+    this.getWarehouse();
   }
 
   ngOnDestroy(): void {
@@ -90,6 +93,10 @@ export class CreateProductComponent implements OnInit, OnDestroy {
     );
 
     this.subscription.add(subscription);
+  }
+
+  getWarehouse() {
+    
   }
 
 }

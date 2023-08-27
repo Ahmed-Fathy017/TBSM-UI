@@ -66,12 +66,13 @@
         "To": "الى"
     },
     "UsersManagementScreen": { 
+        "EntityName": "المستخدم",
         "PrimaryTitle": "الرئيسية /",
         "ColoredPrimaryTitle": "المستخدمين",
         "SecondaryPageTitle": "جميع المستخدمين",
-        "Email": "البريد الالكتروني",
-        "EnglishUsername": "الاسم بالانجليزية",
-        "Username": "الاسم",
+        "Username": "اسم المستخدم",
+        "EnglishFullName": "الاسم بالانجليزية",
+        "FullName": "الاسم",
         "Password": "كلمه السر",
         "Roles": "الادوار",
         "Status":"الحالة",
