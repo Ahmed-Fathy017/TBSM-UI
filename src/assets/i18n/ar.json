@@ -78,6 +78,13 @@
         "Properties":"الخصائص",
         "CreateAccount":"انشاء حساب"
     },
+    "ProductsManagmentScreen" : {
+        "PrimaryTitle": "الرئيسية / المنتجات /",
+        "ColoredPrimaryTitle": "جميع المنتجات",
+        "EntityName": "المنتج",
+        "Filter": "تصنيف",
+        "Value": "القيمة"
+    },
     "CreateProductScreen": {
         "PrimaryTitle": "الرئيسية / المنتجات /",
         "ColoredPrimaryTitle": "انشاء منتج",

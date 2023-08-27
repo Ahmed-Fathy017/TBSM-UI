@@ -76,6 +76,13 @@
         "Properties": "Properties",
         "CreateAccount": "Create Account"
     },
+    "ProductsManagmentScreen" : {
+        "PrimaryTitle": "Home / Products /",
+        "ColoredPrimaryTitle": "All Products",
+        "EntityName": "Product",
+        "Filter": "Filter",
+        "Value": "Value"
+    },
     "CreateProductScreen": {
         "PrimaryTitle": "Home / Products /",
         "ColoredPrimaryTitle": "Create Product",

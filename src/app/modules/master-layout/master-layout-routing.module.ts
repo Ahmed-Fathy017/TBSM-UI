@@ -26,11 +26,13 @@ const routes: Routes = [
       },
 
       
-      { path: 'roles', component: RolesManagementComponent},
       { path: 'departments', component: DepartmentsManagementComponent},
       { path: 'refrigerators', component: RefrigeratorsManagementComponent},
       { path: 'users', component: UsersManagementComponent},
-
+      {
+        path: 'roles',
+        loadChildren: () => import('../roles/roles-routing.module').then(m => m.RolesRoutingModule)
+      },
       {
         path: 'products',
         loadChildren: () => import('../products/products-routing.module').then(m => m.ProductsRoutingModule)
