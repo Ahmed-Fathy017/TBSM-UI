@@ -20,10 +20,13 @@
         "PrimaryTitle": "الرئيسية / المستودعات /",
         "ColoredPrimaryTitle": "انشاء مستودع",
         "SecondaryPageTitle": "جميع المستودعات",
+        "TertiaryPageTitle": "خصائص اخرى",
         "WarehouseName": "اسم المستودع",
         "Username": "اسم المستخدم",
         "Password": "كلمه السر",
-        "Packages": "الباقات"
+        "Packages": "الباقات",
+        "PropertyType": "النوع",
+        "PropertyName": "الاسم"
     },
     "WarehouseDetailsScreen": {
         "PrimaryTitle": "الرئيسية / المستودعات /",

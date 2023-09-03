@@ -43,17 +43,77 @@
                     </select>
                 </div>
 
-                <div class="col-md-6 col-lg-6 col-xl-6">
 
-                    <div class="btn" (click)="onCreateButtonClick()">
-                        <app-loading-button [processing]="isProcessing">
-                            {{'Modal.CreateButton' | translate}}
-                        </app-loading-button>
-                    </div>
-                </div>
             </div>
         </form>
     </div>
+
+    <app-page-header [pageTitle]="tertiaryPageTitle"></app-page-header>
+
+    <div class="container">
+        <form class="row mb-4" [formGroup]="propertiesForm">
+            <div class="col-md-6 col-lg-6 col-xl-6">
+                <label for="propertyType" class="mb-1 d-flex">{{'WarehousesManagementScreen.PropertyType' | translate}}
+                </label>
+                <select name="propertyType" id="propertyType" class="form-select " formControlName="type">
+                    <option *ngFor="let property of propetyTypes" [value]="property.value"> {{property.name}}</option>
+                </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-6">
+                <div class="row">
+
+                    <div class="col-md-10 col-lg-10 col-xl-10">
+                        <label for="propertyName" class="mb-1 d-flex">{{'WarehousesManagementScreen.PropertyName' |
+                            translate}}
+                        </label>
+
+                        <input type="text" name="propertyName" class="form-control" formControlName="name">
+                    </div>
+
+                    <div class="col-md-2 col-lg-2 col-xl-2 d-flex align-items-center justify-content-center mt-4"
+                        (click)="onAddPropertyButtonClick()">
+                        <i class="fa-solid fa-plus bg-success p-2 rounded-1" style="color: #ffffff;"></i>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-xl-12">
+                <div class="row mb-2" *ngFor="let property of properties; let i = index">
+                    <div class="col-md-4 col-lg-4 col-xl-4">
+                        <label [for]="'propertyType-' + i" class="mb-1 d-flex">{{property.type}}
+                        </label>
+
+                        <input type="text" [name]="'propertyType-' + i" class="form-control" [value]="property.name"
+                            [disabled]="true">
+                    </div>
+
+                    <div class="col-md-2 col-lg-2 col-xl-2 d-flex align-items-center justify-content-center mt-4"
+                        (click)="onRemovePropertyButtonClick(i)">
+                        <i class="fa-solid fa-x bg-danger p-2 rounded-1" style="color: #ffffff;"></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row d-flex justify-content-end">
+            <div class="col-md-6 col-lg-6 col-xl-6">
+
+                <div class="btn" (click)="onCreateButtonClick()">
+                    <app-loading-button [processing]="isProcessing">
+                        {{'Modal.CreateButton' | translate}}
+                    </app-loading-button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
     <app-page-header [pageTitle]="secondPageTitle"></app-page-header>
 

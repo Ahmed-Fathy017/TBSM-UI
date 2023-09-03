@@ -19,10 +19,13 @@
         "PrimaryTitle": "Home / Warehouses /",
         "ColoredPrimaryTitle": "Create Warehouse",
         "SecondaryPageTitle": "All Warehouses",
+        "TertiaryPageTitle": "Other Properties",
         "WarehouseName": "Warehouse Name",
         "Username": "Username",
         "Password": "Password",
-        "Packages": "Packages"
+        "Packages": "Packages",
+        "PropertyType": "Type",
+        "PropertyName": "Name"
     },
     "WarehouseDetailsScreen": {
         "PrimaryTitle": "Home / Warehouses /",

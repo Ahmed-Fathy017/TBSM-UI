@@ -8,6 +8,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PackagesService } from 'src/app/modules/packages/remote-services/packages.service';
 import { Package } from 'src/app/modules/packages/models/package';
 import { ViewChild } from '@angular/core';
+import { PropertyTypes } from 'src/app/modules/products/models/property-types';
+import { Property } from 'src/app/modules/products/models/property';
 
 @Component({
   selector: 'app-warehouses-management',
@@ -21,6 +23,7 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
   firstPageTitle: string = 'WarehousesManagementScreen.PrimaryTitle';
   coloredPageTitle: string = 'WarehousesManagementScreen.ColoredPrimaryTitle'
   secondPageTitle: string = 'WarehousesManagementScreen.SecondaryPageTitle';
+  tertiaryPageTitle: string = 'WarehousesManagementScreen.TertiaryPageTitle';
 
   warehouses: Warehouse[] = [];
   packages: Package[] = [];
@@ -31,6 +34,15 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
     password: new FormControl('', [Validators.required, Validators.minLength(4)]),
     package: new FormControl('', [Validators.required]),
   });
+
+  propetyTypes = PropertyTypes;
+
+  propertiesForm = new FormGroup({
+    type: new FormControl('', [Validators.required]),
+    name: new FormControl('', [Validators.required]),
+  });
+
+  properties: Property[] = []
 
   updateWarehouseForm = new FormGroup({
     warehouseName: new FormControl('', [Validators.required]),
@@ -120,6 +132,8 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
       warehouse.password = this.createWarehouseForm.controls.password.value!;
       warehouse.package_id = parseInt(this.createWarehouseForm.controls.package.value!);
 
+      warehouse.Properties = this.properties;
+
       this.isProcessing = true;
       this.isLoading = true;
 
@@ -128,6 +142,25 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
       this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
   }
 
+  onAddPropertyButtonClick() {
+    if (this.propertiesForm.valid) {
+      let property = new Property();
+
+      property.id = this.properties.length + 1;
+      property.name = this.propertiesForm.controls.name.value!;
+      property.type = this.propetyTypes.find(i => i.value == this.propertiesForm.controls.type.value)?.name!;
+
+      this.properties.push(property);
+     
+    } else
+      this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
+  }
+
+  onRemovePropertyButtonClick(index: number) {
+    this.properties.splice(index, 1)
+  }
+
+  // functions
   loadWarehouses() {
     this.isLoading = true;
     let subscription = this.warehousesService.getWarehouses().subscribe(
