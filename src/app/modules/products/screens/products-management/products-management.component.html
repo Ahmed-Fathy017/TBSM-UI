@@ -90,7 +90,7 @@
                                             </div>
 
                                             <div class="rounded-1 edit d-flex justify-content-center align-items-center mx-2 px-3 py-2"
-                                                data-bs-toggle="modal" data-bs-target="#editPackageModal"
+                                                data-bs-toggle="modal" data-bs-target="#editModal"
                                                 (click)="onUpdateButtonClick(item.id, product.id)">
                                                 <i class="fa-solid fa-pen-to-square"></i>
                                             </div>
@@ -140,12 +140,12 @@
 <!-- modals -->
 
 <!-- edit modal -->
-<!-- <div class="modal fade" id="editPackageModal" tabindex="-1" aria-labelledby="editPackageModalLabel" aria-hidden="true">
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header d-flex justify-content-between">
                 <div>
-                    <h5 class="modal-title" id="editWarehouseModalLabel">{{'Modal.EditModalHeader' | translate}}</h5>
+                    <h5 class="modal-title">{{'Modal.EditModalHeader' | translate}}</h5>
                 </div>
 
                 <div>
@@ -153,50 +153,43 @@
                 </div>
             </div>
             <div class="modal-body mt-2">
-                <form action="" class="row" [formGroup]="updatePackageForm">
-                    <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
-                        <label for="warehouseName" class="mb-1 d-flex">
-                            {{'PackagesManagementScreen.PackageName' |
-                            translate}}</label>
-                        <input id="warehouseName" class="form-control" type="text" formControlName="packageName">
-                    </div>
-                    <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
-                        <label for="settings01" class="mb-1 d-flex">
-                            {{'PackagesManagementScreen.RefrigeratorsNumber' |
-                            translate}}</label>
-                        <input id="settings01" class="form-control" type="number" formControlName="refrigeratorSetting">
-                    </div>
-                    <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
-                        <label for="settings02" class="mb-1 d-flex">{{'PackagesManagementScreen.ProductsNumber' |
-                            translate}} </label>
-                        <input id="settings02" class="form-control" type="number" formControlName="productSetting">
-                    </div>
-                    <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
-                        <label for="settings03" class="mb-1 d-flex">{{'PackagesManagementScreen.DepartmentsNumber' |
-                            translate}} </label>
-                        <input id="settings03" class="form-control" type="number" formControlName="departmentSetting">
-                    </div>
-
-                    <div class=" row mb-2 d-flex">
-
-                        <div class="col-md-6 col-lg- col-xl-6 d-flex">
-
-                            <input class="form-check-input mx-1" type="checkbox" value="" id="flexCheckIndeterminate03"
-                                formControlName="temperatureAlert">
-                            <label class="form-check-label" for="flexCheckIndeterminate03">
-                                {{'PackagesManagementScreen.TemperatureChangeAlert' | translate}}
-                            </label>
+                <form action="" class="row" [formGroup]="updateProductForm">
+                        <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
+        
+                            <label for="name" class="mb-1 d-flex">{{'CreateProductScreen.Name' |
+                                translate}}</label>
+                            <input id="name" class="form-control" type="text" formControlName="name">
+                        </div>
+        
+                        <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
+        
+                            <label for="department" class="mb-1 d-flex">{{'CreateProductScreen.Department' |
+                                translate}}</label>
+                            <select id="department" class="form-select" formControlName="department">
+                                <option *ngFor="let department of departments" [value]="department.id">
+                                    {{department.name}}
+                                </option>
+                            </select>
                         </div>
 
-                        <div class="col-md-6 col-lg- col-xl-6 d-flex">
-                            <input class="form-check-input mx-1" type="checkbox" value="" id="flexCheckIndeterminate04"
-                                formControlName="externalSupply">
-                            <label class="form-check-label" for="flexCheckIndeterminate04">
-                                {{'PackagesManagementScreen.ExternalSupplyPrivilage' | translate}}
-                            </label>
+                        <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
+        
+                            <label for="quantity" class="mb-1 d-flex">{{'CreateProductScreen.Quantity' |
+                                translate}}</label>
+                            <input id="quantity" class="form-control" type="number" formControlName="quantity">
                         </div>
-
-                    </div>
+        
+                        <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
+        
+                            <label for="refrigerator" class="mb-1 d-flex">{{'CreateProductScreen.Refrigerator' |
+                                translate}}</label>
+                            <select id="refrigerator" class="form-select" formControlName="refrigerator">
+                                <option *ngFor="let refrigerator of refrigerators" [value]="refrigerator.id">
+                                    {{refrigerator.name}}
+                                </option>
+                            </select>
+                        </div>
+        
                 </form>
             </div>
             <div class="modal-footer mb-4 border-0">
@@ -206,7 +199,7 @@
             </div>
         </div>
     </div>
-</div> -->
+</div>
 
 
 <!-- delete modal -->
