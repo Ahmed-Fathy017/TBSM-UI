@@ -37,12 +37,17 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
 
   propetyTypes = PropertyTypes;
 
-  propertiesForm = new FormGroup({
+  createPropertiesForm = new FormGroup({
     type: new FormControl('', [Validators.required]),
     name: new FormControl('', [Validators.required]),
   });
 
-  properties: Property[] = []
+  updatePropertiesForm = new FormGroup({
+    type: new FormControl('', [Validators.required]),
+    name: new FormControl('', [Validators.required]),
+  });
+
+  properties: Property[] | null = null
 
   updateWarehouseForm = new FormGroup({
     warehouseName: new FormControl('', [Validators.required]),
@@ -53,7 +58,7 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
 
   @ViewChild('updateModalCloseButtonRef') updateModalCloseButtonRef!: ElementRef;
 
-  selectedWarehouse?: Warehouse;
+  selectedWarehouse: Warehouse = new Warehouse();
 
   // page loading
   isLoading: boolean = false;
@@ -67,6 +72,8 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
     private packagesService: PackagesService,
     private router: Router) { }
 
+
+  // events
   ngOnInit(): void {
     this.loadPackages();
     this.loadWarehouses();
@@ -81,7 +88,7 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
   }
 
   onUpdateButtonClick(id: number) {
-    this.selectedWarehouse = this.warehouses.find(i => i.id == id);
+    this.selectedWarehouse = this.warehouses.find(i => i.id == id)!;
 
     this.fetchSelectedWarehouseDataIntoModal();
   }
@@ -95,18 +102,20 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
       this.updateWarehouseForm.controls.password.clearValidators();
 
 
-    if (this.updateWarehouseForm.valid) {
+    if (this.updateWarehouseForm.valid && this.selectedWarehouse.properties && this.selectedWarehouse.properties.length > 0) {
       this.isLoading = true;
 
       let requestDTO = new Warehouse();
 
-        requestDTO.id= this.selectedWarehouse!.id;
-        requestDTO.warehouse_name = this.updateWarehouseForm.controls.warehouseName.value!;
-        requestDTO.username = this.updateWarehouseForm.controls.username.value!;
-        requestDTO.password = this.updateWarehouseForm.controls.password.value!;
-        requestDTO.package_id = parseInt(this.updateWarehouseForm.controls.package.value!);
-      
-      
+      requestDTO.id = this.selectedWarehouse!.id;
+      requestDTO.warehouse_name = this.updateWarehouseForm.controls.warehouseName.value!;
+      requestDTO.username = this.updateWarehouseForm.controls.username.value!;
+      requestDTO.password = this.updateWarehouseForm.controls.password.value!;
+      requestDTO.package_id = parseInt(this.updateWarehouseForm.controls.package.value!);
+
+      requestDTO.properties = this.selectedWarehouse.properties;
+
+
       this.updateWarehouse(requestDTO);
       this.updateModalCloseButtonRef.nativeElement.click();
     } else
@@ -114,7 +123,7 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
   }
 
   onDeleteButtonClick(id: number) {
-    this.selectedWarehouse = this.warehouses.find(i => i.id == id);
+    this.selectedWarehouse = this.warehouses.find(i => i.id == id)!;
   }
 
   onDeleteConfirmationButtonClick() {
@@ -123,7 +132,7 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
   }
 
   onCreateButtonClick() {
-    if (this.createWarehouseForm.valid) {
+    if (this.createWarehouseForm.valid && this.properties && this.properties.length > 0) {
 
       let warehouse = new Warehouse();
 
@@ -132,7 +141,7 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
       warehouse.password = this.createWarehouseForm.controls.password.value!;
       warehouse.package_id = parseInt(this.createWarehouseForm.controls.package.value!);
 
-      warehouse.Properties = this.properties;
+      warehouse.properties = this.properties;
 
       this.isProcessing = true;
       this.isLoading = true;
@@ -142,22 +151,54 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
       this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
   }
 
-  onAddPropertyButtonClick() {
-    if (this.propertiesForm.valid) {
-      let property = new Property();
+  onAddPropertyButtonClick(warehouseId: number = -1) {
+    if (warehouseId == -1) {
+      if (this.createPropertiesForm.valid) {
+        let property = new Property();
 
-      property.id = this.properties.length + 1;
-      property.name = this.propertiesForm.controls.name.value!;
-      property.type = this.propetyTypes.find(i => i.value == this.propertiesForm.controls.type.value)?.name!;
+        if (!this.properties)
+          this.properties = [];
 
-      this.properties.push(property);
-     
-    } else
-      this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
+        property.id = this.properties.length + 1;
+        property.name = this.createPropertiesForm.controls.name.value!;
+        property.type = this.propetyTypes.find(i => i.value == this.createPropertiesForm.controls.type.value)?.name!;
+
+        this.properties.push(property);
+
+      } else
+        this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
+    }
+    else {
+      if (this.updatePropertiesForm.valid) {
+        let property = new Property();
+
+        if (!this.selectedWarehouse.properties)
+          this.selectedWarehouse.properties = [];
+
+        property.id = this.selectedWarehouse.properties.length + 1;
+        property.name = this.updatePropertiesForm.controls.name.value!;
+        property.type = this.propetyTypes.find(i => i.value == this.updatePropertiesForm.controls.type.value)?.name!;
+
+        this.selectedWarehouse.properties.push(property);
+      }
+      else
+        this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
+    }
   }
 
-  onRemovePropertyButtonClick(index: number) {
-    this.properties.splice(index, 1)
+  onRemovePropertyButtonClick(index: number, warehouseId: number = -1) {
+    if (warehouseId == -1) {
+      if (this.properties && this.properties.length > 0)
+        this.properties.splice(index, 1)
+      else
+        this.properties = null
+    }
+    else {
+      if (this.selectedWarehouse.properties && this.selectedWarehouse.properties.length > 0)
+        this.selectedWarehouse.properties.splice(index, 1)
+      else
+        this.selectedWarehouse.properties = null
+    }
   }
 
   // functions
@@ -168,8 +209,9 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
         this.warehouses = response.data;
         this.isLoading = false;
         this.isProcessing = false;
+        console.log(this.warehouses)
       }, (error: any) => {
-        this.toastr.error(error.errors[0].value, error.error.message);
+        this.toastr.error(error.error.errors[0].value, error.error.message);
         this.isLoading = false;
       }
     );
@@ -182,7 +224,7 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
       (response: any) => {
         this.packages = response.data;
       }, (error: any) => {
-        this.toastr.error(error.errors[0].value, error.error.message);
+        this.toastr.error(error.error.errors[0].value, error.error.message);
       }
     );
 
@@ -201,7 +243,8 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
       }, (error: any) => {
         this.isProcessing = false;
         this.isLoading = false;
-        this.toastr.error(error.errors[0].value, error.error.message);
+        console.log(error)
+        this.toastr.error(error.error.errors[0].value, error.error.message);
       }
     );
 
@@ -232,7 +275,7 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
 
         this.isProcessing = false;
         this.isLoading = false;
-        this.toastr.error(error.errors[0].value, error.error.message);
+        this.toastr.error(error.error.errors[0].value, error.error.message);
       }
     );
 
@@ -248,7 +291,7 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
         this.isLoading = false;
       }, (error: any) => {
         this.isLoading = false;
-        this.toastr.error(error.errors[0].value, error.error.message);
+        this.toastr.error(error.error.errors[0].value, error.error.message);
       }
     );
 

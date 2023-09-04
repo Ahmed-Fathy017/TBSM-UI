@@ -12,7 +12,22 @@
 }
 
 .warehouses {
-    height: 150px;
+    height: 200px;
+}
+
+.warehouses::-webkit-scrollbar {
+    width: 6px;
+    background-color: #F5F5F5;
+}
+
+.warehouses::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #F5F5F5;
+}
+
+.warehouses::-webkit-scrollbar-thumb {
+    background-color: #F15A60;
+    border-radius: 2px;
 }
 
 i {

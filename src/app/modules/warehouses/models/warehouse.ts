@@ -11,5 +11,5 @@ export class Warehouse {
     package!: Package;
     package_id!: number;
 
-    Properties: Property[] = [];
+    properties: Property[] | null = null;
 }

@@ -38,7 +38,7 @@
                     <label for="package01" class="mb-1 d-flex">{{'WarehousesManagementScreen.Packages' | translate}}
                     </label>
 
-                    <select id="package01" class="form-select" name="" id="" formControlName="package">
+                    <select id="package01" class="form-select" name="package01" formControlName="package">
                         <option *ngFor="let package of packages" [value]="package.id">{{package.name}}</option>
                     </select>
                 </div>
@@ -51,7 +51,7 @@
     <app-page-header [pageTitle]="tertiaryPageTitle"></app-page-header>
 
     <div class="container">
-        <form class="row mb-4" [formGroup]="propertiesForm">
+        <form class="row mb-4" [formGroup]="createPropertiesForm">
             <div class="col-md-6 col-lg-6 col-xl-6">
                 <label for="propertyType" class="mb-1 d-flex">{{'WarehousesManagementScreen.PropertyType' | translate}}
                 </label>
@@ -70,7 +70,7 @@
                         <input type="text" name="propertyName" class="form-control" formControlName="name">
                     </div>
 
-                    <div class="col-md-2 col-lg-2 col-xl-2 d-flex align-items-center justify-content-center mt-4"
+                    <div class="col-md-2 col-lg-2 col-xl-2 d-flex align-items-center justify-content-end mt-4"
                         (click)="onAddPropertyButtonClick()">
                         <i class="fa-solid fa-plus bg-success p-2 rounded-1" style="color: #ffffff;"></i>
                     </div>
@@ -82,7 +82,7 @@
         <div class="row">
             <div class="col-md-12 col-lg-12 col-xl-12">
                 <div class="row mb-2" *ngFor="let property of properties; let i = index">
-                    <div class="col-md-4 col-lg-4 col-xl-4">
+                    <div class="col-md-5 col-lg-5 col-xl-5">
                         <label [for]="'propertyType-' + i" class="mb-1 d-flex">{{property.type}}
                         </label>
 
@@ -90,7 +90,7 @@
                             [disabled]="true">
                     </div>
 
-                    <div class="col-md-2 col-lg-2 col-xl-2 d-flex align-items-center justify-content-center mt-4"
+                    <div class="col-md-1 col-lg-1 col-xl-1 d-flex align-items-center justify-content-end mt-4"
                         (click)="onRemovePropertyButtonClick(i)">
                         <i class="fa-solid fa-x bg-danger p-2 rounded-1" style="color: #ffffff;"></i>
                     </div>
@@ -119,7 +119,7 @@
 
     <app-loading *ngIf="isLoading"></app-loading>
 
-    <div class="container list warehouses" *ngIf="!isLoading">
+    <div class="container list warehouses mb-4" *ngIf="!isLoading">
         <div class="row g-2 mb-2">
             <div class="item-card col-md-12 col-lg-12 col-xl-12 d-flex justify-content-between rounded-4 border px-4 py-3 mb-3"
                 *ngFor="let warehouse of warehouses">
@@ -140,9 +140,6 @@
                         data-bs-target="#deleteWarehouseModal" (click)="onDeleteButtonClick(warehouse.id)"><i
                             class="fa-solid fa-trash-can"></i></div>
                 </div>
-
-
-
             </div>
         </div>
     </div>
@@ -155,7 +152,7 @@
 <!-- edit warehouse modal -->
 <div class="modal fade" id="editWarehouseModal" tabindex="-1" aria-labelledby="editWarehouseModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header d-flex  justify-content-between">
                 <div>
@@ -191,7 +188,59 @@
                             <option *ngFor="let package of packages" [value]="package.id">{{package.name}}</option>
                         </select>
                     </div>
+
+
                 </form>
+
+                <form class="row mt-2 mb-3" [formGroup]="updatePropertiesForm">
+                    <div class="col-md-12 col-lg-12 col-xl-12 mb-2 ">
+                        <p class="fw-bold m-0">{{'WarehousesManagementScreen.TertiaryPageTitle' | translate}}</p>
+                    </div>
+
+                    <div class="col-md-12 col-lg-12 col-xl-12">
+                        <label for="propertyType01" class="mb-1 d-flex">{{'WarehousesManagementScreen.PropertyType' |
+                            translate}}
+                        </label>
+                        <select name="propertyType01" id="propertyType01" class="form-select " formControlName="type">
+                            <option *ngFor="let property of propetyTypes" [value]="property.value"> {{property.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-12 col-lg-12 col-xl-12">
+                        <div class="row">
+
+                            <div class="col-md-10 col-lg-10 col-xl-10">
+                                <label for="propertyName01"
+                                    class="mb-1 d-flex">{{'WarehousesManagementScreen.PropertyName' |
+                                    translate}}
+                                </label>
+
+                                <input type="text" name="propertyName01" class="form-control" formControlName="name">
+                            </div>
+
+                            <div class="col-md-2 col-lg-2 col-xl-2 d-flex align-items-center justify-content-end mt-4"
+                                (click)="onAddPropertyButtonClick(selectedWarehouse.id)">
+                                <i class="fa-solid fa-plus bg-success p-2 rounded-1" style="color: #ffffff;"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+
+                <div class="row mb-2" *ngFor="let property of selectedWarehouse.properties; let i = index">
+                    <div class="col-md-10 col-lg-10 col-xl-10">
+                        <label [for]="'propertyType-' + selectedWarehouse.id + i" class="mb-1 d-flex">{{property.type}}
+                        </label>
+
+                        <input type="text" [name]="'propertyType-' + selectedWarehouse.id + i" class="form-control" [value]="property.name"
+                            [disabled]="true">
+                    </div>
+
+                    <div class="col-md-2 col-lg-2 col-xl-2 d-flex align-items-center justify-content-end mt-4"
+                        (click)="onRemovePropertyButtonClick(i, selectedWarehouse.id)">
+                        <i class="fa-solid fa-x bg-danger p-2 rounded-1" style="color: #ffffff;"></i>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer mb-4 border-0">
                 <button class="d-none" #updateModalCloseButtonRef data-bs-dismiss="modal"></button>
@@ -218,7 +267,7 @@
                 <div class="d-flex justify-content-center mt-4">
                     <p class="h5 fw-bold">{{'Modal.DeletionConsentMessage' | translate}}
                         {{'WarehousesManagementScreen.EntityName' | translate}}
-                        {{selectedWarehouse?.warehouse_name}}</p>
+                        {{selectedWarehouse.warehouse_name}}</p>
                 </div>
 
             </div>
