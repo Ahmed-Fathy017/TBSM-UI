@@ -40,6 +40,12 @@ export class WarehousesService extends AbstractRemoteService {
     return this.http.post(apiUrl, {});
   }
 
+  getWarehouseProperties() {
+    let apiUrl = this.apiURl + `warehouse/get_properties`;
+
+    return this.http.get(apiUrl);
+  }
+
   // generic api, can be used for both admin user and warehouse user
   getWarehouse(id?: number) {
     let apiUrl = this.apiURl + `warehouse/main`;

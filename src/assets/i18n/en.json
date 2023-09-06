@@ -15,6 +15,9 @@
     "AdminDashboardScreen": {
         "Home": "Home"
     },
+    "General": {
+        "PrintProductBarcode": "Print Barcode"
+    },
     "WarehousesManagementScreen": {
         "PrimaryTitle": "Home / Warehouses /",
         "ColoredPrimaryTitle": "Create Warehouse",

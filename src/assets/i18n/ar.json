@@ -15,6 +15,9 @@
     "AdminDashboardScreen": {
         "Home": "الرئيسية"
     },
+    "General": {
+        "PrintProductBarcode": "طباعه الباركود"
+    },
     "WarehousesManagementScreen": {
         "EntityName": "المستودع",
         "PrimaryTitle": "الرئيسية / المستودعات /",

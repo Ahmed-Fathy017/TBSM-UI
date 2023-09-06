@@ -15,4 +15,85 @@
     box-shadow: none;
 }
 
+i {
+    cursor: pointer;
+}
 
+
+/* custom toast */
+#snackbar {
+    visibility: hidden;
+    color: #fff;
+    border-radius: 2px;
+    position: fixed;
+    z-index: 2;
+    top: -0px;
+    overflow: hidden;
+    margin: 0 0 6px;
+    width: 300px;
+    border-radius: 3px 3px 3px 3px;
+    background-position: 15px center;
+    background-repeat: no-repeat;
+    background-size: 24px;
+    box-shadow: 0 0 12px #999999;
+    color: #FFFFFF;
+    background-color: #51A351;
+    text-decoration: none;
+}
+
+#snackbar .barcode {
+    font-size: 2.5rem;
+}
+
+#snackbar:hover {
+    box-shadow: 0 0 12px #000000;
+    opacity: 1;
+    cursor: pointer;
+}
+
+#snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 3s;
+    animation: fadein 0.5s, fadeout 0.5s 3s;
+}
+
+
+@-webkit-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}

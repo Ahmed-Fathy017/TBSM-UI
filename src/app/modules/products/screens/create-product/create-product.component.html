@@ -1,3 +1,16 @@
+<div id="snackbar" #snackbar class="my-2 mx-2 py-2 px-3" (click)="onProductSnackbarClick()">
+    <div class="d-flex justify-content-between align-items-center ">
+        <div class="d-flex  justify-content-center align-items-center ">
+            {{'General.PrintProductBarcode' | translate}}
+        </div>
+        <div>
+            <i class="fa-solid fa-barcode barcode"></i>
+
+        </div>
+    </div>
+</div>
+
+
 <div class="container-fluid">
     <app-page-header [pageTitle]="firstPageTitle" [coloredPageTitle]="coloredPageTitle"></app-page-header>
 
@@ -15,7 +28,7 @@
 
                     <label for="department01" class="mb-1 d-flex">{{'CreateProductScreen.Department' |
                         translate}}</label>
-                    <select id="department01" class="form-select" formControlName="deparmtent">
+                    <select id="department01" class="form-select" formControlName="department">
                         <option *ngFor="let department of departments" [value]="department.id">
                             {{department.name}}
                         </option>
@@ -60,6 +73,67 @@
 
             <app-page-header [pageTitle]="secondPageTitle"></app-page-header>
 
+            <div class="container ">
+                <div class="row">
+                    <div class="col-md-6 col-lg-6 col-xl-6">
+                        <label class="form-check-label mb-1" for="properties">
+                            {{'CreateProductScreen.ExternalSupply' | translate}}
+                        </label>
+                        <select name="properties" id="properties" class="form-select"
+                            (change)="onPropetyOptionChange($event)">
+                            <option *ngFor="let property of properties" [value]="property.id">{{property.name}}</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 col-lg-6 col-xl-6 mb-2" *ngIf="selectedProperty">
+
+                        <div class="row">
+
+                            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
+                                <label for="propertyValue" class="d-flex mb-1">{{selectedProperty.name}}
+                                </label>
+
+                                <input [type]="selectedProperty.type" name="propertyValue" id="propertyValue"
+                                    class="form-control" formControlName="property" #valueInput>
+                            </div>
+
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 d-flex align-items-center justify-content-end mt-4"
+                                (click)="onAddPropertyButtonClick()">
+                                <i class="fa-solid fa-plus bg-success p-2 rounded-1" style="color: #ffffff;"></i>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="container">
+
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6 col-xl-6"
+                                *ngFor="let property of addedProperties; let i = index">
+                                <div class="row mt-2">
+                                    <div class="col-md-10 col-lg-10 col-xl-10">
+                                        <label [for]="'property-' + i" class="mb-1 d-flex">{{property.name}}
+                                        </label>
+
+                                        <input type="text" [name]="'property-' + i" class="form-control"
+                                            [value]="property.value">
+                                    </div>
+
+                                    <div class="col-md-2 col-lg-2 col-xl-2 d-flex align-items-center justify-content-end mt-4"
+                                        (click)="onRemovePropertyButtonClick(i)">
+                                        <i class="fa-solid fa-x bg-danger p-2 rounded-1" style="color: #ffffff;"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
             <div class=" row mb-2 d-flex justify-content-end">
 
                 <div class="col-md-6 col-lg-6 col-xl-6">
@@ -76,3 +150,18 @@
     </div>
 
 </div>
+
+
+<!-- custom bootstrap toastr -->
+
+<!-- <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" #productToast>
+    <div class="toast-header">
+        <img src="..." class="rounded me-2" alt="...">
+        <strong class="me-auto">Bootstrap</strong>
+        <small class="text-muted">2 seconds ago</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+        Heads up, toasts will stack automatically
+    </div>
+</div> -->

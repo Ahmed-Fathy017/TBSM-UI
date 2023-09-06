@@ -18,6 +18,12 @@ export class ProductsService extends AbstractRemoteService {
     return this.http.get(apiUrl);
   }
 
+  createProduct(requestDTO: Product) {
+    let apiUrl = this.apiURl + `warehouse/add_product`;
+
+    return this.http.post(apiUrl, requestDTO);
+  }
+
   updateProduct(requestDTO: Product) {
     let apiUrl = this.apiURl + `warehouse/update_product/${requestDTO.id}`;
 
@@ -26,6 +32,12 @@ export class ProductsService extends AbstractRemoteService {
 
   deleteProduct(id: number) {
     let apiUrl = this.apiURl + `warehouse/delete_product/${id}`;
+
+    return this.http.post(apiUrl, {});
+  }
+
+  getProductInvoice(id: number) {
+    let apiUrl = this.apiURl + `warehouse/product_invoice/${id}`;
 
     return this.http.post(apiUrl, {});
   }

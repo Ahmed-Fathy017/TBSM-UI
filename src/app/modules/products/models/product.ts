@@ -1,9 +1,10 @@
 import { Department } from "../../departments/models/department";
 import { Refrigerator } from "../../refrigerators/models/refrigerator";
 import { Option } from "./option";
+import { Property } from "./property";
 
 export class Product {
-    chain_demand: boolean = false;
+    chain_demand: number = 0;
     id: number = 0;
     name: string = '';
 
@@ -16,5 +17,7 @@ export class Product {
 
     category_id: number = 0;
     category: Department = new Department();
+
+    properties: Property[] | null = []
 }
 

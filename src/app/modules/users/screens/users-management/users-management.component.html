@@ -38,7 +38,7 @@
                     <label for="role" class="mb-1 d-flex">{{'UsersManagementScreen.Roles' | translate}}
                     </label>
 
-                    <select id="role" class="form-select" name="" id="" formControlName="role">
+                    <select id="role" class="form-select" name="" formControlName="role">
                         <option *ngFor="let role of roles" [value]="role.id">{{role.name}}</option>
                     </select>
                 </div>

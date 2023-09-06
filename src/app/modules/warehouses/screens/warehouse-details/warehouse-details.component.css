@@ -1,17 +1,25 @@
+.cards {
+    width: 70%;
+}
+
 .card {
     background-color: #F6F6FB;
     border: none;
-    width: 244px;
-    height: 190px;
     color: white;
+}
+
+.card-content {
+    width: 230px;
+    height: 200px;
     cursor: pointer;
 }
 
 .card .icon {
     color: #F15A60;
     background-color: white;
-    Width: 30px;
-    Height: 30px;
+    Width: 40px;
+    Height: 40px;
+    font-size: 1.4rem;
 }
 
 .card:hover {
