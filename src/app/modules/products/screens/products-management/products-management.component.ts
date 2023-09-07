@@ -10,6 +10,8 @@ import { Product } from '../../models/product';
 import { RefrigeratorsService } from 'src/app/modules/refrigerators/remote-services/refrigerators.service';
 import { DepartmentsService } from 'src/app/modules/departments/remote-services/departments.service';
 import { Refrigerator } from 'src/app/modules/refrigerators/models/refrigerator';
+import { SupplyChainsService } from 'src/app/modules/supply-chains/remote-services/supply-chains.service';
+import { AddOrder } from 'src/app/modules/supply-chains/models/add-order';
 
 @Component({
   selector: 'app-products-management',
@@ -25,6 +27,7 @@ export class ProductsManagementComponent implements OnInit, OnDestroy {
   secondPageTitle: string = '';
 
   @ViewChild('updateModalCloseButtonRef') updateModalCloseButtonRef!: ElementRef;
+  @ViewChild('supplyModalCloseButtonRef') supplyModalCloseButtonRef!: ElementRef;
 
   // page loading
   isLoading: boolean = false;
@@ -42,6 +45,7 @@ export class ProductsManagementComponent implements OnInit, OnDestroy {
   productsList: Department[] = [];
   selectedDepartment: Department = new Department();
   selectedProduct: Product = new Product();
+  selectedProductIndex: number = -1;
 
   departments: Department[] = [];
   refrigerators: Refrigerator[] = [];
@@ -51,8 +55,11 @@ export class ProductsManagementComponent implements OnInit, OnDestroy {
     department: new FormControl('', [Validators.required]),
     quantity: new FormControl('', [Validators.required]),
     refrigerator: new FormControl('', [Validators.required]),
-    externalSupply: new FormControl(false),
-    number: new FormControl(''),
+    externalSupply: new FormControl(false)
+  });
+
+  supplyChainForm = new FormGroup({
+    quantity: new FormControl('', [Validators.required]),
   });
 
   // constructor
@@ -60,7 +67,8 @@ export class ProductsManagementComponent implements OnInit, OnDestroy {
     private toastr: ToastrService,
     private productsService: ProductsService,
     private refrigeratorsService: RefrigeratorsService,
-    private departmentsService: DepartmentsService) { }
+    private departmentsService: DepartmentsService,
+    private supplyChainsService: SupplyChainsService) { }
 
 
   // events
@@ -83,7 +91,6 @@ export class ProductsManagementComponent implements OnInit, OnDestroy {
       let startIndex = (pageNumber - 1) * this.pageSize;
       let endIndex = startIndex + this.pageSize;
       selectedItem.paginatedProducts = selectedItem.products.slice(startIndex, endIndex);
-      // console.log(selectedItem.paginatedProducts)
     }
   }
 
@@ -115,17 +122,6 @@ export class ProductsManagementComponent implements OnInit, OnDestroy {
     this.fetchDataIntoUpdateModal();
   }
 
-  onDeleteButtonClick(departmentId: number, productId: number) {
-    let selectedDepartment = this.productsList.find(i => i.id == departmentId);
-    if (selectedDepartment)
-      this.selectedProduct = selectedDepartment.products.find(i => i.id == productId)!;
-  }
-
-  onDeleteConfirmationButtonClick() {
-    this.isLoading = true;
-    this.deleteProduct();
-  }
-
   onUpdateConfirmationClick() {
     if (this.updateProductForm.valid) {
       this.isLoading = true;
@@ -144,19 +140,59 @@ export class ProductsManagementComponent implements OnInit, OnDestroy {
       this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
   }
 
+  onDeleteButtonClick(departmentId: number, productId: number, productIndex: number) {
+    this.selectedDepartment = this.productsList.find(i => i.id == departmentId)!;
+    if (this.selectedDepartment)
+      this.selectedProduct = this.selectedDepartment.products.find(i => i.id == productId)!;
+
+    this.selectedProductIndex = productIndex;
+  }
+
+  onDeleteConfirmationButtonClick() {
+    this.isLoading = true;
+    this.deleteProduct();
+  }
+
+  // onRemovePropertyButtonClick(index: number) {
+  //   this.selectedProduct.properties?.splice(index, 1);
+  // }
+
+  onProductSupplyDemandButtonClick(departmentId: number, productId: number) {
+    this.selectedDepartment = this.productsList.find(i => i.id == departmentId)!;
+    if (this.selectedDepartment)
+      this.selectedProduct = this.selectedDepartment.products.find(i => i.id == productId)!;
+  }
+
+  onProductSupplyDemandConfirmationClick() {
+    if (this.supplyChainForm.valid) {
+      let requestDTO = new AddOrder();
+      requestDTO.product_id = this.selectedProduct.id;
+      requestDTO.quantity = parseInt(this.supplyChainForm.controls.quantity.value!);
+      this.addOrderRequest(requestDTO);
+      this.supplyModalCloseButtonRef.nativeElement.click();
+    } else
+      this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
+  }
+
+  onProductBarcodeButtonClick(departmentId: number, productId: number) {
+    this.selectedDepartment = this.productsList.find(i => i.id == departmentId)!;
+    if (this.selectedDepartment)
+      this.selectedProduct = this.selectedDepartment.products.find(i => i.id == productId)!;
+
+    this.getProductInvoice();
+  }
+
   // funtions
   getProducts() {
     let subscription = this.productsService.getProducts().subscribe(
       (response: any) => {
-        console.log(response)
 
         this.productsList = response.data;
-
         this.setupProductsList();
 
         this.isLoading = false;
       }, (error: any) => {
-        this.toastr.error(error.errors[0].value, error.error.message);
+        this.toastr.error(error.error.errors[0].value, error.error.message);
         this.isLoading = false;
       }
     );
@@ -171,10 +207,9 @@ export class ProductsManagementComponent implements OnInit, OnDestroy {
       (response: any) => {
         this.departments = response.data;
         this.isLoading = false;
-        console.log(this.departments)
       }, (error: any) => {
         this.isLoading = false;
-        this.toastr.error(error.error.message);
+        this.toastr.error(error.error.errors[0].value, error.error.message);
       }
     );
 
@@ -189,7 +224,7 @@ export class ProductsManagementComponent implements OnInit, OnDestroy {
         this.isLoading = false;
         this.isProcessing = false;
       }, (error: any) => {
-        this.toastr.error(error.errors[0].value, error.error.message);
+        this.toastr.error(error.error.errors[0].value, error.error.message);
         this.isLoading = false;
       }
     );
@@ -197,38 +232,25 @@ export class ProductsManagementComponent implements OnInit, OnDestroy {
     this.subscription.add(subscription);
   }
 
-  setupProductsList(outdatedProductsList: Department[] = []) {
+  setupProductsList() {
     // index is used to give ui ids
     let index = 0;
 
     this.productsList.map(i => {
-      let existingItem = outdatedProductsList.find(j => j.id == i.id);
 
-      if (!existingItem) {
-        i.id = index + 1;
-        index++;
+      i.id = index + 1;
+      index++;
 
-        i.pagesCount = Math.ceil(i.products.length / this.pageSize);
-        i.pages = Array.from({ length: i.pagesCount }, (_, index) => index + 1);
-        i.selectedPage = 1;
-        i.minPage = 1;
-
-      } else {
-        i.id = index + 1;
-        index++;
-
-        i.pagesCount = existingItem.pagesCount;
-        i.pages = Array.from({ length: i.pagesCount }, (_, index) => index + 1);
-        i.selectedPage = existingItem.selectedPage;
-        i.minPage = existingItem.minPage;
-      }
+      i.pagesCount = Math.ceil(i.products.length / this.pageSize);
+      i.pages = Array.from({ length: i.pagesCount }, (_, index) => index + 1);
+      i.selectedPage = i.lastSelectedPage ?? 1;
+      i.minPage = 1;
 
       this.onPageChange(i.id, i.selectedPage);
     });
   }
 
   fetchDataIntoUpdateModal() {
-    console.log(this.selectedProduct)
     if (this.selectedProduct) {
       // this.selectedWarehouse.package_id = this.selectedWarehouse.package.id;
       this.updateProductForm.controls.name.setValue(this.selectedProduct.name);
@@ -251,7 +273,7 @@ export class ProductsManagementComponent implements OnInit, OnDestroy {
         this.isLoading = false;
       }, (error: any) => {
         this.isLoading = false;
-        this.toastr.error(error.errors[0].value, error.error.message);
+        this.toastr.error(error.error.errors[0].value, error.error.message);
       }
     );
 
@@ -263,18 +285,43 @@ export class ProductsManagementComponent implements OnInit, OnDestroy {
       (response: any) => {
         this.toastr.success(response.message);
 
-        let outdatedProductsList = this.productsList;
-        this.productsList = response.data;
-
-        this.setupProductsList(outdatedProductsList);
+        this.productsList.find(i => i.id = this.selectedDepartment.id)?.products.splice(this.selectedProductIndex, 1);
+        this.productsList.map(i => i.lastSelectedPage = i.selectedPage);
+        this.setupProductsList();
 
         this.isLoading = false;
       }, (error: any) => {
         this.isLoading = false;
-        this.toastr.error(error.errors[0].value, error.error.message);
+        this.toastr.error(error.error.errors[0].value, error.error.message);
       }
     );
 
     this.subscription.add(subscription);
+  }
+
+  getProductInvoice() {
+    console.log(this.selectedProduct.id)
+    let subscribtion = this.productsService.getProductInvoice(this.selectedProduct.id).subscribe(
+      (response: any) => {
+        window.open(response.data, "_blank");
+
+      }, (error: any) => {
+        this.toastr.error(error.error.errors[0].value, error.error.message);
+      }
+    );
+
+    this.subscription.add(subscribtion);
+  }
+
+  addOrderRequest(requestDTO: AddOrder) {
+    let subscribtion = this.supplyChainsService.addOrderRequest(requestDTO).subscribe(
+      (response: any) => {
+        this.toastr.success(response.message);
+      }, (error: any) => {
+        this.toastr.error(error.error.errors[0].value, error.error.message);
+      }
+    );
+
+    this.subscription.add(subscribtion);
   }
 }

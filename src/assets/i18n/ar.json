@@ -1,16 +1,16 @@
 {
     "dir": "rtl",
-    "NavBar" : {
+    "NavBar": {
         "Logout": "تسجيل الخروج"
     },
     "SideNav": {
         "Home": "الرئيسية",
         "Warehouses": "المستودعات",
         "Packages": "الباقات",
-        "Roles":"الادوار",
-        "Departments":"الاقسام",
-        "Refrigerators":"الثلاجات",
-        "Users":"المستخدمين"
+        "Roles": "الادوار",
+        "Departments": "الاقسام",
+        "Refrigerators": "الثلاجات",
+        "Users": "المستخدمين"
     },
     "AdminDashboardScreen": {
         "Home": "الرئيسية"
@@ -35,7 +35,7 @@
         "PrimaryTitle": "الرئيسية / المستودعات /",
         "ColoredPrimaryTitle": "المستودع الاول"
     },
-    "PackagesManagementScreen" : {
+    "PackagesManagementScreen": {
         "EntityName": "الباقة",
         "PrimaryTitle": "الرئيسية / الباقات /",
         "ColoredPrimaryTitle": "انشاء باقة",
@@ -54,14 +54,14 @@
         "SecondaryPageTitle": "جميع الادوار",
         "RoleName": "اسم الدور"
     },
-    "DepartmentsManagementScreen": { 
+    "DepartmentsManagementScreen": {
         "EntityName": "القسم",
         "PrimaryTitle": "الرئيسية /",
         "ColoredPrimaryTitle": "الاقسام",
         "SecondaryPageTitle": "جميع الاقسام",
         "DepartmentName": "اسم القسم"
     },
-    "RefrigeratorsManagementScreen": { 
+    "RefrigeratorsManagementScreen": {
         "EntityName": "الثلاجة",
         "PrimaryTitle": "الرئيسية /",
         "ColoredPrimaryTitle": "الثلاجات",
@@ -71,7 +71,7 @@
         "From": "من",
         "To": "الى"
     },
-    "UsersManagementScreen": { 
+    "UsersManagementScreen": {
         "EntityName": "المستخدم",
         "PrimaryTitle": "الرئيسية /",
         "ColoredPrimaryTitle": "المستخدمين",
@@ -81,11 +81,11 @@
         "FullName": "الاسم",
         "Password": "كلمه السر",
         "Roles": "الادوار",
-        "Status":"الحالة",
-        "Properties":"الخصائص",
-        "CreateAccount":"انشاء حساب"
+        "Status": "الحالة",
+        "Properties": "الخصائص",
+        "CreateAccount": "انشاء حساب"
     },
-    "ProductsManagmentScreen" : {
+    "ProductsManagmentScreen": {
         "PrimaryTitle": "الرئيسية / المنتجات /",
         "ColoredPrimaryTitle": "جميع المنتجات",
         "EntityName": "المنتج",
@@ -96,20 +96,25 @@
         "PrimaryTitle": "الرئيسية / المنتجات /",
         "ColoredPrimaryTitle": "انشاء منتج",
         "SecondaryPageTitle": "خصائص اخرى",
-        "Name":"الاسم",
-        "Department":"القسم",
-        "Quantity":"الكمية",
-        "Refrigerator":"الثلاجة",
+        "Name": "الاسم",
+        "Department": "القسم",
+        "Quantity": "الكمية",
+        "Refrigerator": "الثلاجة",
         "ExternalSupply": "طلب سلاسل امداد خارجية",
-        "Number":"اللوت نامبر",
-        "Properties":"خصائص اخرى"
+        "Number": "اللوت نامبر",
+        "Properties": "خصائص اخرى"
     },
     "Modal": {
-        "CreateButton":"انشاء",
+        "CreateButton": "انشاء",
         "EditModalHeader": "تعديل",
         "SaveChangesButton": "حفظ التغيرات",
         "DeletionConsentMessage": "هل ترغب ف حذف",
         "DeleteButton": "حذف",
         "CancelButton": "الغاء"
+    },
+    "ProductSupplyModal": {
+        "Title": "طلب الامداد",
+        "Quantity": "الكمية",
+        "SaveButton": "حفظ"
     }
 }

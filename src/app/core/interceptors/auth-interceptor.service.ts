@@ -21,8 +21,6 @@ export class AuthInterceptor implements HttpInterceptor {
         .set('Accept-Language', this.localService.getData('lang') || 'ar')
     });
 
-    console.log("interceptor", this.localService.getData('lang'))
-
     return next.handle(req);
   }
 }

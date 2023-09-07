@@ -9,6 +9,7 @@ import { CreateProductComponent } from './screens/create-product/create-product.
 import { WithdrawProductComponent } from './screens/withdraw-product/withdraw-product.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProductsService } from './remote-services/products.service';
+import { SupplyChainsModule } from '../supply-chains/supply-chains.module';
 
 
 @NgModule({

@@ -27,7 +27,7 @@ export class RolesManagementComponent implements OnInit, OnDestroy {
 
   permissionGroups: PermissionGroup[] = [];
   roles: Role[] = [];
-  selectedRole!: Role;
+  selectedRole: Role = new Role();
 
   // page loading
   isLoadingPermissions: boolean = false;

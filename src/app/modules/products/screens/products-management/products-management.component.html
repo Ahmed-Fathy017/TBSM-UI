@@ -34,8 +34,9 @@
                 <h5 class="fw-bold m-0">{{item.category}}</h5>
 
                 <div>
-                    <i class="fa-solid fa-minimize cursor-pointer" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse-' + i"
-                        aria-expanded="false" aria-controls="collapseExample"></i>
+                    <i class="fa-solid fa-minimize cursor-pointer" data-bs-toggle="collapse"
+                        [attr.data-bs-target]="'#collapse-' + i" aria-expanded="false"
+                        aria-controls="collapseExample"></i>
                 </div>
 
 
@@ -44,7 +45,8 @@
             <div class="collapse container " [id]="'collapse-' + i">
 
                 <div class="row g-2 mb-2">
-                    <div class="item-card col-12 rounded-4 border px-4 py-3 mb-3" *ngFor="let product of item.paginatedProducts">
+                    <div class="item-card col-12 rounded-4 border px-4 py-3 mb-3"
+                        *ngFor="let product of item.paginatedProducts; let i = index">
                         <div class="row align-items-center">
                             <div class="col-lg-2 col-md-2 fw-bold">{{product.name}}</div>
 
@@ -74,13 +76,14 @@
                                 <div class="row d-flex justify-content-end">
                                     <div class="col-lg-4 col-md-6">
                                         <div class="d-flex justify-content-center">
-                                            <div
-                                                class="rounded-1 upload d-flex justify-content-center align-items-center mx-2 px-3 py-2">
+                                            <div class="rounded-1 upload d-flex justify-content-center align-items-center mx-2 px-3 py-2"
+                                                data-bs-toggle="modal" data-bs-target="#supplyModal"
+                                                (click)="onProductSupplyDemandButtonClick(item.id, product.id)">
                                                 <i class="fa-solid fa-upload"></i>
                                             </div>
 
-                                            <div
-                                                class="rounded-1 code d-flex justify-content-center align-items-center mx-2 px-3 py-2">
+                                            <div class="rounded-1 code d-flex justify-content-center align-items-center mx-2 px-3 py-2"
+                                                (click)="onProductBarcodeButtonClick(item.id, product.id)">
                                                 <i class="fa-solid fa-qrcode" style="color: #787878;"></i>
                                             </div>
 
@@ -97,7 +100,7 @@
 
                                             <div class="rounded-1 delete d-flex justify-content-center align-items-center mx-2 px-3 py-2"
                                                 data-bs-toggle="modal" data-bs-target="#deleteModal"
-                                                (click)="onDeleteButtonClick(item.id, product.id)">
+                                                (click)="onDeleteButtonClick(item.id, product.id, i)">
                                                 <i class="fa-solid fa-trash-can"></i>
                                             </div>
                                         </div>
@@ -125,7 +128,7 @@
                             <li class="page-item" (click)="onNextPageClick(item.id)">
                                 <a class="page-link navigator rounded-2 fw-bold" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
-                                    <span class="sr-only" >Next</span>
+                                    <span class="sr-only">Next</span>
                                 </a>
                             </li>
                         </ul>
@@ -141,7 +144,7 @@
 
 <!-- edit modal -->
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header d-flex justify-content-between">
                 <div>
@@ -154,42 +157,42 @@
             </div>
             <div class="modal-body mt-2">
                 <form action="" class="row" [formGroup]="updateProductForm">
-                        <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
-        
-                            <label for="name" class="mb-1 d-flex">{{'CreateProductScreen.Name' |
-                                translate}}</label>
-                            <input id="name" class="form-control" type="text" formControlName="name">
-                        </div>
-        
-                        <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
-        
-                            <label for="department" class="mb-1 d-flex">{{'CreateProductScreen.Department' |
-                                translate}}</label>
-                            <select id="department" class="form-select" formControlName="department">
-                                <option *ngFor="let department of departments" [value]="department.id">
-                                    {{department.name}}
-                                </option>
-                            </select>
-                        </div>
+                    <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
 
-                        <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
-        
-                            <label for="quantity" class="mb-1 d-flex">{{'CreateProductScreen.Quantity' |
-                                translate}}</label>
-                            <input id="quantity" class="form-control" type="number" formControlName="quantity">
-                        </div>
-        
-                        <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
-        
-                            <label for="refrigerator" class="mb-1 d-flex">{{'CreateProductScreen.Refrigerator' |
-                                translate}}</label>
-                            <select id="refrigerator" class="form-select" formControlName="refrigerator">
-                                <option *ngFor="let refrigerator of refrigerators" [value]="refrigerator.id">
-                                    {{refrigerator.name}}
-                                </option>
-                            </select>
-                        </div>
-        
+                        <label for="name" class="mb-1 d-flex">{{'CreateProductScreen.Name' |
+                            translate}}</label>
+                        <input id="name" class="form-control" type="text" formControlName="name">
+                    </div>
+
+                    <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
+
+                        <label for="department" class="mb-1 d-flex">{{'CreateProductScreen.Department' |
+                            translate}}</label>
+                        <select id="department" class="form-select" formControlName="department">
+                            <option *ngFor="let department of departments" [value]="department.id">
+                                {{department.name}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
+
+                        <label for="quantity" class="mb-1 d-flex">{{'CreateProductScreen.Quantity' |
+                            translate}}</label>
+                        <input id="quantity" class="form-control" type="number" formControlName="quantity">
+                    </div>
+
+                    <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
+
+                        <label for="refrigerator" class="mb-1 d-flex">{{'CreateProductScreen.Refrigerator' |
+                            translate}}</label>
+                        <select id="refrigerator" class="form-select" formControlName="refrigerator">
+                            <option *ngFor="let refrigerator of refrigerators" [value]="refrigerator.id">
+                                {{refrigerator.name}}
+                            </option>
+                        </select>
+                    </div>
+
                 </form>
             </div>
             <div class="modal-footer mb-4 border-0">
@@ -240,3 +243,40 @@
 </div>
 
 
+<!-- supply modal -->
+<div class="modal fade" id="supplyModal" tabindex="-1" aria-labelledby="supplyModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header d-flex justify-content-between">
+                <div>
+                    <h5 class="modal-title">{{'ProductSupplyModal.Title' | translate}}</h5>
+                </div>
+
+                <div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+            </div>
+            <div class="modal-body mt-1">
+
+                <form class="row container" [formGroup]="supplyChainForm">
+                    <div class="col-md-12 col-lg-12 col-xl-12">
+
+                        <label class="p-0" for="quantity">{{'ProductSupplyModal.Quantity' | translate}}</label>
+                        <input type="number" name="quantity" id="quantity" class="form-control"
+                            formControlName="quantity">
+                    </div>
+                </form>
+
+
+            </div>
+
+            <div class="modal-footer mb-4 border-0">
+                <button class="d-none" #supplyModalCloseButtonRef data-bs-dismiss="modal"></button>
+                <button type="button" class="btn modal-btn m-0 py-2"
+                    (click)="onProductSupplyDemandConfirmationClick()">{{'ProductSupplyModal.SaveButton' |
+                    translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>

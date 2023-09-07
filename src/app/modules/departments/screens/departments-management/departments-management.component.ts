@@ -33,7 +33,7 @@ export class DepartmentsManagementComponent implements OnInit, OnDestroy {
   isProcessing: boolean = false;
 
   departments: Department[] = [];
-  selectedDepartment!: Department;
+  selectedDepartment: Department = new Department();
 
   @ViewChild('updateModalCloseButtonRef') updateModalCloseButtonRef!: ElementRef;
 

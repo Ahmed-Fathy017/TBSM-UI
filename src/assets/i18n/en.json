@@ -109,5 +109,10 @@
         "DeletionConsentMessage": "Do you want to delete",
         "DeleteButton": "Delete",
         "CancelButton": "Cancel"
+    },
+    "ProductSupplyModal": {
+        "Title": "Supply Request",
+        "Quantity": "Quantity",
+        "SaveButton": "Save"
     }
 }

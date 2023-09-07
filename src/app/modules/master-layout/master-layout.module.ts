@@ -20,6 +20,8 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RefrigeratorsModule } from '../refrigerators/refrigerators.module';
 import { ProductsModule } from '../products/products.module';
+import { SupplyChainsModule } from '../supply-chains/supply-chains.module';
+import { SupplyChainsService } from '../supply-chains/remote-services/supply-chains.service';
 
 
 
@@ -45,9 +47,11 @@ import { ProductsModule } from '../products/products.module';
     RefrigeratorsModule,
     UsersModule,
     BrowserAnimationsModule,
-    ProductsModule
+    ProductsModule,
+    SupplyChainsModule
   ], providers: [
-    NavigationService
+    NavigationService,
+    SupplyChainsService
   ]
 })
 export class MasterLayoutModule { }
