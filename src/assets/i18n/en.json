@@ -102,6 +102,15 @@
         "Number": "Loot Number",
         "Properties": "Other Properties"
     },
+    "ProductWihdrawalScreen": {
+        "PrimaryTitle": "Home / Products /",
+        "ColoredPrimaryTitle": "Withdraw Products",
+        "Message":"Please select the input related to product number and scan the barcode.",
+        "ProductNumber": "Product Number",
+        "ProductName": "Product Name",
+        "WithdrawButton":"Withdraw Product",
+        "SaveButton":"Save"
+    },
     "Modal": {
         "CreateButton": "Create",
         "EditModalHeader": "Edit",

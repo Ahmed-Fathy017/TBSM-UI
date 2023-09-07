@@ -104,6 +104,15 @@
         "Number": "اللوت نامبر",
         "Properties": "خصائص اخرى"
     },
+    "ProductWihdrawalScreen": {
+        "PrimaryTitle": "الرئيسية / المنتجات /",
+        "ColoredPrimaryTitle": "سحب المنتج",
+        "Message":"من فضلك قم بتحديد الانبت الخاص برقم المنتج وقم بعمل سكان للباركود .",
+        "ProductNumber": "رقم المنتج",
+        "ProductName": "اسم المنتج",
+        "WithdrawButton":"سحب المنتجات",
+        "SaveButton":"حفظ"
+    },
     "Modal": {
         "CreateButton": "انشاء",
         "EditModalHeader": "تعديل",

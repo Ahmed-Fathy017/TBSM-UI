@@ -147,7 +147,7 @@ export class CreateProductComponent implements OnInit, OnDestroy {
         this.isLoading = false;
       }, (error: any) => {
         this.isLoading = false;
-        this.toastr.error(error.error.message);
+        this.toastr.error(error.error.errors[0].value, error.error.message);
       }
     );
 
@@ -188,7 +188,6 @@ export class CreateProductComponent implements OnInit, OnDestroy {
       (response: any) => {
 
         this.createdProductId = response.data.id;
-        // this.productMessage = 'طباعه الباركود';
         this.getProductInvoice();
       }, (error: any) => {
         this.toastr.error(error.error.errors[0].value, error.error.message);

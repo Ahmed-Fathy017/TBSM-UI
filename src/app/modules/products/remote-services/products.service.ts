@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AbstractRemoteService } from '../../shared-components/remote-services/abstract-remote-service';
 import { Product } from '../models/product';
@@ -40,5 +40,21 @@ export class ProductsService extends AbstractRemoteService {
     let apiUrl = this.apiURl + `warehouse/product_invoice/${id}`;
 
     return this.http.post(apiUrl, {});
+  }
+
+  getProdcuctByNumber(productNumber: string, quanity: number) {
+    let apiUrl = this.apiURl + `warehouse/product_by_number`;
+
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("product_number", productNumber);
+    queryParams = queryParams.append("quantity", quanity);
+
+    return this.http.get(apiUrl, { params: queryParams });
+  }
+
+  withdrawProduct(requestDTO: object) {
+    let apiUrl = this.apiURl + `warehouse/product_withdrawal`;
+
+    return this.http.post(apiUrl, requestDTO);
   }
 }

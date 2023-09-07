@@ -1,0 +1,34 @@
+.btn {
+    color: #ffffff;
+    background-color: #F15A60;
+    border-radius: 12px;
+    width: 100%;
+    margin-top: 1.65rem;
+}
+
+.btn:active {
+    background-color: #F15A60;
+    color: white;
+}
+
+.secondary-action {
+    background-color: #100F37;
+}
+
+.secondary-action:hover {
+    background-color: #100F37;
+}
+
+.form-check-input {
+    box-shadow: none;
+}
+
+.products {
+    height: 500px;
+}
+
+.table th,
+tr,
+td {
+    color: #100F37;
+}
