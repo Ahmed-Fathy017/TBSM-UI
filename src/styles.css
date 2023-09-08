@@ -160,3 +160,39 @@ body::-webkit-scrollbar-thumb {
     background-color: #F15A60;
     border-radius: 2px;
 }
+
+/************  Pagination Styling ************/
+.page-item {
+    background-color: #ffffff;
+    cursor: pointer;
+}
+
+.page-item a {
+    background-color: #ffffff;
+    color: #100F37;
+    text-decoration: none;
+    border: none;
+    box-shadow: none;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+}
+
+.navigator {
+    background-color: #F15A6040 !important;
+}
+
+.navigator:hover {
+    background-color: #F15A6040 !important;
+    border-bottom: 2px solid transparent !important;
+}
+
+.page-item:hover a {
+    color: #F15A60;
+    border-bottom: 2px solid #F15A60;
+    border-width: 2px;
+}
+
+.active-page {
+    color: #F15A60 !important;
+    border-bottom: 2px solid #F15A60 !important;
+}

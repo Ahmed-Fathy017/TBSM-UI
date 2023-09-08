@@ -111,6 +111,14 @@
         "WithdrawButton":"Withdraw Product",
         "SaveButton":"Save"
     },
+    "OprationsLogsScreen": {
+        "PrimaryTitle": "Home /",
+        "ColoredPrimaryTitle": "Operation Logs",
+        "FromDate": "From Date",
+        "ToDate": "To Date",
+        "OperationType": "Operation Type",
+        "ExportButton": "Export Excel File"
+    },
     "Modal": {
         "CreateButton": "Create",
         "EditModalHeader": "Edit",
@@ -123,5 +131,18 @@
         "Title": "Supply Request",
         "Quantity": "Quantity",
         "SaveButton": "Save"
+    },
+    "OperationTypes": {
+        "Add":"Adding",
+        "Edit":"Editing",
+        "Delete":"Deleting",
+        "Export":"Exporting",
+        "Import": "Importing",
+        "SupplyRequest": "Supply Request",
+        "ProductWithdrawal": "Product Withdrawal",
+        "SupplyRequestAcceptance": "Supply Request Acceptance",
+        "SupplyRequestRefusal": "Supply Request Refusal",
+        "AddProduct": "Adding Product",
+        "ChangeUserStatus": " Changing User Status"
     }
 }

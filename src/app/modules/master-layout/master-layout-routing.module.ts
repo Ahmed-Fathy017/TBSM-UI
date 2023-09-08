@@ -7,28 +7,23 @@ import { RolesManagementComponent } from '../roles/screens/roles-management/role
 import { DepartmentsManagementComponent } from '../departments/screens/departments-management/departments-management.component';
 import { UsersManagementComponent } from '../users/screens/users-management/users-management.component';
 import { RefrigeratorsManagementComponent } from '../refrigerators/screens/refrigerators-management/refrigerators-management.component';
+import { OperationLogsComponent } from '../operation-logs/screens/operation-logs/operation-logs.component';
 
 const routes: Routes = [
   {
     path: '', component: MasterLayoutComponent, canActivate: [AuthGuardService],
     children: [
       { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-      { path: 'dashboard', component: MainDashboardComponent},
+      { path: 'dashboard', component: MainDashboardComponent },
 
       {
         path: 'warehouses',
         loadChildren: () => import('../warehouses/warehouses-routing.module').then(m => m.WarehouseRoutingModule)
       },
-
       {
         path: 'packages',
         loadChildren: () => import('../packages/packages-routing.module').then(m => m.PackagesRoutingModule)
       },
-
-      
-      { path: 'departments', component: DepartmentsManagementComponent},
-      { path: 'refrigerators', component: RefrigeratorsManagementComponent},
-      { path: 'users', component: UsersManagementComponent},
       {
         path: 'roles',
         loadChildren: () => import('../roles/roles-routing.module').then(m => m.RolesRoutingModule)
@@ -37,7 +32,10 @@ const routes: Routes = [
         path: 'products',
         loadChildren: () => import('../products/products-routing.module').then(m => m.ProductsRoutingModule)
       },
-
+      { path: 'departments', component: DepartmentsManagementComponent },
+      { path: 'refrigerators', component: RefrigeratorsManagementComponent },
+      { path: 'users', component: UsersManagementComponent },
+      { path: 'operation-logs', component: OperationLogsComponent },
     ]
   },
 

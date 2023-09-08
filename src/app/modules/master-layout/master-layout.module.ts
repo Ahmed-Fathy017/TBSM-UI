@@ -22,6 +22,7 @@ import { RefrigeratorsModule } from '../refrigerators/refrigerators.module';
 import { ProductsModule } from '../products/products.module';
 import { SupplyChainsModule } from '../supply-chains/supply-chains.module';
 import { SupplyChainsService } from '../supply-chains/remote-services/supply-chains.service';
+import { OperationLogsModule } from '../operation-logs/operation-logs.module';
 
 
 
@@ -48,7 +49,8 @@ import { SupplyChainsService } from '../supply-chains/remote-services/supply-cha
     UsersModule,
     BrowserAnimationsModule,
     ProductsModule,
-    SupplyChainsModule
+    SupplyChainsModule,
+    OperationLogsModule
   ], providers: [
     NavigationService,
     SupplyChainsService

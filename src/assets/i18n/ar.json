@@ -107,11 +107,19 @@
     "ProductWihdrawalScreen": {
         "PrimaryTitle": "الرئيسية / المنتجات /",
         "ColoredPrimaryTitle": "سحب المنتج",
-        "Message":"من فضلك قم بتحديد الانبت الخاص برقم المنتج وقم بعمل سكان للباركود .",
+        "Message": "من فضلك قم بتحديد الانبت الخاص برقم المنتج وقم بعمل سكان للباركود .",
         "ProductNumber": "رقم المنتج",
         "ProductName": "اسم المنتج",
-        "WithdrawButton":"سحب المنتجات",
-        "SaveButton":"حفظ"
+        "WithdrawButton": "سحب المنتجات",
+        "SaveButton": "حفظ"
+    },
+    "OprationsLogsScreen": {
+        "PrimaryTitle": "الرئيسية /",
+        "ColoredPrimaryTitle": "سجل العمليات",
+        "FromDate": "من تاريخ",
+        "ToDate": "الى تاريخ",
+        "OperationType": "نوع العملية",
+        "ExportButton": "استخراج ملف اكسل"
     },
     "Modal": {
         "CreateButton": "انشاء",
@@ -125,5 +133,18 @@
         "Title": "طلب الامداد",
         "Quantity": "الكمية",
         "SaveButton": "حفظ"
+    },
+    "OperationTypes": {
+        "Add": "إضافة",
+        "Edit": "تعديل",
+        "Delete": "حذف",
+        "Export": "استخراج",
+        "Import": "استيراد",
+        "SupplyRequest": "طلب إمداد",
+        "ProductWithdrawal": "سحب منتج",
+        "SupplyRequestAcceptance": "الموافقة على طلب الامداد",
+        "SupplyRequestRefusal": "رفض طلب الامداد",
+        "AddProduct": "اضافة منتج",
+        "ChangeUserStatus": "تغيير حالة مستخدم"
     }
 }
