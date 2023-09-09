@@ -32,6 +32,10 @@ const routes: Routes = [
         path: 'products',
         loadChildren: () => import('../products/products-routing.module').then(m => m.ProductsRoutingModule)
       },
+      {
+        path: 'supply-chains',
+        loadChildren: () => import('../supply-chains/supply-chains-routing.module').then(m => m.SupplyChainsRoutingModule)
+      },
       { path: 'departments', component: DepartmentsManagementComponent },
       { path: 'refrigerators', component: RefrigeratorsManagementComponent },
       { path: 'users', component: UsersManagementComponent },

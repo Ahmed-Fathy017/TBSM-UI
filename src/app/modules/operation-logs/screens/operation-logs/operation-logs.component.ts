@@ -18,9 +18,9 @@ import { OperationTypes } from '../../models/operation-types';
 export class OperationLogsComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
 
-  firstPageTitle: string = 'DepartmentsManagementScreen.PrimaryTitle';
-  coloredPageTitle: string = 'DepartmentsManagementScreen.ColoredPrimaryTitle'
-  secondPageTitle: string = 'DepartmentsManagementScreen.SecondaryPageTitle';
+  firstPageTitle: string = 'OprationsLogsScreen.PrimaryTitle';
+  coloredPageTitle: string = 'OprationsLogsScreen.ColoredPrimaryTitle';
+  secondPageTitle: string = 'OprationsLogsScreen.SecondaryPageTitle';
 
   operationLogsForm = new FormGroup({
     fromDate: new FormControl('', [Validators.required]),

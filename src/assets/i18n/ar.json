@@ -121,13 +121,22 @@
         "OperationType": "نوع العملية",
         "ExportButton": "استخراج ملف اكسل"
     },
+    "SupplyRequetsManagementScreen": {
+        "PrimaryTitle": "الرئيسية / سلاسل الامداد /",
+        "ExternalRequestsColoredPrimaryTitle": "الامداد الخارجي",
+        "InternalRequestsColoredPrimaryTitle": "الامداد الداخلي",
+        "MyRequestsColoredPrimaryTitle": "طلباتي",
+        "RequestCancellationConsentMessage": "هل ترغب ف الغاء الطلب ؟",
+        "CancellationReason": "سبب الالغاء"
+    },
     "Modal": {
         "CreateButton": "انشاء",
         "EditModalHeader": "تعديل",
         "SaveChangesButton": "حفظ التغيرات",
         "DeletionConsentMessage": "هل ترغب ف حذف",
         "DeleteButton": "حذف",
-        "CancelButton": "الغاء"
+        "CancelButton": "الغاء",
+        "ConfirmButton": "موافقة"
     },
     "ProductSupplyModal": {
         "Title": "طلب الامداد",

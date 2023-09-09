@@ -119,13 +119,22 @@
         "OperationType": "Operation Type",
         "ExportButton": "Export Excel File"
     },
+    "SupplyRequetsManagementScreen": {
+        "PrimaryTitle": "Home / Supply Chains /",
+        "ExternalRequestsColoredPrimaryTitle": "External Supply",
+        "InternalRequestsColoredPrimaryTitle": "Internal Supply",
+        "MyRequestsColoredPrimaryTitle": "My Requests",
+        "RequestCancellationConsentMessage": "Do you want to cancel the order?",
+        "CancellationReason": "Cancellation Reason"
+    },
     "Modal": {
         "CreateButton": "Create",
         "EditModalHeader": "Edit",
         "SaveChangesButton": "Save Changes",
         "DeletionConsentMessage": "Do you want to delete",
         "DeleteButton": "Delete",
-        "CancelButton": "Cancel"
+        "CancelButton": "Cancel",
+        "ConfirmButton": "Accept"
     },
     "ProductSupplyModal": {
         "Title": "Supply Request",

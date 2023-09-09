@@ -128,6 +128,13 @@ input[type=checkbox]:checked {
     background-color: #4ECB7130;
 }
 
+.check {
+    cursor: pointer;
+    width: 25px;
+    color: #14AE5C;
+    background-color: #4ECB7130;
+}
+
 
 body::-webkit-scrollbar {
     width: 6px;
