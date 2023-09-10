@@ -6,13 +6,15 @@ import { WarehouseDetailsComponent } from './screens/warehouse-details/warehouse
 import { WarehousesService } from './remote-services/warehouses.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { WarehousePropertiesManagementComponent } from './screens/warehouse-properties-management/warehouse-properties-management.component';
 
 
 
 @NgModule({
   declarations: [
     WarehousesManagementComponent,
-    WarehouseDetailsComponent
+    WarehouseDetailsComponent,
+    WarehousePropertiesManagementComponent
   ],
   imports: [
     CommonModule,

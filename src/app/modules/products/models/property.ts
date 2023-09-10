@@ -3,5 +3,6 @@ export class Property {
     property_id: number = 0;
     name: string = '';
     type: string = '';
-    value: string= '';
+    value: string = '';
+    required_status: boolean = false;
 }

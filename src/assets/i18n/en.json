@@ -34,6 +34,17 @@
         "PrimaryTitle": "Home / Warehouses /",
         "ColoredPrimaryTitle": "Warehouse One"
     },
+    "WarehousePropertiesManagementScreen": {
+        "EntityName": "Property",
+        "PrimaryTitle": "Home /",
+        "ColoredPrimaryTitle": "Create Property",
+        "SecondaryPageTitle": "All Properties",
+        "PropertyType": "Type",
+        "PropertyName": "Name",
+        "PropertyRequired": "Required Property",
+        "Text": "Text",
+        "Date": "Date"
+    },
     "PackagesManagementScreen": {
         "PrimaryTitle": "Home / Packages /",
         "ColoredPrimaryTitle": "Create Package",

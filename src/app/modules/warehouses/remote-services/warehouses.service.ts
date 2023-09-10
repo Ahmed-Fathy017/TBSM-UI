@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AbstractRemoteService } from '../../shared-components/remote-services/abstract-remote-service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Warehouse } from '../models/warehouse';
+import { Property } from '../../products/models/property';
 
 
 @Injectable({
@@ -10,7 +11,7 @@ import { Warehouse } from '../models/warehouse';
 export class WarehousesService extends AbstractRemoteService {
 
   constructor(private http: HttpClient,
-   ) {
+  ) {
     super()
   }
 
@@ -19,8 +20,6 @@ export class WarehousesService extends AbstractRemoteService {
 
     return this.http.get(apiUrl);
   }
-
-
 
   createWarehouse(requestDTO: Warehouse) {
     let apiUrl = this.apiURl + `super_admin/add_warehouse`;
@@ -40,12 +39,6 @@ export class WarehousesService extends AbstractRemoteService {
     return this.http.post(apiUrl, {});
   }
 
-  getWarehouseProperties() {
-    let apiUrl = this.apiURl + `warehouse/get_properties`;
-
-    return this.http.get(apiUrl);
-  }
-
   // generic api, can be used for both admin user and warehouse user
   getWarehouse(id?: number) {
     let apiUrl = this.apiURl + `warehouse/main`;
@@ -59,5 +52,30 @@ export class WarehousesService extends AbstractRemoteService {
     }
 
     return this.http.get(apiUrl);
+  }
+
+  // warehouse proeprties
+  getWarehouseProperties() {
+    let apiUrl = this.apiURl + `warehouse/view_properties`;
+
+    return this.http.get(apiUrl);
+  }
+
+  createWarehouseProperty(requestDTO: Property) {
+    let apiUrl = this.apiURl + `warehouse/add_property`;
+
+    return this.http.post(apiUrl, requestDTO);
+  }
+
+  updateWarehouseProperty(requestDTO: Property) {
+    let apiUrl = this.apiURl + `warehouse/update_property/${requestDTO.id}`;
+
+    return this.http.post(apiUrl, requestDTO);
+  }
+
+  deleteWarehouseProperty(id: number) {
+    let apiUrl = this.apiURl + `warehouse/delete_property/${id}`;
+
+    return this.http.post(apiUrl, {});
   }
 }

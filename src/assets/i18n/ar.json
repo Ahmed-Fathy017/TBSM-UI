@@ -23,17 +23,25 @@
         "PrimaryTitle": "الرئيسية / المستودعات /",
         "ColoredPrimaryTitle": "انشاء مستودع",
         "SecondaryPageTitle": "جميع المستودعات",
-        "TertiaryPageTitle": "خصائص اخرى",
         "WarehouseName": "اسم المستودع",
         "Username": "اسم المستخدم",
         "Password": "كلمه السر",
-        "Packages": "الباقات",
-        "PropertyType": "النوع",
-        "PropertyName": "الاسم"
+        "Packages": "الباقات"
     },
     "WarehouseDetailsScreen": {
         "PrimaryTitle": "الرئيسية / المستودعات /",
         "ColoredPrimaryTitle": "المستودع الاول"
+    },
+    "WarehousePropertiesManagementScreen": {
+        "EntityName": "خاصية",
+        "PrimaryTitle": "الرئيسية /",
+        "ColoredPrimaryTitle": "انشاء خاصية",
+        "SecondaryPageTitle": "جميع الخصائص",
+        "PropertyType": "النوع",
+        "PropertyName": "الاسم",
+        "PropertyRequired": "الخاصية مطلوبة",
+        "Text": "نص",
+        "Date": "تاريخ"
     },
     "PackagesManagementScreen": {
         "EntityName": "الباقة",

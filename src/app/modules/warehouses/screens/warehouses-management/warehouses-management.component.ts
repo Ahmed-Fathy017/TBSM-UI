@@ -23,7 +23,7 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
   firstPageTitle: string = 'WarehousesManagementScreen.PrimaryTitle';
   coloredPageTitle: string = 'WarehousesManagementScreen.ColoredPrimaryTitle'
   secondPageTitle: string = 'WarehousesManagementScreen.SecondaryPageTitle';
-  tertiaryPageTitle: string = 'WarehousesManagementScreen.TertiaryPageTitle';
+  // tertiaryPageTitle: string = 'WarehousesManagementScreen.TertiaryPageTitle';
 
   warehouses: Warehouse[] = [];
   packages: Package[] = [];
@@ -35,19 +35,19 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
     package: new FormControl('', [Validators.required]),
   });
 
-  propetyTypes = PropertyTypes;
+  // propetyTypes = PropertyTypes;
 
-  createPropertiesForm = new FormGroup({
-    type: new FormControl('', [Validators.required]),
-    name: new FormControl('', [Validators.required]),
-  });
+  // createPropertiesForm = new FormGroup({
+  //   type: new FormControl('', [Validators.required]),
+  //   name: new FormControl('', [Validators.required]),
+  // });
 
-  updatePropertiesForm = new FormGroup({
-    type: new FormControl('', [Validators.required]),
-    name: new FormControl('', [Validators.required]),
-  });
+  // updatePropertiesForm = new FormGroup({
+  //   type: new FormControl('', [Validators.required]),
+  //   name: new FormControl('', [Validators.required]),
+  // });
 
-  properties: Property[] | null = null
+  // properties: Property[] | null = null
 
   updateWarehouseForm = new FormGroup({
     warehouseName: new FormControl('', [Validators.required]),
@@ -132,7 +132,7 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
   }
 
   onCreateButtonClick() {
-    if (this.createWarehouseForm.valid && this.properties && this.properties.length > 0) {
+    if (this.createWarehouseForm.valid) {
 
       let warehouse = new Warehouse();
 
@@ -141,64 +141,12 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
       warehouse.password = this.createWarehouseForm.controls.password.value!;
       warehouse.package_id = parseInt(this.createWarehouseForm.controls.package.value!);
 
-      warehouse.properties = this.properties;
-
       this.isProcessing = true;
       this.isLoading = true;
 
       this.createWarehouse(warehouse);
     } else
       this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
-  }
-
-  onAddPropertyButtonClick(warehouseId: number = -1) {
-    if (warehouseId == -1) {
-      if (this.createPropertiesForm.valid) {
-        let property = new Property();
-
-        if (!this.properties)
-          this.properties = [];
-
-        property.id = this.properties.length + 1;
-        property.name = this.createPropertiesForm.controls.name.value!;
-        property.type = this.propetyTypes.find(i => i.value == this.createPropertiesForm.controls.type.value)?.name!;
-
-        this.properties.push(property);
-
-      } else
-        this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
-    }
-    else {
-      if (this.updatePropertiesForm.valid) {
-        let property = new Property();
-
-        if (!this.selectedWarehouse.properties)
-          this.selectedWarehouse.properties = [];
-
-        property.id = this.selectedWarehouse.properties.length + 1;
-        property.name = this.updatePropertiesForm.controls.name.value!;
-        property.type = this.propetyTypes.find(i => i.value == this.updatePropertiesForm.controls.type.value)?.name!;
-
-        this.selectedWarehouse.properties.push(property);
-      }
-      else
-        this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
-    }
-  }
-
-  onRemovePropertyButtonClick(index: number, warehouseId: number = -1) {
-    if (warehouseId == -1) {
-      if (this.properties && this.properties.length > 0)
-        this.properties.splice(index, 1)
-      else
-        this.properties = null
-    }
-    else {
-      if (this.selectedWarehouse.properties && this.selectedWarehouse.properties.length > 0)
-        this.selectedWarehouse.properties.splice(index, 1)
-      else
-        this.selectedWarehouse.properties = null
-    }
   }
 
   // functions

@@ -1,0 +1,16 @@
+.btn {
+    color: #ffffff;
+    background-color: #F15A60;
+    border-radius: 12px;
+    width: 100%;
+    margin-top: 1.65rem;
+}
+
+.btn:active {
+    background-color: #F15A60;
+    color: white;
+}
+
+.warehouses {
+    height: 300px;
+}
