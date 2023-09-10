@@ -62,14 +62,14 @@ export class WithdrawProductComponent implements OnInit, OnDestroy {
   }
 
   onSaveButtonClick() {
-
+    this.isProcessing = true;
+    this.withdrawProduct(this.returnProductsWithdrawalRequestDTO());
   }
 
   // functions
   getProdcuctByNumber(productNumber: string) {
     let subscription = this.productsService.getProdcuctByNumber(productNumber, 1).subscribe(
       (response: any) => {
-        this.toastr.success(response.message);
         console.log(response.data)
         this.products.push(response.data)
         this.isProcessing = false;
@@ -77,10 +77,41 @@ export class WithdrawProductComponent implements OnInit, OnDestroy {
       (error: any) => {
         this.isProcessing = false;
         console.log(error)
-        this.toastr.error(error.error.errors[0].value, error.error.message);
+        this.toastr.error(error.error.message);
       }
     );
 
     this.subscription.add(subscription);
+  }
+
+  returnProductsWithdrawalRequestDTO(): Object {
+    let map = new Map();
+
+    this.products.forEach(i => {
+      let keyValue = map.get(`${i.number}`);
+      if (keyValue)
+        map.set(`${i.number}`, keyValue + 1)
+      else
+        map.set(`${i.number}`, 1);
+    });
+
+    console.log(map)
+
+    return Object.fromEntries(map);
+  }
+
+  withdrawProduct(requestDTO: Object) {
+    let subscribtion = this.productsService.withdrawProduct(requestDTO).subscribe(
+      (response: any) => {
+        this.isProcessing = false;
+        this.toastr.success(response.message);
+        this.products = [];
+      }, (error: any) => {
+        this.isProcessing = false;
+        this.toastr.error(error.error.errors[0].value, error.error.message);
+      }
+    );
+
+    this.subscription.add(subscribtion);
   }
 }

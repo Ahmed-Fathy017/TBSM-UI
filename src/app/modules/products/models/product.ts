@@ -1,7 +1,7 @@
 import { Department } from "../../departments/models/department";
 import { Refrigerator } from "../../refrigerators/models/refrigerator";
 import { Option } from "./option";
-import { Property } from "../../properties/models/property";
+import { Property } from "./property";
 
 export class Product {
     chain_demand: number = 0;

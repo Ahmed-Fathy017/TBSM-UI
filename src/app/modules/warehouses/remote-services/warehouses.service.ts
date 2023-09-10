@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AbstractRemoteService } from '../../shared-components/remote-services/abstract-remote-service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Warehouse } from '../models/warehouse';
-import { Property } from '../../properties/models/property';
+import { Property } from '../../products/models/property';
 
 
 @Injectable({

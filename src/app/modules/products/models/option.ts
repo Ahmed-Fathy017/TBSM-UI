@@ -1,4 +1,4 @@
-import { Property } from "../../properties/models/property";
+import { Property } from "./property";
 
 export class Option {
     id: number = 0;

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AbstractRemoteService } from '../../shared-components/remote-services/abstract-remote-service';
-import { Property } from '../models/property';
+import { Property } from '../../products/models/property';
 
 @Injectable({
   providedIn: 'root'

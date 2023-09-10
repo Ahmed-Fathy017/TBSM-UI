@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
-import { Property } from 'src/app/modules/properties/models/property';
+import { Property } from 'src/app/modules/products/models/property';
 import { PropertyTypes } from 'src/app/modules/products/models/property-types';
 import { WarehousesService } from 'src/app/modules/warehouses/remote-services/warehouses.service';
 import { PropertiesService } from '../../remote-services/properties.service';

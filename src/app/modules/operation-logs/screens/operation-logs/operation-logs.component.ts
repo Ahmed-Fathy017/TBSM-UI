@@ -62,8 +62,9 @@ export class OperationLogsComponent implements OnInit, OnDestroy {
       requestDTO.date_from = this.operationLogsForm.controls.fromDate.value!;
       requestDTO.date_to = this.operationLogsForm.controls.toDate.value!;
       requestDTO.type = this.operationLogsForm.controls.type.value;
+      requestDTO.is_export = false;
 
-      this.getOperationLogs(requestDTO, false);
+      this.getOperationLogs(requestDTO);
     } else
       this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
   }
@@ -89,10 +90,10 @@ export class OperationLogsComponent implements OnInit, OnDestroy {
       requestDTO.date_from = this.operationLogsForm.controls.fromDate.value!;
       requestDTO.date_to = this.operationLogsForm.controls.toDate.value!;
       requestDTO.type = this.operationLogsForm.controls.type.value;
-
+      requestDTO.is_export = true;
       this.isProcessing = true;
 
-      this.getOperationLogs(requestDTO, true);
+      this.getOperationLogs(requestDTO);
     } else
       this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
   }
@@ -122,20 +123,19 @@ export class OperationLogsComponent implements OnInit, OnDestroy {
 
   // functions
 
-  getOperationLogs(requestDTO: GetOperationLogs, exportExcel: boolean = false) {
-    requestDTO.is_export = exportExcel;
-    console.log(exportExcel)
+  getOperationLogs(requestDTO: GetOperationLogs) {
+
+    console.log(requestDTO.is_export)
 
     let subscribtion = this.operationLogsService.getOperationLogs(requestDTO).subscribe(
       (response: any) => {
         console.log(response)
-        // this.logs = response.data;
 
-        if (exportExcel) 
+        if (requestDTO.is_export)
           window.open(response.data, "_blank");
-        else {
+        else
+          this.logs.data = response.data;
 
-        }
 
         this.isProcessing = false;
         this.isLoading = false;

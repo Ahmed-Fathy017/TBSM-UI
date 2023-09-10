@@ -7,7 +7,7 @@ import { DepartmentsService } from 'src/app/modules/departments/remote-services/
 import { Refrigerator } from 'src/app/modules/refrigerators/models/refrigerator';
 import { RefrigeratorsService } from 'src/app/modules/refrigerators/remote-services/refrigerators.service';
 import { WarehousesService } from 'src/app/modules/warehouses/remote-services/warehouses.service';
-import { Property } from '../../../properties/models/property';
+import { Property } from '../../models/property';
 import { Product } from '../../models/product';
 import { ProductsService } from '../../remote-services/products.service';
 

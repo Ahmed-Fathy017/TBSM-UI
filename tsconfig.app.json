@@ -3,7 +3,8 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "target": "ES6",
+    "target": "ES2022",
+    "lib": ["es2019", "dom"],
     "module": "CommonJS",
     "types": ["node"]
   },
