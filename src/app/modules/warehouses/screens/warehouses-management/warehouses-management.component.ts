@@ -9,7 +9,7 @@ import { PackagesService } from 'src/app/modules/packages/remote-services/packag
 import { Package } from 'src/app/modules/packages/models/package';
 import { ViewChild } from '@angular/core';
 import { PropertyTypes } from 'src/app/modules/products/models/property-types';
-import { Property } from 'src/app/modules/products/models/property';
+import { Property } from 'src/app/modules/properties/models/property';
 
 @Component({
   selector: 'app-warehouses-management',

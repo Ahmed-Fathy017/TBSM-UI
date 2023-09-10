@@ -1,27 +1,25 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { Package } from 'src/app/modules/packages/models/package';
-import { Warehouse } from '../../models/warehouse';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { PackagesService } from 'src/app/modules/packages/remote-services/packages.service';
-import { WarehousesService } from '../../remote-services/warehouses.service';
+import { Subscription } from 'rxjs';
+import { Property } from 'src/app/modules/properties/models/property';
 import { PropertyTypes } from 'src/app/modules/products/models/property-types';
-import { Property } from 'src/app/modules/products/models/property';
+import { WarehousesService } from 'src/app/modules/warehouses/remote-services/warehouses.service';
+import { PropertiesService } from '../../remote-services/properties.service';
 
 @Component({
-  selector: 'app-warehouse-properties-management',
-  templateUrl: './warehouse-properties-management.component.html',
-  styleUrls: ['./warehouse-properties-management.component.css']
+  selector: 'app-properties-management',
+  templateUrl: './properties-management.component.html',
+  styleUrls: ['./properties-management.component.css']
 })
-export class WarehousePropertiesManagementComponent implements OnInit, OnDestroy {
+export class PropertiesManagementComponent implements OnInit, OnDestroy {
 
   subscription = new Subscription();
 
-  firstPageTitle: string = 'WarehousePropertiesManagementScreen.PrimaryTitle';
-  coloredPageTitle: string = 'WarehousePropertiesManagementScreen.ColoredPrimaryTitle';
-  secondPageTitle: string = 'WarehousePropertiesManagementScreen.SecondaryPageTitle';
+  firstPageTitle: string = 'PropertiesManagementScreen.PrimaryTitle';
+  coloredPageTitle: string = 'PropertiesManagementScreen.ColoredPrimaryTitle';
+  secondPageTitle: string = 'PropertiesManagementScreen.SecondaryPageTitle';
 
   @ViewChild('updateModalCloseButtonRef') updateModalCloseButtonRef!: ElementRef;
 
@@ -50,7 +48,7 @@ export class WarehousePropertiesManagementComponent implements OnInit, OnDestroy
 
   constructor(
     private toastr: ToastrService,
-    private warehousesService: WarehousesService,
+    private propertiesService: PropertiesService,
     private router: Router) { }
 
 
@@ -114,7 +112,7 @@ export class WarehousePropertiesManagementComponent implements OnInit, OnDestroy
 
   // functions
   getWarehouseProperties() {
-    let subscribtion = this.warehousesService.getWarehouseProperties().subscribe(
+    let subscribtion = this.propertiesService.getWarehouseProperties().subscribe(
       (response: any) => {
         console.log(response)
         this.properties = response.data;
@@ -129,7 +127,7 @@ export class WarehousePropertiesManagementComponent implements OnInit, OnDestroy
   }
 
   createWarehouseProperty(requestDTO: Property) {
-    let subscribtion = this.warehousesService.createWarehouseProperty(requestDTO).subscribe(
+    let subscribtion = this.propertiesService.createWarehouseProperty(requestDTO).subscribe(
       (response: any) => {
         console.log(response)
         this.toastr.success(response.message);
@@ -156,7 +154,7 @@ export class WarehousePropertiesManagementComponent implements OnInit, OnDestroy
   }
 
   updateWarehouseProperty(requestDTO: Property) {
-    let subscribtion = this.warehousesService.updateWarehouseProperty(requestDTO).subscribe(
+    let subscribtion = this.propertiesService.updateWarehouseProperty(requestDTO).subscribe(
       (response: any) => {
         this.toastr.success(response.message);
 
@@ -173,7 +171,7 @@ export class WarehousePropertiesManagementComponent implements OnInit, OnDestroy
   }
 
   deleteWarehouseProperty() {
-    let subscribtion = this.warehousesService.deleteWarehouseProperty(this.selectedProperty.id).subscribe(
+    let subscribtion = this.propertiesService.deleteWarehouseProperty(this.selectedProperty.id).subscribe(
       (response: any) => {
         console.log(response)
         this.toastr.success(response.message);

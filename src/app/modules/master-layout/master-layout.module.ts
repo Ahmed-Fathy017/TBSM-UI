@@ -23,6 +23,7 @@ import { ProductsModule } from '../products/products.module';
 import { SupplyChainsModule } from '../supply-chains/supply-chains.module';
 import { SupplyChainsService } from '../supply-chains/remote-services/supply-chains.service';
 import { OperationLogsModule } from '../operation-logs/operation-logs.module';
+import { PropertiesModule } from '../properties/properties.module';
 
 
 
@@ -50,7 +51,8 @@ import { OperationLogsModule } from '../operation-logs/operation-logs.module';
     BrowserAnimationsModule,
     ProductsModule,
     SupplyChainsModule,
-    OperationLogsModule
+    OperationLogsModule,
+    PropertiesModule
   ], providers: [
     NavigationService,
     SupplyChainsService

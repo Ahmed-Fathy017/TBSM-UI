@@ -1,10 +1,10 @@
 export const PropertyTypes = [
     {
-        name: 'WarehousePropertiesManagementScreen.Text', // changeavble ar/en
+        name: 'PropertiesManagementScreen.Text', // changeavble ar/en
         value: 'text',
     },
     {
-        name: 'WarehousePropertiesManagementScreen.Date', // changeavble ar/en
+        name: 'PropertiesManagementScreen.Date', // changeavble ar/en
         value: 'date', 
     }
 ]

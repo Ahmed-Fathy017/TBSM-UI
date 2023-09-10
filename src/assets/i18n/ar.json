@@ -32,7 +32,7 @@
         "PrimaryTitle": "الرئيسية / المستودعات /",
         "ColoredPrimaryTitle": "المستودع الاول"
     },
-    "WarehousePropertiesManagementScreen": {
+    "PropertiesManagementScreen": {
         "EntityName": "خاصية",
         "PrimaryTitle": "الرئيسية /",
         "ColoredPrimaryTitle": "انشاء خاصية",

@@ -1,5 +1,5 @@
 import { Package } from "../../packages/models/package";
-import { Property } from "../../products/models/property";
+import { Property } from "../../properties/models/property";
 
 export class Warehouse {
     id!: number;

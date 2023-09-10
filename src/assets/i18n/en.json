@@ -34,7 +34,7 @@
         "PrimaryTitle": "Home / Warehouses /",
         "ColoredPrimaryTitle": "Warehouse One"
     },
-    "WarehousePropertiesManagementScreen": {
+    "PropertiesManagementScreen": {
         "EntityName": "Property",
         "PrimaryTitle": "Home /",
         "ColoredPrimaryTitle": "Create Property",

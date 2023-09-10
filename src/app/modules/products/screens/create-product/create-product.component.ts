@@ -7,7 +7,7 @@ import { DepartmentsService } from 'src/app/modules/departments/remote-services/
 import { Refrigerator } from 'src/app/modules/refrigerators/models/refrigerator';
 import { RefrigeratorsService } from 'src/app/modules/refrigerators/remote-services/refrigerators.service';
 import { WarehousesService } from 'src/app/modules/warehouses/remote-services/warehouses.service';
-import { Property } from '../../models/property';
+import { Property } from '../../../properties/models/property';
 import { Product } from '../../models/product';
 import { ProductsService } from '../../remote-services/products.service';
 
@@ -67,7 +67,7 @@ export class CreateProductComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getDepartments();
     this.getRefrigerators();
-    this.getWarehouseProperties();
+    // this.getWarehouseProperties();
   }
 
   ngOnDestroy(): void {
@@ -170,18 +170,18 @@ export class CreateProductComponent implements OnInit, OnDestroy {
     this.subscription.add(subscription);
   }
 
-  getWarehouseProperties() {
-    let subscription = this.warehouseService.getWarehouseProperties().subscribe(
-      (response: any) => {
-        this.properties = response.data;
-        this.selectedProperty = this.properties[0];
-      }, (error) => {
-        this.toastr.error(error.error.errors[0].value, error.error.message);
-      }
-    );
+  // getWarehouseProperties() {
+  //   let subscription = this.warehouseService.getWarehouseProperties().subscribe(
+  //     (response: any) => {
+  //       this.properties = response.data;
+  //       this.selectedProperty = this.properties[0];
+  //     }, (error: any) => {
+  //       this.toastr.error(error.error.errors[0].value, error.error.message);
+  //     }
+  //   );
 
-    this.subscription.add(subscription);
-  }
+  //   this.subscription.add(subscription);
+  // }
 
   createProduct(requestDTO: Product) {
     let subscription = this.productsService.createProduct(requestDTO).subscribe(

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AbstractRemoteService } from '../../shared-components/remote-services/abstract-remote-service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Warehouse } from '../models/warehouse';
-import { Property } from '../../products/models/property';
+import { Property } from '../../properties/models/property';
 
 
 @Injectable({
@@ -52,30 +52,5 @@ export class WarehousesService extends AbstractRemoteService {
     }
 
     return this.http.get(apiUrl);
-  }
-
-  // warehouse proeprties
-  getWarehouseProperties() {
-    let apiUrl = this.apiURl + `warehouse/view_properties`;
-
-    return this.http.get(apiUrl);
-  }
-
-  createWarehouseProperty(requestDTO: Property) {
-    let apiUrl = this.apiURl + `warehouse/add_property`;
-
-    return this.http.post(apiUrl, requestDTO);
-  }
-
-  updateWarehouseProperty(requestDTO: Property) {
-    let apiUrl = this.apiURl + `warehouse/update_property/${requestDTO.id}`;
-
-    return this.http.post(apiUrl, requestDTO);
-  }
-
-  deleteWarehouseProperty(id: number) {
-    let apiUrl = this.apiURl + `warehouse/delete_property/${id}`;
-
-    return this.http.post(apiUrl, {});
   }
 }

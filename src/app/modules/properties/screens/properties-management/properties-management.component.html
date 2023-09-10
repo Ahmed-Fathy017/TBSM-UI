@@ -4,14 +4,14 @@
     <div class="container">
         <form class="row mb-2" [formGroup]="createPropertyForm">
             <div class="col-md-6 col-lg-6 col-xl-6">
-                <label for="propertyType" class="mb-1 d-flex">{{'WarehousePropertiesManagementScreen.PropertyType' | translate}}
+                <label for="propertyType" class="mb-1 d-flex">{{'PropertiesManagementScreen.PropertyType' | translate}}
                 </label>
                 <select name="propertyType" id="propertyType" class="form-select " formControlName="type">
                     <option *ngFor="let property of propetyTypes" [value]="property.value"> {{property.name | translate}}</option>
                 </select>
             </div>
             <div class="col-md-6 col-lg-6 col-xl-6">
-                <label for="propertyName" class="mb-1 d-flex">{{'WarehousePropertiesManagementScreen.PropertyName' |
+                <label for="propertyName" class="mb-1 d-flex">{{'PropertiesManagementScreen.PropertyName' |
                     translate}}
                 </label>
 
@@ -24,7 +24,7 @@
                 <input class="form-check-input mx-2" type="checkbox" value="" id="flexCheckIndeterminate01"
                     formControlName="required">
                 <label class="form-check-label" for="flexCheckIndeterminate01">
-                    {{'WarehousePropertiesManagementScreen.PropertyRequired' | translate}}
+                    {{'PropertiesManagementScreen.PropertyRequired' | translate}}
                 </label>
             </div>
 
@@ -90,14 +90,14 @@
             <div class="modal-body mt-2">
                 <form class="row mb-2" [formGroup]="updatePropertyForm">
                     <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
-                        <label for="propertyType01" class="mb-1 d-flex">{{'WarehousePropertiesManagementScreen.PropertyType' | translate}}
+                        <label for="propertyType01" class="mb-1 d-flex">{{'PropertiesManagementScreen.PropertyType' | translate}}
                         </label>
                         <select name="propertyType" id="propertyType" class="form-select " formControlName="type">
                             <option *ngFor="let property of propetyTypes" [value]="property.value"> {{property.name | translate}}</option>
                         </select>
                     </div>
                     <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
-                        <label for="propertyName" class="mb-1 d-flex">{{'WarehousePropertiesManagementScreen.PropertyName' |
+                        <label for="propertyName" class="mb-1 d-flex">{{'PropertiesManagementScreen.PropertyName' |
                             translate}}
                         </label>
         
@@ -110,7 +110,7 @@
                         <input class="form-check-input mx-2" type="checkbox" value="" id="flexCheckIndeterminate02"
                             formControlName="required">
                         <label class="form-check-label" for="flexCheckIndeterminate02">
-                            {{'WarehousePropertiesManagementScreen.PropertyRequired' | translate}}
+                            {{'PropertiesManagementScreen.PropertyRequired' | translate}}
                         </label>
                     </div>
         
@@ -140,7 +140,7 @@
 
                 <div class="d-flex justify-content-center mt-4">
                     <p class="h5 fw-bold">{{'Modal.DeletionConsentMessage' | translate}}
-                        {{'WarehousePropertiesManagementScreen.EntityName' | translate}} {{selectedProperty.name}}</p>
+                        {{'PropertiesManagementScreen.EntityName' | translate}} {{selectedProperty.name}}</p>
                 </div>
 
             </div>
