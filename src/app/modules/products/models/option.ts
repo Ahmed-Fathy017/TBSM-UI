@@ -6,4 +6,7 @@ export class Option {
     property_id: number = 0;
     value: string = '';
     property: Property = new Property();
+
+    // UI properties
+    // isNew: boolean = false;
 }

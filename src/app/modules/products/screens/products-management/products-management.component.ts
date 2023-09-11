@@ -14,6 +14,7 @@ import { SupplyChainsService } from 'src/app/modules/supply-chains/remote-servic
 import { AddOrder } from 'src/app/modules/supply-chains/models/add-order';
 import { PropertiesService } from 'src/app/modules/properties/remote-services/properties.service';
 import { Property } from '../../models/property';
+import { Option } from '../../models/option'
 
 @Component({
   selector: 'app-products-management',
@@ -31,6 +32,8 @@ export class ProductsManagementComponent implements OnInit, OnDestroy, AfterView
   @ViewChild('editModal') editModal!: ElementRef;
   @ViewChild('updateModalCloseButtonRef') updateModalCloseButtonRef!: ElementRef;
   @ViewChild('supplyModalCloseButtonRef') supplyModalCloseButtonRef!: ElementRef;
+  @ViewChild('valueInput', { static: false }) valueInput!: ElementRef;
+
 
   // page loading
   isLoading: boolean = false;
@@ -68,6 +71,7 @@ export class ProductsManagementComponent implements OnInit, OnDestroy, AfterView
 
 
   properties: Property[] = [];
+  selectedProperty: Property = new Property();
   requiredPropertiesIds: number[] = [];
 
   // constructor
@@ -130,27 +134,64 @@ export class ProductsManagementComponent implements OnInit, OnDestroy, AfterView
     }
   }
 
+  onPropetyOptionChange(event: any) {
+    this.selectedProperty = this.properties.find(i => i.id == event.target.value)!;
+  }
+
+  onAddPropertyButtonClick() {
+    // Access the element by its id
+    let element = this.valueInput.nativeElement;
+
+    let propertyExists = this.selectedProduct.options?.some(i => i.property.id == this.selectedProperty?.id);
+    if (propertyExists) {
+      this.toastr.warning('!تم اضافة هذه الخاصية', 'تحذير');
+      return;
+    }
+
+    // Now, you can use element as a reference to the DOM element
+    // For example, you can modify its properties or add event listeners
+    if (element.value && this.selectedProperty) {
+      if (!this.selectedProduct.options)
+        this.selectedProduct.options = [];
+
+      let option = new Option();
+      option.id = this.selectedProduct.options.length + 1;
+      // option.isNew = true;
+      option.value = element.value;
+
+      option.property = new Property();
+      option.property.property_id = this.selectedProperty?.id;
+      option.property.id = option.property.property_id;
+      option.property.type = this.selectedProperty.type;
+      option.property.name = this.selectedProperty.name;
+      option.property.value = element.value;
+
+      this.selectedProduct.options.push(option);
+
+      element.textContent = '';
+    }
+    else
+      this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
+
+  }
+
   onUpdateButtonClick(departmentId: number, productId: number) {
     this.selectedDepartment = this.productsList.find(i => i.id == departmentId)!;
     if (this.selectedDepartment)
       this.selectedProduct = this.selectedDepartment.products.find(i => i.id == productId)!;
 
-
-
-    // Object.assign(this.tempSelectedProduct, this.selectedProduct);
+    // deep cloning of latest snapshot of this.selectedProduct
     this.tempSelectedProduct = JSON.parse(JSON.stringify(this.selectedProduct))
-    console.log(this.tempSelectedProduct)
 
     this.fetchDataIntoUpdateModal();
   }
 
   onUpdateConfirmationClick() {
-    console.log(this.requiredPropertiesIds)
-    // let allRequiredPropertiesExist = this.selectedProduct.options.some(i => this.requiredPropertiesIds.every(j => j == i.property.id));
-    // if (!allRequiredPropertiesExist){
-    //   this.toastr.warning('لم يتم ادخال كل الخصائص المطلوبة!', 'تحذير');
-    //   return;
-    // }
+    let allRequiredPropertiesExist = this.selectedProduct.options.some(i => this.requiredPropertiesIds.every(j => j == i.property.id));
+    if (!allRequiredPropertiesExist) {
+      this.toastr.warning('لم يتم ادخال كل الخصائص المطلوبة!', 'تحذير');
+      return;
+    }
 
     if (this.updateProductForm.valid) {
       this.isLoading = true;
@@ -163,7 +204,7 @@ export class ProductsManagementComponent implements OnInit, OnDestroy, AfterView
       requestDTO.refrigerator_id = parseInt(this.updateProductForm.controls.refrigerator.value!);
       requestDTO.category_id = parseInt(this.updateProductForm.controls.department.value!);
       requestDTO.options = this.selectedProduct.options;
-      requestDTO.properties = this.selectedProduct.properties;
+      requestDTO.properties = this.selectedProduct.options.map(i => i.property);
 
       this.updateProduct(requestDTO);
       this.updateModalCloseButtonRef.nativeElement.click();
@@ -241,7 +282,7 @@ export class ProductsManagementComponent implements OnInit, OnDestroy, AfterView
       (response: any) => {
         this.properties = response.data;
         this.requiredPropertiesIds = this.properties.filter(i => i.required_status).map(i => i.id);
-        console.log(this.properties)
+        this.selectedProperty = this.properties[0];
       }, (error: any) => {
         this.toastr.error(error.error.errors[0].value, error.error.message);
         this.isLoading = false;
@@ -289,6 +330,16 @@ export class ProductsManagementComponent implements OnInit, OnDestroy, AfterView
 
     this.productsList.map(i => {
 
+      // setup properties of products so on sending requests the values
+      // will be in the right format (as updating requires object with property_id, value)
+      // which are not supplied on retrieving the data initially, so I have to set them manually
+      i.products.map(i => {
+        i.options.map(i => {
+          i.property.property_id = i.property.id;
+          i.property.value = i.value
+        })
+      });
+
       i.id = index + 1;
       index++;
 
@@ -324,14 +375,25 @@ export class ProductsManagementComponent implements OnInit, OnDestroy, AfterView
       (response: any) => {
         this.toastr.success(response.message);
 
-        let updatedProduct = this.selectedDepartment.products.find(i => i.id == requestDTO.id);
+        let updatedProduct = this.selectedDepartment.products.find(i => i.id == requestDTO.id)!;
         Object.assign(updatedProduct!, response.data);
+
+        // setup options/properties objects of the product
+        // to be in the suitable formats for the upcoming update requests
+        updatedProduct.options.map(i => {
+          i.property.property_id = i.property.id;
+          i.property.value = i.value
+        });
+
         this.onPageChange(this.selectedDepartment.id, this.selectedDepartment.selectedPage);
 
         this.isLoading = false;
       }, (error: any) => {
         this.isLoading = false;
-        this.toastr.error(error.error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
       }
     );
 
@@ -358,13 +420,15 @@ export class ProductsManagementComponent implements OnInit, OnDestroy, AfterView
   }
 
   getProductInvoice() {
-    console.log(this.selectedProduct.id)
     let subscribtion = this.productsService.getProductInvoice(this.selectedProduct.id).subscribe(
       (response: any) => {
         window.open(response.data, "_blank");
 
       }, (error: any) => {
-        this.toastr.error(error.error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
       }
     );
 
@@ -376,7 +440,10 @@ export class ProductsManagementComponent implements OnInit, OnDestroy, AfterView
       (response: any) => {
         this.toastr.success(response.message);
       }, (error: any) => {
-        this.toastr.error(error.error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
       }
     );
 
