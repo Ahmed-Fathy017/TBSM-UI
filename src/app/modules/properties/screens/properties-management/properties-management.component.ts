@@ -112,7 +112,7 @@ export class PropertiesManagementComponent implements OnInit, OnDestroy {
 
   // functions
   getWarehouseProperties() {
-    let subscribtion = this.propertiesService.getWarehouseProperties().subscribe(
+    let subscribtion = this.propertiesService.getProperties().subscribe(
       (response: any) => {
         console.log(response)
         this.properties = response.data;
@@ -127,7 +127,7 @@ export class PropertiesManagementComponent implements OnInit, OnDestroy {
   }
 
   createWarehouseProperty(requestDTO: Property) {
-    let subscribtion = this.propertiesService.createWarehouseProperty(requestDTO).subscribe(
+    let subscribtion = this.propertiesService.createProperty(requestDTO).subscribe(
       (response: any) => {
         console.log(response)
         this.toastr.success(response.message);
@@ -154,7 +154,7 @@ export class PropertiesManagementComponent implements OnInit, OnDestroy {
   }
 
   updateWarehouseProperty(requestDTO: Property) {
-    let subscribtion = this.propertiesService.updateWarehouseProperty(requestDTO).subscribe(
+    let subscribtion = this.propertiesService.updateProperty(requestDTO).subscribe(
       (response: any) => {
         this.toastr.success(response.message);
 
@@ -171,7 +171,7 @@ export class PropertiesManagementComponent implements OnInit, OnDestroy {
   }
 
   deleteWarehouseProperty() {
-    let subscribtion = this.propertiesService.deleteWarehouseProperty(this.selectedProperty.id).subscribe(
+    let subscribtion = this.propertiesService.deleteProperty(this.selectedProperty.id).subscribe(
       (response: any) => {
         console.log(response)
         this.toastr.success(response.message);

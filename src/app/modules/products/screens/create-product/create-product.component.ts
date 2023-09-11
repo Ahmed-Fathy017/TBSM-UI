@@ -10,6 +10,7 @@ import { WarehousesService } from 'src/app/modules/warehouses/remote-services/wa
 import { Property } from '../../models/property';
 import { Product } from '../../models/product';
 import { ProductsService } from '../../remote-services/products.service';
+import { PropertiesService } from 'src/app/modules/properties/remote-services/properties.service';
 
 @Component({
   selector: 'app-create-product',
@@ -39,6 +40,9 @@ export class CreateProductComponent implements OnInit, OnDestroy {
   addedProperties: Property[] = [];
   selectedProperty: Property | null = null;
 
+  requiredPropertiesIds: number[] = [];
+
+
   createProductForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     department: new FormControl('', [Validators.required]),
@@ -58,7 +62,8 @@ export class CreateProductComponent implements OnInit, OnDestroy {
     private departmentsService: DepartmentsService,
     private refrigeratorsService: RefrigeratorsService,
     private warehouseService: WarehousesService,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private propertiesService: PropertiesService
   ) {
 
 
@@ -67,7 +72,7 @@ export class CreateProductComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getDepartments();
     this.getRefrigerators();
-    // this.getWarehouseProperties();
+    this.getProperties();
   }
 
   ngOnDestroy(): void {
@@ -82,17 +87,19 @@ export class CreateProductComponent implements OnInit, OnDestroy {
     // Access the element by its id
     let element = this.valueInput.nativeElement;
 
+    console.log(this.selectedProperty)
     let propertyExists = this.addedProperties.some(i => i.id == this.selectedProperty?.id)
     if (propertyExists) {
       this.toastr.warning('!تم اضافة هذه الخاصية', 'تحذير');
       return;
     }
+    console.log(this.addedProperties)
 
     // Now, you can use element as a reference to the DOM element
     // For example, you can modify its properties or add event listeners
     if (element.value && this.selectedProperty) {
       let property = new Property();
-      property.property_id = this.addedProperties.length + 1;
+      property.property_id = this.selectedProperty?.id;
       property.id = property.property_id;
       property.type = this.selectedProperty.type;
       property.name = this.selectedProperty.name;
@@ -119,6 +126,13 @@ export class CreateProductComponent implements OnInit, OnDestroy {
 
   onCreateButtonClick() {
 
+    let allRequiredPropertiesExist = this.addedProperties.some(i => this.requiredPropertiesIds.every(j => j == i.property_id));
+    if (!allRequiredPropertiesExist){
+      this.toastr.warning('لم يتم ادخال كل الخصائص المطلوبة!', 'تحذير');
+      return;
+    }
+
+    console.log(allRequiredPropertiesExist)
     if (this.createProductForm.valid) {
       let requestDTO = new Product();
 
@@ -170,18 +184,20 @@ export class CreateProductComponent implements OnInit, OnDestroy {
     this.subscription.add(subscription);
   }
 
-  // getWarehouseProperties() {
-  //   let subscription = this.warehouseService.getWarehouseProperties().subscribe(
-  //     (response: any) => {
-  //       this.properties = response.data;
-  //       this.selectedProperty = this.properties[0];
-  //     }, (error: any) => {
-  //       this.toastr.error(error.error.errors[0].value, error.error.message);
-  //     }
-  //   );
+  getProperties() {
+    let subscription = this.propertiesService.getProperties().subscribe(
+      (response: any) => {
+        this.properties = response.data;
+        this.requiredPropertiesIds = this.properties.filter(i => i.required_status).map(i => i.id);
+        console.log(this.requiredPropertiesIds)
+        this.selectedProperty = this.properties[0];
+      }, (error: any) => {
+        this.toastr.error(error.error.errors[0].value, error.error.message);
+      }
+    );
 
-  //   this.subscription.add(subscription);
-  // }
+    this.subscription.add(subscription);
+  }
 
   createProduct(requestDTO: Product) {
     let subscription = this.productsService.createProduct(requestDTO).subscribe(
