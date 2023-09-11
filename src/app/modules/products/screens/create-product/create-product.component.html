@@ -72,12 +72,14 @@
             </div>
 
             <app-page-header [pageTitle]="secondPageTitle"></app-page-header>
+            <app-loading *ngIf="isLoading"></app-loading>
 
-            <div class="container ">
+
+            <div class="container " *ngIf="!isLoading">
                 <div class="row">
                     <div class="col-md-6 col-lg-6 col-xl-6">
                         <label class="form-check-label mb-1" for="properties">
-                            {{'CreateProductScreen.ExternalSupply' | translate}}
+                            {{'CreateProductScreen.Properties' | translate}}
                         </label>
                         <select name="properties" id="properties" class="form-select"
                             (change)="onPropetyOptionChange($event)">

@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
@@ -12,13 +12,15 @@ import { DepartmentsService } from 'src/app/modules/departments/remote-services/
 import { Refrigerator } from 'src/app/modules/refrigerators/models/refrigerator';
 import { SupplyChainsService } from 'src/app/modules/supply-chains/remote-services/supply-chains.service';
 import { AddOrder } from 'src/app/modules/supply-chains/models/add-order';
+import { PropertiesService } from 'src/app/modules/properties/remote-services/properties.service';
+import { Property } from '../../models/property';
 
 @Component({
   selector: 'app-products-management',
   templateUrl: './products-management.component.html',
   styleUrls: ['./products-management.component.css']
 })
-export class ProductsManagementComponent implements OnInit, OnDestroy {
+export class ProductsManagementComponent implements OnInit, OnDestroy, AfterViewInit {
 
   subscription = new Subscription();
 
@@ -26,6 +28,7 @@ export class ProductsManagementComponent implements OnInit, OnDestroy {
   coloredPageTitle: string = 'ProductsManagmentScreen.ColoredPrimaryTitle'
   secondPageTitle: string = '';
 
+  @ViewChild('editModal') editModal!: ElementRef;
   @ViewChild('updateModalCloseButtonRef') updateModalCloseButtonRef!: ElementRef;
   @ViewChild('supplyModalCloseButtonRef') supplyModalCloseButtonRef!: ElementRef;
 
@@ -45,6 +48,7 @@ export class ProductsManagementComponent implements OnInit, OnDestroy {
   productsList: Department[] = [];
   selectedDepartment: Department = new Department();
   selectedProduct: Product = new Product();
+  tempSelectedProduct: Product = new Product();
   selectedProductIndex: number = -1;
 
   departments: Department[] = [];
@@ -62,13 +66,19 @@ export class ProductsManagementComponent implements OnInit, OnDestroy {
     quantity: new FormControl('', [Validators.required]),
   });
 
+
+  properties: Property[] = [];
+  requiredPropertiesIds: number[] = [];
+
   // constructor
   constructor(
     private toastr: ToastrService,
     private productsService: ProductsService,
     private refrigeratorsService: RefrigeratorsService,
     private departmentsService: DepartmentsService,
-    private supplyChainsService: SupplyChainsService) { }
+    private supplyChainsService: SupplyChainsService,
+    private propertiesService: PropertiesService,
+    private renderer: Renderer2) { }
 
 
   // events
@@ -76,6 +86,12 @@ export class ProductsManagementComponent implements OnInit, OnDestroy {
     this.getProducts();
     this.getDepartments();
     this.getRefrigerators();
+    this.getProperties();
+
+  }
+
+  ngAfterViewInit() {
+    this.setupModalCloseEventActions();
   }
 
   ngOnDestroy(): void {
@@ -119,10 +135,23 @@ export class ProductsManagementComponent implements OnInit, OnDestroy {
     if (this.selectedDepartment)
       this.selectedProduct = this.selectedDepartment.products.find(i => i.id == productId)!;
 
+
+
+    // Object.assign(this.tempSelectedProduct, this.selectedProduct);
+    this.tempSelectedProduct = JSON.parse(JSON.stringify(this.selectedProduct))
+    console.log(this.tempSelectedProduct)
+
     this.fetchDataIntoUpdateModal();
   }
 
   onUpdateConfirmationClick() {
+    console.log(this.requiredPropertiesIds)
+    // let allRequiredPropertiesExist = this.selectedProduct.options.some(i => this.requiredPropertiesIds.every(j => j == i.property.id));
+    // if (!allRequiredPropertiesExist){
+    //   this.toastr.warning('لم يتم ادخال كل الخصائص المطلوبة!', 'تحذير');
+    //   return;
+    // }
+
     if (this.updateProductForm.valid) {
       this.isLoading = true;
 
@@ -133,6 +162,8 @@ export class ProductsManagementComponent implements OnInit, OnDestroy {
       requestDTO.quantity = parseInt(this.updateProductForm.controls.quantity.value!);
       requestDTO.refrigerator_id = parseInt(this.updateProductForm.controls.refrigerator.value!);
       requestDTO.category_id = parseInt(this.updateProductForm.controls.department.value!);
+      requestDTO.options = this.selectedProduct.options;
+      requestDTO.properties = this.selectedProduct.properties;
 
       this.updateProduct(requestDTO);
       this.updateModalCloseButtonRef.nativeElement.click();
@@ -152,10 +183,6 @@ export class ProductsManagementComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.deleteProduct();
   }
-
-  // onRemovePropertyButtonClick(index: number) {
-  //   this.selectedProduct.properties?.splice(index, 1);
-  // }
 
   onProductSupplyDemandButtonClick(departmentId: number, productId: number) {
     this.selectedDepartment = this.productsList.find(i => i.id == departmentId)!;
@@ -182,6 +209,15 @@ export class ProductsManagementComponent implements OnInit, OnDestroy {
     this.getProductInvoice();
   }
 
+  onUpdateProperty(optionId: number, event: any) {
+    let updatedProperty = this.selectedProduct.options?.find(i => i.id == optionId)!;
+    updatedProperty.value = event.target.value;
+  }
+
+  onDeleteProperty(index: number) {
+    this.selectedProduct.options.splice(index, 1);
+  }
+
   // funtions
   getProducts() {
     let subscription = this.productsService.getProducts().subscribe(
@@ -198,6 +234,21 @@ export class ProductsManagementComponent implements OnInit, OnDestroy {
     );
 
     this.subscription.add(subscription);
+  }
+
+  getProperties() {
+    let subscribtion = this.propertiesService.getProperties().subscribe(
+      (response: any) => {
+        this.properties = response.data;
+        this.requiredPropertiesIds = this.properties.filter(i => i.required_status).map(i => i.id);
+        console.log(this.properties)
+      }, (error: any) => {
+        this.toastr.error(error.error.errors[0].value, error.error.message);
+        this.isLoading = false;
+      }
+    );
+
+    this.subscription.add(subscribtion);
   }
 
   getDepartments() {
@@ -250,14 +301,21 @@ export class ProductsManagementComponent implements OnInit, OnDestroy {
     });
   }
 
+  setupModalCloseEventActions() {
+    const modalElement = this.editModal.nativeElement;
+    this.renderer.listen(modalElement, 'hidden.bs.modal', () => {
+      // This code will be executed when the modal is closed
+      // Perform any actions you want when the modal is closed here
+      Object.assign(this.selectedProduct, this.tempSelectedProduct);
+    });
+  }
+
   fetchDataIntoUpdateModal() {
     if (this.selectedProduct) {
-      // this.selectedWarehouse.package_id = this.selectedWarehouse.package.id;
       this.updateProductForm.controls.name.setValue(this.selectedProduct.name);
       this.updateProductForm.controls.quantity.setValue(String(this.selectedProduct.quantity));
       this.updateProductForm.controls.refrigerator.setValue(String(this.selectedProduct.refrigerator.id));
       this.updateProductForm.controls.department.setValue(String(this.selectedProduct.category.id));
-
     }
   }
 

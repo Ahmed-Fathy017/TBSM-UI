@@ -42,6 +42,10 @@ i {
     cursor: pointer;
 }
 
+.property-deletion {
+    font-size: 0.7rem;
+}
+
 @media only screen and (max-width: 767px) {
 
     /* Styles for screens less than 820 pixels wide */

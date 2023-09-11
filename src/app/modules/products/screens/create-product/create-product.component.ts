@@ -70,6 +70,7 @@ export class CreateProductComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.getDepartments();
     this.getRefrigerators();
     this.getProperties();
@@ -191,8 +192,10 @@ export class CreateProductComponent implements OnInit, OnDestroy {
         this.requiredPropertiesIds = this.properties.filter(i => i.required_status).map(i => i.id);
         console.log(this.requiredPropertiesIds)
         this.selectedProperty = this.properties[0];
+        this.isLoading = false;
       }, (error: any) => {
         this.toastr.error(error.error.errors[0].value, error.error.message);
+        this.isLoading = false;
       }
     );
 

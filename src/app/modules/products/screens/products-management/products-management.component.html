@@ -143,7 +143,7 @@
 <!-- modals -->
 
 <!-- edit modal -->
-<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true" #editModal>
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header d-flex justify-content-between">
@@ -192,6 +192,19 @@
                             </option>
                         </select>
                     </div>
+
+                    <div class="col-md-12 col-lg-12 col-xl-12 mb-2" *ngFor="let option of selectedProduct.options; let i = index;">
+
+                        <div class="d-flex justify-content-between ">
+                            <label for="quantity" class="mb-1 d-flex">{{option.property.name}}</label>
+                            <i class="fa-solid fa-x bg-danger p-1 rounded-1 h-50 text-white property-deletion"
+                                (click)="onDeleteProperty(i)"></i>
+                        </div>
+                        <input [id]="'quantity'+ option.id" class="form-control" [type]="option.property.type"
+                            [value]="option.value" (change)="onUpdateProperty(option.id, $event)">
+                    </div>
+
+                    
 
                 </form>
             </div>
