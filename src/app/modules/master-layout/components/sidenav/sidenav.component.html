@@ -7,7 +7,7 @@
         </button> -->
     </div>
 
-    <ul class="sidenav-nav mt-4">
+    <!-- <ul class="sidenav-nav mt-4">
         <li class="sidenav-nav-item " *ngFor="let data of navData">
             <a href="" class="sidenav-nav-link"
                 [ngClass]="lang === 'ar'? 'sidenav-nav-link-padding-right': 'sidenav-nav-link-padding-left'"
@@ -17,6 +17,44 @@
                 <span class="tooltiptext p-2" @fadeInOut *ngIf="!collapsed">{{data.label | translate}}</span>
 
             </a>
+
+        </li>
+    </ul> -->
+
+    <ul class="sidenav-nav mt-4">
+        <li class="sidenav-nav-item " *ngFor="let data of navData">
+            <a  class="sidenav-nav-link"
+                (click)="handleClick(data)"
+                *ngIf="data.items && data.items.length > 0"
+                [ngClass]="lang === 'ar'? 'sidenav-nav-link-padding-right': 'sidenav-nav-link-padding-left'">
+                <i class="sidenav-link-icon" [class]="data.icon"></i>
+                <span class="sidenav-link-text m-0" @fadeInOut *ngIf="collapsed">{{data.label | translate}}</span>
+                <i *ngIf="data.items && collapsed" class="menu-collapse-item"
+                    [ngClass]="!data.expanded? 'fa-solid fa-angle-left' : 'fa-solid fa-angle-down'"></i>
+                <span class="tooltiptext p-2" @fadeInOut *ngIf="!collapsed">{{data.label | translate}}</span>
+                
+            </a>
+
+            <a  class="sidenav-nav-link"
+                *ngIf="!data.items || (data.items && data.items.length === 0)"
+                [ngClass]="lang === 'ar'? 'sidenav-nav-link-padding-right': 'sidenav-nav-link-padding-left'"
+                [routerLink]="data.routeLink" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <i class="sidenav-link-icon" [class]="data.icon"></i>
+                <span class="sidenav-link-text m-0" @fadeInOut *ngIf="collapsed">{{data.label | translate}}</span>
+                <span class="tooltiptext p-2" @fadeInOut *ngIf="!collapsed">{{data.label | translate}}</span>
+
+            </a>
+
+            <!-- removed collapsed flag from ul from the div -->
+            <div *ngIf="data.items && data.items.length">
+                <app-sublevel-menu
+                    [data]="data"
+                    [collapsed]="collapsed"
+                    [multiple]="multiple"
+                    [expanded]="data.expanded"
+                ></app-sublevel-menu>
+            </div>
+
         </li>
     </ul>
 </div>

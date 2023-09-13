@@ -7,10 +7,30 @@
         "Home": "الرئيسية",
         "Warehouses": "المستودعات",
         "Packages": "الباقات",
-        "Roles": "الادوار",
-        "Departments": "الاقسام",
+        "Users": "المستخدمين",
+
+        "Management" :"الادارة",
         "Refrigerators": "الثلاجات",
-        "Users": "المستخدمين"
+        "Departments": "الاقسام",
+        "Properties": "الخصائص",
+
+        "Roles": "الادوار",
+        "AllRoles": "جميع الادوار",
+        "CreateRole": "انشاء دور",
+
+        "Products" : "المنتجات",
+        "AllProducts": "جميع المنتجات",
+        "CreateProduct": "انشاء منتج",
+        "ًWithdrawProduct": "سحب منتج",
+
+        "SupplyChains": "سلاسل الامداد",
+        "InternalSupplyRequests": "طلبات الامداد الداخلي",
+        "ExternalSupplyRequests": "طلبات الامداد الخارجي",
+        "MySupplyRequests": "طلباتي",
+
+        "OperationLogs": "سجل العمليات",
+        "AddOperation":"عملية اضافة",
+        "WithdrawOperation":"عملية سحب"
     },
     "AdminDashboardScreen": {
         "Home": "الرئيسية"

@@ -24,6 +24,7 @@ import { SupplyChainsModule } from '../supply-chains/supply-chains.module';
 import { SupplyChainsService } from '../supply-chains/remote-services/supply-chains.service';
 import { OperationLogsModule } from '../operation-logs/operation-logs.module';
 import { PropertiesModule } from '../properties/properties.module';
+import { SublevelMenuComponent } from './components/sidenav/sublevel-menu.component';
 
 
 
@@ -32,7 +33,8 @@ import { PropertiesModule } from '../properties/properties.module';
     MasterLayoutComponent,
     NavBarComponent,
     SideNavComponent,
-    SidenavComponent
+    SidenavComponent,
+    SublevelMenuComponent
   ],
   imports: [
     CommonModule,

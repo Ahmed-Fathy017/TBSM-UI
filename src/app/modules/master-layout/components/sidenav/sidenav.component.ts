@@ -3,6 +3,7 @@ import { adminNavbarData, userNavbarData } from '../../models/nav-data';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 import { UserTypes } from 'src/app/modules/authentication/models/user-types';
+import { INavbarData } from '../../models/helper';
 
 @Component({
   selector: 'app-sidenav',
@@ -30,6 +31,7 @@ export class SidenavComponent implements OnInit {
   collapsed = false;
   screenWidth = 0;
   navData = adminNavbarData;
+  multiple: boolean = false;
   lang!: string;
 
   constructor(private localService: LocalService) {
@@ -65,6 +67,17 @@ export class SidenavComponent implements OnInit {
   closeSideNav() {
     this.collapsed = false;
     this.onToggleSideNav.emit({ collapsed: this.collapsed, screenWidth: this.screenWidth });
+  }
+
+  handleClick(item: INavbarData): void {
+    if (!this.multiple) {
+      for (let modelItem of this.navData) {
+        if (item !== modelItem && modelItem.expanded) {
+          modelItem.expanded = false;
+        }
+      }
+    }
+    item.expanded = !item.expanded;
   }
 
 }

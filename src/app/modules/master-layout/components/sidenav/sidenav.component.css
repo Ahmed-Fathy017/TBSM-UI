@@ -81,6 +81,8 @@
             height: 2.5rem;
             color: #fff;
             text-decoration: none;
+        /* min-width: 20rem; */
+
 
             /* border-radius: 0.625rem; */
             transition: all .3s ease;
@@ -105,6 +107,15 @@
                 font-size: 0.95rem;
             }
         }
+
+        .sidenav-nav-link:hover {
+            /* background-color: #fff; */
+            /* color: #000; */
+
+            .menu-collapse-icon {
+                color: #000;
+            }
+        }
     }
 }
 
@@ -120,9 +131,68 @@
     background-color: #F3F6F92B;
 
     /* .sidenav-link-icon,
-    .sidenav-link-text {
+    .sidenav-link-text,
+    .sidenav-link-icon,
+    .menu-collapse-icon {
         color: #100F37;
     } */
+}
+
+.active-sublevel {
+    background-color: #F3F6F92B;
+}
+
+.menu-collapse-item {
+    font-size: 12px;
+    width: 2rem;
+    min-width: 2rem;
+    margin: auto 0.5rem auto auto;
+    text-align: end;
+    color: #f3f3f3;
+}
+
+.sublevel-nav {
+    list-style: none;
+    /* margin-left: 10px; */
+    padding: 0;
+
+    .sublevel-nav-item {
+        .sublevel-nav-link {
+            display: flex;
+            align-items: center;
+            /* justify-content: center; */
+            height: 2.5rem;
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.7rem;
+            padding:0 1rem;
+        /* min-width: 18rem; */
+
+
+            /* border-radius: 0.625rem; */
+            transition: all .3s ease;
+
+            .sublevel-link-icon {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 12px;
+                width: 2rem;
+                min-width: 2rem;
+                margin: 0 0.5rem;
+                text-align: center;
+            }
+
+            .sublevel-link-text {
+                /* margin-left: 0.9rem; */
+                font-size: 0.8rem;
+            }
+        }
+
+        .sublevel-nav-link:hover {
+            background-color: #F3F6F92B;
+        }
+    }
 }
 
 img {
@@ -161,4 +231,3 @@ img {
     visibility: visible;
     /* transition: all .3s ease; */
 }
-

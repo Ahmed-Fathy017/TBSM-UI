@@ -7,10 +7,30 @@
         "Home": "Home",
         "Warehouses": "Warehouses",
         "Packages": "Packages",
-        "Roles": "Roles",
-        "Departments": "Departments",
+        "Users": "Users",
+
+        "Management" :"Management",
         "Refrigerators": "Refrigerators",
-        "Users": "Users"
+        "Departments": "Departments",
+        "Properties": "Properties",
+
+        "Roles": "Roles",
+        "AllRoles": "All Roles",
+        "CreateRole": "Create Role",
+        
+        "Products" : "Products",
+        "AllProducts": "All Products",
+        "CreateProduct": "Create Product",
+        "ًWithdrawProduct": "Withdraw Product",
+
+        "SupplyChains": "Supply Chains",
+        "InternalSupplyRequests": "Internal Supply Requests",
+        "ExternalSupplyRequests": "External Supply Requests",
+        "MySupplyRequests": "My Supply Requests",
+
+        "OperationLogs": "Operation Logs",
+        "AddOperation":"Adding Operation",
+        "WithdrawOperation":"Withdrawal Operation"
     },
     "AdminDashboardScreen": {
         "Home": "Home"
