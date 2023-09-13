@@ -27,22 +27,22 @@ export const userNavbarData: INavbarData[] = [
 
     },
     {
-        routeLink: 'refrigerators/departments/properties',
+        routeLink: 'management',
         icon: 'fa-solid fa-gear',
         label: 'SideNav.Management',
         items: [
             {
-                routeLink: 'refrigerators',
+                routeLink: 'management/refrigerators',
                 icon: 'fa-solid fa-snowflake',
                 label: 'SideNav.Refrigerators'
             },
             {
-                routeLink: 'departments',
+                routeLink: 'management/departments',
                 icon: 'fa-solid fa-border-all',
                 label: 'SideNav.Departments'
             },
             {
-                routeLink: 'properties',
+                routeLink: 'management/properties',
                 icon: 'fa-solid fa-gears',
                 label: 'SideNav.Properties'
             }

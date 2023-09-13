@@ -37,11 +37,11 @@ const routes: Routes = [
         path: 'supply-chains',
         loadChildren: () => import('../supply-chains/supply-chains-routing.module').then(m => m.SupplyChainsRoutingModule)
       },
-      { path: 'departments', component: DepartmentsManagementComponent },
-      { path: 'refrigerators', component: RefrigeratorsManagementComponent },
+      { path: 'management/departments', component: DepartmentsManagementComponent },
+      { path: 'management/refrigerators', component: RefrigeratorsManagementComponent },
+      { path: 'management/properties', component: PropertiesManagementComponent },
       { path: 'users', component: UsersManagementComponent },
       { path: 'operation-logs', component: OperationLogsComponent },
-      { path: 'properties', component: PropertiesManagementComponent }
     ]
   },
 

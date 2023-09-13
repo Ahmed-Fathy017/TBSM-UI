@@ -148,7 +148,7 @@
     width: 2rem;
     min-width: 2rem;
     margin: auto 0.5rem auto auto;
-    text-align: end;
+    text-align: start;
     color: #f3f3f3;
 }
 
