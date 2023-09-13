@@ -23,6 +23,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
           <i *ngIf="item.items && collapsed" class="menu-collapse-icon"
             [ngClass]="!item.expanded ? 'fal fa-angle-right' : 'fal fa-angle-down'"
           > </i>
+
+
         </a>
         <a class="sublevel-nav-link"
           *ngIf="!item.items || (item.items && item.items.length === 0)"
@@ -32,6 +34,9 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
         >
           <i class="sublevel-link-icon " [class]="item.icon"></i>
           <span class="sublevel-link-text" *ngIf="collapsed">{{item.label | translate}}</span>
+
+          <span class="tooltiptext p-2" @fadeInOut *ngIf="!collapsed">{{item.label | translate}}</span>
+
         </a>
         <div *ngIf="item.items && item.items.length > 0">
           <app-sublevel-menu

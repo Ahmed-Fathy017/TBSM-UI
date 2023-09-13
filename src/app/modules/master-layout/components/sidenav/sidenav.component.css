@@ -219,7 +219,9 @@ img {
     text-align: center;
     border-radius: 4px;
     font-size: 0.9rem;
-
+    /* width: 12rem; */
+    min-width: 9rem;
+    font-size: 0.8rem;
     /* Position the tooltip */
     position: relative;
     z-index: 1;
@@ -228,6 +230,10 @@ img {
 }
 
 .sidenav-nav-item:hover .tooltiptext {
+    visibility: visible;
+    /* transition: all .3s ease; */
+}
+.sublevel-nav-item:hover .tooltiptext {
     visibility: visible;
     /* transition: all .3s ease; */
 }
