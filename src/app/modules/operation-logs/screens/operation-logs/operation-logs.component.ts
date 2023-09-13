@@ -64,6 +64,8 @@ export class OperationLogsComponent implements OnInit, OnDestroy {
       requestDTO.type = this.operationLogsForm.controls.type.value;
       requestDTO.is_export = false;
 
+      this.isLoading = true;
+
       this.getOperationLogs(requestDTO);
     } else
       this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
@@ -133,8 +135,10 @@ export class OperationLogsComponent implements OnInit, OnDestroy {
 
         if (requestDTO.is_export)
           window.open(response.data, "_blank");
-        else
+        else {
           this.logs.data = response.data;
+          this.setupPagination();
+        }
 
 
         this.isProcessing = false;

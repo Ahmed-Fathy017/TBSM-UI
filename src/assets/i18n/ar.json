@@ -118,7 +118,10 @@
         "ColoredPrimaryTitle": "جميع المنتجات",
         "EntityName": "المنتج",
         "Filter": "تصنيف",
-        "Value": "القيمة"
+        "Value": "القيمة",
+        "NameSearch": "الاسم",
+        "PropertySearch":"خاصية",
+        "OtherSearch":"اخرى"
     },
     "CreateProductScreen": {
         "PrimaryTitle": "الرئيسية / المنتجات /",

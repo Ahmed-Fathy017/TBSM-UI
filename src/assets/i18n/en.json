@@ -119,7 +119,10 @@
         "ColoredPrimaryTitle": "All Products",
         "EntityName": "Product",
         "Filter": "Filter",
-        "Value": "Value"
+        "Value": "Value",
+        "NameSearch": "Name",
+        "PropertySearch":"Property",
+        "OtherSearch":"Other"
     },
     "CreateProductScreen": {
         "PrimaryTitle": "Home / Products /",

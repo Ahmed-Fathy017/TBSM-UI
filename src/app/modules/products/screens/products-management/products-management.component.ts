@@ -15,6 +15,8 @@ import { AddOrder } from 'src/app/modules/supply-chains/models/add-order';
 import { PropertiesService } from 'src/app/modules/properties/remote-services/properties.service';
 import { Property } from '../../models/property';
 import { Option } from '../../models/option'
+import { GetProductsRequest } from '../../models/get-products-request';
+import { ProductSearchItems } from '../../models/product-search-items';
 
 @Component({
   selector: 'app-products-management',
@@ -34,7 +36,6 @@ export class ProductsManagementComponent implements OnInit, OnDestroy, AfterView
   @ViewChild('supplyModalCloseButtonRef') supplyModalCloseButtonRef!: ElementRef;
   @ViewChild('valueInput', { static: false }) valueInput!: ElementRef;
 
-
   // page loading
   isLoading: boolean = false;
 
@@ -47,6 +48,8 @@ export class ProductsManagementComponent implements OnInit, OnDestroy, AfterView
     filter: new FormControl(''),
     value: new FormControl('')
   });
+
+  searchItems = ProductSearchItems;
 
   productsList: Department[] = [];
   selectedDepartment: Department = new Department();
@@ -87,7 +90,7 @@ export class ProductsManagementComponent implements OnInit, OnDestroy, AfterView
 
   // events
   ngOnInit(): void {
-    this.getProducts();
+    this.getProducts(new GetProductsRequest());
     this.getDepartments();
     this.getRefrigerators();
     this.getProperties();
@@ -100,6 +103,15 @@ export class ProductsManagementComponent implements OnInit, OnDestroy, AfterView
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  onSearchButtonClick() {
+    let requestDTO = new GetProductsRequest();
+    requestDTO.filter_type = this.searchProductForm.controls.filter.value!;
+    requestDTO.filter_value = this.searchProductForm.controls.value.value!;
+
+    this.isLoading = true;
+    this.getProducts(requestDTO);
   }
 
   onPageChange(id: number, pageNumber: number) {
@@ -260,8 +272,8 @@ export class ProductsManagementComponent implements OnInit, OnDestroy, AfterView
   }
 
   // funtions
-  getProducts() {
-    let subscription = this.productsService.getProducts().subscribe(
+  getProducts(requestDTO: GetProductsRequest) {
+    let subscription = this.productsService.getProducts(requestDTO).subscribe(
       (response: any) => {
 
         this.productsList = response.data;

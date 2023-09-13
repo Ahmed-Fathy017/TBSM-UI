@@ -72,6 +72,28 @@ export const userNavbarData: INavbarData[] = [
     },
     {
         routeLink: '',
+        icon: 'fa-solid fa-box',
+        label: 'SideNav.Products',
+        items: [
+            {
+                routeLink: 'products',
+                icon: 'fa-solid fa-boxes-stacked',
+                label: 'SideNav.AllProducts'
+            },
+            {
+                routeLink: 'products/create',
+                icon: 'fa-solid fa-plus',
+                label: 'SideNav.CreateProduct'
+            },
+            {
+                routeLink: 'products/withdraw',
+                icon: 'fa-solid fa-minus',
+                label: 'SideNav.WithdrawProduct'
+            }
+        ]
+    },
+    {
+        routeLink: '',
         icon: 'fa-solid fa-parachute-box',
         label: 'SideNav.SupplyChains',
         items: [
