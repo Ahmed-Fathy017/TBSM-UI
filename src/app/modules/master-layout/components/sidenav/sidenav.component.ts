@@ -4,6 +4,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 import { UserTypes } from 'src/app/modules/authentication/models/user-types';
 import { INavbarData } from '../../models/helper';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidenav',
@@ -34,7 +35,8 @@ export class SidenavComponent implements OnInit {
   multiple: boolean = false;
   lang!: string;
 
-  constructor(private localService: LocalService) {
+  constructor(private localService: LocalService,
+    private router: Router) {
 
     if (localService.getData('type') === UserTypes.ADMIN)
       this.navData = adminNavbarData;
@@ -78,6 +80,10 @@ export class SidenavComponent implements OnInit {
       }
     }
     item.expanded = !item.expanded;
+  }
+
+  getActiveClass(data: INavbarData) : string {
+    return this.router.url.includes(data.routeLink) ? 'active': '';
   }
 
 }

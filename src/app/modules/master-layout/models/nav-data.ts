@@ -27,7 +27,7 @@ export const userNavbarData: INavbarData[] = [
 
     },
     {
-        routeLink: '',
+        routeLink: 'refrigerators/departments/properties',
         icon: 'fa-solid fa-gear',
         label: 'SideNav.Management',
         items: [
@@ -71,7 +71,7 @@ export const userNavbarData: INavbarData[] = [
         label: 'SideNav.Users'
     },
     {
-        routeLink: '',
+        routeLink: 'products',
         icon: 'fa-solid fa-box',
         label: 'SideNav.Products',
         items: [
@@ -93,7 +93,7 @@ export const userNavbarData: INavbarData[] = [
         ]
     },
     {
-        routeLink: '',
+        routeLink: 'supply-chains',
         icon: 'fa-solid fa-parachute-box',
         label: 'SideNav.SupplyChains',
         items: [

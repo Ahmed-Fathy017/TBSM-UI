@@ -26,7 +26,8 @@
             <a  class="sidenav-nav-link"
                 (click)="handleClick(data)"
                 *ngIf="data.items && data.items.length > 0"
-                [ngClass]="lang === 'ar'? 'sidenav-nav-link-padding-right': 'sidenav-nav-link-padding-left'">
+                [ngClass]="lang === 'ar'? 'sidenav-nav-link-padding-right': 'sidenav-nav-link-padding-left'"
+                [class]="getActiveClass(data)">
                 <i class="sidenav-link-icon" [class]="data.icon"></i>
                 <span class="sidenav-link-text m-0" @fadeInOut *ngIf="collapsed">{{data.label | translate}}</span>
                 <i *ngIf="data.items && collapsed" class="menu-collapse-item"

@@ -139,7 +139,8 @@
 }
 
 .active-sublevel {
-    background-color: #F3F6F92B;
+    /* background-color: #F3F6F92B; */
+    opacity: 1 !important;
 }
 
 .menu-collapse-item {
@@ -166,6 +167,7 @@
             text-decoration: none;
             font-size: 0.7rem;
             padding:0 1rem;
+            opacity: 0.6;
         /* min-width: 18rem; */
 
 
@@ -190,7 +192,12 @@
         }
 
         .sublevel-nav-link:hover {
-            background-color: #F3F6F92B;
+            /* background-color: #F3F6F92B; */
+            opacity: 1;
+
+            .active {
+                background-color: none !important;
+            }
         }
     }
 }
@@ -229,7 +236,7 @@ img {
     right: 20px;
 }
 
-.sidenav-nav-item:hover .tooltiptext {
+.sidenav-nav-item:hover:not(:has(.sublevel-nav-item:hover)) .tooltiptext {
     visibility: visible;
     /* transition: all .3s ease; */
 }
