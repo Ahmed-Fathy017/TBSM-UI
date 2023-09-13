@@ -17,6 +17,8 @@ import { Property } from '../../models/property';
 import { Option } from '../../models/option'
 import { GetProductsRequest } from '../../models/get-products-request';
 import { ProductSearchItems } from '../../models/product-search-items';
+import { ProductFilters } from '../../models/products-filter';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-products-management',
@@ -50,6 +52,8 @@ export class ProductsManagementComponent implements OnInit, OnDestroy, AfterView
   });
 
   searchItems = ProductSearchItems;
+  productFilters = ProductFilters;
+  filter: string = '';
 
   productsList: Department[] = [];
   selectedDepartment: Department = new Department();
@@ -85,12 +89,19 @@ export class ProductsManagementComponent implements OnInit, OnDestroy, AfterView
     private departmentsService: DepartmentsService,
     private supplyChainsService: SupplyChainsService,
     private propertiesService: PropertiesService,
-    private renderer: Renderer2) { }
+    private renderer: Renderer2,
+    private activatedRoute: ActivatedRoute) { }
 
 
   // events
   ngOnInit(): void {
-    this.getProducts(new GetProductsRequest());
+
+    this.filter = this.productFilters.get(this.activatedRoute.snapshot.params.filter)?? '';
+
+    let requestDTO = new GetProductsRequest();
+    requestDTO.product_filter = this.filter;
+
+    this.getProducts(requestDTO);
     this.getDepartments();
     this.getRefrigerators();
     this.getProperties();
@@ -109,6 +120,7 @@ export class ProductsManagementComponent implements OnInit, OnDestroy, AfterView
     let requestDTO = new GetProductsRequest();
     requestDTO.filter_type = this.searchProductForm.controls.filter.value!;
     requestDTO.filter_value = this.searchProductForm.controls.value.value!;
+    requestDTO.product_filter = this.filter;
 
     this.isLoading = true;
     this.getProducts(requestDTO);

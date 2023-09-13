@@ -6,6 +6,7 @@ import { WithdrawProductComponent } from './screens/withdraw-product/withdraw-pr
 
 const routes: Routes = [
   { path: '', component: ProductsManagementComponent },
+  { path: ':filter', component: ProductsManagementComponent },
   { path: 'create', component: CreateProductComponent },
   { path: 'withdraw', component: WithdrawProductComponent }
 ];

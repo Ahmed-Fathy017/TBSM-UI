@@ -5,4 +5,5 @@ export interface WarehouseDataCard {
     backgroundColor: string;
     iconClass: string;
     visibility: string;
+    filter: string;
 }

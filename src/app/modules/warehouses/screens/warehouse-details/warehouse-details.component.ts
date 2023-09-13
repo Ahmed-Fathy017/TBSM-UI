@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { WarehousesService } from '../../remote-services/warehouses.service';
 import { Warehouse } from '../../models/warehouse';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 import { UserTypes } from 'src/app/modules/authentication/models/user-types';
@@ -29,18 +29,14 @@ export class WarehouseDetailsComponent implements OnInit, OnDestroy {
 
   cards: WarehouseDataCard[] = [];
 
-  logs: string[] = [
-    'قام احمد بسحب المنتج شيبس عدد 5 بتاريخ 2/7/2023',
-    'قام خالد بادخال منتج جديد بأسم حاويات عدد 1 بتاريخ 1/7/2023',
-    'قام خالد بالموافقة على طلب سلاسل امداد خارجية من المستودع الطائر بمنتج شيبس عدد 1',
-    'قام المستودع الطائر بطلب سلاسل امداد خارجية منتج شيبس عدد 1'
-  ]
+  logs: string[] = [];
 
   constructor(
     private warehousesService: WarehousesService,
     private route: ActivatedRoute,
     private toastr: ToastrService,
-    private localService: LocalService) { }
+    private localService: LocalService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.warehouseId = parseInt(this.route.snapshot.paramMap.get('id')!);
@@ -49,6 +45,10 @@ export class WarehouseDetailsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  onCardClick(filter: string) {
+    this.router.navigate([`products/${filter}`]);
   }
 
   getWarehouse() {
@@ -60,6 +60,7 @@ export class WarehouseDetailsComponent implements OnInit, OnDestroy {
       (response: any) => {
         console.log(response)
         this.cards = response.data;
+        this.logs = response.events;
         
         this.setupScreenView();
         this.isLoadingWarehouseData = false;
@@ -76,6 +77,7 @@ export class WarehouseDetailsComponent implements OnInit, OnDestroy {
     let dummyCard = <WarehouseDataCard>{};
     dummyCard.title = 'dummy';
     dummyCard.visibility = 'invisible';
+    dummyCard.filter = '';
 
     this.cards.push(dummyCard)
     this.cards.map(i => {
@@ -83,31 +85,31 @@ export class WarehouseDetailsComponent implements OnInit, OnDestroy {
         i.backgroundColor = '#0D99FF';
         i.iconClass = 'fa-solid fa-box';
         i.visibility = 'visible';
-
+        i.filter = 'empty-quantity';
       }
       else if (i.title == 'products_quantity_little'){
         i.backgroundColor = '#FFA629';
         i.iconClass = 'fa-solid fa-box';
         i.visibility = 'visible';
-
+        i.filter = 'little-quantity';
       }
       else if (i.title == 'variable_temperature'){
         i.backgroundColor = '#F15A60';
         i.iconClass = 'fa-solid fa-temperature-three-quarters';
         i.visibility = 'visible';
-
+        i.filter = 'variable-temperature';
       }
       else if (i.title == 'expiration_date_expired'){
         i.backgroundColor = '#0D99FF';
         i.iconClass = 'fa-solid fa-calendar-days';
         i.visibility = 'visible';
-
+        i.filter = 'expired-date';
       }
       else if (i.title == 'expiration_date_about_expired'){
         i.backgroundColor = '#FFA629';
         i.iconClass = 'fa-solid fa-calendar-days';
         i.visibility = 'visible';
-
+        i.filter = 'almost-expired-date';
       }
 
     });
