@@ -6,9 +6,9 @@ import { WithdrawProductComponent } from './screens/withdraw-product/withdraw-pr
 
 const routes: Routes = [
   { path: '', component: ProductsManagementComponent },
+  { path: 'create', component: CreateProductComponent,  pathMatch: 'full'},
+  { path: 'withdraw', component: WithdrawProductComponent,  pathMatch: 'full' },
   { path: ':filter', component: ProductsManagementComponent },
-  { path: 'create', component: CreateProductComponent },
-  { path: 'withdraw', component: WithdrawProductComponent }
 ];
 
 @NgModule({
