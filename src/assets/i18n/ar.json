@@ -160,6 +160,18 @@
         "RequestCancellationConsentMessage": "هل ترغب ف الغاء الطلب ؟",
         "CancellationReason": "سبب الالغاء"
     },
+    "InventoryScreen": {
+        "PrimaryTitle": "الرئيسية /",
+        "ColoredPrimaryTitle": "الجرد",
+        "Department":"القسم",
+        "UploadFile":"ارفع ملف",
+        "ImportFileButton":"استيراد",
+        "ExportFileButton":"تصدير",
+        "ImportMessage":"استيراد قسم",
+        "ColoredImportMessage": "(من فضلك قم بتحميل هذا الملف وقم بادخال البيانات )",
+        "ExportMessage":"تصدير قسم",
+        "ExportModalMessage":"برجاء اختيار صيغة الملف"
+    },
     "Modal": {
         "CreateButton": "انشاء",
         "EditModalHeader": "تعديل",

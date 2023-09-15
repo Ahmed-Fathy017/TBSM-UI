@@ -161,6 +161,18 @@
         "RequestCancellationConsentMessage": "Do you want to cancel the order?",
         "CancellationReason": "Cancellation Reason"
     },
+    "InventoryScreen": {
+        "PrimaryTitle": "Home /",
+        "ColoredPrimaryTitle": "Inventory",
+        "Department":"Department",
+        "Upload File":"Upload File",
+        "ImportFileButton":" Import",
+        "ExportFileButton":"Export",
+        "ImportMessage":"Import Department",
+        "ColoredImportMessage": "(Please upload this file and enter the data)",
+        "ExportMessage":"Export Department",
+        "ُExportModalMessage":"Please choose the file format"
+    },
     "Modal": {
         "CreateButton": "Create",
         "EditModalHeader": "Edit",

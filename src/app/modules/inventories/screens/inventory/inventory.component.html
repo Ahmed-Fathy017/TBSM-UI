@@ -1,0 +1,140 @@
+<div class="container-fluid">
+    <app-page-header [pageTitle]="firstPageTitle" [coloredPageTitle]="coloredPageTitle"></app-page-header>
+
+    <div class="container ">
+        <form [formGroup]="inventoryImportForm" class="row">
+            <div class="header d-flex flex-column align-items-start fw-bold mb-3">
+                <span class="block mb-2"> {{'InventoryScreen.ImportMessage' | translate}}
+                    <span class="colored-link" (click)="onExcelLinkClick()">{{'InventoryScreen.ColoredImportMessage' |
+                        translate}}</span>
+                </span>
+
+            </div>
+            <div class="col-md-5 col-lg-5 col-xl-5">
+                <label for="department1" class="mb-1 d-flex">{{'InventoryScreen.Department' |
+                    translate}} </label>
+
+                <select name="department1" id="department1" formControlName="department" class="form-select">
+                    <option *ngFor="let department of departments" [value]="department.id">
+                        {{department.name | translate}}
+                    </option>
+                </select>
+
+            </div>
+
+            <div class="col-md-5 col-lg-5 col-xl-5">
+
+                <label for="fileName" class="mb-1 d-flex">{{'InventoryScreen.UploadFile' |
+                    translate}} </label>
+
+                <div class="input-group flex-nowrap">
+
+                    <input type="text" formControlName="file" class="form-control rounded-end" id="fileName"
+                        name="fileName">
+
+                    <span class="input-group-text small-search-btn rounded-2" id="addon-wrapping">
+
+                        <label class="inputTag w-100 h-100" for="file">
+                            <i class="fa-solid fa-cloud-arrow-up" style="color: #ffffff;"></i>
+                            <input id="file" class="form-control d-none" type="file" accept=".xlsx, .xls"
+                                (change)="onFileChange($event)">
+                        </label>
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-md-2 col-lg-2 col-xl-2">
+
+                <div class="btn" (click)="onImportButtonClick()">
+                    <app-loading-button [processing]="isImporting">
+                        {{'InventoryScreen.ImportFileButton' | translate}}
+                    </app-loading-button>
+                </div>
+
+
+            </div>
+        </form>
+    </div>
+
+    <div class="container my-4">
+        <hr class="container text-secondary">
+    </div>
+
+    <div class="container ">
+        <form [formGroup]="inventoryExportForm" class="row">
+
+            <div class="header d-flex flex-column align-items-start fw-bold mb-3">
+                <span class="block mb-2"> {{'InventoryScreen.ExportMessage' | translate}}
+                </span>
+            </div>
+
+            <div class="col-md-6 col-lg-6 col-xl-6">
+                <label for="department2" class="mb-1 d-flex">{{'InventoryScreen.Department' |
+                    translate}} </label>
+
+                <select name="department1" id="department2" formControlName="department" class="form-select">
+                    <option *ngFor="let department of departments" [value]="department.id">
+                        {{department.name | translate}}
+                    </option>
+                </select>
+
+            </div>
+
+            <div class="col-md-6 col-lg-6 col-xl-6">
+
+                <div class="btn">
+                    <app-loading-button [processing]="isExporting" (click)="onExportButtonClick()">
+                        {{'InventoryScreen.ExportFileButton' | translate}}
+                    </app-loading-button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+
+</div>
+
+
+<button data-bs-toggle="modal" data-bs-target="#exportModal" class="d-none" #modalShowButtonRef>dummy button for modal opening</button>
+
+<!-- export modal -->
+
+<div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header d-flex justify-content-end">
+
+                <div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+            </div>
+
+            <div class="modal-body mt-1 ">
+
+                <div class="col-md-12 col-lg-12 col-xl-12 d-flex justify-content-center align-items-center fw-bold h5">
+                    {{'InventoryScreen.ExportModalMessage' | translate}}
+                </div>
+
+
+            </div>
+
+            <div class="mt-4 mb-5 d-flex align-items-center justify-content-center">
+                <div class="row m-0 d-flex  justify-content-between  w-75 align-items-center">
+                    <div class="col-md-6 col-lg-6 col-xl-6 mb-2">
+                        <button type="button" class="btn-primary modal-btn  py-2" data-bs-dismiss="modal"
+                            (click)="onExportButtonConfirmationClick('exel')">Excel</button>
+                    </div>
+
+                    <div class="col-md-6 col-lg-6 col-xl-6 mb-2">
+                        <button type="button" class="btn-secondary modal-btn format-btn py-2 " data-bs-dismiss="modal"
+                            (click)="onExportButtonConfirmationClick('pdf')">PDF</button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

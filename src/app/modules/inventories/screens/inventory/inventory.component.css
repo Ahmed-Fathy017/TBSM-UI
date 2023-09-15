@@ -1,0 +1,30 @@
+.btn {
+    color: #ffffff;
+    background-color: #F15A60;
+    border-radius: 12px;
+    width: 100%;
+    margin-top: 1.65rem;
+}
+
+.btn:active {
+    background-color: #F15A60;
+    color: white;
+}
+
+.inputTag {
+    cursor: pointer;
+}
+
+#addon-wrapping {
+    background-color: #F15A60;
+}
+
+.colored-link {
+    color: #F15A60;
+    cursor: pointer;
+}
+
+.format-btn {
+    background-color: #F15A6052;
+    color: #F15A60;
+}

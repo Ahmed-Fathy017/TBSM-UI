@@ -9,6 +9,7 @@ import { UsersManagementComponent } from '../users/screens/users-management/user
 import { RefrigeratorsManagementComponent } from '../refrigerators/screens/refrigerators-management/refrigerators-management.component';
 import { OperationLogsComponent } from '../operation-logs/screens/operation-logs/operation-logs.component';
 import { PropertiesManagementComponent } from '../properties/screens/properties-management/properties-management.component';
+import { InventoryComponent } from '../inventories/screens/inventory/inventory.component';
 
 const routes: Routes = [
   {
@@ -42,6 +43,7 @@ const routes: Routes = [
       { path: 'management/properties', component: PropertiesManagementComponent },
       { path: 'users', component: UsersManagementComponent },
       { path: 'operation-logs', component: OperationLogsComponent },
+      { path: 'inventories', component: InventoryComponent },
     ]
   },
 

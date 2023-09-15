@@ -25,6 +25,7 @@ import { SupplyChainsService } from '../supply-chains/remote-services/supply-cha
 import { OperationLogsModule } from '../operation-logs/operation-logs.module';
 import { PropertiesModule } from '../properties/properties.module';
 import { SublevelMenuComponent } from './components/sidenav/sublevel-menu.component';
+import { InventoriesModule } from '../inventories/inventories.module';
 
 
 
@@ -54,7 +55,8 @@ import { SublevelMenuComponent } from './components/sidenav/sublevel-menu.compon
     ProductsModule,
     SupplyChainsModule,
     OperationLogsModule,
-    PropertiesModule
+    PropertiesModule,
+    InventoriesModule
   ], providers: [
     NavigationService,
     SupplyChainsService
