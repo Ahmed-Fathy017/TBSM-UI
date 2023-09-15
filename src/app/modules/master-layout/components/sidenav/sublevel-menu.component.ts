@@ -21,7 +21,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
           <i class="sublevel-link-icon " [class]="item.icon"></i>
           <span class="sublevel-link-text" *ngIf="collapsed">{{item.label | translate}}</span>
           <i *ngIf="item.items && collapsed" class="menu-collapse-icon"
-            [ngClass]="!item.expanded ? 'fal fa-angle-right' : 'fal fa-angle-down'"
+            [ngClass]="!item.expanded ? 'fal fa-caret-right' : 'fal fa-caret-down'"
           > </i>
 
 

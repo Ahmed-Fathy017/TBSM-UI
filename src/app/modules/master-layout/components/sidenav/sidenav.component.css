@@ -2,36 +2,42 @@
     background: #100F37;
     transition: all .5s ease;
     position: fixed;
-    z-index: 1;
+    z-index: 4;
     top: 0;
     width: 5rem;
 
     height: 100vh;
 
     .logo-container {
-        display: flex;
-        align-items: center;
-        padding: 0.938rem 0.938rem 0 0.938rem;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        /* padding: 0.938rem 0.938rem 0 0.938rem; */
         width: 100%;
 
 
         .logo {
-            background: #fff;
+            /* background: #fff; */
+            background-color: #100F37;
+            color: #ffffff;
             text-align: center;
             width: 3rem;
             min-width: 3rem;
-            border-radius: 0.313rem;
-            padding: 0.313rem;
+            border-radius: 0.5rem;
+            padding: 0.2rem 0.1rem 0.2rem 0.2rem;
             font-size: 20px;
             font-weight: 900;
             cursor: pointer;
             border: none;
+            position: absolute;
+            top: 15px ;
+            transform: translate(-0%, 84%, -0%, -0%);
         }
 
         .logo-text {
-            margin-left: 1.5rem;
-            font-size: 24px;
-            font-weight: 700;
+            /* margin-left: 1.5rem; */
+            /* font-size: 24px; */
+            /* font-weight: 700; */
             color: #fff;
         }
 
@@ -243,4 +249,11 @@ img {
 .sublevel-nav-item:hover .tooltiptext {
     visibility: visible;
     /* transition: all .3s ease; */
+}
+
+.absolute-right-position {
+    right: 93%;
+}
+.absolute-left-position {
+    left: 94%;
 }

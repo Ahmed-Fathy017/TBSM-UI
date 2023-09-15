@@ -119,6 +119,11 @@ export const userNavbarData: INavbarData[] = [
         icon: 'fa-solid fa-folder-open',
         label: 'SideNav.OperationLogs'
     },
+    {
+        routeLink: 'inventories',
+        icon: 'fa-solid fa-warehouse',
+        label: 'SideNav.Inventory'
+    },
     // {
     //     routeLink: 'departments',
     //     icon: 'fa-solid fa-border-all',
