@@ -19,13 +19,15 @@ import { GetProductsRequest } from '../../models/get-products-request';
 import { ProductSearchItems } from '../../models/product-search-items';
 import { ProductFilters } from '../../models/products-filter';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
 
 @Component({
   selector: 'app-products-management',
   templateUrl: './products-management.component.html',
   styleUrls: ['./products-management.component.css']
 })
-export class ProductsManagementComponent implements OnInit, OnDestroy, AfterViewInit {
+export class ProductsManagementComponent extends SharedMessagesComponent implements OnInit, OnDestroy, AfterViewInit {
 
   subscription = new Subscription();
 
@@ -90,13 +92,16 @@ export class ProductsManagementComponent implements OnInit, OnDestroy, AfterView
     private supplyChainsService: SupplyChainsService,
     private propertiesService: PropertiesService,
     private renderer: Renderer2,
-    private activatedRoute: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute,
+    private translateService: TranslateService) { 
+      super(translateService);
+    }
 
 
   // events
   ngOnInit(): void {
 
-    this.filter = this.productFilters.get(this.activatedRoute.snapshot.params.filter)?? '';
+    this.filter = this.productFilters.get(this.activatedRoute.snapshot.params.filter) ?? '';
 
     let requestDTO = new GetProductsRequest();
     requestDTO.product_filter = this.filter;
@@ -168,7 +173,7 @@ export class ProductsManagementComponent implements OnInit, OnDestroy, AfterView
 
     let propertyExists = this.selectedProduct.options?.some(i => i.property.id == this.selectedProperty?.id);
     if (propertyExists) {
-      this.toastr.warning('!تم اضافة هذه الخاصية', 'تحذير');
+      this.toastr.warning(this.invalidInputDuplicationMessage, this.invalidInputWarningHeader);
       return;
     }
 
@@ -195,7 +200,7 @@ export class ProductsManagementComponent implements OnInit, OnDestroy, AfterView
       element.textContent = '';
     }
     else
-      this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
+      this.toastr.warning(this.invalidInputWarningMessage, this.invalidInputWarningHeader);
 
   }
 
@@ -213,7 +218,7 @@ export class ProductsManagementComponent implements OnInit, OnDestroy, AfterView
   onUpdateConfirmationClick() {
     let allRequiredPropertiesExist = this.selectedProduct.options.some(i => this.requiredPropertiesIds.every(j => j == i.property.id));
     if (!allRequiredPropertiesExist) {
-      this.toastr.warning('لم يتم ادخال كل الخصائص المطلوبة!', 'تحذير');
+      this.toastr.warning(this.invalidInputCountMessage, this.invalidInputWarningHeader);
       return;
     }
 
@@ -233,7 +238,7 @@ export class ProductsManagementComponent implements OnInit, OnDestroy, AfterView
       this.updateProduct(requestDTO);
       this.updateModalCloseButtonRef.nativeElement.click();
     } else
-      this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
+      this.toastr.warning(this.invalidInputWarningMessage, this.invalidInputWarningHeader);
   }
 
   onDeleteButtonClick(departmentId: number, productId: number, productIndex: number) {
@@ -263,7 +268,7 @@ export class ProductsManagementComponent implements OnInit, OnDestroy, AfterView
       this.addOrderRequest(requestDTO);
       this.supplyModalCloseButtonRef.nativeElement.click();
     } else
-      this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
+      this.toastr.warning(this.invalidInputWarningMessage, this.invalidInputWarningHeader);
   }
 
   onProductBarcodeButtonClick(departmentId: number, productId: number) {
@@ -293,7 +298,10 @@ export class ProductsManagementComponent implements OnInit, OnDestroy, AfterView
 
         this.isLoading = false;
       }, (error: any) => {
-        this.toastr.error(error.error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
         this.isLoading = false;
       }
     );
@@ -308,7 +316,10 @@ export class ProductsManagementComponent implements OnInit, OnDestroy, AfterView
         this.requiredPropertiesIds = this.properties.filter(i => i.required_status).map(i => i.id);
         this.selectedProperty = this.properties[0];
       }, (error: any) => {
-        this.toastr.error(error.error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
         this.isLoading = false;
       }
     );
@@ -325,7 +336,10 @@ export class ProductsManagementComponent implements OnInit, OnDestroy, AfterView
         this.isLoading = false;
       }, (error: any) => {
         this.isLoading = false;
-        this.toastr.error(error.error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
       }
     );
 
@@ -340,7 +354,10 @@ export class ProductsManagementComponent implements OnInit, OnDestroy, AfterView
         this.isLoading = false;
         this.isProcessing = false;
       }, (error: any) => {
-        this.toastr.error(error.error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
         this.isLoading = false;
       }
     );
@@ -436,7 +453,10 @@ export class ProductsManagementComponent implements OnInit, OnDestroy, AfterView
         this.isLoading = false;
       }, (error: any) => {
         this.isLoading = false;
-        this.toastr.error(error.error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
       }
     );
 

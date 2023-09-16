@@ -1,17 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { PermissionGroup } from '../../models/permission-group';
 import { Role } from '../../models/role';
 import { RolesService } from '../../remote-services/roles.service';
+import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-create-role',
   templateUrl: './create-role.component.html',
   styleUrls: ['./create-role.component.css']
 })
-export class CreateRoleComponent {
+export class CreateRoleComponent extends SharedMessagesComponent implements OnInit, OnDestroy {
 
   subscription = new Subscription();
 
@@ -37,7 +39,9 @@ export class CreateRoleComponent {
 
   constructor(
     private toastr: ToastrService,
-    private rolesService: RolesService) {
+    private rolesService: RolesService,
+    private translateService: TranslateService) {
+      super(translateService);
   }
 
 
@@ -61,7 +65,6 @@ export class CreateRoleComponent {
         role.permissions.push(...group.permissions.filter(i => i.checked).map(i => i.id));
       });
 
-      console.log(role.permissions)
 
 
       this.isLoadingRoles = true;
@@ -70,7 +73,7 @@ export class CreateRoleComponent {
       this.createRole(role);
     }
     else
-      this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
+      this.toastr.warning(this.invalidInputWarningMessage, this.invalidInputWarningHeader);
 
   }
 
@@ -89,9 +92,11 @@ export class CreateRoleComponent {
         });
 
         this.isLoadingPermissions = false;
-        console.log(this.permissionGroups)
 
       }, (error: any) => {
+        if (error.error.errors)
+        this.toastr.error(error.error.errors[0].value, error.error.message);
+      else
         this.toastr.error(error.error.message);
         this.isLoadingPermissions = false;
       }
@@ -109,6 +114,9 @@ export class CreateRoleComponent {
         this.isProcessing = false;
 
       }, (error: any) => {
+        if (error.error.errors)
+        this.toastr.error(error.error.errors[0].value, error.error.message);
+      else
         this.toastr.error(error.error.message);
         this.isLoadingRoles = false;
         this.isProcessing = false;

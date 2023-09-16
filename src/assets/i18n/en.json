@@ -200,5 +200,12 @@
         "SupplyRequestRefusal": "Supply Request Refusal",
         "AddProduct": "Adding Product",
         "ChangeUserStatus": " Changing User Status"
+    },
+    "GeneralMessages": {
+        "InvalidInputWarningHeader": "Warning",
+        "InvalidInputWarningMessage": "Please input the values correctly!",
+        "InvalidInputDuplicationMessage":"This property already exists!",
+        "InvalidInputCountMessage":"Some required properties missing!"
+        
     }
 }

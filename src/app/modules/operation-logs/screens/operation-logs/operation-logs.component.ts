@@ -8,6 +8,8 @@ import { GetOperationLogs } from '../../models/get-operations-logs';
 import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver';
 import { OperationTypes } from '../../models/operation-types';
+import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -15,7 +17,7 @@ import { OperationTypes } from '../../models/operation-types';
   templateUrl: './operation-logs.component.html',
   styleUrls: ['./operation-logs.component.css']
 })
-export class OperationLogsComponent implements OnInit, OnDestroy {
+export class OperationLogsComponent extends SharedMessagesComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
 
   firstPageTitle: string = 'OprationsLogsScreen.PrimaryTitle';
@@ -44,7 +46,9 @@ export class OperationLogsComponent implements OnInit, OnDestroy {
   excelLink: string = '';
 
   constructor(private toastr: ToastrService,
-    private operationLogsService: OperationLogsService) {
+    private operationLogsService: OperationLogsService,
+    private translateService: TranslateService) {
+      super(translateService);
   }
 
   ngOnInit(): void {
@@ -68,7 +72,7 @@ export class OperationLogsComponent implements OnInit, OnDestroy {
 
       this.getOperationLogs(requestDTO);
     } else
-      this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
+      this.toastr.warning(this.invalidInputWarningMessage, this.invalidInputWarningHeader);
   }
 
   onExportButtonClick() {
@@ -97,7 +101,7 @@ export class OperationLogsComponent implements OnInit, OnDestroy {
 
       this.getOperationLogs(requestDTO);
     } else
-      this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
+      this.toastr.warning(this.invalidInputWarningMessage, this.invalidInputWarningHeader);
   }
 
   onPageChange(pageNumber: number) {
@@ -127,12 +131,8 @@ export class OperationLogsComponent implements OnInit, OnDestroy {
 
   getOperationLogs(requestDTO: GetOperationLogs) {
 
-    console.log(requestDTO.is_export)
-
     let subscribtion = this.operationLogsService.getOperationLogs(requestDTO).subscribe(
       (response: any) => {
-        console.log(response)
-
         if (requestDTO.is_export)
           window.open(response.data, "_blank");
         else {
@@ -146,7 +146,10 @@ export class OperationLogsComponent implements OnInit, OnDestroy {
       }, (error: any) => {
         this.isProcessing = false;
         this.isLoading = false;
+        if (error.error.errors)
         this.toastr.error(error.error.errors[0].value, error.error.message);
+      else
+        this.toastr.error(error.error.message);
       }
     );
 

@@ -120,12 +120,14 @@ export class SupplyRequestsManagementComponent implements OnInit, OnDestroy {
     let subscription = this.supplyChainsService.getExternalSupplyRequests().subscribe(
       (response: any) => {
         this.group.data = response.data;
-        console.log(response.data)
         this.setupPagination();
         this.isLoading = false;
       }, (error: any) => {
         this.isLoading = false;
-        this.toastr.error(error.error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
       }
     );
 
@@ -136,12 +138,14 @@ export class SupplyRequestsManagementComponent implements OnInit, OnDestroy {
     let subscription = this.supplyChainsService.getInternalSupplyRequests().subscribe(
       (response: any) => {
         this.group.data = response.data;
-        console.log(response.data)
         this.setupPagination();
         this.isLoading = false;
       }, (error: any) => {
         this.isLoading = false;
-        this.toastr.error(error.error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
       }
     );
 
@@ -152,12 +156,14 @@ export class SupplyRequestsManagementComponent implements OnInit, OnDestroy {
     let subscription = this.supplyChainsService.getAllSupplyRequests().subscribe(
       (response: any) => {
         this.group.data = response.data;
-        console.log(response.data)
         this.setupPagination();
         this.isLoading = false;
       }, (error: any) => {
         this.isLoading = false;
-        this.toastr.error(error.error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
       }
     );
 
@@ -167,7 +173,6 @@ export class SupplyRequestsManagementComponent implements OnInit, OnDestroy {
   updateOrderStatus(requestDTO: UpdateOrder) {
     let subscription = this.supplyChainsService.updateOrderStatus(requestDTO).subscribe(
       (response: any) => {
-        console.log(response)
         this.toastr.success(response.message);
         this.group.data.splice(this.selectedIndex, 1);
         this.setupPagination();
@@ -175,7 +180,10 @@ export class SupplyRequestsManagementComponent implements OnInit, OnDestroy {
 
       }, (error: any) => {
         this.isLoading = false;
-        this.toastr.error(error.error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
       }
     );
 

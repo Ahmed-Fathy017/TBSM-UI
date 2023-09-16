@@ -4,13 +4,15 @@ import { Subscription } from 'rxjs';
 import { PackagesService } from '../../remote-services/packages.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-packages-management',
   templateUrl: './packages-management.component.html',
   styleUrls: ['./packages-management.component.css']
 })
-export class PackagesManagementComponent implements OnInit, OnDestroy {
+export class PackagesManagementComponent extends SharedMessagesComponent implements OnInit, OnDestroy {
 
   subscription = new Subscription();
 
@@ -50,7 +52,10 @@ export class PackagesManagementComponent implements OnInit, OnDestroy {
 
   constructor(
     private toastr: ToastrService,
-    private packagesService: PackagesService) { }
+    private packagesService: PackagesService,
+    private translateService: TranslateService) { 
+      super(translateService);
+    }
 
 
   ngOnInit(): void {
@@ -89,7 +94,7 @@ export class PackagesManagementComponent implements OnInit, OnDestroy {
       this.updatePackage(requestDTO);
       this.updateModalCloseButtonRef.nativeElement.click();
     } else
-      this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
+      this.toastr.warning(this.invalidInputWarningMessage, this.invalidInputWarningHeader);
   }
 
   onDeleteButtonClick(id: number) {
@@ -110,15 +115,15 @@ export class PackagesManagementComponent implements OnInit, OnDestroy {
       requestDTO.refrigerator_numbers = parseInt(this.createPackageForm.controls.refrigeratorSetting.value!);
       requestDTO.categories_numbers = parseInt(this.createPackageForm.controls.departmentSetting.value!);
       requestDTO.products_numbers = parseInt(this.createPackageForm.controls.productSetting.value!);
-      requestDTO.heat_alert = this.createPackageForm.controls.temperatureAlert.value!  == true ? 1 : 0;
-      requestDTO.external_supply = this.createPackageForm.controls.externalSupply.value!  == true ? 1 : 0;
+      requestDTO.heat_alert = this.createPackageForm.controls.temperatureAlert.value! == true ? 1 : 0;
+      requestDTO.external_supply = this.createPackageForm.controls.externalSupply.value! == true ? 1 : 0;
 
       this.isProcessing = true;
       this.isLoading = true;
 
       this.createPackage(requestDTO);
     } else
-      this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
+      this.toastr.warning(this.invalidInputWarningMessage, this.invalidInputWarningHeader);
   }
 
   loadPackages() {
@@ -129,7 +134,10 @@ export class PackagesManagementComponent implements OnInit, OnDestroy {
         this.isLoading = false;
 
       }, (error: any) => {
-        this.toastr.error(error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
         this.isLoading = false;
       }
     );
@@ -148,7 +156,10 @@ export class PackagesManagementComponent implements OnInit, OnDestroy {
       }, (error: any) => {
         this.isProcessing = false;
         this.isLoading = false;
-        this.toastr.error(error.errors[0].value, error.error.key);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
       }
     );
 
@@ -180,7 +191,10 @@ export class PackagesManagementComponent implements OnInit, OnDestroy {
 
         this.isProcessing = false;
         this.isLoading = false;
-        this.toastr.error(error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
       }
     );
 
@@ -196,7 +210,10 @@ export class PackagesManagementComponent implements OnInit, OnDestroy {
         this.isLoading = false;
       }, (error: any) => {
         this.isLoading = false;
-        this.toastr.error(error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
       }
     );
 

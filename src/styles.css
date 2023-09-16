@@ -57,7 +57,8 @@
 textarea:focus,
 textarea.form-control:focus,
 input.form-control:focus,
-input.form-select:focus input[type=text]:focus,
+input.form-select:focus,
+input[type=text]:focus,
 input[type=password]:focus,
 input[type=email]:focus,
 input[type=number]:focus,
@@ -67,8 +68,15 @@ input[type=number]:focus,
 [type=tel].form-control:focus,
 [type=select].form-select:focus,
 [contenteditable].form-control:focus {
-    box-shadow: inset 0 -1px 0 #ddd;
+    box-shadow: inset 0 -1px 0 #ddd !important;
     border-color: #DEE2E6;
+    outline: none; /* Remove the outline */
+}
+.form-select:active,
+.form-select:focus {
+    box-shadow: inset 0 -1px 0 #ddd !important;
+    outline: none; /* Remove the outline */
+    border-color: #dee2e6 !important;
 }
 
 /************ Bootstrap Checkboxes Color Edit ************/

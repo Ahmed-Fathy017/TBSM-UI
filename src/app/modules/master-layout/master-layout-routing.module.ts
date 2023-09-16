@@ -10,10 +10,11 @@ import { RefrigeratorsManagementComponent } from '../refrigerators/screens/refri
 import { OperationLogsComponent } from '../operation-logs/screens/operation-logs/operation-logs.component';
 import { PropertiesManagementComponent } from '../properties/screens/properties-management/properties-management.component';
 import { InventoryComponent } from '../inventories/screens/inventory/inventory.component';
+import { ScreensConfigProvider } from './providers/screens-config-provider';
 
 const routes: Routes = [
   {
-    path: '', component: MasterLayoutComponent, canActivate: [AuthGuardService],
+    path: '', component: MasterLayoutComponent, canActivateChild: [AuthGuardService],
     children: [
       { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: MainDashboardComponent },
@@ -38,7 +39,7 @@ const routes: Routes = [
         path: 'supply-chains',
         loadChildren: () => import('../supply-chains/supply-chains-routing.module').then(m => m.SupplyChainsRoutingModule)
       },
-      { path: 'management/departments', component: DepartmentsManagementComponent },
+      { path: 'management/departments', component: DepartmentsManagementComponent, data: { config: ScreensConfigProvider.DepartmentsManagementScreen } },
       { path: 'management/refrigerators', component: RefrigeratorsManagementComponent },
       { path: 'management/properties', component: PropertiesManagementComponent },
       { path: 'users', component: UsersManagementComponent },

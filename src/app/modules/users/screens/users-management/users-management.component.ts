@@ -8,13 +8,15 @@ import { Role } from 'src/app/modules/roles/models/role';
 import { RolesService } from 'src/app/modules/roles/remote-services/roles.service';
 import { UsersService } from '../../remote-services/users.service';
 import { User } from '../../models/user';
+import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-users-management',
   templateUrl: './users-management.component.html',
   styleUrls: ['./users-management.component.css']
 })
-export class UsersManagementComponent implements OnInit, OnDestroy {
+export class UsersManagementComponent extends SharedMessagesComponent implements OnInit, OnDestroy {
 
   subscription = new Subscription();
 
@@ -51,9 +53,10 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
   constructor(
     private toastr: ToastrService,
     private rolesService: RolesService,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private translateService: TranslateService
   ) {
-
+    super(translateService);
   }
 
   ngOnInit(): void {
@@ -80,7 +83,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
 
       this.createUser(requestDTO);
     } else
-      this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
+      this.toastr.warning(this.invalidInputWarningMessage, this.invalidInputWarningHeader);
   }
 
   onDeleteButtonClick(id: number) {
@@ -112,7 +115,7 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
       this.updateUser(requestDTO);
       this.updateModalCloseButtonRef.nativeElement.click();
     } else
-      this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
+      this.toastr.warning(this.invalidInputWarningMessage, this.invalidInputWarningHeader);
   }
 
   getRoles() {
@@ -120,7 +123,10 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
       (response: any) => {
         this.roles = response.data;
       }, (error: any) => {
-        this.toastr.error(error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
       }
     );
 
@@ -133,12 +139,14 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
     let subscription = this.usersService.getUsers().subscribe(
       (response: any) => {
         this.users = response.data;
-        console.log(this.users)
 
         this.isLoading = false;
       }, (error: any) => {
         this.isLoading = false;
-        this.toastr.error(error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
       }
     );
 
@@ -156,7 +164,10 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
       }, (error: any) => {
         this.isProcessing = false;
         this.isLoading = false;
-        this.toastr.error(error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
       }
     );
 
@@ -183,7 +194,10 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
       }, (error: any) => {
 
         this.isLoading = false;
-        this.toastr.error(error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
       }
     );
 
@@ -195,12 +209,14 @@ export class UsersManagementComponent implements OnInit, OnDestroy {
     let subscription = this.usersService.deleteUser(this.selectedUser.id).subscribe(
       (response: any) => {
         this.toastr.success(response.message);
-        console.log(response.data)
         this.users = response.data;
         this.isLoading = false;
       }, (error: any) => {
         this.isLoading = false;
-        this.toastr.error(error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
       }
     );
 

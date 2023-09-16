@@ -25,13 +25,12 @@
             min-width: 3rem;
             border-radius: 0.5rem;
             padding: 0.2rem 0.1rem 0.2rem 0.2rem;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 900;
             cursor: pointer;
             border: none;
             position: absolute;
-            top: 15px ;
-            transform: translate(-0%, 84%, -0%, -0%);
+            top: 12px ;
         }
 
         .logo-text {
@@ -252,7 +251,7 @@ img {
 }
 
 .absolute-right-position {
-    right: 93%;
+    right: 94%;
 }
 .absolute-left-position {
     left: 94%;

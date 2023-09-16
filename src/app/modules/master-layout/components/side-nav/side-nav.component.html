@@ -9,9 +9,7 @@
     <!-- side bar-->
     <div class="side-nav-bar-menu-container" [ngStyle]="getSideNavBarStyle(showSideNav)">
 
-        <!-- close button -->
-        <!-- <div class="ms-2 mt-2"><span class="material-icons side-nav-bar-close" (click)="onSidebarClose()"><i
-                    class="fa-solid fa-x"></i></span></div> -->
+
 
         <div class="mx-3 mt-3 mb-0 d-flex justify-content-end"><span class="material-icons side-nav-bar-close" (click)="onSidebarClose()"><i
                     class="fa-solid fa-x"></i></span></div>
@@ -20,7 +18,6 @@
             <img src="../../../../../assets/images/logo.svg" alt="">
         </div>
 
-        <!-- side bar content -->
         <div class="side-nav-bar-content-container">
             <ng-container *ngTemplateOutlet="sidenavTemplateRef"></ng-container>
         </div>

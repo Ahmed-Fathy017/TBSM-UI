@@ -4,13 +4,15 @@ import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { RefrigeratorsService } from '../../remote-services/refrigerators.service';
 import { Refrigerator } from '../../models/refrigerator';
+import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-refrigerators-management',
   templateUrl: './refrigerators-management.component.html',
   styleUrls: ['./refrigerators-management.component.css']
 })
-export class RefrigeratorsManagementComponent implements OnInit, OnDestroy {
+export class RefrigeratorsManagementComponent extends SharedMessagesComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
 
   firstPageTitle: string = 'RefrigeratorsManagementScreen.PrimaryTitle';
@@ -43,8 +45,9 @@ export class RefrigeratorsManagementComponent implements OnInit, OnDestroy {
 
   constructor(
     private toastr: ToastrService,
-    private refrigeratorsService: RefrigeratorsService) {
-
+    private refrigeratorsService: RefrigeratorsService,
+    private translateService: TranslateService) {
+      super(translateService);
   }
 
   ngOnInit(): void {
@@ -69,7 +72,7 @@ export class RefrigeratorsManagementComponent implements OnInit, OnDestroy {
 
       this.createRefrigerator(requestDTO);
     } else
-      this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
+      this.toastr.warning(this.invalidInputWarningMessage, this.invalidInputWarningHeader);
   }
 
   onUpdateButtonClick(id: number) {
@@ -91,7 +94,7 @@ export class RefrigeratorsManagementComponent implements OnInit, OnDestroy {
       this.updateRefrigerator(requestDTO);
       this.updateModalCloseButtonRef.nativeElement.click();
     } else
-      this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
+      this.toastr.warning(this.invalidInputWarningMessage, this.invalidInputWarningHeader);
   }
 
   onDeleteButtonClick(id: number) {
@@ -111,7 +114,10 @@ export class RefrigeratorsManagementComponent implements OnInit, OnDestroy {
         this.isLoading = false;
         this.isProcessing = false;
       }, (error: any) => {
-        this.toastr.error(error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
         this.isLoading = false;
       }
     );
@@ -130,7 +136,10 @@ export class RefrigeratorsManagementComponent implements OnInit, OnDestroy {
       }, (error: any) => {
         this.isProcessing = false;
         this.isLoading = false;
-        this.toastr.error(error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
       }
     );
 
@@ -157,7 +166,10 @@ export class RefrigeratorsManagementComponent implements OnInit, OnDestroy {
       }, (error: any) => {
 
         this.isLoading = false;
-        this.toastr.error(error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
       }
     );
 
@@ -169,12 +181,14 @@ export class RefrigeratorsManagementComponent implements OnInit, OnDestroy {
     let subscription = this.refrigeratorsService.deleteRefrigerator(this.selectedRefrigerator.id).subscribe(
       (response: any) => {
         this.toastr.success(response.message);
-        console.log(response.data)
         this.refrigerators = response.data;
         this.isLoading = false;
       }, (error: any) => {
         this.isLoading = false;
-        this.toastr.error(error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
       }
     );
 

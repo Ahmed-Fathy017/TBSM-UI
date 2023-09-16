@@ -9,13 +9,15 @@ import { RefrigeratorsService } from 'src/app/modules/refrigerators/remote-servi
 import { SupplyChainsService } from 'src/app/modules/supply-chains/remote-services/supply-chains.service';
 import { Product } from '../../models/product';
 import { ProductsService } from '../../remote-services/products.service';
+import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-withdraw-product',
   templateUrl: './withdraw-product.component.html',
   styleUrls: ['./withdraw-product.component.css']
 })
-export class WithdrawProductComponent implements OnInit, OnDestroy {
+export class WithdrawProductComponent extends SharedMessagesComponent implements OnInit, OnDestroy {
 
   subscription = new Subscription();
 
@@ -39,7 +41,10 @@ export class WithdrawProductComponent implements OnInit, OnDestroy {
   // constructor
   constructor(
     private toastr: ToastrService,
-    private productsService: ProductsService) { }
+    private productsService: ProductsService,
+    private translateService: TranslateService) { 
+      super(translateService);
+    }
 
 
   // events
@@ -57,7 +62,7 @@ export class WithdrawProductComponent implements OnInit, OnDestroy {
       this.isProcessing = true;
       this.getProdcuctByNumber(productNumber);
     } else
-      this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
+      this.toastr.warning(this.invalidInputWarningMessage, this.invalidInputWarningHeader);
 
   }
 
@@ -70,14 +75,15 @@ export class WithdrawProductComponent implements OnInit, OnDestroy {
   getProdcuctByNumber(productNumber: string) {
     let subscription = this.productsService.getProdcuctByNumber(productNumber, 1).subscribe(
       (response: any) => {
-        console.log(response.data)
         this.products.push(response.data)
         this.isProcessing = false;
       },
       (error: any) => {
         this.isProcessing = false;
-        console.log(error)
-        this.toastr.error(error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
       }
     );
 
@@ -95,7 +101,6 @@ export class WithdrawProductComponent implements OnInit, OnDestroy {
         map.set(`${i.number}`, 1);
     });
 
-    console.log(map)
 
     return Object.fromEntries(map);
   }
@@ -108,7 +113,10 @@ export class WithdrawProductComponent implements OnInit, OnDestroy {
         this.products = [];
       }, (error: any) => {
         this.isProcessing = false;
-        this.toastr.error(error.error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
       }
     );
 

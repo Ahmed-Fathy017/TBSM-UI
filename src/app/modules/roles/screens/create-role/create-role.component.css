@@ -32,11 +32,34 @@
 }
 
 
+/************ Bootstrap Checkboxes Color Edit ************/
+.form-check-input {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: #100F37 !important;
+    background-color: #ffffff !important;
+}
+
+.header .form-check-input:checked {
+    border: 2px solid #ffffff;
+    background-color: #100F37 !important;
+}
+
+.content .form-check-input:checked {
+    border: 2px solid #100F37;
+    color: #100F37;
+
+    background-image: url('./check-solid.svg') !important;
+    background-size: 0.9rem;
+}
+
+
+
 .content-wrapper::-webkit-scrollbar {
     width: 4px;
     background-color: #F5F5F5;
     border-radius: 5px;
-    margin: -2px;
+    /* margin: -2px; */
 }
 
 .content-wrapper::-webkit-scrollbar-track {
@@ -46,6 +69,6 @@
 }
 
 .content-wrapper::-webkit-scrollbar-thumb {
-    background-color: #F15A60;
+    background-color: #100F37;
     border-radius: 2px;
 }

@@ -8,13 +8,15 @@ import { DepartmentsService } from 'src/app/modules/departments/remote-services/
 import { OperationTypes } from 'src/app/modules/operation-logs/models/operation-types';
 import { OperationLogsService } from 'src/app/modules/operation-logs/remote-services/operation-logs.service';
 import { InventoriesService } from '../../remote-services/inventories.service';
+import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-inventory',
   templateUrl: './inventory.component.html',
   styleUrls: ['./inventory.component.css']
 })
-export class InventoryComponent implements OnInit, OnDestroy {
+export class InventoryComponent extends SharedMessagesComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
 
   firstPageTitle: string = 'InventoryScreen.PrimaryTitle';
@@ -54,7 +56,9 @@ export class InventoryComponent implements OnInit, OnDestroy {
   constructor(private toastr: ToastrService,
     private departmentsService: DepartmentsService,
     private inventoriesService: InventoriesService,
-    private sanitizer: DomSanitizer) {
+    private sanitizer: DomSanitizer,
+    private translateService: TranslateService) {
+      super(translateService);
   }
 
   ngOnInit(): void {
@@ -81,7 +85,6 @@ export class InventoryComponent implements OnInit, OnDestroy {
 
         let fileName = String(file.name).toLowerCase();
         let fileFormatValid = this.isValidFileFormat(fileName.slice(fileName.lastIndexOf('.') + 1));
-        console.log(fileFormatValid)
 
         if (fileFormatValid) {
 
@@ -104,7 +107,7 @@ export class InventoryComponent implements OnInit, OnDestroy {
       this.isImporting = true;
       this.importExcelFile();
     } else
-      this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
+      this.toastr.warning(this.invalidInputWarningMessage, this.invalidInputWarningHeader);
 
   }
 
@@ -112,7 +115,7 @@ export class InventoryComponent implements OnInit, OnDestroy {
     if (this.inventoryExportForm.valid)
       this.modalShowButtonRef.nativeElement.click();
     else
-      this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
+      this.toastr.warning(this.invalidInputWarningMessage, this.invalidInputWarningHeader);
   }
 
   onExportButtonConfirmationClick(fileType: string) {

@@ -9,28 +9,24 @@
         "Packages": "الباقات",
         "Users": "المستخدمين",
         "Inventory": "الجرد",
-        "Management" :"الادارة",
+        "Management": "الادارة",
         "Refrigerators": "الثلاجات",
         "Departments": "الاقسام",
         "Properties": "الخصائص",
-
         "Roles": "الادوار",
         "AllRoles": "جميع الادوار",
         "CreateRole": "انشاء دور",
-
-        "Products" : "المنتجات",
+        "Products": "المنتجات",
         "AllProducts": "جميع المنتجات",
         "CreateProduct": "انشاء منتج",
         "WithdrawProduct": "سحب منتج",
-
         "SupplyChains": "سلاسل الامداد",
         "InternalSupplyRequests": "طلبات الامداد الداخلي",
         "ExternalSupplyRequests": "طلبات الامداد الخارجي",
         "MySupplyRequests": "طلباتي",
-
         "OperationLogs": "سجل العمليات",
-        "AddOperation":"عملية اضافة",
-        "WithdrawOperation":"عملية سحب"
+        "AddOperation": "عملية اضافة",
+        "WithdrawOperation": "عملية سحب"
     },
     "AdminDashboardScreen": {
         "Home": "الرئيسية"
@@ -120,8 +116,8 @@
         "Filter": "تصنيف",
         "Value": "القيمة",
         "NameSearch": "الاسم",
-        "PropertySearch":"خاصية",
-        "OtherSearch":"اخرى"
+        "PropertySearch": "خاصية",
+        "OtherSearch": "اخرى"
     },
     "CreateProductScreen": {
         "PrimaryTitle": "الرئيسية / المنتجات /",
@@ -163,14 +159,14 @@
     "InventoryScreen": {
         "PrimaryTitle": "الرئيسية /",
         "ColoredPrimaryTitle": "الجرد",
-        "Department":"القسم",
-        "UploadFile":"ارفع ملف",
-        "ImportFileButton":"استيراد",
-        "ExportFileButton":"تصدير",
-        "ImportMessage":"استيراد قسم",
+        "Department": "القسم",
+        "UploadFile": "ارفع ملف",
+        "ImportFileButton": "استيراد",
+        "ExportFileButton": "تصدير",
+        "ImportMessage": "استيراد قسم",
         "ColoredImportMessage": "(من فضلك قم بتحميل هذا الملف وقم بادخال البيانات )",
-        "ExportMessage":"تصدير قسم",
-        "ExportModalMessage":"برجاء اختيار صيغة الملف"
+        "ExportMessage": "تصدير قسم",
+        "ExportModalMessage": "برجاء اختيار صيغة الملف"
     },
     "Modal": {
         "CreateButton": "انشاء",
@@ -198,5 +194,12 @@
         "SupplyRequestRefusal": "رفض طلب الامداد",
         "AddProduct": "اضافة منتج",
         "ChangeUserStatus": "تغيير حالة مستخدم"
+    },
+    "GeneralMessages": {
+        "InvalidInputWarningHeader": "تحذير",
+        "InvalidInputWarningMessage": "!برجاء ادخال القيم بطريقة صحيحة",
+        "InvalidInputDuplicationMessage":"!هذه الخاصية موجودة بالفعل",
+        "InvalidInputCountMessage":"!لم يتم ادخال كل الخصائص المطلوبة"
+
     }
 }

@@ -4,13 +4,15 @@ import { Subscription } from 'rxjs';
 import { Department } from '../../models/department';
 import { ToastrService } from 'ngx-toastr';
 import { DepartmentsService } from '../../remote-services/departments.service';
+import { TranslateService } from '@ngx-translate/core';
+import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
 
 @Component({
   selector: 'app-departments-management',
   templateUrl: './departments-management.component.html',
   styleUrls: ['./departments-management.component.css']
 })
-export class DepartmentsManagementComponent implements OnInit, OnDestroy {
+export class DepartmentsManagementComponent extends SharedMessagesComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
 
   firstPageTitle: string = 'DepartmentsManagementScreen.PrimaryTitle';
@@ -38,7 +40,9 @@ export class DepartmentsManagementComponent implements OnInit, OnDestroy {
   @ViewChild('updateModalCloseButtonRef') updateModalCloseButtonRef!: ElementRef;
 
   constructor(private toastr: ToastrService,
-    private departmentsService: DepartmentsService) {
+    private departmentsService: DepartmentsService,
+    private translateService: TranslateService) {
+      super(translateService);
   }
 
   ngOnInit(): void {
@@ -63,11 +67,11 @@ export class DepartmentsManagementComponent implements OnInit, OnDestroy {
 
       department.id = this.selectedDepartment.id!;
       department.name = this.updateDepartmentForm.controls.departmentName.value!;
-      
+
       this.updateDepartment(department);
       this.updateModalCloseButtonRef.nativeElement.click();
     } else
-      this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
+      this.toastr.warning(this.invalidInputWarningMessage, this.invalidInputWarningHeader);
   }
 
   onDeleteButtonClick(id: number) {
@@ -92,7 +96,7 @@ export class DepartmentsManagementComponent implements OnInit, OnDestroy {
 
       this.createDepartment(requestDTO);
     } else
-      this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
+      this.toastr.warning(this.invalidInputWarningMessage, this.invalidInputWarningHeader);
   }
 
 
@@ -106,7 +110,10 @@ export class DepartmentsManagementComponent implements OnInit, OnDestroy {
         this.isLoading = false;
       }, (error: any) => {
         this.isLoading = false;
-        this.toastr.error(error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
       }
     );
 
@@ -124,8 +131,10 @@ export class DepartmentsManagementComponent implements OnInit, OnDestroy {
       }, (error: any) => {
         this.isProcessing = false;
         this.isLoading = false;
-        console.log(error)
-        this.toastr.error(error.errors[0].value, error.error.key);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
       }
     );
 
@@ -140,8 +149,10 @@ export class DepartmentsManagementComponent implements OnInit, OnDestroy {
         this.isLoading = false;
       }, (error: any) => {
         this.isLoading = false;
-        console.log(error)
-        this.toastr.error(error.errors[0].value, error.error.key);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
       }
     );
 
@@ -167,7 +178,10 @@ export class DepartmentsManagementComponent implements OnInit, OnDestroy {
       }, (error: any) => {
 
         this.isLoading = false;
-        this.toastr.error(error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
       }
     );
 

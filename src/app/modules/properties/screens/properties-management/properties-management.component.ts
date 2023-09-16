@@ -7,13 +7,15 @@ import { Property } from 'src/app/modules/products/models/property';
 import { PropertyTypes } from 'src/app/modules/products/models/property-types';
 import { WarehousesService } from 'src/app/modules/warehouses/remote-services/warehouses.service';
 import { PropertiesService } from '../../remote-services/properties.service';
+import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-properties-management',
   templateUrl: './properties-management.component.html',
   styleUrls: ['./properties-management.component.css']
 })
-export class PropertiesManagementComponent implements OnInit, OnDestroy {
+export class PropertiesManagementComponent extends SharedMessagesComponent implements OnInit, OnDestroy {
 
   subscription = new Subscription();
 
@@ -23,11 +25,11 @@ export class PropertiesManagementComponent implements OnInit, OnDestroy {
 
   @ViewChild('updateModalCloseButtonRef') updateModalCloseButtonRef!: ElementRef;
 
-   // page loading
-   isLoading: boolean = false;
+  // page loading
+  isLoading: boolean = false;
 
-   // button loading
-   isProcessing: boolean = false;
+  // button loading
+  isProcessing: boolean = false;
 
   propetyTypes = PropertyTypes;
 
@@ -49,7 +51,10 @@ export class PropertiesManagementComponent implements OnInit, OnDestroy {
   constructor(
     private toastr: ToastrService,
     private propertiesService: PropertiesService,
-    private router: Router) { }
+    private router: Router,
+    private translateService: TranslateService) {
+      super(translateService);
+     }
 
 
   // events
@@ -76,7 +81,7 @@ export class PropertiesManagementComponent implements OnInit, OnDestroy {
       this.createWarehouseProperty(requestDTO);
 
     } else
-      this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
+      this.toastr.warning(this.invalidInputWarningMessage, this.invalidInputWarningHeader);
   }
 
   onUpdateButtonClick(id: number) {
@@ -86,19 +91,19 @@ export class PropertiesManagementComponent implements OnInit, OnDestroy {
 
   onUpdateConfirmationClick() {
     if (this.updatePropertyForm.valid) {
-        this.isLoading = true;
-  
-        let requestDTO = new Property();
-  
-        requestDTO.id = this.selectedProperty!.id;
-        requestDTO.name = this.updatePropertyForm.controls.name.value!;
-        requestDTO.type = this.updatePropertyForm.controls.type.value!;
-        requestDTO.required_status = this.updatePropertyForm.controls.required.value!;
-  
-        this.updateWarehouseProperty(requestDTO);
-        this.updateModalCloseButtonRef.nativeElement.click();
-      } else
-        this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
+      this.isLoading = true;
+
+      let requestDTO = new Property();
+
+      requestDTO.id = this.selectedProperty!.id;
+      requestDTO.name = this.updatePropertyForm.controls.name.value!;
+      requestDTO.type = this.updatePropertyForm.controls.type.value!;
+      requestDTO.required_status = this.updatePropertyForm.controls.required.value!;
+
+      this.updateWarehouseProperty(requestDTO);
+      this.updateModalCloseButtonRef.nativeElement.click();
+    } else
+      this.toastr.warning(this.invalidInputWarningMessage, this.invalidInputWarningHeader);
   }
 
   onDeleteButtonClick(id: number) {
@@ -114,11 +119,13 @@ export class PropertiesManagementComponent implements OnInit, OnDestroy {
   getWarehouseProperties() {
     let subscribtion = this.propertiesService.getProperties().subscribe(
       (response: any) => {
-        console.log(response)
         this.properties = response.data;
         this.isLoading = false;
       }, (error: any) => {
-        this.toastr.error(error.error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
         this.isLoading = false;
       }
     );
@@ -129,13 +136,15 @@ export class PropertiesManagementComponent implements OnInit, OnDestroy {
   createWarehouseProperty(requestDTO: Property) {
     let subscribtion = this.propertiesService.createProperty(requestDTO).subscribe(
       (response: any) => {
-        console.log(response)
         this.toastr.success(response.message);
         this.properties = response.data;
         this.isProcessing = false;
         this.isLoading = false;
       }, (error: any) => {
-        this.toastr.error(error.error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
         this.isProcessing = false;
         this.isLoading = false;
       }
@@ -162,7 +171,10 @@ export class PropertiesManagementComponent implements OnInit, OnDestroy {
         Object.assign(updatedPackage!, response.data);
         this.isLoading = false;
       }, (error: any) => {
-        this.toastr.error(error.error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
         this.isLoading = false;
       }
     );
@@ -173,12 +185,14 @@ export class PropertiesManagementComponent implements OnInit, OnDestroy {
   deleteWarehouseProperty() {
     let subscribtion = this.propertiesService.deleteProperty(this.selectedProperty.id).subscribe(
       (response: any) => {
-        console.log(response)
         this.toastr.success(response.message);
         this.properties = response.data;
         this.isLoading = false;
       }, (error: any) => {
-        this.toastr.error(error.error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
         this.isLoading = false;
       }
     );

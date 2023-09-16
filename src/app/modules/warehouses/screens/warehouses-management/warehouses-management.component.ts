@@ -10,13 +10,15 @@ import { Package } from 'src/app/modules/packages/models/package';
 import { ViewChild } from '@angular/core';
 import { PropertyTypes } from 'src/app/modules/products/models/property-types';
 import { Property } from 'src/app/modules/products/models/property';
+import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-warehouses-management',
   templateUrl: './warehouses-management.component.html',
   styleUrls: ['./warehouses-management.component.css']
 })
-export class WarehousesManagementComponent implements OnInit, OnDestroy {
+export class WarehousesManagementComponent extends SharedMessagesComponent implements OnInit, OnDestroy {
 
   subscription = new Subscription();
 
@@ -70,7 +72,10 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
     private toastr: ToastrService,
     private warehousesService: WarehousesService,
     private packagesService: PackagesService,
-    private router: Router) { }
+    private router: Router,
+    private translateService: TranslateService) { 
+      super(translateService);
+    }
 
 
   // events
@@ -119,7 +124,7 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
       this.updateWarehouse(requestDTO);
       this.updateModalCloseButtonRef.nativeElement.click();
     } else
-      this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
+      this.toastr.warning(this.invalidInputWarningMessage, this.invalidInputWarningHeader);
   }
 
   onDeleteButtonClick(id: number) {
@@ -146,7 +151,7 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
 
       this.createWarehouse(warehouse);
     } else
-      this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
+      this.toastr.warning(this.invalidInputWarningMessage, this.invalidInputWarningHeader);
   }
 
   // functions
@@ -157,9 +162,11 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
         this.warehouses = response.data;
         this.isLoading = false;
         this.isProcessing = false;
-        console.log(this.warehouses)
       }, (error: any) => {
-        this.toastr.error(error.error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
         this.isLoading = false;
       }
     );
@@ -172,7 +179,10 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
       (response: any) => {
         this.packages = response.data;
       }, (error: any) => {
-        this.toastr.error(error.error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
       }
     );
 
@@ -191,8 +201,10 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
       }, (error: any) => {
         this.isProcessing = false;
         this.isLoading = false;
-        console.log(error)
-        this.toastr.error(error.error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
       }
     );
 
@@ -223,7 +235,10 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
 
         this.isProcessing = false;
         this.isLoading = false;
-        this.toastr.error(error.error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
       }
     );
 
@@ -239,7 +254,10 @@ export class WarehousesManagementComponent implements OnInit, OnDestroy {
         this.isLoading = false;
       }, (error: any) => {
         this.isLoading = false;
-        this.toastr.error(error.error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
       }
     );
 

@@ -39,7 +39,10 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
         this.cards = response.data;
         this.isLoading = false;
       }, (error: any) => {
-        this.toastr.error(error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
         this.isLoading = false;
       }
     );

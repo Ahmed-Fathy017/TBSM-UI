@@ -11,13 +11,15 @@ import { Property } from '../../models/property';
 import { Product } from '../../models/product';
 import { ProductsService } from '../../remote-services/products.service';
 import { PropertiesService } from 'src/app/modules/properties/remote-services/properties.service';
+import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-create-product',
   templateUrl: './create-product.component.html',
   styleUrls: ['./create-product.component.css']
 })
-export class CreateProductComponent implements OnInit, OnDestroy {
+export class CreateProductComponent extends SharedMessagesComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
 
   firstPageTitle: string = 'CreateProductScreen.PrimaryTitle';
@@ -63,10 +65,11 @@ export class CreateProductComponent implements OnInit, OnDestroy {
     private refrigeratorsService: RefrigeratorsService,
     private warehouseService: WarehousesService,
     private productsService: ProductsService,
-    private propertiesService: PropertiesService
+    private propertiesService: PropertiesService,
+    private translateService: TranslateService
   ) {
 
-
+    super(translateService)
   }
 
   ngOnInit(): void {
@@ -88,13 +91,11 @@ export class CreateProductComponent implements OnInit, OnDestroy {
     // Access the element by its id
     let element = this.valueInput.nativeElement;
 
-    console.log(this.selectedProperty)
     let propertyExists = this.addedProperties.some(i => i.id == this.selectedProperty?.id)
     if (propertyExists) {
-      this.toastr.warning('!تم اضافة هذه الخاصية', 'تحذير');
+      this.toastr.warning(this.invalidInputDuplicationMessage, this.invalidInputWarningHeader);
       return;
     }
-    console.log(this.addedProperties)
 
     // Now, you can use element as a reference to the DOM element
     // For example, you can modify its properties or add event listeners
@@ -112,7 +113,7 @@ export class CreateProductComponent implements OnInit, OnDestroy {
 
     }
     else
-      this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
+      this.toastr.warning(this.invalidInputWarningMessage, this.invalidInputWarningHeader);
 
   }
 
@@ -128,12 +129,11 @@ export class CreateProductComponent implements OnInit, OnDestroy {
   onCreateButtonClick() {
 
     let allRequiredPropertiesExist = this.addedProperties.some(i => this.requiredPropertiesIds.every(j => j == i.property_id));
-    if (!allRequiredPropertiesExist){
-      this.toastr.warning('لم يتم ادخال كل الخصائص المطلوبة!', 'تحذير');
+    if (!allRequiredPropertiesExist) {
+      this.toastr.warning(this.invalidInputCountMessage, this.invalidInputWarningHeader);
       return;
     }
 
-    console.log(allRequiredPropertiesExist)
     if (this.createProductForm.valid) {
       let requestDTO = new Product();
 
@@ -150,7 +150,7 @@ export class CreateProductComponent implements OnInit, OnDestroy {
       this.createProduct(requestDTO);
     }
     else
-      this.toastr.warning('برجاء ادخال القيم بطريقة صحيحة!', 'تحذير');
+      this.toastr.warning(this.invalidInputWarningMessage, this.invalidInputWarningHeader);
   }
 
   getDepartments() {
@@ -162,7 +162,10 @@ export class CreateProductComponent implements OnInit, OnDestroy {
         this.isLoading = false;
       }, (error: any) => {
         this.isLoading = false;
-        this.toastr.error(error.error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
       }
     );
 
@@ -177,7 +180,10 @@ export class CreateProductComponent implements OnInit, OnDestroy {
         this.isLoading = false;
         this.isProcessing = false;
       }, (error: any) => {
-        this.toastr.error(error.error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
         this.isLoading = false;
       }
     );
@@ -190,11 +196,13 @@ export class CreateProductComponent implements OnInit, OnDestroy {
       (response: any) => {
         this.properties = response.data;
         this.requiredPropertiesIds = this.properties.filter(i => i.required_status).map(i => i.id);
-        console.log(this.requiredPropertiesIds)
         this.selectedProperty = this.properties[0];
         this.isLoading = false;
       }, (error: any) => {
-        this.toastr.error(error.error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
         this.isLoading = false;
       }
     );
@@ -209,7 +217,10 @@ export class CreateProductComponent implements OnInit, OnDestroy {
         this.createdProductId = response.data.id;
         this.getProductInvoice();
       }, (error: any) => {
-        this.toastr.error(error.error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
         this.isProcessing = false;
       }
     );
@@ -224,7 +235,10 @@ export class CreateProductComponent implements OnInit, OnDestroy {
         this.showProductSnackbar();
         this.isProcessing = false;
       }, (error: any) => {
-        this.toastr.error(error.error.errors[0].value, error.error.message);
+        if (error.error.errors)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
         this.isProcessing = false;
       }
     );

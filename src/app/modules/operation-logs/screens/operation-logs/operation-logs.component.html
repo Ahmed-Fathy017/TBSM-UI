@@ -22,12 +22,12 @@
                         translate}} </label>
                     <div class="input-group flex-nowrap">
 
-                        <select name="type" id="type" formControlName="type" class="form-select">
+                        <select name="type" id="type" formControlName="type" class="form-select rounded-2">
                             <option *ngFor="let type of operationTypes" [value]="type.value">
                                 {{type.name | translate}}
                             </option>
                         </select>
-                        <span class="input-group-text small-search-btn" id="addon-wrapping"
+                        <span class="input-group-text small-search-btn rounded-2" id="addon-wrapping"
                             (click)="onSearchButtonClick()"><i class="fa-solid fa-magnifying-glass"></i></span>
                     </div>
                 </div>

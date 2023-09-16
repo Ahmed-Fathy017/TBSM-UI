@@ -23,7 +23,6 @@ export class AppComponent {
   }
 
   translate(event: any) {
-    console.log("lang event", event.target.value)
     this.translateService.use(event.target.value)
   }
 }

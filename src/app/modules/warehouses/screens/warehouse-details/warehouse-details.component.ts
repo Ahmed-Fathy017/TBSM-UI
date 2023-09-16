@@ -58,7 +58,6 @@ export class WarehouseDetailsComponent implements OnInit, OnDestroy {
 
     let subscription = this.warehousesService.getWarehouse(isAdmin? this.warehouseId : undefined).subscribe(
       (response: any) => {
-        console.log(response)
         this.cards = response.data;
         this.logs = response.events;
         
@@ -66,7 +65,10 @@ export class WarehouseDetailsComponent implements OnInit, OnDestroy {
         this.isLoadingWarehouseData = false;
       }, (error: any) => {
         this.isLoadingWarehouseData = false;
-        this.toastr.error(error.errors[0].value, error.error.message);
+        if (error.error.errors)
+        this.toastr.error(error.error.errors[0].value, error.error.message);
+      else
+        this.toastr.error(error.error.message);
       }
     );
 

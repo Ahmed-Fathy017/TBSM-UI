@@ -12,7 +12,7 @@ import { WarehousesModule } from '../warehouses/warehouses.module';
 import { PackagesModule } from '../packages/packages.module';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { NavigationService } from './services/navigation.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { RolesModule } from '../roles/roles.module';
 import { DepartmentsModule } from '../departments/departments.module';
 import { UsersModule } from '../users/users.module';
@@ -59,7 +59,8 @@ import { InventoriesModule } from '../inventories/inventories.module';
     InventoriesModule
   ], providers: [
     NavigationService,
-    SupplyChainsService
+    SupplyChainsService,
+    TranslateService
   ]
 })
 export class MasterLayoutModule { }
