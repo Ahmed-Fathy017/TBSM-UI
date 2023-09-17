@@ -10,7 +10,7 @@ import { Property } from '../../products/models/property';
 })
 export class WarehousesService extends AbstractRemoteService {
 
-  constructor(private http: HttpClient,
+  constructor(private http: HttpClient
   ) {
     super()
   }
@@ -40,16 +40,9 @@ export class WarehousesService extends AbstractRemoteService {
   }
 
   // generic api, can be used for both admin user and warehouse user
-  getWarehouse(id?: number) {
+  getWarehouse() {
     let apiUrl = this.apiURl + `warehouse/main`;
 
-    if (id) {
-      let httpHeaders: HttpHeaders = new HttpHeaders();
-      // warehouse id should be added to headers
-      // httpHeaders.append('Accept-Language', 'ar');
-      let options = { headers: httpHeaders };
-      return this.http.get(apiUrl, options);
-    }
 
     return this.http.get(apiUrl);
   }

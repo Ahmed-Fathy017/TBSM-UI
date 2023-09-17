@@ -10,6 +10,7 @@ import { UsersService } from '../../remote-services/users.service';
 import { User } from '../../models/user';
 import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
 import { TranslateService } from '@ngx-translate/core';
+import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 
 @Component({
   selector: 'app-users-management',
@@ -50,13 +51,26 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
     role: new FormControl('', [Validators.required])
   });
 
+  permissions: string[] = [];
+
+  hasCreatingAuthority: boolean = true;
+  hasDeletingAuthority: boolean = true;
+  hasUpdatingAuthority: boolean = true;
+
+  creatingAuthorityPermission: string = 'Users.create';
+  deletingAuthorityPermission: string = 'Users.delete';
+  updatingAuthorityPermission: string = 'Users.update';
+
   constructor(
     private toastr: ToastrService,
     private rolesService: RolesService,
     private usersService: UsersService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private localService: LocalService
   ) {
     super(translateService);
+
+    this.evaluateScreenPermissions();
   }
 
   ngOnInit(): void {
@@ -116,6 +130,16 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
       this.updateModalCloseButtonRef.nativeElement.click();
     } else
       this.toastr.warning(this.invalidInputWarningMessage, this.invalidInputWarningHeader);
+  }
+
+  // functions
+  evaluateScreenPermissions() {
+    this.permissions = JSON.parse(this.localService.getData("permissions"));
+    console.log(this.permissions)
+    this.hasCreatingAuthority = this.permissions.findIndex(i => i === this.creatingAuthorityPermission) != -1 ? true : false;
+    console.log(this.hasCreatingAuthority)
+    this.hasDeletingAuthority = this.permissions.findIndex(i => i === this.deletingAuthorityPermission) != -1 ? true : false;
+    this.hasUpdatingAuthority = this.permissions.findIndex(i => i === this.updatingAuthorityPermission) != -1 ? true : false;
   }
 
   getRoles() {

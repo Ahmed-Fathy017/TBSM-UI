@@ -10,6 +10,7 @@ import { WithdrawProductComponent } from './screens/withdraw-product/withdraw-pr
 import { TranslateModule } from '@ngx-translate/core';
 import { ProductsService } from './remote-services/products.service';
 import { SupplyChainsModule } from '../supply-chains/supply-chains.module';
+import { LocalService } from '../shared-components/services/local.service';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { SupplyChainsModule } from '../supply-chains/supply-chains.module';
     TranslateModule
   ],
   providers: [
+    LocalService,
     ProductsService
   ]
 })

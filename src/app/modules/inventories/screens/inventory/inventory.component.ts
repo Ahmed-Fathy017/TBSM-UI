@@ -10,6 +10,7 @@ import { OperationLogsService } from 'src/app/modules/operation-logs/remote-serv
 import { InventoriesService } from '../../remote-services/inventories.service';
 import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
 import { TranslateService } from '@ngx-translate/core';
+import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 
 @Component({
   selector: 'app-inventory',
@@ -53,12 +54,24 @@ export class InventoryComponent extends SharedMessagesComponent implements OnIni
 
   excelLink: string = '';
 
+  permissions: string[] = [];
+
+  hasImportingAuthority: boolean = true;
+  hasExportingAuthority: boolean = true;
+
+  importingAuthorityPermission: string = 'Inventory.import';
+  exportingAuthorityPermission: string = 'Inventory.export';
+
+
   constructor(private toastr: ToastrService,
     private departmentsService: DepartmentsService,
     private inventoriesService: InventoriesService,
     private sanitizer: DomSanitizer,
-    private translateService: TranslateService) {
-      super(translateService);
+    private translateService: TranslateService,
+    private localService: LocalService) {
+    super(translateService);
+
+    this.evaluateScreenPermissions();
   }
 
   ngOnInit(): void {
@@ -121,6 +134,13 @@ export class InventoryComponent extends SharedMessagesComponent implements OnIni
   onExportButtonConfirmationClick(fileType: string) {
     this.isExporting = true;
     this.exportFile(fileType);
+  }
+
+  evaluateScreenPermissions() {
+    this.permissions = JSON.parse(this.localService.getData("permissions"));
+
+    this.hasImportingAuthority = this.permissions.findIndex(i => i === this.importingAuthorityPermission) != -1? true: false;
+    this.hasExportingAuthority = this.permissions.findIndex(i => i === this.exportingAuthorityPermission) != -1? true: false;
   }
 
   getExcelDownlaodableFile() {

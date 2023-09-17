@@ -21,6 +21,7 @@ import { ProductFilters } from '../../models/products-filter';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
+import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 
 @Component({
   selector: 'app-products-management',
@@ -83,6 +84,25 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
   selectedProperty: Property = new Property();
   requiredPropertiesIds: number[] = [];
 
+  permissions: string[] = [];
+
+  isAdmin: boolean = true;
+
+  hasProductDeletionAuthority: boolean = true;
+  hasProductSupplyDemandingAuthority: boolean = true;
+  hasProductIncreasingAuthority: boolean = true;
+  hasProductBarcodePrintingAuthority: boolean = true;
+  hasProductViewingAuthority: boolean = true;
+  hasProductUpdatingAuthority: boolean = true;
+
+  productDeletionAuthorityPermission: string = 'Products.delete';
+  productSupplyDemandingAuthorityPermission: string = 'Products.demand_product';
+  productIncreasingAuthorityPermission: string = 'Products.increase_product';
+  productBarcodePrintingAuthorityPermission: string = 'Products.print_barcode';
+  productViewingAuthorityPermission: string = 'Products.show_details';
+  productUpdatingAuthorityPermission: string = 'Products.update';
+
+
   // constructor
   constructor(
     private toastr: ToastrService,
@@ -93,9 +113,13 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
     private propertiesService: PropertiesService,
     private renderer: Renderer2,
     private activatedRoute: ActivatedRoute,
-    private translateService: TranslateService) { 
-      super(translateService);
-    }
+    private translateService: TranslateService,
+    private localService: LocalService) {
+    super(translateService);
+
+    this.isAdmin = Boolean(this.localService.getData('isAdmin'));
+    this.evaluateScreenPermissions();
+  }
 
 
   // events
@@ -289,6 +313,27 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
   }
 
   // funtions
+
+  evaluateScreenPermissions() {
+    this.permissions = JSON.parse(this.localService.getData("permissions"));
+
+    if (this.isAdmin) {
+      this.hasProductViewingAuthority = true;
+      this.hasProductDeletionAuthority = false;
+      this.hasProductUpdatingAuthority = false;
+      this.hasProductBarcodePrintingAuthority = false;
+      this.hasProductSupplyDemandingAuthority = false;
+      this.hasProductIncreasingAuthority = false;
+    } else {
+      this.hasProductViewingAuthority = this.permissions.findIndex(i => i === this.productViewingAuthorityPermission) != -1 ? true : false;
+      this.hasProductDeletionAuthority = this.permissions.findIndex(i => i === this.productDeletionAuthorityPermission) != -1 ? true : false;
+      this.hasProductUpdatingAuthority = this.permissions.findIndex(i => i === this.productUpdatingAuthorityPermission) != -1 ? true : false;
+      this.hasProductBarcodePrintingAuthority = this.permissions.findIndex(i => i === this.productBarcodePrintingAuthorityPermission) != -1 ? true : false;
+      this.hasProductSupplyDemandingAuthority = this.permissions.findIndex(i => i === this.productSupplyDemandingAuthorityPermission) != -1 ? true : false;
+      this.hasProductIncreasingAuthority = this.permissions.findIndex(i => i === this.productIncreasingAuthorityPermission) != -1 ? true : false;
+    }
+  }
+
   getProducts(requestDTO: GetProductsRequest) {
     let subscription = this.productsService.getProducts(requestDTO).subscribe(
       (response: any) => {

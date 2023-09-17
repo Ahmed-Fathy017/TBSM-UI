@@ -8,6 +8,7 @@ import { LocalService } from 'src/app/modules/shared-components/services/local.s
 import { UserTypes } from '../../models/user-types';
 import { PermissionGroup } from 'src/app/modules/roles/models/permission-group';
 import { Permission } from 'src/app/modules/roles/models/permission';
+import { ScreensConfigProvider } from 'src/app/modules/master-layout/providers/screens-config-provider';
 
 @Component({
   selector: 'app-login',
@@ -112,8 +113,15 @@ export class LoginComponent implements OnInit {
           this.localStore.saveData('username', response.data.username);
           this.localStore.saveData('type', response.data.type);
           this.localStore.saveData('id', String(response.data.id));
+          this.localStore.saveData('isAdmin', String(response.data.type === UserTypes.ADMIN ? true : false));
 
-          this.setupUserPermissions(response);
+          if (!Boolean(this.localStore.getData('isAdmin')))
+            this.setupUserPermissions(response);
+          else
+          this.setupAdminPermissions();
+            
+
+          console.log(response)
 
           this.navigateToHomePage()
 
@@ -144,6 +152,16 @@ export class LoginComponent implements OnInit {
 
 
     // console.table(JSON.parse(this.localStore.getData("permissions")))
+  }
+
+  setupAdminPermissions() {
+    this.localStore.saveData("permissions", JSON.stringify([
+      ScreensConfigProvider.AlmostExpiredProductsViewManagementScreen,
+      ScreensConfigProvider.ExpiredProductsViewManagementScreen,
+      ScreensConfigProvider.EmptyQuantityProductsViewManagementScreen,
+      ScreensConfigProvider.LittleQuantityProductsViewManagementScreen,
+      ScreensConfigProvider.VairableTemperatureProductsViewManagementScreen
+    ]));
   }
 
   navigateToHomePage() {

@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Role } from '../../models/role';
 import { Permission } from '../../models/permission';
 import { PermissionGroup } from '../../models/permission-group';
+import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 
 @Component({
   selector: 'app-roles-management',
@@ -13,7 +14,6 @@ import { PermissionGroup } from '../../models/permission-group';
   styleUrls: ['./roles-management.component.css']
 })
 export class RolesManagementComponent implements OnInit, OnDestroy {
-
 
   subscription = new Subscription();
 
@@ -36,12 +36,20 @@ export class RolesManagementComponent implements OnInit, OnDestroy {
   // button loading
   isProcessing: boolean = false;
 
+  permissions: string[] = [];
+
+  hasDeletingAuthority: boolean = true;
+  hasUpdatingAuthority: boolean = true;
+
+  deletingAuthorityPermission: string = 'Roles.delete';
+  updatingAuthorityPermission: string = 'Roles.update';
 
   constructor(
     private toastr: ToastrService,
-    private rolesService: RolesService) {
+    private rolesService: RolesService,
+    private localService: LocalService) {
 
-
+    this.evaluateScreenPermissions();
   }
 
 
@@ -62,8 +70,13 @@ export class RolesManagementComponent implements OnInit, OnDestroy {
     this.deleteRole();
   }
 
+  // functions
+  evaluateScreenPermissions() {
+    this.permissions = JSON.parse(this.localService.getData("permissions"));
 
-  
+    this.hasDeletingAuthority = this.permissions.findIndex(i => i === this.deletingAuthorityPermission) != -1 ? true : false;
+    this.hasUpdatingAuthority = this.permissions.findIndex(i => i === this.updatingAuthorityPermission) != -1 ? true : false;
+  }
 
   getRoles() {
     this.isLoadingRoles = true;
@@ -73,9 +86,9 @@ export class RolesManagementComponent implements OnInit, OnDestroy {
         this.isLoadingRoles = false;
       }, (error: any) => {
         if (error.error.errors)
-        this.toastr.error(error.error.errors[0].value, error.error.message);
-      else
-        this.toastr.error(error.error.message);
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
         this.isLoadingRoles = false;
       }
     );
@@ -94,9 +107,9 @@ export class RolesManagementComponent implements OnInit, OnDestroy {
 
       }, (error: any) => {
         if (error.error.errors)
-        this.toastr.error(error.error.errors[0].value, error.error.message);
-      else
-        this.toastr.error(error.error.message);
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
         this.isLoadingRoles = false;
       }
     );
@@ -105,5 +118,5 @@ export class RolesManagementComponent implements OnInit, OnDestroy {
   }
 
 
-  
+
 }

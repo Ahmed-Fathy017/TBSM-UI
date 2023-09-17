@@ -40,14 +40,14 @@
             <div *ngIf="item.products && item.products.length > 0">
                 <div class="title p-3 my-4 d-flex justify-content-between">
                     <h5 class="fw-bold m-0">{{item.category}}</h5>
-    
+
                     <div>
                         <i class="fa-solid fa-minimize cursor-pointer" data-bs-toggle="collapse"
                             [attr.data-bs-target]="'#collapse-' + i" aria-expanded="false"
                             aria-controls="collapseExample"></i>
                     </div>
-    
-    
+
+
                 </div>
 
                 <div class="collapse container " [id]="'collapse-' + i">
@@ -57,58 +57,65 @@
                             *ngFor="let product of item.paginatedProducts; let i = index">
                             <div class="row align-items-center">
                                 <div class="col-lg-2 col-md-2 fw-bold">{{product.name}}</div>
-    
+
                                 <div class="stat col-lg-2 col-md-3">
-                                    <div class="small-item-card d-flex justify-content-between rounded-2 border py-2 px-2">
+                                    <div
+                                        class="small-item-card d-flex justify-content-between rounded-2 border py-2 px-2">
                                         <div>الكمية</div>
                                         <div>{{product.quantity}}</div>
                                     </div>
                                 </div>
-    
+
                                 <div class="stat col-lg-2 col-md-3">
-                                    <div class="small-item-card d-flex justify-content-between rounded-2 border py-2 px-2">
+                                    <div
+                                        class="small-item-card d-flex justify-content-between rounded-2 border py-2 px-2">
                                         <div>الثلاجة</div>
                                         <div>{{product.refrigerator.name}}</div>
                                     </div>
                                 </div>
-    
+
                                 <div class="stat col-lg-2 col-md-3">
-                                    <div class="small-item-card d-flex justify-content-between rounded-2 border py-2 px-2">
+                                    <div
+                                        class="small-item-card d-flex justify-content-between rounded-2 border py-2 px-2">
                                         <div>كود المنتج</div>
                                         <div><small> {{product.number}}</small></div>
                                     </div>
                                 </div>
-    
+
                                 <div class="actions col-lg-3 col-md-12 d-flex justify-content-end align-items-center">
-    
+
                                     <div class="row d-flex justify-content-end">
                                         <div class="col-lg-4 col-md-6">
                                             <div class="d-flex justify-content-center">
                                                 <div class="rounded-1 upload d-flex justify-content-center align-items-center mx-2 px-3 py-2"
                                                     data-bs-toggle="modal" data-bs-target="#supplyModal"
-                                                    (click)="onProductSupplyDemandButtonClick(item.id, product.id)">
+                                                    (click)="onProductSupplyDemandButtonClick(item.id, product.id)"
+                                                    *ngIf="hasProductSupplyDemandingAuthority">
                                                     <i class="fa-solid fa-upload"></i>
                                                 </div>
-    
+
                                                 <div class="rounded-1 code d-flex justify-content-center align-items-center mx-2 px-3 py-2"
-                                                    (click)="onProductBarcodeButtonClick(item.id, product.id)">
+                                                    (click)="onProductBarcodeButtonClick(item.id, product.id)"
+                                                    *ngIf="hasProductBarcodePrintingAuthority">
                                                     <i class="fa-solid fa-qrcode" style="color: #787878;"></i>
                                                 </div>
-    
-                                                <div
-                                                    class="rounded-1 view d-flex justify-content-center align-items-center mx-2 px-3 py-2">
+
+                                                <div class="rounded-1 view d-flex justify-content-center align-items-center mx-2 px-3 py-2"
+                                                    *ngIf="hasProductViewingAuthority">
                                                     <i class="fa-solid fa-eye"></i>
                                                 </div>
-    
+
                                                 <div class="rounded-1 edit d-flex justify-content-center align-items-center mx-2 px-3 py-2"
                                                     data-bs-toggle="modal" data-bs-target="#editModal"
-                                                    (click)="onUpdateButtonClick(item.id, product.id)">
+                                                    (click)="onUpdateButtonClick(item.id, product.id)"
+                                                    *ngIf="hasProductUpdatingAuthority">
                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                 </div>
-    
+
                                                 <div class="rounded-1 delete d-flex justify-content-center align-items-center mx-2 px-3 py-2"
                                                     data-bs-toggle="modal" data-bs-target="#deleteModal"
-                                                    (click)="onDeleteButtonClick(item.id, product.id, i)">
+                                                    (click)="onDeleteButtonClick(item.id, product.id, i)"
+                                                    *ngIf="hasProductDeletionAuthority">
                                                     <i class="fa-solid fa-trash-can"></i>
                                                 </div>
                                             </div>
@@ -118,9 +125,9 @@
                             </div>
                         </div>
                     </div>
-    
+
                     <div class="d-flex justify-content-end" *ngIf="item.products && item.products.length > 0">
-    
+
                         <nav aria-label="Page navigation example ">
                             <ul class="pagination">
                                 <li class="page-item" (click)="onPreviousPageClick(item.id)">
@@ -132,7 +139,7 @@
                                 <li class="page-item fw-bold" *ngFor="let page of item.pages"
                                     (click)="onPageChange(item.id, page)"><a class="page-link"
                                         [ngClass]="{'active-page': item.selectedPage === page}">{{page}}</a></li>
-    
+
                                 <li class="page-item" (click)="onNextPageClick(item.id)">
                                     <a class="page-link navigator rounded-2 fw-bold" aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>
@@ -144,9 +151,9 @@
                     </div>
                 </div>
             </div>
-           
 
-            
+
+
         </div>
     </div>
 </div>

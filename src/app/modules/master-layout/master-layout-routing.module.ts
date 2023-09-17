@@ -11,6 +11,7 @@ import { OperationLogsComponent } from '../operation-logs/screens/operation-logs
 import { PropertiesManagementComponent } from '../properties/screens/properties-management/properties-management.component';
 import { InventoryComponent } from '../inventories/screens/inventory/inventory.component';
 import { ScreensConfigProvider } from './providers/screens-config-provider';
+import { PackagesManagementComponent } from '../packages/screens/packages-management/packages-management.component';
 
 const routes: Routes = [
   {
@@ -24,10 +25,6 @@ const routes: Routes = [
         loadChildren: () => import('../warehouses/warehouses-routing.module').then(m => m.WarehouseRoutingModule)
       },
       {
-        path: 'packages',
-        loadChildren: () => import('../packages/packages-routing.module').then(m => m.PackagesRoutingModule)
-      },
-      {
         path: 'roles',
         loadChildren: () => import('../roles/roles-routing.module').then(m => m.RolesRoutingModule)
       },
@@ -39,8 +36,9 @@ const routes: Routes = [
         path: 'supply-chains',
         loadChildren: () => import('../supply-chains/supply-chains-routing.module').then(m => m.SupplyChainsRoutingModule)
       },
+      { path: 'packages', component: PackagesManagementComponent, data: { config: ScreensConfigProvider.PackagesManagementScreen } },
       { path: 'management/departments', component: DepartmentsManagementComponent, data: { config: ScreensConfigProvider.DepartmentsManagementScreen } },
-      { path: 'management/refrigerators', component:  RefrigeratorsManagementComponent, data: { config: ScreensConfigProvider.RefrigeratorsManagementScreen }},
+      { path: 'management/refrigerators', component: RefrigeratorsManagementComponent, data: { config: ScreensConfigProvider.RefrigeratorsManagementScreen } },
       { path: 'management/properties', component: PropertiesManagementComponent, data: { config: ScreensConfigProvider.PropertiesManagementScreen } },
       { path: 'users', component: UsersManagementComponent, data: { config: ScreensConfigProvider.UsersManagementScreen } },
       { path: 'operation-logs', component: OperationLogsComponent, data: { config: ScreensConfigProvider.OperationLogsManagementScreen } },

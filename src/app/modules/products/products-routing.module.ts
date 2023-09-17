@@ -9,7 +9,12 @@ const routes: Routes = [
   { path: '', component: ProductsManagementComponent, data: { config: ScreensConfigProvider.ProductsManagementScreen } },
   { path: 'create', component: CreateProductComponent, pathMatch: 'full', data: { config: ScreensConfigProvider.CreateProductScreen } },
   { path: 'withdraw', component: WithdrawProductComponent, pathMatch: 'full', data: { config: ScreensConfigProvider.WithdrawProductScreen } },
-  { path: ':filter', component: ProductsManagementComponent, data: { config: ScreensConfigProvider.ProductsManagementScreen } },
+  { path: 'empty-quantity', component: ProductsManagementComponent, data: { config: ScreensConfigProvider.EmptyQuantityProductsViewManagementScreen } },
+  { path: 'little-quantity', component: ProductsManagementComponent, data: { config: ScreensConfigProvider.LittleQuantityProductsViewManagementScreen } },
+  { path: 'variable-temperature', component: ProductsManagementComponent, data: { config: ScreensConfigProvider.VairableTemperatureProductsViewManagementScreen } },
+  { path: 'expired-date', component: ProductsManagementComponent, data: { config: ScreensConfigProvider.ExpiredProductsViewManagementScreen } },
+  { path: 'almost-expired-date', component: ProductsManagementComponent, data: { config: ScreensConfigProvider.AlmostExpiredProductsViewManagementScreen } },
+
 ];
 
 @NgModule({

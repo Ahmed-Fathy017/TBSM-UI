@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <app-page-header [pageTitle]="firstPageTitle" [coloredPageTitle]="coloredPageTitle"></app-page-header>
 
-    <div class="container ">
+    <div class="container " *ngIf="hasCreatingAuthority">
         <form action="" [formGroup]="createUserForm">
 
             <div class=" row mb-2 ">
@@ -91,11 +91,13 @@
 
                             <div class="mx-2 edit d-flex justify-content-center align-items-center rounded-2"
                                 data-bs-toggle="modal" data-bs-target="#editModal"
-                                (click)="onUpdateButtonClick(user.id)"><i class="fa-solid fa-pen-to-square"></i>
+                                (click)="onUpdateButtonClick(user.id)"><i class="fa-solid fa-pen-to-square"
+                                    *ngIf="hasUpdatingAuthority"></i>
                             </div>
                             <div class="mx-2 delete d-flex justify-content-center align-items-center rounded-2"
                                 data-bs-toggle="modal" data-bs-target="#deleteModal"
-                                (click)="onDeleteButtonClick(user.id)"><i class="fa-solid fa-trash-can"></i>
+                                (click)="onDeleteButtonClick(user.id)"><i class="fa-solid fa-trash-can"
+                                    *ngIf="hasDeletingAuthority"></i>
                             </div>
                         </div>
 

@@ -9,6 +9,7 @@ import { WarehousesService } from 'src/app/modules/warehouses/remote-services/wa
 import { PropertiesService } from '../../remote-services/properties.service';
 import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
 import { TranslateService } from '@ngx-translate/core';
+import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 
 @Component({
   selector: 'app-properties-management',
@@ -48,13 +49,26 @@ export class PropertiesManagementComponent extends SharedMessagesComponent imple
   properties: Property[] = [];
   selectedProperty: Property = new Property();
 
+  permissions: string[] = [];
+
+  hasCreatingAuthority: boolean = true;
+  hasDeletingAuthority: boolean = true;
+  hasUpdatingAuthority: boolean = true;
+
+  creatingAuthorityPermission: string = 'Properties.create';
+  deletingAuthorityPermission: string = 'Properties.delete';
+  updatingAuthorityPermission: string = 'Properties.update';
+
   constructor(
     private toastr: ToastrService,
     private propertiesService: PropertiesService,
     private router: Router,
-    private translateService: TranslateService) {
-      super(translateService);
-     }
+    private translateService: TranslateService,
+    private localService: LocalService) {
+    super(translateService);
+
+    this.evaluateScreenPermissions();
+  }
 
 
   // events
@@ -116,6 +130,14 @@ export class PropertiesManagementComponent extends SharedMessagesComponent imple
   }
 
   // functions
+  evaluateScreenPermissions() {
+    this.permissions = JSON.parse(this.localService.getData("permissions"));
+
+    this.hasCreatingAuthority = this.permissions.findIndex(i => i === this.creatingAuthorityPermission) != -1 ? true : false;
+    this.hasDeletingAuthority = this.permissions.findIndex(i => i === this.deletingAuthorityPermission) != -1 ? true : false;
+    this.hasUpdatingAuthority = this.permissions.findIndex(i => i === this.updatingAuthorityPermission) != -1 ? true : false;
+  }
+
   getWarehouseProperties() {
     let subscribtion = this.propertiesService.getProperties().subscribe(
       (response: any) => {

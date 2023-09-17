@@ -21,6 +21,14 @@ export class AuthInterceptor implements HttpInterceptor {
         .set('Accept-Language', this.localService.getData('lang') || 'ar')
     });
 
+    // if the warehouseId (in super admin case) will add the warehouse-id header to the request
+    if (this.localService.getData('warehouseId'))
+      // Append the warehouse-id header
+      req = req.clone({
+        headers: req.headers.append('warehouse-id', this.localService.getData('warehouseId'))
+      });
+
+
     return next.handle(req);
   }
 }

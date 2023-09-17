@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { PackagesRoutingModule } from './packages-routing.module';
 import { PackagesManagementComponent } from './screens/packages-management/packages-management.component';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
 import { PackagesService } from './remote-services/packages.service';
@@ -15,7 +14,6 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
   imports: [
     CommonModule,
-    PackagesRoutingModule,
     SharedComponentsModule,
     ReactiveFormsModule,
     TranslateModule

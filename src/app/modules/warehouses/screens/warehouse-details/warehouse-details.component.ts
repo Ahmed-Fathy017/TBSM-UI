@@ -31,12 +31,28 @@ export class WarehouseDetailsComponent implements OnInit, OnDestroy {
 
   logs: string[] = [];
 
+  permissions: string[] = [];
+
+  hasProductsAlmostExpiredViewAuthority: boolean = true;
+  hasProductsExpiredViewAuthority: boolean = true;
+  hasProductsEmptyQuantityViewAuthority: boolean = true;
+  hasProductsLittleQuantityViewAuthority: boolean = true;
+  hasProductsVariableTemperatureViewAuthority: boolean = true;
+
+  productsAlmostExpiredViewAuthorityPermission: string = 'Main_page.expiration_date_about_expired';
+  productsExpiredViewAuthorityPermission: string = 'Main_page.expiration_date_expired';
+  productsEmptyQuantityViewAuthorityPermission: string = 'Main_page.products_quantity_empty';
+  productsLittleQuantityViewAuthorityPermission: string = 'Main_page.products_quantity_little';
+  productsVariableTemperatureViewAuthorityPermission: string = 'Main_page.variable_temperature';
+
   constructor(
     private warehousesService: WarehousesService,
     private route: ActivatedRoute,
     private toastr: ToastrService,
     private localService: LocalService,
-    private router: Router) { }
+    private router: Router) {
+    this.evaluateScreenPermissions();
+  }
 
   ngOnInit(): void {
     this.warehouseId = parseInt(this.route.snapshot.paramMap.get('id')!);
@@ -51,24 +67,35 @@ export class WarehouseDetailsComponent implements OnInit, OnDestroy {
     this.router.navigate([`products/${filter}`]);
   }
 
+  // functions
+  evaluateScreenPermissions() {
+    this.permissions = JSON.parse(this.localService.getData("permissions"));
+    if (!Boolean(this.localService.getData('isAdmin'))) {
+      this.hasProductsAlmostExpiredViewAuthority = this.permissions.findIndex(i => i === this.productsAlmostExpiredViewAuthorityPermission) != -1 ? true : false;
+      this.hasProductsExpiredViewAuthority = this.permissions.findIndex(i => i === this.productsExpiredViewAuthorityPermission) != -1 ? true : false;
+      this.hasProductsEmptyQuantityViewAuthority = this.permissions.findIndex(i => i === this.productsEmptyQuantityViewAuthorityPermission) != -1 ? true : false;
+      this.hasProductsLittleQuantityViewAuthority = this.permissions.findIndex(i => i === this.productsLittleQuantityViewAuthorityPermission) != -1 ? true : false;
+      this.hasProductsVariableTemperatureViewAuthority = this.permissions.findIndex(i => i === this.productsVariableTemperatureViewAuthorityPermission) != -1 ? true : false;
+    }
+  }
+
   getWarehouse() {
 
     this.isLoadingWarehouseData = true;
-    let isAdmin: boolean = this.localService.getData('type') === UserTypes.ADMIN;
 
-    let subscription = this.warehousesService.getWarehouse(isAdmin? this.warehouseId : undefined).subscribe(
+    let subscription = this.warehousesService.getWarehouse().subscribe(
       (response: any) => {
         this.cards = response.data;
         this.logs = response.events;
-        
+
         this.setupScreenView();
         this.isLoadingWarehouseData = false;
       }, (error: any) => {
         this.isLoadingWarehouseData = false;
         if (error.error.errors)
-        this.toastr.error(error.error.errors[0].value, error.error.message);
-      else
-        this.toastr.error(error.error.message);
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
       }
     );
 
@@ -86,31 +113,31 @@ export class WarehouseDetailsComponent implements OnInit, OnDestroy {
       if (i.title == 'products_quantity_empty') {
         i.backgroundColor = '#0D99FF';
         i.iconClass = 'fa-solid fa-box';
-        i.visibility = 'visible';
+        i.visibility = this.hasProductsEmptyQuantityViewAuthority ? 'visible' : 'invisible';
         i.filter = 'empty-quantity';
       }
-      else if (i.title == 'products_quantity_little'){
+      else if (i.title == 'products_quantity_little') {
         i.backgroundColor = '#FFA629';
         i.iconClass = 'fa-solid fa-box';
-        i.visibility = 'visible';
+        i.visibility = this.hasProductsLittleQuantityViewAuthority ? 'visible' : 'invisible';
         i.filter = 'little-quantity';
       }
-      else if (i.title == 'variable_temperature'){
+      else if (i.title == 'variable_temperature') {
         i.backgroundColor = '#F15A60';
         i.iconClass = 'fa-solid fa-temperature-three-quarters';
-        i.visibility = 'visible';
+        i.visibility = this.hasProductsVariableTemperatureViewAuthority ? 'visible' : 'invisible';
         i.filter = 'variable-temperature';
       }
-      else if (i.title == 'expiration_date_expired'){
+      else if (i.title == 'expiration_date_expired') {
         i.backgroundColor = '#0D99FF';
         i.iconClass = 'fa-solid fa-calendar-days';
-        i.visibility = 'visible';
+        i.visibility = this.hasProductsExpiredViewAuthority ? 'visible' : 'invisible';
         i.filter = 'expired-date';
       }
-      else if (i.title == 'expiration_date_about_expired'){
+      else if (i.title == 'expiration_date_about_expired') {
         i.backgroundColor = '#FFA629';
         i.iconClass = 'fa-solid fa-calendar-days';
-        i.visibility = 'visible';
+        i.visibility = this.hasProductsAlmostExpiredViewAuthority ? 'visible' : 'invisible';
         i.filter = 'almost-expired-date';
       }
 

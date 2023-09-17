@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <app-page-header [pageTitle]="firstPageTitle" [coloredPageTitle]="coloredPageTitle"></app-page-header>
 
-    <div class="container ">
+    <div class="container " *ngIf="this.hasImportingAuthority">
         <form [formGroup]="inventoryImportForm" class="row">
             <div class="header d-flex flex-column align-items-start fw-bold mb-3">
                 <span class="block mb-2"> {{'InventoryScreen.ImportMessage' | translate}}
@@ -56,11 +56,11 @@
         </form>
     </div>
 
-    <div class="container my-4">
+    <div class="container my-4" *ngIf="this.hasExportingAuthority">
         <hr class="container text-secondary">
     </div>
 
-    <div class="container ">
+    <div class="container " *ngIf="this.hasExportingAuthority">
         <form [formGroup]="inventoryExportForm" class="row">
 
             <div class="header d-flex flex-column align-items-start fw-bold mb-3">
@@ -96,7 +96,8 @@
 </div>
 
 
-<button data-bs-toggle="modal" data-bs-target="#exportModal" class="d-none" #modalShowButtonRef>dummy button for modal opening</button>
+<button data-bs-toggle="modal" data-bs-target="#exportModal" class="d-none" #modalShowButtonRef>dummy button for modal
+    opening</button>
 
 <!-- export modal -->
 

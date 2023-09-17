@@ -17,6 +17,13 @@ export class ScreensConfigProvider {
     static CreateProductScreen: string = 'Properties.create';
     static WithdrawProductScreen: string = 'Products.withdraw';
 
+    // products filter 
+    static AlmostExpiredProductsViewManagementScreen: string = 'Main_page.expiration_date_about_expired';
+    static ExpiredProductsViewManagementScreen: string = 'Main_page.expiration_date_expired';
+    static EmptyQuantityProductsViewManagementScreen: string = 'Main_page.products_quantity_empty';
+    static LittleQuantityProductsViewManagementScreen: string = 'Main_page.products_quantity_little';
+    static VairableTemperatureProductsViewManagementScreen: string = 'Main_page.variable_temperature';
+
     // supply chains module screens
     static ExternalRequestsManagementScreen: string = 'Orders.external_supply_requests';
     static InternalRequestsManagementScreen: string = 'Orders.internal_supply_requests';
@@ -35,4 +42,6 @@ export class ScreensConfigProvider {
 
     // inventories module screens
     static InventoryScreen: string = 'Inventory.view';
+
+    
 }

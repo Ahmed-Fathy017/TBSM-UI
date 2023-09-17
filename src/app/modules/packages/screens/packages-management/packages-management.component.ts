@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
 import { TranslateService } from '@ngx-translate/core';
+import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 
 @Component({
   selector: 'app-packages-management',
@@ -50,12 +51,25 @@ export class PackagesManagementComponent extends SharedMessagesComponent impleme
 
   selectedPackage?: Package;
 
+  permissions: string[] = [];
+
+  hasCreatingAuthority: boolean = true;
+  hasDeletingAuthority: boolean = true;
+  hasUpdatingAuthority: boolean = true;
+
+  creatingAuthorityPermission: string = 'Categories.create';
+  deletingAuthorityPermission: string = 'Categories.delete';
+  updatingAuthorityPermission: string = 'Categories.update';
+
   constructor(
     private toastr: ToastrService,
     private packagesService: PackagesService,
-    private translateService: TranslateService) { 
-      super(translateService);
-    }
+    private translateService: TranslateService,
+    private localService: LocalService) {
+    super(translateService);
+    this.evaluateScreenPermissions();
+
+  }
 
 
   ngOnInit(): void {
@@ -124,6 +138,19 @@ export class PackagesManagementComponent extends SharedMessagesComponent impleme
       this.createPackage(requestDTO);
     } else
       this.toastr.warning(this.invalidInputWarningMessage, this.invalidInputWarningHeader);
+  }
+
+  // functions
+  evaluateScreenPermissions() {
+    this.permissions = JSON.parse(this.localService.getData("permissions"));
+    if (this.permissions.length > 0) {
+      console.log(this.permissions)
+      this.hasCreatingAuthority = this.permissions.findIndex(i => i === this.creatingAuthorityPermission) != -1 ? true : false;
+      console.log(this.hasCreatingAuthority)
+      this.hasDeletingAuthority = this.permissions.findIndex(i => i === this.deletingAuthorityPermission) != -1 ? true : false;
+      this.hasUpdatingAuthority = this.permissions.findIndex(i => i === this.updatingAuthorityPermission) != -1 ? true : false;
+    }
+    
   }
 
   loadPackages() {

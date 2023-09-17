@@ -12,6 +12,7 @@ import { PropertyTypes } from 'src/app/modules/products/models/property-types';
 import { Property } from 'src/app/modules/products/models/property';
 import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
 import { TranslateService } from '@ngx-translate/core';
+import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 
 @Component({
   selector: 'app-warehouses-management',
@@ -73,7 +74,8 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
     private warehousesService: WarehousesService,
     private packagesService: PackagesService,
     private router: Router,
-    private translateService: TranslateService) { 
+    private translateService: TranslateService,
+    private localService: LocalService) { 
       super(translateService);
     }
 
@@ -89,6 +91,7 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
   }
 
   onViewButtonClick(id: number) {
+    this.localService.saveData('warehouseId', String(id));
     this.router.navigate([`warehouses/warehouse/${id}`])
   }
 
