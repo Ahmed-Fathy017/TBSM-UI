@@ -70,7 +70,7 @@ export class WarehouseDetailsComponent implements OnInit, OnDestroy {
   // functions
   evaluateScreenPermissions() {
     this.permissions = JSON.parse(this.localService.getData("permissions"));
-    if (!Boolean(this.localService.getData('isAdmin'))) {
+    if (this.localService.getData('type') != UserTypes.ADMIN) {
       this.hasProductsAlmostExpiredViewAuthority = this.permissions.findIndex(i => i === this.productsAlmostExpiredViewAuthorityPermission) != -1 ? true : false;
       this.hasProductsExpiredViewAuthority = this.permissions.findIndex(i => i === this.productsExpiredViewAuthorityPermission) != -1 ? true : false;
       this.hasProductsEmptyQuantityViewAuthority = this.permissions.findIndex(i => i === this.productsEmptyQuantityViewAuthorityPermission) != -1 ? true : false;

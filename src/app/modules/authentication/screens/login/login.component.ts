@@ -9,6 +9,9 @@ import { UserTypes } from '../../models/user-types';
 import { PermissionGroup } from 'src/app/modules/roles/models/permission-group';
 import { Permission } from 'src/app/modules/roles/models/permission';
 import { ScreensConfigProvider } from 'src/app/modules/master-layout/providers/screens-config-provider';
+import { adminNavbarData, userNavbarData } from 'src/app/modules/master-layout/models/nav-data';
+import { INavbarData } from 'src/app/modules/master-layout/models/helper';
+import { SideNavSingleton } from 'src/app/modules/master-layout/models/sidenav-singleton';
 
 @Component({
   selector: 'app-login',
@@ -113,15 +116,17 @@ export class LoginComponent implements OnInit {
           this.localStore.saveData('username', response.data.username);
           this.localStore.saveData('type', response.data.type);
           this.localStore.saveData('id', String(response.data.id));
-          this.localStore.saveData('isAdmin', String(response.data.type === UserTypes.ADMIN ? true : false));
-
-          if (!Boolean(this.localStore.getData('isAdmin')))
-            this.setupUserPermissions(response);
-          else
-          this.setupAdminPermissions();
-            
 
           console.log(response)
+
+          if (response.data.type === UserTypes.ADMIN) 
+            this.setupAdminPermissions();
+          
+          else 
+            this.setupUserPermissions(response);
+
+          // sideNavSingleton class calling once to setup the side nav data
+          SideNavSingleton.getInstance();
 
           this.navigateToHomePage()
 
@@ -149,9 +154,36 @@ export class LoginComponent implements OnInit {
     });
 
     this.localStore.saveData("permissions", JSON.stringify(permissions));
+  }
 
+  setupUserNavbarData() {
+    let permissions = JSON.parse(this.localStore.getData("permissions"));
 
-    // console.table(JSON.parse(this.localStore.getData("permissions")))
+    userNavbarData.map((i: INavbarData) => {
+      // looping through items
+      if (i.items && i.items.length > 0) {
+        i.items.map((j: INavbarData) => {
+          if (j.screenConfig)
+            j.showInMenu = permissions.find((p: string) => p == j.screenConfig) ? true : false;
+          else
+            j.showInMenu = true;
+        });
+
+        // reevaluating the parent module showInMenu state based on the items
+        // showInMenu state, if any of the items must be shown in menu the whole module must be shown also
+        i.showInMenu = i.items.some(i => i.showInMenu);
+      }
+      else {
+        // if the screenConfig is undefined it means that the show in menu is by default true
+        // but if not it means, we need to check if the config of the screen found
+        // in the user permissions or not, in order to evaluate the state of the showInMenuFlag
+        if (i.screenConfig)
+          i.showInMenu = permissions.find((p: string) => p == i.screenConfig) ? true : false;
+        else
+          i.showInMenu = true;
+
+      }
+    })
   }
 
   setupAdminPermissions() {
@@ -163,6 +195,13 @@ export class LoginComponent implements OnInit {
       ScreensConfigProvider.VairableTemperatureProductsViewManagementScreen
     ]));
   }
+
+  setupAdminNavbarData() {
+    // no need for implementation as all the menu items will be shown to
+    // the user by default (as two separated arrays, can be enhanced and merged into one array later)
+  }
+
+
 
   navigateToHomePage() {
     if (this.localStore.getData('type') === UserTypes.ADMIN)

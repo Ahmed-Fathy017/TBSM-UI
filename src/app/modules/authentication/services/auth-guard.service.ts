@@ -34,9 +34,10 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
     }
 
     let screenConfig = childRoute.data.config;
+    console.log(screenConfig)
 
     if (screenConfig === 'public' || screenConfig === undefined)
-    return true;
+      return true;
 
     if (!this.permissions.find(i => i === screenConfig))
       return false;

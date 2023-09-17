@@ -7,8 +7,8 @@ import { ScreensConfigProvider } from '../master-layout/providers/screens-config
 
 const routes: Routes = [
   { path: '', component: ProductsManagementComponent, data: { config: ScreensConfigProvider.ProductsManagementScreen } },
-  { path: 'create', component: CreateProductComponent, pathMatch: 'full', data: { config: ScreensConfigProvider.CreateProductScreen } },
-  { path: 'withdraw', component: WithdrawProductComponent, pathMatch: 'full', data: { config: ScreensConfigProvider.WithdrawProductScreen } },
+  { path: 'create', component: CreateProductComponent, data: { config: ScreensConfigProvider.CreateProductScreen } },
+  { path: 'withdraw', component: WithdrawProductComponent, data: { config: ScreensConfigProvider.WithdrawProductScreen } },
   { path: 'empty-quantity', component: ProductsManagementComponent, data: { config: ScreensConfigProvider.EmptyQuantityProductsViewManagementScreen } },
   { path: 'little-quantity', component: ProductsManagementComponent, data: { config: ScreensConfigProvider.LittleQuantityProductsViewManagementScreen } },
   { path: 'variable-temperature', component: ProductsManagementComponent, data: { config: ScreensConfigProvider.VairableTemperatureProductsViewManagementScreen } },

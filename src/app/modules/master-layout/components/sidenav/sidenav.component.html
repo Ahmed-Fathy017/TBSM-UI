@@ -16,7 +16,7 @@
 
     <ul class="sidenav-nav mt-4">
         <li class="sidenav-nav-item " *ngFor="let data of navData">
-            <a class="sidenav-nav-link" (click)="handleClick(data)" *ngIf="data.items && data.items.length > 0"
+            <a class="sidenav-nav-link" (click)="handleClick(data)" *ngIf="data.items && data.items.length > 0 && data.showInMenu"
                 [ngClass]="lang === 'ar'? 'sidenav-nav-link-padding-right': 'sidenav-nav-link-padding-left'"
                 [class]="getActiveClass(data)">
                 <i class="sidenav-link-icon" [class]="data.icon"></i>
@@ -27,7 +27,7 @@
 
             </a>
 
-            <a class="sidenav-nav-link" *ngIf="!data.items || (data.items && data.items.length === 0)"
+            <a class="sidenav-nav-link" *ngIf="(!data.items || (data.items && data.items.length === 0)) && data.showInMenu"
                 [ngClass]="lang === 'ar'? 'sidenav-nav-link-padding-right': 'sidenav-nav-link-padding-left'"
                 [routerLink]="data.routeLink" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <i class="sidenav-link-icon" [class]="data.icon"></i>
@@ -37,7 +37,7 @@
             </a>
 
             <!-- removed collapsed flag from ul from the div -->
-            <div *ngIf="data.items && data.items.length">
+            <div *ngIf="data.items && data.items.length && data.showInMenu">
                 <app-sublevel-menu [data]="data" [collapsed]="collapsed" [multiple]="multiple"
                     [expanded]="data.expanded"></app-sublevel-menu>
             </div>

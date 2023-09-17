@@ -5,7 +5,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 @Component({
   selector: 'app-sublevel-menu',
   template: `
-    <ul *ngIf=" data.items && data.items.length > 0"
+    <ul *ngIf=" data.items && data.items.length > 0 && data.showInMenu"
       [@submenu]="expanded
         ? {value: 'visible', 
           params: {transitionParams: '400ms cubic-bezier(0.86, 0, 0.07, 1)',height: '*'}} 
@@ -15,7 +15,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
     >
       <li *ngFor="let item of data.items" class="sublevel-nav-item">
         <a class="sublevel-nav-link"
-          *ngIf="item.items && item.items.length > 0"
+          *ngIf="item.items && item.items.length > 0 && item.showInMenu" 
           (click)="handleClick(item)"
         >
           <i class="sublevel-link-icon " [class]="item.icon"></i>
@@ -27,7 +27,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 
         </a>
         <a class="sublevel-nav-link"
-          *ngIf="!item.items || (item.items && item.items.length === 0)"
+          *ngIf="(!item.items || (item.items && item.items.length === 0))  && item.showInMenu"
           [routerLink]="[item.routeLink]"
           routerLinkActive="active-sublevel"
           [routerLinkActiveOptions]="{exact: true}"
@@ -38,7 +38,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
           <span class="tooltiptext p-2" @fadeInOut *ngIf="!collapsed">{{item.label | translate}}</span>
 
         </a>
-        <div *ngIf="item.items && item.items.length > 0">
+        <div *ngIf="item.items && item.items.length > 0 && item.showInMenu">
           <app-sublevel-menu
             [collapsed]="collapsed"
             [multiple]="multiple"
@@ -83,7 +83,8 @@ export class SublevelMenuComponent implements OnInit {
     routeLink: '',
     icon: '',
     label: '',
-    items: []
+    items: [],
+    showInMenu: false
   }
 
   @Input() collapsed = false;

@@ -22,6 +22,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
 import { LocalService } from 'src/app/modules/shared-components/services/local.service';
+import { UserTypes } from 'src/app/modules/authentication/models/user-types';
 
 @Component({
   selector: 'app-products-management',
@@ -117,7 +118,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
     private localService: LocalService) {
     super(translateService);
 
-    this.isAdmin = Boolean(this.localService.getData('isAdmin'));
+    this.isAdmin = this.localService.getData('type') === UserTypes.ADMIN;
     this.evaluateScreenPermissions();
   }
 

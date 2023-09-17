@@ -14,7 +14,7 @@ export class ScreensConfigProvider {
 
     // products module screens
     static ProductsManagementScreen: string = 'Products.view';
-    static CreateProductScreen: string = 'Properties.create';
+    static CreateProductScreen: string = 'Products.create';
     static WithdrawProductScreen: string = 'Products.withdraw';
 
     // products filter 

@@ -32,4 +32,11 @@ export class LocalService {
   private decrypt(txtToDecrypt: string) {
     return CryptoJS.AES.decrypt(txtToDecrypt, environment.encryptionKey).toString(CryptoJS.enc.Utf8);
   }
+
+  // static method to get data through the calling of the class itself
+  // which is necessary in singletion design pattern, as no parameters will be passed to the constructor
+  public static getData(key: string) {
+    let data = localStorage.getItem(key) || "";
+    return CryptoJS.AES.decrypt(data, environment.encryptionKey).toString(CryptoJS.enc.Utf8);
+  }
 }
