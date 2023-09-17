@@ -11,7 +11,6 @@ import { Permission } from 'src/app/modules/roles/models/permission';
 import { ScreensConfigProvider } from 'src/app/modules/master-layout/providers/screens-config-provider';
 import { adminNavbarData, userNavbarData } from 'src/app/modules/master-layout/models/nav-data';
 import { INavbarData } from 'src/app/modules/master-layout/models/helper';
-import { SideNavSingleton } from 'src/app/modules/master-layout/models/sidenav-singleton';
 
 @Component({
   selector: 'app-login',
@@ -117,16 +116,14 @@ export class LoginComponent implements OnInit {
           this.localStore.saveData('type', response.data.type);
           this.localStore.saveData('id', String(response.data.id));
 
-          console.log(response)
-
-          if (response.data.type === UserTypes.ADMIN) 
+          if (response.data.type === UserTypes.ADMIN)  {
             this.setupAdminPermissions();
-          
-          else 
+            this.setupAdminNavbarData();
+          }
+          else {
             this.setupUserPermissions(response);
-
-          // sideNavSingleton class calling once to setup the side nav data
-          SideNavSingleton.getInstance();
+            this.setupUserNavbarData();
+          }
 
           this.navigateToHomePage()
 
@@ -183,7 +180,9 @@ export class LoginComponent implements OnInit {
           i.showInMenu = true;
 
       }
-    })
+    });
+
+    this.localStore.saveData('navData', JSON.stringify(userNavbarData));
   }
 
   setupAdminPermissions() {
@@ -199,6 +198,7 @@ export class LoginComponent implements OnInit {
   setupAdminNavbarData() {
     // no need for implementation as all the menu items will be shown to
     // the user by default (as two separated arrays, can be enhanced and merged into one array later)
+    this.localStore.saveData('navData', JSON.stringify(adminNavbarData));
   }
 
 

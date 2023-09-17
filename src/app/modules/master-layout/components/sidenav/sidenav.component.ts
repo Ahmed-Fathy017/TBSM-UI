@@ -5,7 +5,6 @@ import { LocalService } from 'src/app/modules/shared-components/services/local.s
 import { UserTypes } from 'src/app/modules/authentication/models/user-types';
 import { INavbarData } from '../../models/helper';
 import { Router } from '@angular/router';
-import { SideNavSingleton } from '../../models/sidenav-singleton';
 
 @Component({
   selector: 'app-sidenav',
@@ -39,12 +38,7 @@ export class SidenavComponent implements OnInit {
   constructor(private localService: LocalService,
     private router: Router) {
 
-      SideNavSingleton.getInstance();
-
-    if (localService.getData('type') === UserTypes.ADMIN)
-      this.navData = SideNavSingleton.getAdminNavbatData();
-    else
-      this.navData = SideNavSingleton.getUserNavbatData();
+    this.navData = JSON.parse(this.localService.getData('navData'));
 
     this.lang = localService.getData('lang') || 'ar';
 
