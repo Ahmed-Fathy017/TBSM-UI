@@ -135,9 +135,7 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
   // functions
   evaluateScreenPermissions() {
     this.permissions = JSON.parse(this.localService.getData("permissions"));
-    console.log(this.permissions)
     this.hasCreatingAuthority = this.permissions.findIndex(i => i === this.creatingAuthorityPermission) != -1 ? true : false;
-    console.log(this.hasCreatingAuthority)
     this.hasDeletingAuthority = this.permissions.findIndex(i => i === this.deletingAuthorityPermission) != -1 ? true : false;
     this.hasUpdatingAuthority = this.permissions.findIndex(i => i === this.updatingAuthorityPermission) != -1 ? true : false;
   }

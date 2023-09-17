@@ -26,6 +26,7 @@ import { OperationLogsModule } from '../operation-logs/operation-logs.module';
 import { PropertiesModule } from '../properties/properties.module';
 import { SublevelMenuComponent } from './components/sidenav/sublevel-menu.component';
 import { InventoriesModule } from '../inventories/inventories.module';
+import { UnauthorizedComponent } from '../shared-components/components/unauthorized/unauthorized.component';
 
 
 
@@ -35,7 +36,8 @@ import { InventoriesModule } from '../inventories/inventories.module';
     NavBarComponent,
     SideNavComponent,
     SidenavComponent,
-    SublevelMenuComponent
+    SublevelMenuComponent,
+    UnauthorizedComponent
   ],
   imports: [
     CommonModule,

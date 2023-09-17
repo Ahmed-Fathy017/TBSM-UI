@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedMessagesComponent } from './components/shared-messages/shared-messages.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { SharedMessagesComponent } from './components/shared-messages/shared-mes
     LoadingComponent,
     LoadingDotsComponent,
     PageHeaderComponent,
-    SharedMessagesComponent
+    SharedMessagesComponent,
+    PageNotFoundComponent
   ],
   imports: [
     CommonModule,

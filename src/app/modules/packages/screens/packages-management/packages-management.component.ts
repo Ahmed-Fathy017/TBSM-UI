@@ -144,9 +144,7 @@ export class PackagesManagementComponent extends SharedMessagesComponent impleme
   evaluateScreenPermissions() {
     this.permissions = JSON.parse(this.localService.getData("permissions"));
     if (this.permissions.length > 0) {
-      console.log(this.permissions)
       this.hasCreatingAuthority = this.permissions.findIndex(i => i === this.creatingAuthorityPermission) != -1 ? true : false;
-      console.log(this.hasCreatingAuthority)
       this.hasDeletingAuthority = this.permissions.findIndex(i => i === this.deletingAuthorityPermission) != -1 ? true : false;
       this.hasUpdatingAuthority = this.permissions.findIndex(i => i === this.updatingAuthorityPermission) != -1 ? true : false;
     }

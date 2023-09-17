@@ -33,14 +33,16 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
       return false;
     }
 
-    let screenConfig = childRoute.data.config;
+    let screenConfig = childRoute.firstChild?.data.config;
     console.log(screenConfig)
 
     if (screenConfig === 'public' || screenConfig === undefined)
       return true;
 
-    if (!this.permissions.find(i => i === screenConfig))
+    if (!this.permissions.find(i => i === screenConfig)) {
+      this.router.navigate(['unauthorized']);
       return false;
+    }
 
     return true;
   }

@@ -1,9 +1,8 @@
 .card {
     background-color: #F6F6FB;
     border: none;
-    width: 244px;
+    width: 230px;
     height: 190px;
-
 }
 
 .card .icon {
@@ -15,5 +14,6 @@
 
 .card-title {
     color: #2B2F42;
-}
+} 
+
 

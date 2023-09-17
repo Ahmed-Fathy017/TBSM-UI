@@ -103,6 +103,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
   productViewingAuthorityPermission: string = 'Products.show_details';
   productUpdatingAuthorityPermission: string = 'Products.update';
 
+  isEditMode: boolean = true;
 
   // constructor
   constructor(
@@ -230,6 +231,8 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
   }
 
   onUpdateButtonClick(departmentId: number, productId: number) {
+    this.isEditMode = true;
+
     this.selectedDepartment = this.productsList.find(i => i.id == departmentId)!;
     if (this.selectedDepartment)
       this.selectedProduct = this.selectedDepartment.products.find(i => i.id == productId)!;
@@ -311,6 +314,19 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
 
   onDeleteProperty(index: number) {
     this.selectedProduct.options.splice(index, 1);
+  }
+
+  onViewProductButtonClick(departmentId: number, productId: number) {
+    this.isEditMode = false;
+
+    this.selectedDepartment = this.productsList.find(i => i.id == departmentId)!;
+    if (this.selectedDepartment)
+      this.selectedProduct = this.selectedDepartment.products.find(i => i.id == productId)!;
+
+    // deep cloning of latest snapshot of this.selectedProduct
+    this.tempSelectedProduct = JSON.parse(JSON.stringify(this.selectedProduct))
+
+    this.fetchDataIntoUpdateModal();
   }
 
   // funtions
@@ -455,6 +471,11 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
       this.updateProductForm.controls.refrigerator.setValue(String(this.selectedProduct.refrigerator.id));
       this.updateProductForm.controls.department.setValue(String(this.selectedProduct.category.id));
     }
+
+    if (this.isEditMode)
+      this.updateProductForm.enable();
+    else
+      this.updateProductForm.disable();
   }
 
   updateProduct(requestDTO: Product) {

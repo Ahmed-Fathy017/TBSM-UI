@@ -117,7 +117,10 @@
         "Value": "القيمة",
         "NameSearch": "الاسم",
         "PropertySearch": "خاصية",
-        "OtherSearch": "اخرى"
+        "OtherSearch": "اخرى",
+        "Quantity": "الكمية",
+        "Refrigerator": "الثلاجة",
+        "ProductCode": "كود المنتج"
     },
     "CreateProductScreen": {
         "PrimaryTitle": "الرئيسية / المنتجات /",
@@ -171,6 +174,7 @@
     "Modal": {
         "CreateButton": "انشاء",
         "EditModalHeader": "تعديل",
+        "ViewModalHeader": "عرض",
         "SaveChangesButton": "حفظ التغيرات",
         "DeletionConsentMessage": "هل ترغب ف حذف",
         "DeleteButton": "حذف",
@@ -198,8 +202,7 @@
     "GeneralMessages": {
         "InvalidInputWarningHeader": "تحذير",
         "InvalidInputWarningMessage": "!برجاء ادخال القيم بطريقة صحيحة",
-        "InvalidInputDuplicationMessage":"!هذه الخاصية موجودة بالفعل",
-        "InvalidInputCountMessage":"!لم يتم ادخال كل الخصائص المطلوبة"
-
+        "InvalidInputDuplicationMessage": "!هذه الخاصية موجودة بالفعل",
+        "InvalidInputCountMessage": "!لم يتم ادخال كل الخصائص المطلوبة"
     }
 }

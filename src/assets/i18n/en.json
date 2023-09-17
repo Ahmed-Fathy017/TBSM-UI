@@ -123,7 +123,10 @@
         "Value": "Value",
         "NameSearch": "Name",
         "PropertySearch":"Property",
-        "OtherSearch":"Other"
+        "OtherSearch":"Other",
+        "Quantity": "Quantity",
+        "Refrigerator": "Refrigerator",
+        "ProductCode": "Product Code"
     },
     "CreateProductScreen": {
         "PrimaryTitle": "Home / Products /",
@@ -177,6 +180,7 @@
     "Modal": {
         "CreateButton": "Create",
         "EditModalHeader": "Edit",
+        "ViewModalHeader":"View",
         "SaveChangesButton": "Save Changes",
         "DeletionConsentMessage": "Do you want to delete",
         "DeleteButton": "Delete",
