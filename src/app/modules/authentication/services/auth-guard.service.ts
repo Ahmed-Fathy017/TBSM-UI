@@ -10,11 +10,16 @@ import { LocalService } from '../../shared-components/services/local.service';
 
 export class AuthGuardService implements CanActivate, CanActivateChild {
 
+  permissions: string[] = [];
+
   constructor(private authenticationService: AuthenticationService,
     private router: Router,
-    private localService: LocalService) { }
+    private localService: LocalService) {
+    this.permissions = JSON.parse(this.localService.getData("permissions"));
+  }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+
     if (!this.authenticationService.isAuthenticated()) {
       this.logout();
       return false;
@@ -23,7 +28,19 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
   }
 
   canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    console.log(childRoute.data.config)
+    if (!this.authenticationService.isAuthenticated()) {
+      this.logout();
+      return false;
+    }
+
+    let screenConfig = childRoute.data.config;
+
+    if (screenConfig === 'public' || screenConfig === undefined)
+    return true;
+
+    if (!this.permissions.find(i => i === screenConfig))
+      return false;
+
     return true;
   }
 

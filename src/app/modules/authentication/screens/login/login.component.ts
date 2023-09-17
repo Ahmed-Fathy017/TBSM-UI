@@ -6,6 +6,8 @@ import { LoginRequest } from '../../models/login-request';
 import { AuthenticationService } from '../../remote-services/authentication.service';
 import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 import { UserTypes } from '../../models/user-types';
+import { PermissionGroup } from 'src/app/modules/roles/models/permission-group';
+import { Permission } from 'src/app/modules/roles/models/permission';
 
 @Component({
   selector: 'app-login',
@@ -111,6 +113,8 @@ export class LoginComponent implements OnInit {
           this.localStore.saveData('type', response.data.type);
           this.localStore.saveData('id', String(response.data.id));
 
+          this.setupUserPermissions(response);
+
           this.navigateToHomePage()
 
           this.isProcessing = false;
@@ -123,6 +127,23 @@ export class LoginComponent implements OnInit {
       );
 
     this.subscription.add(tokenReqSubscription);
+  }
+
+  setupUserPermissions(response: any) {
+    let permissions: string[] = [];
+
+    response.data.permissions.map((i: PermissionGroup) => {
+      let groupName = i.group_name;
+      i.permissions.map((j: Permission) => {
+        let permission = `${groupName}.${j.name}`;
+        permissions.push(permission);
+      });
+    });
+
+    this.localStore.saveData("permissions", JSON.stringify(permissions));
+
+
+    // console.table(JSON.parse(this.localStore.getData("permissions")))
   }
 
   navigateToHomePage() {

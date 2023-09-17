@@ -3,12 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProductsManagementComponent } from './screens/products-management/products-management.component';
 import { CreateProductComponent } from './screens/create-product/create-product.component';
 import { WithdrawProductComponent } from './screens/withdraw-product/withdraw-product.component';
+import { ScreensConfigProvider } from '../master-layout/providers/screens-config-provider';
 
 const routes: Routes = [
-  { path: '', component: ProductsManagementComponent },
-  { path: 'create', component: CreateProductComponent,  pathMatch: 'full'},
-  { path: 'withdraw', component: WithdrawProductComponent,  pathMatch: 'full' },
-  { path: ':filter', component: ProductsManagementComponent },
+  { path: '', component: ProductsManagementComponent, data: { config: ScreensConfigProvider.ProductsManagementScreen } },
+  { path: 'create', component: CreateProductComponent, pathMatch: 'full', data: { config: ScreensConfigProvider.CreateProductScreen } },
+  { path: 'withdraw', component: WithdrawProductComponent, pathMatch: 'full', data: { config: ScreensConfigProvider.WithdrawProductScreen } },
+  { path: ':filter', component: ProductsManagementComponent, data: { config: ScreensConfigProvider.ProductsManagementScreen } },
 ];
 
 @NgModule({

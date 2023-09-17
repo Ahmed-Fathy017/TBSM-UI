@@ -17,7 +17,7 @@ const routes: Routes = [
     path: '', component: MasterLayoutComponent, canActivateChild: [AuthGuardService],
     children: [
       { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-      { path: 'dashboard', component: MainDashboardComponent },
+      { path: 'dashboard', component: MainDashboardComponent, data: { config: ScreensConfigProvider.AdminDashboardScreen } },
 
       {
         path: 'warehouses',
@@ -40,11 +40,11 @@ const routes: Routes = [
         loadChildren: () => import('../supply-chains/supply-chains-routing.module').then(m => m.SupplyChainsRoutingModule)
       },
       { path: 'management/departments', component: DepartmentsManagementComponent, data: { config: ScreensConfigProvider.DepartmentsManagementScreen } },
-      { path: 'management/refrigerators', component: RefrigeratorsManagementComponent },
-      { path: 'management/properties', component: PropertiesManagementComponent },
-      { path: 'users', component: UsersManagementComponent },
-      { path: 'operation-logs', component: OperationLogsComponent },
-      { path: 'inventories', component: InventoryComponent },
+      { path: 'management/refrigerators', component:  RefrigeratorsManagementComponent, data: { config: ScreensConfigProvider.RefrigeratorsManagementScreen }},
+      { path: 'management/properties', component: PropertiesManagementComponent, data: { config: ScreensConfigProvider.PropertiesManagementScreen } },
+      { path: 'users', component: UsersManagementComponent, data: { config: ScreensConfigProvider.UsersManagementScreen } },
+      { path: 'operation-logs', component: OperationLogsComponent, data: { config: ScreensConfigProvider.OperationLogsManagementScreen } },
+      { path: 'inventories', component: InventoryComponent, data: { config: ScreensConfigProvider.InventoryScreen } },
     ]
   },
 
