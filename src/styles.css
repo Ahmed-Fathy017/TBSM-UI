@@ -46,11 +46,14 @@
     margin-top: 0;
 }
 
-/************ Errors ************/
-
-/* input.ng-touched.ng-invalid {
-    border: 0.1px solid red;
-} */
+.modal .btn-close {
+    box-shadow: none !important;
+    background-color: #F15A60;
+    --bs-btn-close-opacity: 1;
+    --bs-btn-close-hover-opacity: 1;
+    color: #ffffff !important;
+    --bs-btn-close-bg: url('assets/images/x-solid.svg') !important;
+}
 
 /************ Bootstrap Shadows Removal ************/
 
