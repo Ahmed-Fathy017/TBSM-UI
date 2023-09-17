@@ -1,12 +1,13 @@
 export class ScreensConfigProvider {
     // public screens has no configs
     static LoginScreen: string = 'public';
-    static AdminDashboardScreen: string = 'public';
-    static WarehousesManagementScreen: string = 'public';
-    static WarehouseDetailsScreen: string = 'public';
-    static PackagesManagementScreen: string = 'public';
-    static MyRequestsManagementScreen: string = 'public';
-    static RefrigeratorsManagementScreen: string = 'public';
+    static AdminDashboardScreen: string = 'admin';
+    static WarehousesManagementScreen: string = 'admin';
+    static RefrigeratorsManagementScreen: string = 'admin';
+    static PackagesManagementScreen: string = 'admin';
+    static WarehouseDetailsScreen: string = 'admin';
+    static MyRequestsManagementScreen: string = 'user';
+    static UserDashboardScreen: string = 'user';
 
     // roles module screens
     static RolesManagementScreen: string = 'Roles.view';

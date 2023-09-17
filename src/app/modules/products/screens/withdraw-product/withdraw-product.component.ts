@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
@@ -11,6 +11,8 @@ import { Product } from '../../models/product';
 import { ProductsService } from '../../remote-services/products.service';
 import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
 import { TranslateService } from '@ngx-translate/core';
+import { Html5QrcodeScanType, Html5QrcodeScanner } from "html5-qrcode";
+import { Html5Qrcode } from "html5-qrcode";
 
 @Component({
   selector: 'app-withdraw-product',
@@ -24,6 +26,9 @@ export class WithdrawProductComponent extends SharedMessagesComponent implements
   firstPageTitle: string = 'ProductWihdrawalScreen.PrimaryTitle';
   coloredPageTitle: string = 'ProductWihdrawalScreen.ColoredPrimaryTitle'
   secondPageTitle: string = '';
+
+  html5QrcodeScanner!: Html5QrcodeScanner;
+  scannedCode!: string;
 
   // page loading
   isLoading: boolean = false;
@@ -47,14 +52,38 @@ export class WithdrawProductComponent extends SharedMessagesComponent implements
     }
 
 
+
   // events
   ngOnInit(): void {
+  }
 
+  ngAfterViewInit(): void {
+    this.html5QrcodeScanner = new Html5QrcodeScanner(
+      "reader",
+      { fps: 10, qrbox: { width: 250, height: 250 }, supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA], aspectRatio: 2.2 },
+      /* verbose= */ false);
+
+    this.html5QrcodeScanner.render(this.onScanSuccess, undefined);
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+
+  onScanSuccess = (decodedText: any, decodedResult: any) => {
+    // handle the scanned code as you like, for example:
+
+    if (decodedResult.decodedText != this.scannedCode) {
+      this.scannedCode = decodedResult.decodedText;
+      this.withdrawProductForm.controls.number.setValue(this.scannedCode);
+    }
+  }
+
+  // onScanFailure(error: any) {
+  //   // handle scan failure, usually better to ignore and keep scanning.
+  //   // for example:
+  //   // console.warn(`Code scan error = ${error}`);
+  // }
 
   onWihdrawButtonClick() {
     if (this.withdrawProductForm.valid) {
@@ -72,6 +101,9 @@ export class WithdrawProductComponent extends SharedMessagesComponent implements
   }
 
   // functions
+
+
+
   getProdcuctByNumber(productNumber: string) {
     let subscription = this.productsService.getProdcuctByNumber(productNumber, 1).subscribe(
       (response: any) => {

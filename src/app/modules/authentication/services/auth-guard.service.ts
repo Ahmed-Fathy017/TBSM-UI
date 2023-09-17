@@ -3,6 +3,7 @@ import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterSt
 import { Observable } from 'rxjs';
 import { AuthenticationService } from '../remote-services/authentication.service';
 import { LocalService } from '../../shared-components/services/local.service';
+import { UserTypes } from '../models/user-types';
 
 @Injectable({
   providedIn: 'root'
@@ -36,10 +37,15 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
     let screenConfig = childRoute.firstChild?.data.config;
     console.log(screenConfig)
 
-    if (screenConfig === 'public' || screenConfig === undefined)
+    if (screenConfig === 'public' ||
+      screenConfig === undefined ||
+      (screenConfig === 'admin' && this.localService.getData('type') == UserTypes.ADMIN) ||
+      (screenConfig === 'user' && this.localService.getData('type') != UserTypes.ADMIN))
       return true;
 
-    if (!this.permissions.find(i => i === screenConfig)) {
+    if (!this.permissions.find(i => i === screenConfig) ||
+      (screenConfig === 'admin' && this.localService.getData('type') != UserTypes.ADMIN) ||
+      (screenConfig === 'user' && this.localService.getData('type') == UserTypes.ADMIN)) {
       this.router.navigate(['unauthorized']);
       return false;
     }

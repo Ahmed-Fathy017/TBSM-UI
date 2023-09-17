@@ -250,18 +250,21 @@ img {
     font-size: 0.8rem;
     /* Position the tooltip */
     position: relative;
-    z-index: 1;
     left: 20px;
     right: 20px;
+    z-index: 4 !important;
 }
 
 .sidenav-nav-item:hover:not(:has(.sublevel-nav-item:hover)) .tooltiptext {
     visibility: visible;
+    z-index: 4 !important;
     /* transition: all .3s ease; */
 }
 
 .sublevel-nav-item:hover .tooltiptext {
     visibility: visible;
+    z-index: 4 !important;
+
     /* transition: all .3s ease; */
 }
 

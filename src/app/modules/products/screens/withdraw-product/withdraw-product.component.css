@@ -24,7 +24,7 @@
 }
 
 .products {
-    height: 500px;
+    height: 520px;
 }
 
 .table th,
@@ -32,3 +32,27 @@ tr,
 td {
     color: #100F37;
 }
+
+
+/* Apply styles to the button(s) inside the scanner container */
+.scanner-container button {
+    background-color: #FF5733  !important;
+    color: #FFF;
+    /* Add other styles as needed */
+  }
+
+  .html5-qrcode-element {
+    background-color: #FF5733  !important;
+    color: #FFF;
+  }
+
+  .qrcode-button {
+    background-color: #FF5733;
+    color: #FFF;
+    /* Add other styles as needed */
+  }
+
+  #reader__dashboard_section_csr {
+    background-color: #FF5733 !important;
+    color: #FFF;
+  }
