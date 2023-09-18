@@ -1,7 +1,7 @@
 <div class="sidenav" [ngClass]="collapsed? 'sidenav-collapsed': ''">
     <div class="logo-container d-flex justify-content-between align-content-center  mt-4">
         <div class="d-flex align-items-center">
-            <img src="../../../../../assets/images/logo.svg" alt="" class="logo-text mx-4" @fadeInOut >
+            <img src="../../../../../assets/images/logo.svg" alt="" class="logo-text mx-4" @fadeInOut>
         </div>
 
         <!-- <div class="d-flex align-items-center">
@@ -9,25 +9,32 @@
         </div> -->
 
         <div>
-            <button class="logo " [ngClass]="lang === 'ar'? 'absolute-right-position': 'absolute-left-position'"
+            <button [class]="lang !== 'en' ? 'logo-arabic' : 'logo-english'"
+                [ngClass]="lang === 'ar'? 'absolute-right-position': 'absolute-left-position'"
                 (click)="toggleCollapse()"><i class="fa-solid fa-bars"></i></button>
         </div>
     </div>
 
     <ul class="sidenav-nav mt-4">
         <li class="sidenav-nav-item " *ngFor="let data of navData">
-            <a class="sidenav-nav-link" (click)="handleClick(data)" *ngIf="data.items && data.items.length > 0 && data.showInMenu"
+            <a class="sidenav-nav-link" (click)="handleClick(data)"
+                *ngIf="data.items && data.items.length > 0 && data.showInMenu"
                 [ngClass]="lang === 'ar'? 'sidenav-nav-link-padding-right': 'sidenav-nav-link-padding-left'"
                 [class]="getActiveClass(data)">
                 <i class="sidenav-link-icon" [class]="data.icon"></i>
                 <span class="sidenav-link-text m-0" @fadeInOut *ngIf="collapsed">{{data.label | translate}}</span>
-                <i *ngIf="data.items && collapsed" class="menu-collapse-item"
+                <i *ngIf="data.items && collapsed && lang != 'en'; else caret;" class="menu-collapse-item"
                     [ngClass]="!data.expanded? 'fa-solid fa-caret-left' : 'fa-solid fa-caret-down'"></i>
+                <ng-template #caret>
+                    <i *ngIf="data.items && collapsed" class="menu-collapse-item"
+                        [ngClass]="!data.expanded? 'fa-solid fa-caret-right' : 'fa-solid fa-caret-down'"></i>
+                </ng-template>
                 <span class="tooltiptext p-2" @fadeInOut *ngIf="!collapsed">{{data.label | translate}}</span>
 
             </a>
 
-            <a class="sidenav-nav-link" *ngIf="(!data.items || (data.items && data.items.length === 0)) && data.showInMenu"
+            <a class="sidenav-nav-link"
+                *ngIf="(!data.items || (data.items && data.items.length === 0)) && data.showInMenu"
                 [ngClass]="lang === 'ar'? 'sidenav-nav-link-padding-right': 'sidenav-nav-link-padding-left'"
                 [routerLink]="data.routeLink" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <i class="sidenav-link-icon" [class]="data.icon"></i>

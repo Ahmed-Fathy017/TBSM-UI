@@ -17,7 +17,7 @@
                             <div>
 
                                 <label for="username" class="d-flex flex-row-reverse">اسم المستخدم</label>
-                                <input type="text" id="username" placeholder="User Name" formControlName="userName"
+                                <input type="text" id="username" formControlName="userName"
                                     [ngClass]="{'inputerror': loginForm.controls.userName.errors && loginForm.controls.userName.touched}" />
 
                                 <div class="errors"
@@ -31,7 +31,7 @@
                             <div>
                                 <label for="password" class="d-flex flex-row-reverse">الرقم السري</label>
 
-                                <input type="password" id="password" placeholder="Password" #password
+                                <input type="password" id="password" #password
                                     formControlName="password"
                                     [ngClass]="{'inputerror': loginForm.controls.password.errors && loginForm.controls.password.touched}" />
                                 <div class="eye">

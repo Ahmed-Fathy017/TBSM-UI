@@ -11,7 +11,7 @@
                 <span (click)="toggleSideNav()" class="menu-icon material-icons"><i class="fa-solid fa-bars"></i></span>
             </div> -->
 
-            <div class="avatar-small ms-2 me-4">
+            <div [class]="lang !== 'en'? 'avatar-small-arabic' : 'avatar-small-english'">
                 <img class="avatar-img rounded-circle"
                     src="https://i.insider.com/5c007f32499ade0d21195b72?width=1100&format=jpeg&auto=webp" />
             </div>

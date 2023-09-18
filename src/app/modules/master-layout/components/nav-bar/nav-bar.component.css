@@ -1,6 +1,15 @@
-.avatar-small {
+.avatar-small-arabic {
   height: 35px;
   width: 35px;
+  margin-left: 0.5rem;
+  margin-right: 1.5rem;
+}
+
+.avatar-small-english {
+  height: 35px;
+  width: 35px;
+  margin-left: 1.5rem;
+  margin-right: 0.5rem;
 }
 
 .avatar-img {

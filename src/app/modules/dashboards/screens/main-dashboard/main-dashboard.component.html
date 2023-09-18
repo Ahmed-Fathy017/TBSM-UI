@@ -2,7 +2,7 @@
     <app-page-header [pageTitle]="pageTitle"></app-page-header>
 
     <app-loading *ngIf="isLoading"></app-loading>
-    <div class="container w-75" *ngIf="!isLoading">
+    <div class="container" *ngIf="!isLoading">
         <div class="row d-flex ">
             <div class="col-md-6 col-lg-4 col-xl-4"  *ngFor="let card of cards">
                 <div class="card  rounded-5 py-3 px-4 mx-4 my-4 d-flex justify-content-around">

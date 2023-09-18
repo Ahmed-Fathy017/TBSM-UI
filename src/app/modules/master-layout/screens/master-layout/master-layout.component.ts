@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 
 @Component({
@@ -9,27 +9,35 @@ import { LocalService } from 'src/app/modules/shared-components/services/local.s
 export class MasterLayoutComponent implements OnInit {
 
   isSideNavCollapsed = false;
-  screenwidth = 0;
+  screenWidth = 0;
+
+  lang: string = '';
+
+
+  // @Input() collapsed = false;
+  // @Input() screenwidth = 0;
 
   constructor(private localService: LocalService) { }
 
   ngOnInit(): void {
+    this.lang = this.localService.getData('lang');
+
   }
 
   onToggleSideNav(data: SideNavToggle) {
-    this.screenwidth = data.screenWidth;
+    this.screenWidth = data.screenWidth;
     this.isSideNavCollapsed = data.collapsed
-
   }
 
-  // getBodyClass(): string {
-  //   let styleClass = '';
-  //   if (this.isSideNavCollapsed && this.screenwidth > 768)
-  //     styleClass = 'body-trimmed'
-  //   else if (this.isSideNavCollapsed && this.screenwidth <= 768 && this.screenwidth > 0)
-  //     styleClass = 'body-md-screen'
-  //   return styleClass;
-  // }
+
+  getBodyClass(): string {
+    let styleClass = '';
+    if (this.isSideNavCollapsed && this.screenWidth > 768)
+      styleClass = this.lang !== 'en' ? 'body-trimmed-arabic' : 'body-trimmed-english';
+    else if (this.isSideNavCollapsed && this.screenWidth <= 768 && this.screenWidth > 0)
+      styleClass = this.lang !== 'en' ? 'body-md-screen-arabic' : 'body-md-screen-english';
+    return styleClass;
+  }
 
 }
 
