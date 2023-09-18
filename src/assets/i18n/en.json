@@ -211,5 +211,24 @@
         "InvalidInputDuplicationMessage":"This property already exists!",
         "InvalidInputCountMessage":"Some required properties missing!"
         
+    },
+    "ScreenNames": {
+        "Home": "Home",
+        "RefrigeratorsManagement": "Referigerators",
+        "DepartmentsManagement": "Departments",
+        "PropertiesManagement": "Properties",
+        "RolesManagement": "Roles",
+        "CreateRole": "Create Role",
+        "UsersManagement": "Users",
+        "ProductsManagement": "Products",
+        "CreateProduct": "Create Product",
+        "WithdrawProduct": "Withdraw Product",
+        "ExternalSupplyRequests": "External Supply Requests",
+        "InternalSupplyRequests": "Internal Supply Requests",
+        "MySupplyRequests": "My Supply Requests",
+        "OperationLogs":"Operation Logs",
+        "Inventory": "Inventory",
+        "WarehousesManagement": "Warehouse",
+        "PackagesManagement": "Packages"
     }
 }

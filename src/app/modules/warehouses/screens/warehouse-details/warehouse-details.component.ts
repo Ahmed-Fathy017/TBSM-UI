@@ -53,12 +53,26 @@ export class WarehouseDetailsComponent implements OnInit, OnDestroy {
     private localService: LocalService,
     private router: Router,
     private screenTitleNavigationService: ScreenTitleNavigationService) {
-    this.screenTitleNavigationService.setScreenKey('UserDashboard');
+
+
+
+
     this.evaluateScreenPermissions();
   }
 
   ngOnInit(): void {
+
+    if (this.localService.getData('type') === UserTypes.ADMIN) {
+      if (this.route.snapshot.paramMap.get('warehouseName'))
+        this.localService.saveData('warehouseName', this.route.snapshot.paramMap.get('warehouseName')!);
+      this.screenTitleNavigationService.setScreenKey('SelectedWarehouse');
+    }
+    else
+      this.screenTitleNavigationService.setScreenKey('UserDashboard');
+
     this.warehouseId = parseInt(this.route.snapshot.paramMap.get('id')!);
+
+
     this.getWarehouse();
   }
 

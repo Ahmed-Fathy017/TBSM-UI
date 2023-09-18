@@ -7,7 +7,7 @@ import { ScreensConfigProvider } from "../master-layout/providers/screens-config
 const routes: Routes = [
   { path: '', component: WarehousesManagementComponent, data: { config: ScreensConfigProvider.WarehousesManagementScreen } },
   { path: 'warehouse/:id', component: WarehouseDetailsComponent, data: { config: ScreensConfigProvider.WarehouseDetailsScreen } },
-  { path: 'home', component: WarehouseDetailsComponent, data: { config: ScreensConfigProvider.UserDashboardScreen, key: 'UserDashboard' } }
+  { path: 'home', component: WarehouseDetailsComponent, data: { config: ScreensConfigProvider.UserDashboardScreen} }
 ];
 
 @NgModule({

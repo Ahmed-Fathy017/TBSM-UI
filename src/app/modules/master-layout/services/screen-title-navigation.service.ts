@@ -27,10 +27,10 @@ export class ScreenTitleNavigationService {
     ["Inventory", [{ name: 'ScreenNames.Home', routeLink: 'warehouses/home' }, { name: 'ScreenNames.Inventory', routeLink: 'inventories' }]],
     ["AdminDashboard", [{ name: 'ScreenNames.Home', routeLink: 'dashboard' }]],
     ["WarehousesManagement", [{ name: 'ScreenNames.Home', routeLink: 'dashboard' }, { name: 'ScreenNames.WarehousesManagement', routeLink: 'warehouses' }]],
-
+    // ["SelectedWarehouse", [{ name: 'ScreenNames.Home', routeLink: 'dashboard' }, { name: 'ScreenNames.WarehousesManagement', routeLink: 'warehouses' }]],
     ["PackagesManagement", [{ name: 'ScreenNames.Home', routeLink: 'dashboard' }, { name: 'ScreenNames.PackagesManagement', routeLink: 'packages' }]],
 
-  
+
   ]);
 
   getScreenKey(): Observable<string> {
@@ -41,7 +41,10 @@ export class ScreenTitleNavigationService {
     this.screenKey$.next(newState);
   }
 
-  getTitleNavigationDetails(screenKey: string): IScreenNavigator[] {
+  getTitleNavigationDetails(screenKey: string, additionalData: any = null): IScreenNavigator[] {
+    if (additionalData || screenKey === 'SelectedWarehouse')
+      this.screensMap.set('SelectedWarehouse', [{ name: 'ScreenNames.Home', routeLink: 'dashboard' }, { name: 'ScreenNames.WarehousesManagement', routeLink: 'warehouses' }, { name: `${additionalData?.name}`, routeLink: `warehouses/warehouse/${additionalData?.id}` }]);
+
     return this.screensMap.get(screenKey)!;
   }
 

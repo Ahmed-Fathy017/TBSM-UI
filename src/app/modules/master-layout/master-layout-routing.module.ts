@@ -38,7 +38,7 @@ const routes: Routes = [
       },
       { path: 'packages', component: PackagesManagementComponent, data: { config: ScreensConfigProvider.PackagesManagementScreen } },
       { path: 'management/departments', component: DepartmentsManagementComponent, data: { config: ScreensConfigProvider.DepartmentsManagementScreen } },
-      { path: 'management/refrigerators', component: RefrigeratorsManagementComponent, data: { config: ScreensConfigProvider.RefrigeratorsManagementScreen, key: 'RefrigeratorsManagement' } },
+      { path: 'management/refrigerators', component: RefrigeratorsManagementComponent, data: { config: ScreensConfigProvider.RefrigeratorsManagementScreen } },
       { path: 'management/properties', component: PropertiesManagementComponent, data: { config: ScreensConfigProvider.PropertiesManagementScreen } },
       { path: 'users', component: UsersManagementComponent, data: { config: ScreensConfigProvider.UsersManagementScreen } },
       { path: 'operation-logs', component: OperationLogsComponent, data: { config: ScreensConfigProvider.OperationLogsManagementScreen } },

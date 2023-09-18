@@ -94,8 +94,9 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
   }
 
   onViewButtonClick(id: number) {
+    this.selectedWarehouse = this.warehouses.find(i => i.id == id)!;
     this.localService.saveData('warehouseId', String(id));
-    this.router.navigate([`warehouses/warehouse/${id}`])
+    this.router.navigate([`warehouses/warehouse/${id}`, {warehouseName: this.selectedWarehouse.warehouse_name}])
   }
 
   onUpdateButtonClick(id: number) {

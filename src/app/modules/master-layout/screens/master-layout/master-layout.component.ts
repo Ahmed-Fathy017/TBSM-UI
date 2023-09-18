@@ -10,7 +10,7 @@ import { switchMap } from 'rxjs/operators';
   templateUrl: './master-layout.component.html',
   styleUrls: ['./master-layout.component.css']
 })
-export class MasterLayoutComponent implements OnInit, AfterViewInit {
+export class MasterLayoutComponent implements OnInit {
 
   isSideNavCollapsed = false;
   screenWidth = 0;
@@ -21,20 +21,18 @@ export class MasterLayoutComponent implements OnInit, AfterViewInit {
   screenNavigators: IScreenNavigator[] = [{ name: 'ScreenNames.Home', routeLink: 'warehouses/home' }];
 
   constructor(private localService: LocalService,
-    private screenTitleNavigationService: ScreenTitleNavigationService,
-    private ngZone: NgZone) {
-
-  }
-  ngAfterViewInit(): void {
+    private screenTitleNavigationService: ScreenTitleNavigationService) {
 
   }
 
   ngOnInit(): void {
     this.lang = this.localService.getData('lang');
+
     this.screenTitleNavigationService.getScreenKey().subscribe((state) => {
-      console.log(this.screenTitleNavigationService.getTitleNavigationDetails(state));
-      if (this.screenTitleNavigationService.getTitleNavigationDetails(state))
-        this.screenNavigators = this.screenTitleNavigationService.getTitleNavigationDetails(state);
+      // This code will only run when the getScreenKey() observable emits a value
+      if (this.screenTitleNavigationService.getTitleNavigationDetails(state)) {
+        this.screenNavigators = this.screenTitleNavigationService.getTitleNavigationDetails(state, { name: this.localService.getData('warehouseName'), id: this.localService.getData('warehouseId') });
+      }
     });
 
   }
