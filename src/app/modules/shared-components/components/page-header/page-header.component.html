@@ -1,5 +1,12 @@
 <div class="container">
-    <div class="pageTitle p-3 my-4 d-flex">
-        <h5 class="fw-bold m-0">{{pageTitle | translate}} <span class="colored-text">{{coloredPageTitle | translate}}</span></h5>
+    <div class="pageTitle p-3 my-4 d-flex" *ngIf="!isNavigator">
+        <h5 class="fw-bold m-0">{{pageTitle | translate}} <span class="colored-text">{{coloredPageTitle |
+                translate}}</span></h5>
+    </div>
+
+    <div class="pageTitle p-3 my-4 d-flex" *ngIf="isNavigator && screenNavigators && screenNavigators.length > 0">
+        <a class="h5 fw-bold m-0" *ngFor="let item of screenNavigators; let i = index" [routerLink]="item.routeLink"
+            routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">{{item.name | translate}}
+            <span class="no-color" *ngIf="i != screenNavigators.length - 1"> / &nbsp;</span></a>
     </div>
 </div>

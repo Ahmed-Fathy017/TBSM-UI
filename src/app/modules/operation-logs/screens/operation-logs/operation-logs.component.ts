@@ -10,6 +10,7 @@ import { saveAs } from 'file-saver';
 import { OperationTypes } from '../../models/operation-types';
 import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
 import { TranslateService } from '@ngx-translate/core';
+import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
 
 
 @Component({
@@ -47,8 +48,10 @@ export class OperationLogsComponent extends SharedMessagesComponent implements O
 
   constructor(private toastr: ToastrService,
     private operationLogsService: OperationLogsService,
-    private translateService: TranslateService) {
-      super(translateService);
+    private translateService: TranslateService,
+    private screenTitleNavigationService: ScreenTitleNavigationService) {
+    super(translateService);
+    this.screenTitleNavigationService.setScreenKey('OperationLogs');
   }
 
   ngOnInit(): void {
@@ -147,9 +150,9 @@ export class OperationLogsComponent extends SharedMessagesComponent implements O
         this.isProcessing = false;
         this.isLoading = false;
         if (error.error.errors)
-        this.toastr.error(error.error.errors[0].value, error.error.message);
-      else
-        this.toastr.error(error.error.message);
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message);
       }
     );
 

@@ -11,6 +11,7 @@ import { InventoriesService } from '../../remote-services/inventories.service';
 import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
 import { TranslateService } from '@ngx-translate/core';
 import { LocalService } from 'src/app/modules/shared-components/services/local.service';
+import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
 
 @Component({
   selector: 'app-inventory',
@@ -68,8 +69,11 @@ export class InventoryComponent extends SharedMessagesComponent implements OnIni
     private inventoriesService: InventoriesService,
     private sanitizer: DomSanitizer,
     private translateService: TranslateService,
-    private localService: LocalService) {
+    private localService: LocalService,
+    private screenTitleNavigationService: ScreenTitleNavigationService) {
     super(translateService);
+    this.screenTitleNavigationService.setScreenKey('Inventory');
+
 
     this.evaluateScreenPermissions();
   }

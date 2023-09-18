@@ -7,6 +7,7 @@ import { Role } from '../../models/role';
 import { Permission } from '../../models/permission';
 import { PermissionGroup } from '../../models/permission-group';
 import { LocalService } from 'src/app/modules/shared-components/services/local.service';
+import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
 
 @Component({
   selector: 'app-roles-management',
@@ -47,8 +48,9 @@ export class RolesManagementComponent implements OnInit, OnDestroy {
   constructor(
     private toastr: ToastrService,
     private rolesService: RolesService,
-    private localService: LocalService) {
-
+    private localService: LocalService,
+    private screenTitleNavigationService: ScreenTitleNavigationService) {
+    this.screenTitleNavigationService.setScreenKey('RolesManagement');
     this.evaluateScreenPermissions();
   }
 

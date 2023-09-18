@@ -7,6 +7,7 @@ import { Role } from '../../models/role';
 import { RolesService } from '../../remote-services/roles.service';
 import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
 import { TranslateService } from '@ngx-translate/core';
+import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
 
 @Component({
   selector: 'app-create-role',
@@ -40,8 +41,10 @@ export class CreateRoleComponent extends SharedMessagesComponent implements OnIn
   constructor(
     private toastr: ToastrService,
     private rolesService: RolesService,
-    private translateService: TranslateService) {
+    private translateService: TranslateService,
+     private screenTitleNavigationService: ScreenTitleNavigationService) {
       super(translateService);
+      this.screenTitleNavigationService.setScreenKey('CreateRole');
   }
 
 

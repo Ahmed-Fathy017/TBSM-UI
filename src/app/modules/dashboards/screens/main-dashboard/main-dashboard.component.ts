@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { AdminDashboardCard } from '../../models/admin-dashboard-card';
 import { DashboardsService } from '../../remote-services/dashboards.service';
+import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
 
 @Component({
   selector: 'app-main-dashboard',
@@ -21,7 +22,10 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
   isLoading: boolean = false;
 
   constructor(private toastr: ToastrService,
-    private dashboardsService: DashboardsService) { }
+    private dashboardsService: DashboardsService,
+    private screenTitleNavigationService: ScreenTitleNavigationService) { 
+      this.screenTitleNavigationService.setScreenKey('AdminDashboard');
+    }
 
   ngOnInit(): void {
     this.loadData();

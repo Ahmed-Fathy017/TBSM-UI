@@ -1,26 +1,41 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, Input, OnInit } from '@angular/core';
 import { LocalService } from 'src/app/modules/shared-components/services/local.service';
+import { ScreenTitleNavigationService } from '../../services/screen-title-navigation.service';
+import { IScreenNavigator } from '../../models/screen-navigator';
+import { NgZone } from '@angular/core';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-master-layout',
   templateUrl: './master-layout.component.html',
   styleUrls: ['./master-layout.component.css']
 })
-export class MasterLayoutComponent implements OnInit {
+export class MasterLayoutComponent implements OnInit, AfterViewInit {
 
   isSideNavCollapsed = false;
   screenWidth = 0;
 
   lang: string = '';
 
+  // just initial value should be changed later based on user type
+  screenNavigators: IScreenNavigator[] = [{ name: 'ScreenNames.Home', routeLink: 'warehouses/home' }];
 
-  // @Input() collapsed = false;
-  // @Input() screenwidth = 0;
+  constructor(private localService: LocalService,
+    private screenTitleNavigationService: ScreenTitleNavigationService,
+    private ngZone: NgZone) {
 
-  constructor(private localService: LocalService) { }
+  }
+  ngAfterViewInit(): void {
+
+  }
 
   ngOnInit(): void {
     this.lang = this.localService.getData('lang');
+    this.screenTitleNavigationService.getScreenKey().subscribe((state) => {
+      console.log(this.screenTitleNavigationService.getTitleNavigationDetails(state));
+      if (this.screenTitleNavigationService.getTitleNavigationDetails(state))
+        this.screenNavigators = this.screenTitleNavigationService.getTitleNavigationDetails(state);
+    });
 
   }
 

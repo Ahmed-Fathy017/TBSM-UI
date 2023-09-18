@@ -7,3 +7,16 @@
 .colored-text {
     color: #F15A60;
 }
+
+a {
+    text-decoration: none;
+    display: inline-block;
+}
+
+.active {
+    color: #F15A60;
+}
+
+.no-color {
+    color: #100F37;
+}

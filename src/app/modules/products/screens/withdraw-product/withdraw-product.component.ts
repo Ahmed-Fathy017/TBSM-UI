@@ -13,6 +13,7 @@ import { SharedMessagesComponent } from 'src/app/modules/shared-components/compo
 import { TranslateService } from '@ngx-translate/core';
 import { Html5QrcodeScanType, Html5QrcodeScanner } from "html5-qrcode";
 import { Html5Qrcode } from "html5-qrcode";
+import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
 
 @Component({
   selector: 'app-withdraw-product',
@@ -47,9 +48,12 @@ export class WithdrawProductComponent extends SharedMessagesComponent implements
   constructor(
     private toastr: ToastrService,
     private productsService: ProductsService,
-    private translateService: TranslateService) { 
-      super(translateService);
-    }
+    private translateService: TranslateService,
+    private screenTitleNavigationService: ScreenTitleNavigationService) {
+    super(translateService);
+    this.screenTitleNavigationService.setScreenKey('WithdrawProduct');
+
+  }
 
 
 

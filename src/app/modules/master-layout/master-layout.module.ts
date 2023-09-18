@@ -27,6 +27,7 @@ import { PropertiesModule } from '../properties/properties.module';
 import { SublevelMenuComponent } from './components/sidenav/sublevel-menu.component';
 import { InventoriesModule } from '../inventories/inventories.module';
 import { UnauthorizedComponent } from '../shared-components/components/unauthorized/unauthorized.component';
+import { ScreenTitleNavigationService } from './services/screen-title-navigation.service';
 
 
 
@@ -62,7 +63,8 @@ import { UnauthorizedComponent } from '../shared-components/components/unauthori
   ], providers: [
     NavigationService,
     SupplyChainsService,
-    TranslateService
+    TranslateService,
+    ScreenTitleNavigationService
   ]
 })
 export class MasterLayoutModule { }

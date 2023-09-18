@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 import { UserTypes } from 'src/app/modules/authentication/models/user-types';
 import { WarehouseDataCard } from '../../models/warehouse-data-card';
+import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
 
 @Component({
   selector: 'app-warehouse-details',
@@ -50,7 +51,9 @@ export class WarehouseDetailsComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private toastr: ToastrService,
     private localService: LocalService,
-    private router: Router) {
+    private router: Router,
+    private screenTitleNavigationService: ScreenTitleNavigationService) {
+    this.screenTitleNavigationService.setScreenKey('UserDashboard');
     this.evaluateScreenPermissions();
   }
 

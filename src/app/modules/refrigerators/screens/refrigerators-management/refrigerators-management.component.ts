@@ -6,6 +6,7 @@ import { RefrigeratorsService } from '../../remote-services/refrigerators.servic
 import { Refrigerator } from '../../models/refrigerator';
 import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
 import { TranslateService } from '@ngx-translate/core';
+import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
 
 @Component({
   selector: 'app-refrigerators-management',
@@ -46,8 +47,10 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
   constructor(
     private toastr: ToastrService,
     private refrigeratorsService: RefrigeratorsService,
-    private translateService: TranslateService) {
+    private translateService: TranslateService, 
+    private screenTitleNavigationService: ScreenTitleNavigationService) {
       super(translateService);
+      this.screenTitleNavigationService.setScreenKey('RefrigeratorsManagement');
   }
 
   ngOnInit(): void {

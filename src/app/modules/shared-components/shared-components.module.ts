@@ -10,6 +10,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedMessagesComponent } from './components/shared-messages/shared-messages.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     CommonModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added,
-    TranslateModule 
+    TranslateModule,
+    RouterModule
   ],
   exports : [
     LoadingButtonComponent,

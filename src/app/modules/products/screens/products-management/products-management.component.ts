@@ -23,6 +23,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
 import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 import { UserTypes } from 'src/app/modules/authentication/models/user-types';
+import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
 
 @Component({
   selector: 'app-products-management',
@@ -116,8 +117,10 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
     private renderer: Renderer2,
     private activatedRoute: ActivatedRoute,
     private translateService: TranslateService,
-    private localService: LocalService) {
+    private localService: LocalService,
+    private screenTitleNavigationService: ScreenTitleNavigationService) {
     super(translateService);
+    this.screenTitleNavigationService.setScreenKey('ProductsManagement');
 
     this.isAdmin = this.localService.getData('type') === UserTypes.ADMIN;
     this.evaluateScreenPermissions();

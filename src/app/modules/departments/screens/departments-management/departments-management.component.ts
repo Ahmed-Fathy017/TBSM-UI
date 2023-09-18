@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { DepartmentsService } from '../../remote-services/departments.service';
 import { TranslateService } from '@ngx-translate/core';
 import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
+import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
 
 @Component({
   selector: 'app-departments-management',
@@ -41,8 +42,10 @@ export class DepartmentsManagementComponent extends SharedMessagesComponent impl
 
   constructor(private toastr: ToastrService,
     private departmentsService: DepartmentsService,
-    private translateService: TranslateService) {
+    private translateService: TranslateService,
+    private screenTitleNavigationService: ScreenTitleNavigationService) {
       super(translateService);
+      this.screenTitleNavigationService.setScreenKey('DepartmentsManagement');
   }
 
   ngOnInit(): void {

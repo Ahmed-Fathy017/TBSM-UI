@@ -52,7 +52,6 @@ export class SidenavComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.screenWidth = window.innerWidth;
-    console.log(this.screenWidth)
     if (this.screenWidth <= 768) {
       this.collapsed = false;
       this.onToggleSideNav.emit({ collapsed: this.collapsed, screenWidth: this.screenWidth });

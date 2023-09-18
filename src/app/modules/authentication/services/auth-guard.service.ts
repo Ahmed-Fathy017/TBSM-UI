@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { AuthenticationService } from '../remote-services/authentication.service';
 import { LocalService } from '../../shared-components/services/local.service';
 import { UserTypes } from '../models/user-types';
+import { ScreenTitleNavigationService } from '../../master-layout/services/screen-title-navigation.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
 
   constructor(private authenticationService: AuthenticationService,
     private router: Router,
-    private localService: LocalService) {
+    private localService: LocalService,
+    private screenTitleNavigationService: ScreenTitleNavigationService) {
     this.permissions = JSON.parse(this.localService.getData("permissions"));
   }
 
@@ -35,7 +37,6 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
     }
 
     let screenConfig = childRoute.firstChild?.data.config;
-    console.log(screenConfig)
 
     if (screenConfig === 'public' ||
       screenConfig === undefined ||
@@ -43,6 +44,7 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
       (screenConfig === 'user' && this.localService.getData('type') != UserTypes.ADMIN))
       return true;
 
+      // this should be map key, value for O(1) execution enhancement
     if (!this.permissions.find(i => i === screenConfig) ||
       (screenConfig === 'admin' && this.localService.getData('type') != UserTypes.ADMIN) ||
       (screenConfig === 'user' && this.localService.getData('type') == UserTypes.ADMIN)) {

@@ -13,6 +13,7 @@ import { ProductsService } from '../../remote-services/products.service';
 import { PropertiesService } from 'src/app/modules/properties/remote-services/properties.service';
 import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
 import { TranslateService } from '@ngx-translate/core';
+import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
 
 @Component({
   selector: 'app-create-product',
@@ -66,10 +67,11 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
     private warehouseService: WarehousesService,
     private productsService: ProductsService,
     private propertiesService: PropertiesService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private screenTitleNavigationService: ScreenTitleNavigationService
   ) {
-
-    super(translateService)
+    super(translateService);
+    this.screenTitleNavigationService.setScreenKey('CreateProduct');
   }
 
   ngOnInit(): void {

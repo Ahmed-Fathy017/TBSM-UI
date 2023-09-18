@@ -10,6 +10,7 @@ import { PropertiesService } from '../../remote-services/properties.service';
 import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
 import { TranslateService } from '@ngx-translate/core';
 import { LocalService } from 'src/app/modules/shared-components/services/local.service';
+import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
 
 @Component({
   selector: 'app-properties-management',
@@ -64,8 +65,10 @@ export class PropertiesManagementComponent extends SharedMessagesComponent imple
     private propertiesService: PropertiesService,
     private router: Router,
     private translateService: TranslateService,
-    private localService: LocalService) {
+    private localService: LocalService,
+    private screenTitleNavigationService: ScreenTitleNavigationService) {
     super(translateService);
+    this.screenTitleNavigationService.setScreenKey('PropertiesManagement');
 
     this.evaluateScreenPermissions();
   }

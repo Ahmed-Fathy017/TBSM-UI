@@ -204,5 +204,24 @@
         "InvalidInputWarningMessage": "!برجاء ادخال القيم بطريقة صحيحة",
         "InvalidInputDuplicationMessage": "!هذه الخاصية موجودة بالفعل",
         "InvalidInputCountMessage": "!لم يتم ادخال كل الخصائص المطلوبة"
+    },
+    "ScreenNames": {
+        "Home": "الرئيسية",
+        "RefrigeratorsManagement": "الثلاجات",
+        "DepartmentsManagement": "الاقسام",
+        "PropertiesManagement": "الخصائص",
+        "RolesManagement": "الأدوار",
+        "CreateRole": "انشاء دور",
+        "UsersManagement": "المستخدمين",
+        "ProductsManagement": "المنتجات",
+        "CreateProduct": "انشاء منتج",
+        "WithdrawProduct": "سحب منتج",
+        "ExternalSupplyRequests": "طلبات الامداد الخارجي",
+        "InternalSupplyRequests": "طلبات الامداد الداخلي",
+        "MySupplyRequests": "طلباتي",
+        "OperationLogs":"سجل العمليات",
+        "Inventory": "الجرد",
+        "WarehousesManagement": "المستودعات",
+        "PackagesManagement": "الباقات"
     }
 }
