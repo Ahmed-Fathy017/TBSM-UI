@@ -117,7 +117,7 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
         this.isLoading = false;
         this.isProcessing = false;
       }, (error: any) => {
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);
@@ -139,7 +139,7 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
       }, (error: any) => {
         this.isProcessing = false;
         this.isLoading = false;
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);
@@ -169,7 +169,7 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
       }, (error: any) => {
 
         this.isLoading = false;
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);
@@ -188,7 +188,7 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
         this.isLoading = false;
       }, (error: any) => {
         this.isLoading = false;
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);

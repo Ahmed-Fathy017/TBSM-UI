@@ -25,8 +25,8 @@
 .body-arabic {
     width: calc(100%);
     height: 100vh;
-    /* margin-left: 5rem; */
-    /* z-index: 0; */
+    /* margin-left: 5rem;
+    z-index: 0; */
     position: relative;
     top: 0;
     transition: all .5s ease;
@@ -66,3 +66,4 @@
     margin-left: 14rem;
 
 }
+

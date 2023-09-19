@@ -93,7 +93,8 @@ export class WithdrawProductComponent extends SharedMessagesComponent implements
     if (this.withdrawProductForm.valid) {
       let productNumber = this.withdrawProductForm.controls.number.value!;
       this.isProcessing = true;
-      this.getProdcuctByNumber(productNumber);
+      let quanitity = this.products.filter(i => i.number == productNumber)?.length;
+      this.getProdcuctByNumber(productNumber, quanitity);
     } else
       this.toastr.warning(this.invalidInputWarningMessage, this.invalidInputWarningHeader);
 
@@ -108,15 +109,15 @@ export class WithdrawProductComponent extends SharedMessagesComponent implements
 
 
 
-  getProdcuctByNumber(productNumber: string) {
-    let subscription = this.productsService.getProdcuctByNumber(productNumber, 1).subscribe(
+  getProdcuctByNumber(productNumber: string, quanitity: number) {
+    let subscription = this.productsService.getProdcuctByNumber(productNumber, quanitity).subscribe(
       (response: any) => {
         this.products.push(response.data)
         this.isProcessing = false;
       },
       (error: any) => {
         this.isProcessing = false;
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);
@@ -149,7 +150,7 @@ export class WithdrawProductComponent extends SharedMessagesComponent implements
         this.products = [];
       }, (error: any) => {
         this.isProcessing = false;
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);

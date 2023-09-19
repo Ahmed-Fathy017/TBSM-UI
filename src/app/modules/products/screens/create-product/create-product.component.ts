@@ -164,7 +164,7 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
         this.isLoading = false;
       }, (error: any) => {
         this.isLoading = false;
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);
@@ -182,7 +182,7 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
         this.isLoading = false;
         this.isProcessing = false;
       }, (error: any) => {
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);
@@ -201,7 +201,7 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
         this.selectedProperty = this.properties[0];
         this.isLoading = false;
       }, (error: any) => {
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);
@@ -219,7 +219,7 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
         this.createdProductId = response.data.id;
         this.getProductInvoice();
       }, (error: any) => {
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);
@@ -237,7 +237,7 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
         this.showProductSnackbar();
         this.isProcessing = false;
       }, (error: any) => {
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);

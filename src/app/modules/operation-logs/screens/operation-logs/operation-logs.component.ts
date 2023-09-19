@@ -149,7 +149,7 @@ export class OperationLogsComponent extends SharedMessagesComponent implements O
       }, (error: any) => {
         this.isProcessing = false;
         this.isLoading = false;
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);

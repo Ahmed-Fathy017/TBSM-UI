@@ -25,6 +25,7 @@
 
 .products {
     height: 520px;
+    overflow: auto;
 }
 
 .table th,

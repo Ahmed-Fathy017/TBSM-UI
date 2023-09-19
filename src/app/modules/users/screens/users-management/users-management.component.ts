@@ -147,7 +147,7 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
       (response: any) => {
         this.roles = response.data;
       }, (error: any) => {
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);
@@ -167,7 +167,7 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
         this.isLoading = false;
       }, (error: any) => {
         this.isLoading = false;
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);
@@ -188,7 +188,7 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
       }, (error: any) => {
         this.isProcessing = false;
         this.isLoading = false;
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);
@@ -218,7 +218,7 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
       }, (error: any) => {
 
         this.isLoading = false;
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);
@@ -237,7 +237,7 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
         this.isLoading = false;
       }, (error: any) => {
         this.isLoading = false;
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);

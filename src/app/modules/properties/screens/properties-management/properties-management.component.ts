@@ -147,7 +147,7 @@ export class PropertiesManagementComponent extends SharedMessagesComponent imple
         this.properties = response.data;
         this.isLoading = false;
       }, (error: any) => {
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);
@@ -166,7 +166,7 @@ export class PropertiesManagementComponent extends SharedMessagesComponent imple
         this.isProcessing = false;
         this.isLoading = false;
       }, (error: any) => {
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);
@@ -196,7 +196,7 @@ export class PropertiesManagementComponent extends SharedMessagesComponent imple
         Object.assign(updatedPackage!, response.data);
         this.isLoading = false;
       }, (error: any) => {
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);
@@ -214,7 +214,7 @@ export class PropertiesManagementComponent extends SharedMessagesComponent imple
         this.properties = response.data;
         this.isLoading = false;
       }, (error: any) => {
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);

@@ -363,7 +363,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
 
         this.isLoading = false;
       }, (error: any) => {
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);
@@ -381,7 +381,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
         this.requiredPropertiesIds = this.properties.filter(i => i.required_status).map(i => i.id);
         this.selectedProperty = this.properties[0];
       }, (error: any) => {
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);
@@ -401,7 +401,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
         this.isLoading = false;
       }, (error: any) => {
         this.isLoading = false;
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);
@@ -419,7 +419,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
         this.isLoading = false;
         this.isProcessing = false;
       }, (error: any) => {
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);
@@ -501,7 +501,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
         this.isLoading = false;
       }, (error: any) => {
         this.isLoading = false;
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);
@@ -523,7 +523,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
         this.isLoading = false;
       }, (error: any) => {
         this.isLoading = false;
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);
@@ -539,7 +539,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
         window.open(response.data, "_blank");
 
       }, (error: any) => {
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);
@@ -554,7 +554,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
       (response: any) => {
         this.toastr.success(response.message);
       }, (error: any) => {
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);

@@ -162,7 +162,7 @@ export class PackagesManagementComponent extends SharedMessagesComponent impleme
         this.isLoading = false;
 
       }, (error: any) => {
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);
@@ -184,7 +184,7 @@ export class PackagesManagementComponent extends SharedMessagesComponent impleme
       }, (error: any) => {
         this.isProcessing = false;
         this.isLoading = false;
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);
@@ -219,7 +219,7 @@ export class PackagesManagementComponent extends SharedMessagesComponent impleme
 
         this.isProcessing = false;
         this.isLoading = false;
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);
@@ -238,7 +238,7 @@ export class PackagesManagementComponent extends SharedMessagesComponent impleme
         this.isLoading = false;
       }, (error: any) => {
         this.isLoading = false;
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);

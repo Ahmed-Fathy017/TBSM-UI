@@ -153,7 +153,7 @@ export class InventoryComponent extends SharedMessagesComponent implements OnIni
         this.excelLink = response.data;
 
       }, (error: any) => {
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length >0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);
@@ -169,7 +169,7 @@ export class InventoryComponent extends SharedMessagesComponent implements OnIni
       (response: any) => {
         this.departments = response.data;
       }, (error: any) => {
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length >0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);
@@ -193,7 +193,7 @@ export class InventoryComponent extends SharedMessagesComponent implements OnIni
         this.toastr.success(response.message);
         this.isImporting = false;
       }, (error: any) => {
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);
@@ -212,7 +212,7 @@ export class InventoryComponent extends SharedMessagesComponent implements OnIni
         window.open(response.data, '_blank');
         this.isExporting = false;
       }, (error: any) => {
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);

@@ -87,7 +87,7 @@ export class RolesManagementComponent implements OnInit, OnDestroy {
         this.roles = response.data;
         this.isLoadingRoles = false;
       }, (error: any) => {
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);
@@ -108,7 +108,7 @@ export class RolesManagementComponent implements OnInit, OnDestroy {
         this.isLoadingRoles = false;
 
       }, (error: any) => {
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);

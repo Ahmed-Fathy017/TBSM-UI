@@ -114,7 +114,7 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
       this.updateWarehouseForm.controls.password.clearValidators();
 
 
-    if (this.updateWarehouseForm.valid && this.selectedWarehouse.properties && this.selectedWarehouse.properties.length > 0) {
+    if (this.updateWarehouseForm.valid) {
       this.isLoading = true;
 
       let requestDTO = new Warehouse();
@@ -170,7 +170,7 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
         this.isLoading = false;
         this.isProcessing = false;
       }, (error: any) => {
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);
@@ -186,7 +186,7 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
       (response: any) => {
         this.packages = response.data;
       }, (error: any) => {
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);
@@ -208,7 +208,7 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
       }, (error: any) => {
         this.isProcessing = false;
         this.isLoading = false;
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);
@@ -242,7 +242,7 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
 
         this.isProcessing = false;
         this.isLoading = false;
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);
@@ -261,7 +261,7 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
         this.isLoading = false;
       }, (error: any) => {
         this.isLoading = false;
-        if (error.error.errors)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
           this.toastr.error(error.error.message);

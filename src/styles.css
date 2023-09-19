@@ -214,3 +214,17 @@ body::-webkit-scrollbar-thumb {
     color: #F15A60 !important;
     border-bottom: 2px solid #F15A60 !important;
 }
+
+
+@media screen and (min-width: 1920px) {
+    .container {
+        width: 100% !important;
+        padding-right: 75px !important;
+        padding-left: 60px !important;
+        margin-right: auto !important;
+        margin-left: auto !important;
+        max-width: 5000px !important;
+        
+      }
+       
+}
