@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild, } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
+// import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { Department } from 'src/app/modules/departments/models/department';
 import { DepartmentsService } from 'src/app/modules/departments/remote-services/departments.service';
@@ -14,6 +14,7 @@ import { PropertiesService } from 'src/app/modules/properties/remote-services/pr
 import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
 import { TranslateService } from '@ngx-translate/core';
 import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
+import { ToasterService } from 'src/app/modules/master-layout/services/toaster.service';
 
 @Component({
   selector: 'app-create-product',
@@ -61,7 +62,7 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
 
 
   constructor(
-    private toastr: ToastrService,
+    private toastr: ToasterService,
     private departmentsService: DepartmentsService,
     private refrigeratorsService: RefrigeratorsService,
     private warehouseService: WarehousesService,

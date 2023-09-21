@@ -1,11 +1,12 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+// import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { SupplyRequestsGroup } from '../../models/supply-requests-group';
 import { SupplyChainsService } from '../../remote-services/supply-chains.service';
 import { SupplyRequest } from '../../models/supply-request';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UpdateOrder } from '../../models/update-order';
+import { ToasterService } from 'src/app/modules/master-layout/services/toaster.service';
 
 @Component({
   selector: 'app-supply-requests-management',
@@ -40,7 +41,7 @@ export class SupplyRequestsManagementComponent implements OnInit, OnDestroy {
   });
 
 
-  constructor(private toastr: ToastrService,
+  constructor(private toastr: ToasterService,
     private supplyChainsService: SupplyChainsService) {
   }
 

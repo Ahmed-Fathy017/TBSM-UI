@@ -1,12 +1,13 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
+// import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { RefrigeratorsService } from '../../remote-services/refrigerators.service';
 import { Refrigerator } from '../../models/refrigerator';
 import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
 import { TranslateService } from '@ngx-translate/core';
 import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
+import { ToasterService } from 'src/app/modules/master-layout/services/toaster.service';
 
 @Component({
   selector: 'app-refrigerators-management',
@@ -45,7 +46,7 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
   @ViewChild('updateModalCloseButtonRef') updateModalCloseButtonRef!: ElementRef;
 
   constructor(
-    private toastr: ToastrService,
+    private toastr: ToasterService,
     private refrigeratorsService: RefrigeratorsService,
     private translateService: TranslateService, 
     private screenTitleNavigationService: ScreenTitleNavigationService) {

@@ -2,12 +2,13 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { RolesService } from '../../remote-services/roles.service';
-import { ToastrService } from 'ngx-toastr';
+// import { ToastrService } from 'ngx-toastr';
 import { Role } from '../../models/role';
 import { Permission } from '../../models/permission';
 import { PermissionGroup } from '../../models/permission-group';
 import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
+import { ToasterService } from 'src/app/modules/master-layout/services/toaster.service';
 
 @Component({
   selector: 'app-roles-management',
@@ -46,7 +47,7 @@ export class RolesManagementComponent implements OnInit, OnDestroy {
   updatingAuthorityPermission: string = 'Roles.update';
 
   constructor(
-    private toastr: ToastrService,
+    private toastr: ToasterService,
     private rolesService: RolesService,
     private localService: LocalService,
     private screenTitleNavigationService: ScreenTitleNavigationService) {

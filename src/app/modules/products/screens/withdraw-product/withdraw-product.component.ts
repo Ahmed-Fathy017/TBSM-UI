@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
+// import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { Department } from 'src/app/modules/departments/models/department';
 import { DepartmentsService } from 'src/app/modules/departments/remote-services/departments.service';
@@ -14,6 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Html5QrcodeScanType, Html5QrcodeScanner } from "html5-qrcode";
 import { Html5Qrcode } from "html5-qrcode";
 import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
+import { ToasterService } from 'src/app/modules/master-layout/services/toaster.service';
 
 @Component({
   selector: 'app-withdraw-product',
@@ -46,7 +47,7 @@ export class WithdrawProductComponent extends SharedMessagesComponent implements
 
   // constructor
   constructor(
-    private toastr: ToastrService,
+    private toastr: ToasterService,
     private productsService: ProductsService,
     private translateService: TranslateService,
     private screenTitleNavigationService: ScreenTitleNavigationService) {

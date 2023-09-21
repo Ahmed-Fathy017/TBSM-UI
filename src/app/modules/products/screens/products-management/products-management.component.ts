@@ -1,6 +1,6 @@
 import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
+// import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { Package } from 'src/app/modules/packages/models/package';
 import { PackagesService } from 'src/app/modules/packages/remote-services/packages.service';
@@ -24,6 +24,7 @@ import { SharedMessagesComponent } from 'src/app/modules/shared-components/compo
 import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 import { UserTypes } from 'src/app/modules/authentication/models/user-types';
 import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
+import { ToasterService } from 'src/app/modules/master-layout/services/toaster.service';
 
 @Component({
   selector: 'app-products-management',
@@ -108,7 +109,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
 
   // constructor
   constructor(
-    private toastr: ToastrService,
+    private toastr: ToasterService,
     private productsService: ProductsService,
     private refrigeratorsService: RefrigeratorsService,
     private departmentsService: DepartmentsService,

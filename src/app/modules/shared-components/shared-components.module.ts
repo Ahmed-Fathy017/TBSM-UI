@@ -24,8 +24,6 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
-    BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot(), // ToastrModule added,
     TranslateModule,
     RouterModule
   ],

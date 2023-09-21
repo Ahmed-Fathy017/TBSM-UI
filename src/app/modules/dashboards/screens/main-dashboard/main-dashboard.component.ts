@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+// import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { AdminDashboardCard } from '../../models/admin-dashboard-card';
 import { DashboardsService } from '../../remote-services/dashboards.service';
 import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
+import { ToasterService } from 'src/app/modules/master-layout/services/toaster.service';
 
 @Component({
   selector: 'app-main-dashboard',
@@ -21,7 +22,7 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
 
   isLoading: boolean = false;
 
-  constructor(private toastr: ToastrService,
+  constructor(private toastr: ToasterService,
     private dashboardsService: DashboardsService,
     private screenTitleNavigationService: ScreenTitleNavigationService) { 
       this.screenTitleNavigationService.setScreenKey('AdminDashboard');

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { OperationLogs } from '../../models/operation-logs';
-import { ToastrService } from 'ngx-toastr';
+// import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { OperationLogsService } from '../../remote-services/operation-logs.service';
@@ -11,6 +11,7 @@ import { OperationTypes } from '../../models/operation-types';
 import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
 import { TranslateService } from '@ngx-translate/core';
 import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
+import { ToasterService } from 'src/app/modules/master-layout/services/toaster.service';
 
 
 @Component({
@@ -46,7 +47,7 @@ export class OperationLogsComponent extends SharedMessagesComponent implements O
 
   excelLink: string = '';
 
-  constructor(private toastr: ToastrService,
+  constructor(private toastr: ToasterService,
     private operationLogsService: OperationLogsService,
     private translateService: TranslateService,
     private screenTitleNavigationService: ScreenTitleNavigationService) {

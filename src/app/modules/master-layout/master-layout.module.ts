@@ -28,6 +28,8 @@ import { SublevelMenuComponent } from './components/sidenav/sublevel-menu.compon
 import { InventoriesModule } from '../inventories/inventories.module';
 import { UnauthorizedComponent } from '../shared-components/components/unauthorized/unauthorized.component';
 import { ScreenTitleNavigationService } from './services/screen-title-navigation.service';
+import { ToastrModule } from 'ngx-toastr';
+import { ToasterService } from './services/toaster.service';
 
 
 
@@ -59,12 +61,15 @@ import { ScreenTitleNavigationService } from './services/screen-title-navigation
     SupplyChainsModule,
     OperationLogsModule,
     PropertiesModule,
-    InventoriesModule
+    InventoriesModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(), // ToastrModule added,
   ], providers: [
     NavigationService,
     SupplyChainsService,
     TranslateService,
-    ScreenTitleNavigationService
+    ScreenTitleNavigationService,
+    ToasterService
   ]
 })
 export class MasterLayoutModule { }

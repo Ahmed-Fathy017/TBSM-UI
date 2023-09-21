@@ -2,7 +2,7 @@ import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { Warehouse } from '../../models/warehouse';
 import { WarehousesService } from '../../remote-services/warehouses.service';
 import { Subscription } from 'rxjs';
-import { ToastrService } from 'ngx-toastr';
+// import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PackagesService } from 'src/app/modules/packages/remote-services/packages.service';
@@ -14,6 +14,8 @@ import { SharedMessagesComponent } from 'src/app/modules/shared-components/compo
 import { TranslateService } from '@ngx-translate/core';
 import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
+import { ToasterService } from 'src/app/modules/master-layout/services/toaster.service';
+// import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-warehouses-management',
@@ -71,7 +73,7 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
   isProcessing: boolean = false;
 
   constructor(
-    private toastr: ToastrService,
+    private toastr: ToasterService,
     private warehousesService: WarehousesService,
     private packagesService: PackagesService,
     private router: Router,

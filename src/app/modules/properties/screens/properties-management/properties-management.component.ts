@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+// import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { Property } from 'src/app/modules/products/models/property';
 import { PropertyTypes } from 'src/app/modules/products/models/property-types';
@@ -11,6 +11,7 @@ import { SharedMessagesComponent } from 'src/app/modules/shared-components/compo
 import { TranslateService } from '@ngx-translate/core';
 import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
+import { ToasterService } from 'src/app/modules/master-layout/services/toaster.service';
 
 @Component({
   selector: 'app-properties-management',
@@ -61,7 +62,7 @@ export class PropertiesManagementComponent extends SharedMessagesComponent imple
   updatingAuthorityPermission: string = 'Properties.update';
 
   constructor(
-    private toastr: ToastrService,
+    private toastr: ToasterService,
     private propertiesService: PropertiesService,
     private router: Router,
     private translateService: TranslateService,

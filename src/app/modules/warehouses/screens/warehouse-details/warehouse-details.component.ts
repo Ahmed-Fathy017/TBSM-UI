@@ -3,11 +3,12 @@ import { Subscription } from 'rxjs';
 import { WarehousesService } from '../../remote-services/warehouses.service';
 import { Warehouse } from '../../models/warehouse';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+// import { ToastrService } from 'ngx-toastr';
 import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 import { UserTypes } from 'src/app/modules/authentication/models/user-types';
 import { WarehouseDataCard } from '../../models/warehouse-data-card';
 import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
+import { ToasterService } from 'src/app/modules/master-layout/services/toaster.service';
 
 @Component({
   selector: 'app-warehouse-details',
@@ -49,7 +50,7 @@ export class WarehouseDetailsComponent implements OnInit, OnDestroy {
   constructor(
     private warehousesService: WarehousesService,
     private route: ActivatedRoute,
-    private toastr: ToastrService,
+    private toastr: ToasterService,
     private localService: LocalService,
     private router: Router,
     private screenTitleNavigationService: ScreenTitleNavigationService) {

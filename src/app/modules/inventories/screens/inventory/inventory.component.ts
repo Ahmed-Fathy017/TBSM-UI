@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ToastrService } from 'ngx-toastr';
+// import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { Department } from 'src/app/modules/departments/models/department';
 import { DepartmentsService } from 'src/app/modules/departments/remote-services/departments.service';
@@ -12,6 +12,7 @@ import { SharedMessagesComponent } from 'src/app/modules/shared-components/compo
 import { TranslateService } from '@ngx-translate/core';
 import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
+import { ToasterService } from 'src/app/modules/master-layout/services/toaster.service';
 
 @Component({
   selector: 'app-inventory',
@@ -64,7 +65,7 @@ export class InventoryComponent extends SharedMessagesComponent implements OnIni
   exportingAuthorityPermission: string = 'Inventory.export';
 
 
-  constructor(private toastr: ToastrService,
+  constructor(private toastr: ToasterService,
     private departmentsService: DepartmentsService,
     private inventoriesService: InventoriesService,
     private sanitizer: DomSanitizer,

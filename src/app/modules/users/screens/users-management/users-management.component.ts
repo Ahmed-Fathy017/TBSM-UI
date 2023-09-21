@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
+// import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { Package } from 'src/app/modules/packages/models/package';
 import { PackagesService } from 'src/app/modules/packages/remote-services/packages.service';
@@ -12,6 +12,7 @@ import { SharedMessagesComponent } from 'src/app/modules/shared-components/compo
 import { TranslateService } from '@ngx-translate/core';
 import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
+import { ToasterService } from 'src/app/modules/master-layout/services/toaster.service';
 
 @Component({
   selector: 'app-users-management',
@@ -63,7 +64,7 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
   updatingAuthorityPermission: string = 'Users.update';
 
   constructor(
-    private toastr: ToastrService,
+    private toastr: ToasterService,
     private rolesService: RolesService,
     private usersService: UsersService,
     private translateService: TranslateService,

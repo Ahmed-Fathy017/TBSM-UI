@@ -2,12 +2,13 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/co
 import { Package } from '../../models/package';
 import { Subscription } from 'rxjs';
 import { PackagesService } from '../../remote-services/packages.service';
-import { ToastrService } from 'ngx-toastr';
+// import { ToastrService } from 'ngx-toastr';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
 import { TranslateService } from '@ngx-translate/core';
 import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
+import { ToasterService } from 'src/app/modules/master-layout/services/toaster.service';
 
 @Component({
   selector: 'app-packages-management',
@@ -63,7 +64,7 @@ export class PackagesManagementComponent extends SharedMessagesComponent impleme
   updatingAuthorityPermission: string = 'Categories.update';
 
   constructor(
-    private toastr: ToastrService,
+    private toastr: ToasterService,
     private packagesService: PackagesService,
     private translateService: TranslateService,
     private localService: LocalService,
