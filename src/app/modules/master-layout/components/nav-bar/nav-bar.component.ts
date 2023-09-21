@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NavigationService } from '../../services/navigation.service';
 import { Router } from '@angular/router';
 import { LocalService } from 'src/app/modules/shared-components/services/local.service';
+import { SideNavToggle } from '../../models/sidenav-toggle';
 
 @Component({
   selector: 'app-nav-bar',
@@ -10,6 +11,8 @@ import { LocalService } from 'src/app/modules/shared-components/services/local.s
 })
 export class NavBarComponent implements OnInit {
 
+  // @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();
+  
   lang: string = '';
   userName: string = '';
 

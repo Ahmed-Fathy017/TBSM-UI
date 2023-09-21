@@ -5,6 +5,7 @@ import { LocalService } from 'src/app/modules/shared-components/services/local.s
 import { UserTypes } from 'src/app/modules/authentication/models/user-types';
 import { INavbarData } from '../../models/helper';
 import { Router } from '@angular/router';
+import { SideNavToggle } from '../../models/sidenav-toggle';
 
 @Component({
   selector: 'app-sidenav',
@@ -85,7 +86,3 @@ export class SidenavComponent implements OnInit {
 
 }
 
-interface SideNavToggle {
-  screenWidth: number;
-  collapsed: boolean;
-}

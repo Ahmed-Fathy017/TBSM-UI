@@ -23,8 +23,8 @@
 
     </div>
 
-    <div class="container ">
-        <div class="logs pt-2 d-flex flex-column"  *ngIf="!isLoadingWarehouseData">
+    <div class="container "  *ngIf="!isLoadingWarehouseData && logs && logs.length > 0">
+        <div class="logs pt-2 d-flex flex-column" >
             <p *ngFor="let log of logs">{{log}}</p>
         </div>
     </div>
