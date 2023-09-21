@@ -4,10 +4,8 @@
     <div [class]="lang !== 'en' ? 'body-arabic' : 'body-english'" [ngClass]="getBodyClass()">
         <app-nav-bar> </app-nav-bar>
 
-        <div class="container ">
-            <app-page-header [screenNavigators]="screenNavigators" [isNavigator]="true"></app-page-header>
 
-        </div>
+        <app-page-header [screenNavigators]="screenNavigators" [isNavigator]="true"></app-page-header>
 
         <router-outlet></router-outlet>
     </div>
