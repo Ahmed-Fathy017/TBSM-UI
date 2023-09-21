@@ -120,15 +120,16 @@ export class LoginComponent implements OnInit {
         (response: any) => {
           this.localStore.saveData('token', response.auth_data.access_token);
           this.localStore.saveData('username', response.data.username);
-          this.localStore.saveData('type', response.data.type);
+          this.localStore.saveData('type', response.data.type.toLowerCase());
           this.localStore.saveData('id', String(response.data.id));
 
 
-          if (response.data.type.toLowerCase() === UserTypes.ADMIN) {
+          if (this.localStore.getData('type') === UserTypes.ADMIN) {
             this.setupAdminPermissions();
             this.setupAdminNavbarData();
           }
-          else {
+          else if (this.localStore.getData('type') === UserTypes.WAREHOUSE){
+
             this.setupUserPermissions(response);
             this.setupUserNavbarData();
           }
@@ -149,7 +150,6 @@ export class LoginComponent implements OnInit {
 
   setupUserPermissions(response: any) {
     let permissions: string[] = [];
-
     response.data.permissions.map((i: PermissionGroup) => {
       let groupName = i.group_name;
       i.permissions.map((j: Permission) => {
@@ -194,6 +194,7 @@ export class LoginComponent implements OnInit {
   }
 
   setupAdminPermissions() {
+
     this.localStore.saveData("permissions", JSON.stringify([
       ScreensConfigProvider.AlmostExpiredProductsViewManagementScreen,
       ScreensConfigProvider.ExpiredProductsViewManagementScreen,
