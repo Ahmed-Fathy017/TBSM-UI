@@ -40,9 +40,18 @@
     background-color: #ffffff !important;
 }
 
+.header .form-check-input {
+    border: 2px solid #ffffff;
+
+}
+
 .header .form-check-input:checked {
     border: 2px solid #ffffff;
     background-color: #100F37 !important;
+}
+
+.content .form-check-input {
+    border: solid 2px #100F37 !important;
 }
 
 .content .form-check-input:checked {
