@@ -107,7 +107,7 @@ export class LoginComponent implements OnInit {
   // login
   login(requestDTO: LoginRequest) {
     // re clearing local storage data
-    this.localStore.clearData();
+    // this.localStore.clearData();
     // resetting navData array
     this.localStore.saveData('navData', JSON.stringify([]));
     // resetting permissions array

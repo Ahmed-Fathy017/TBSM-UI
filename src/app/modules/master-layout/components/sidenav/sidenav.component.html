@@ -29,7 +29,7 @@
                     <i *ngIf="data.items && collapsed" class="menu-collapse-item"
                         [ngClass]="!data.expanded? 'fa-solid fa-caret-right' : 'fa-solid fa-caret-down'"></i>
                 </ng-template>
-                <span class="tooltiptext p-2" @fadeInOut *ngIf="!collapsed">{{data.label | translate}}</span>
+                <span class="tooltiptext p-2" @fadeInOut *ngIf="!collapsed" (click)="$event.stopPropagation()">{{data.label | translate}}</span>
 
             </a>
 
@@ -39,7 +39,7 @@
                 [routerLink]="data.routeLink" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <i class="sidenav-link-icon" [class]="data.icon"></i>
                 <span class="sidenav-link-text m-0" @fadeInOut *ngIf="collapsed">{{data.label | translate}}</span>
-                <span class="tooltiptext p-2" @fadeInOut *ngIf="!collapsed">{{data.label | translate}}</span>
+                <span class="tooltiptext p-2" @fadeInOut *ngIf="!collapsed" (click)="$event.stopPropagation()">{{data.label | translate}}</span>
 
             </a>
 
