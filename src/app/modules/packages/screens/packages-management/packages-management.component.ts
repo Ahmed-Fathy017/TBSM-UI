@@ -166,7 +166,7 @@ export class PackagesManagementComponent extends SharedMessagesComponent impleme
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader,error.error.message);
         this.isLoading = false;
       }
     );
@@ -177,7 +177,7 @@ export class PackagesManagementComponent extends SharedMessagesComponent impleme
   createPackage(requestDTO: Package) {
     let subscribtion = this.packagesService.createPackage(requestDTO).subscribe(
       (response: any) => {
-        this.toastr.success(response.message);
+        this.toastr.success(this.successCreateOperationHeader,response.message);
 
         this.packages = response.data;
         this.isProcessing = false;
@@ -188,7 +188,7 @@ export class PackagesManagementComponent extends SharedMessagesComponent impleme
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader,error.error.message);
       }
     );
 
@@ -210,7 +210,7 @@ export class PackagesManagementComponent extends SharedMessagesComponent impleme
 
     let subscription = this.packagesService.updatePackage(requestDTO).subscribe(
       (response: any) => {
-        this.toastr.success(response.message);
+        this.toastr.success(this.successEditOperationHeader, response.message);
 
         let updatedPackage = this.packages.find(i => i.id == requestDTO.id);
         Object.assign(updatedPackage!, response.data);
@@ -223,7 +223,7 @@ export class PackagesManagementComponent extends SharedMessagesComponent impleme
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader,error.error.message);
       }
     );
 
@@ -234,7 +234,7 @@ export class PackagesManagementComponent extends SharedMessagesComponent impleme
   deletePackage() {
     let subscription = this.packagesService.deletePackage(this.selectedPackage!.id).subscribe(
       (response: any) => {
-        this.toastr.success(response.message);
+        this.toastr.success(this.successDeleteOperationHeader,response.message);
         this.packages = response.data;
         this.isLoading = false;
       }, (error: any) => {
@@ -242,7 +242,7 @@ export class PackagesManagementComponent extends SharedMessagesComponent impleme
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader,error.error.message);
       }
     );
 

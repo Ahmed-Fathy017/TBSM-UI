@@ -45,8 +45,8 @@ export class DepartmentsManagementComponent extends SharedMessagesComponent impl
     private departmentsService: DepartmentsService,
     private translateService: TranslateService,
     private screenTitleNavigationService: ScreenTitleNavigationService) {
-      super(translateService);
-      this.screenTitleNavigationService.setScreenKey('DepartmentsManagement');
+    super(translateService);
+    this.screenTitleNavigationService.setScreenKey('DepartmentsManagement');
   }
 
   ngOnInit(): void {
@@ -114,10 +114,10 @@ export class DepartmentsManagementComponent extends SharedMessagesComponent impl
         this.isLoading = false;
       }, (error: any) => {
         this.isLoading = false;
-        if (error.error.errors && error.error.errors.length >0)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader, error.error.message);
       }
     );
 
@@ -127,7 +127,7 @@ export class DepartmentsManagementComponent extends SharedMessagesComponent impl
   createDepartment(requestDTO: Department) {
     let subscribtion = this.departmentsService.createDepartment(requestDTO).subscribe(
       (response: any) => {
-        this.toastr.success(response.message);
+        this.toastr.success(this.successCreateOperationHeader,response.message);
 
         this.departments = response.data;
         this.isProcessing = false;
@@ -135,10 +135,10 @@ export class DepartmentsManagementComponent extends SharedMessagesComponent impl
       }, (error: any) => {
         this.isProcessing = false;
         this.isLoading = false;
-        if (error.error.errors && error.error.errors.length >0)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader, error.error.message);
       }
     );
 
@@ -148,15 +148,15 @@ export class DepartmentsManagementComponent extends SharedMessagesComponent impl
   deleteDepartment() {
     let subscribtion = this.departmentsService.deleteDepartment(this.selectedDepartment.id).subscribe(
       (response: any) => {
-        this.toastr.success(response.message);
+        this.toastr.success(this.successDeleteOperationHeader,response.message);
         this.departments = response.data;
         this.isLoading = false;
       }, (error: any) => {
         this.isLoading = false;
-        if (error.error.errors && error.error.errors.length >0)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader,error.error.message);
       }
     );
 
@@ -173,7 +173,7 @@ export class DepartmentsManagementComponent extends SharedMessagesComponent impl
 
     let subscription = this.departmentsService.updateDepartment(requestDTO).subscribe(
       (response: any) => {
-        this.toastr.success(response.message);
+        this.toastr.success(this.successEditOperationHeader,response.message);
 
         let updatedDepartment = this.departments.find(i => i.id == requestDTO.id);
         Object.assign(updatedDepartment!, response.data);
@@ -182,10 +182,10 @@ export class DepartmentsManagementComponent extends SharedMessagesComponent impl
       }, (error: any) => {
 
         this.isLoading = false;
-        if (error.error.errors && error.error.errors.length >0)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader,error.error.message);
       }
     );
 

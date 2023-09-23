@@ -126,7 +126,7 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader,error.error.message);
         this.isLoading = false;
       }
     );
@@ -137,7 +137,7 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
   createRefrigerator(requestDTO: Refrigerator) {
     let subscribtion = this.refrigeratorsService.createRefrigerator(requestDTO).subscribe(
       (response: any) => {
-        this.toastr.success(response.message);
+        this.toastr.success(this.successCreateOperationHeader, response.message);
 
         this.refrigerators = response.data;
         this.isProcessing = false;
@@ -148,7 +148,7 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader,error.error.message);
       }
     );
 
@@ -166,7 +166,7 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
   updateRefrigerator(requestDTO: Refrigerator) {
     let subscription = this.refrigeratorsService.updateRefrigerator(requestDTO).subscribe(
       (response: any) => {
-        this.toastr.success(response.message);
+        this.toastr.success(this.successEditOperationHeader, response.message);
 
         let updatedRefrigerator = this.refrigerators.find(i => i.id == requestDTO.id);
         Object.assign(updatedRefrigerator!, response.data);
@@ -178,7 +178,7 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader,error.error.message);
       }
     );
 
@@ -189,7 +189,7 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
   deleteRefrigerator() {
     let subscription = this.refrigeratorsService.deleteRefrigerator(this.selectedRefrigerator.id).subscribe(
       (response: any) => {
-        this.toastr.success(response.message);
+        this.toastr.success(this.successDeleteOperationHeader, response.message);
         this.refrigerators = response.data;
         this.isLoading = false;
       }, (error: any) => {
@@ -197,7 +197,7 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader,error.error.message);
       }
     );
 

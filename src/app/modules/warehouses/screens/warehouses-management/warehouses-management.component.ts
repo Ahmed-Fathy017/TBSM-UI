@@ -175,7 +175,7 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader,error.error.message);
         this.isLoading = false;
       }
     );
@@ -191,7 +191,7 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader,error.error.message);
       }
     );
 
@@ -202,7 +202,7 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
   createWarehouse(warehouse: Warehouse) {
     let subscribtion = this.warehousesService.createWarehouse(warehouse).subscribe(
       (response: any) => {
-        this.toastr.success(response.message);
+        this.toastr.success(this.successCreateOperationHeader, response.message);
 
         this.warehouses = response.data;
         this.isProcessing = false;
@@ -213,7 +213,7 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader,error.error.message);
       }
     );
 
@@ -234,7 +234,7 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
 
     let subscription = this.warehousesService.updateWarehouse(requestDTO).subscribe(
       (response: any) => {
-        this.toastr.success(response.message);
+        this.toastr.success(this.successEditOperationHeader, response.message);
 
         let updatedWarehouse = this.warehouses.find(i => i.id == requestDTO.id);
         Object.assign(updatedWarehouse!, response.data);
@@ -247,7 +247,7 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader,error.error.message);
       }
     );
 
@@ -258,7 +258,7 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
   deleteWarehouse() {
     let subscription = this.warehousesService.deleteWarehouse(this.selectedWarehouse!.id).subscribe(
       (response: any) => {
-        this.toastr.success(response.message);
+        this.toastr.success(this.successDeleteOperationHeader, response.message);
         this.warehouses = response.data;
         this.isLoading = false;
       }, (error: any) => {
@@ -266,7 +266,7 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader,error.error.message);
       }
     );
 

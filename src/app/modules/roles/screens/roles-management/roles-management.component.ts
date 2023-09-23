@@ -9,13 +9,15 @@ import { PermissionGroup } from '../../models/permission-group';
 import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
 import { ToasterService } from 'src/app/modules/master-layout/services/toaster.service';
+import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-roles-management',
   templateUrl: './roles-management.component.html',
   styleUrls: ['./roles-management.component.css']
 })
-export class RolesManagementComponent implements OnInit, OnDestroy {
+export class RolesManagementComponent extends SharedMessagesComponent implements OnInit, OnDestroy {
 
   subscription = new Subscription();
 
@@ -50,7 +52,9 @@ export class RolesManagementComponent implements OnInit, OnDestroy {
     private toastr: ToasterService,
     private rolesService: RolesService,
     private localService: LocalService,
-    private screenTitleNavigationService: ScreenTitleNavigationService) {
+    private screenTitleNavigationService: ScreenTitleNavigationService,
+    private translateService: TranslateService) {
+      super(translateService);
     this.screenTitleNavigationService.setScreenKey('RolesManagement');
     this.evaluateScreenPermissions();
   }
@@ -91,7 +95,7 @@ export class RolesManagementComponent implements OnInit, OnDestroy {
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader,error.error.message);
         this.isLoadingRoles = false;
       }
     );
@@ -104,7 +108,7 @@ export class RolesManagementComponent implements OnInit, OnDestroy {
 
     let subscribtion = this.rolesService.deleteRole(this.selectedRole.id).subscribe(
       (response: any) => {
-        this.toastr.success(response.message);
+        this.toastr.success(this.successDeleteOperationHeader, response.message);
         this.roles = response.data;
         this.isLoadingRoles = false;
 
@@ -112,7 +116,7 @@ export class RolesManagementComponent implements OnInit, OnDestroy {
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader,error.error.message);
         this.isLoadingRoles = false;
       }
     );

@@ -121,7 +121,7 @@ export class WithdrawProductComponent extends SharedMessagesComponent implements
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader,error.error.message);
       }
     );
 
@@ -147,14 +147,14 @@ export class WithdrawProductComponent extends SharedMessagesComponent implements
     let subscribtion = this.productsService.withdrawProduct(requestDTO).subscribe(
       (response: any) => {
         this.isProcessing = false;
-        this.toastr.success(response.message);
+        this.toastr.success(this.successWithdrawOperationHeader, response.message);
         this.products = [];
       }, (error: any) => {
         this.isProcessing = false;
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader,error.error.message);
       }
     );
 

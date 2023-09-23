@@ -101,7 +101,7 @@ export class CreateRoleComponent extends SharedMessagesComponent implements OnIn
         if (error.error.errors && error.error.errors.length > 0)
         this.toastr.error(error.error.errors[0].value, error.error.message);
       else
-        this.toastr.error(error.error.message);
+        this.toastr.error(this.errorOperationHeader,error.error.message);
         this.isLoadingPermissions = false;
       }
     );
@@ -112,7 +112,7 @@ export class CreateRoleComponent extends SharedMessagesComponent implements OnIn
   createRole(role: Role) {
     let subscribtion = this.rolesService.createRole(role).subscribe(
       (response: any) => {
-        this.toastr.success(response.message);
+        this.toastr.success(this.successCreateOperationHeader,response.message);
         this.roles = response.data;
         this.isLoadingRoles = false;
         this.isProcessing = false;
@@ -121,7 +121,7 @@ export class CreateRoleComponent extends SharedMessagesComponent implements OnIn
         if (error.error.errors && error.error.errors.length > 0)
         this.toastr.error(error.error.errors[0].value, error.error.message);
       else
-        this.toastr.error(error.error.message);
+        this.toastr.error(this.errorOperationHeader,error.error.message);
         this.isLoadingRoles = false;
         this.isProcessing = false;
       }

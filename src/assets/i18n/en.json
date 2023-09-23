@@ -9,29 +9,24 @@
         "Packages": "Packages",
         "Users": "Users",
         "Inventory": "Inventory",
-
-        "Management" :"Management",
+        "Management": "Management",
         "Refrigerators": "Refrigerators",
         "Departments": "Departments",
         "Properties": "Properties",
-
         "Roles": "Roles",
         "AllRoles": "All Roles",
         "CreateRole": "Create Role",
-        
-        "Products" : "Products",
+        "Products": "Products",
         "AllProducts": "All Products",
         "CreateProduct": "Create Product",
         "ًWithdrawProduct": "Withdraw Product",
-
         "SupplyChains": "Supply Chains",
         "InternalSupplyRequests": "Internal Supply Requests",
         "ExternalSupplyRequests": "External Supply Requests",
         "MySupplyRequests": "My Supply Requests",
-
         "OperationLogs": "Operation Logs",
-        "AddOperation":"Adding Operation",
-        "WithdrawOperation":"Withdrawal Operation"
+        "AddOperation": "Adding Operation",
+        "WithdrawOperation": "Withdrawal Operation"
     },
     "AdminDashboardScreen": {
         "Home": "Home"
@@ -115,15 +110,15 @@
         "Properties": "Properties",
         "CreateAccount": "Create Account"
     },
-    "ProductsManagmentScreen" : {
+    "ProductsManagmentScreen": {
         "PrimaryTitle": "Home / Products /",
         "ColoredPrimaryTitle": "All Products",
         "EntityName": "Product",
         "Filter": "Filter",
         "Value": "Value",
         "NameSearch": "Name",
-        "PropertySearch":"Property",
-        "OtherSearch":"Other",
+        "PropertySearch": "Property",
+        "OtherSearch": "Other",
         "Quantity": "Quantity",
         "Refrigerator": "Refrigerator",
         "ProductCode": "Product Code"
@@ -143,11 +138,11 @@
     "ProductWihdrawalScreen": {
         "PrimaryTitle": "Home / Products /",
         "ColoredPrimaryTitle": "Withdraw Products",
-        "Message":"Please select the input related to product number and scan the barcode.",
+        "Message": "Please select the input related to product number and scan the barcode.",
         "ProductNumber": "Product Number",
         "ProductName": "Product Name",
-        "WithdrawButton":"Withdraw Product",
-        "SaveButton":"Save"
+        "WithdrawButton": "Withdraw Product",
+        "SaveButton": "Save"
     },
     "OprationsLogsScreen": {
         "PrimaryTitle": "Home /",
@@ -168,19 +163,19 @@
     "InventoryScreen": {
         "PrimaryTitle": "Home /",
         "ColoredPrimaryTitle": "Inventory",
-        "Department":"Department",
-        "Upload File":"Upload File",
-        "ImportFileButton":" Import",
-        "ExportFileButton":"Export",
-        "ImportMessage":"Import Department",
+        "Department": "Department",
+        "Upload File": "Upload File",
+        "ImportFileButton": " Import",
+        "ExportFileButton": "Export",
+        "ImportMessage": "Import Department",
         "ColoredImportMessage": "(Please upload this file and enter the data)",
-        "ExportMessage":"Export Department",
-        "ُExportModalMessage":"Please choose the file format"
+        "ExportMessage": "Export Department",
+        "ُExportModalMessage": "Please choose the file format"
     },
     "Modal": {
         "CreateButton": "Create",
         "EditModalHeader": "Edit",
-        "ViewModalHeader":"View",
+        "ViewModalHeader": "View",
         "SaveChangesButton": "Save Changes",
         "DeletionConsentMessage": "Do you want to delete",
         "DeleteButton": "Delete",
@@ -193,10 +188,10 @@
         "SaveButton": "Save"
     },
     "OperationTypes": {
-        "Add":"Adding",
-        "Edit":"Editing",
-        "Delete":"Deleting",
-        "Export":"Exporting",
+        "Add": "Adding",
+        "Edit": "Editing",
+        "Delete": "Deleting",
+        "Export": "Exporting",
         "Import": "Importing",
         "SupplyRequest": "Supply Request",
         "ProductWithdrawal": "Product Withdrawal",
@@ -208,9 +203,14 @@
     "GeneralMessages": {
         "InvalidInputWarningHeader": "Warning",
         "InvalidInputWarningMessage": "Please input the values correctly!",
-        "InvalidInputDuplicationMessage":"This property already exists!",
-        "InvalidInputCountMessage":"Some required properties missing!"
-        
+        "InvalidInputDuplicationMessage": "This property already exists!",
+        "InvalidInputCountMessage": "Some required properties missing!",
+        "ErrorOperationHeader": "Error",
+        "SuccessEditOperationHeader": "Editing",
+        "SuccessCreateOperationHeader": "Adding",
+        "SuccessDeleteOperationHeader": "Deleting",
+        "SuccessWithdrawOperationHeader": "Withdraw",
+        "SuccessImportOperationHeader":"Import"
     },
     "ScreenNames": {
         "Home": "Home",
@@ -226,7 +226,7 @@
         "ExternalSupplyRequests": "External Supply Requests",
         "InternalSupplyRequests": "Internal Supply Requests",
         "MySupplyRequests": "My Supply Requests",
-        "OperationLogs":"Operation Logs",
+        "OperationLogs": "Operation Logs",
         "Inventory": "Inventory",
         "WarehousesManagement": "Warehouse",
         "PackagesManagement": "Packages"

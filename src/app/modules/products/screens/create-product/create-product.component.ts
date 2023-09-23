@@ -168,7 +168,7 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader,error.error.message);
       }
     );
 
@@ -186,7 +186,7 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader,error.error.message);
         this.isLoading = false;
       }
     );
@@ -205,7 +205,7 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader,error.error.message);
         this.isLoading = false;
       }
     );
@@ -223,7 +223,7 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader,error.error.message);
         this.isProcessing = false;
       }
     );
@@ -241,7 +241,7 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader,error.error.message);
         this.isProcessing = false;
       }
     );

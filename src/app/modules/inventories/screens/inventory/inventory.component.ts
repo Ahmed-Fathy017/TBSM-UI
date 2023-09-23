@@ -144,8 +144,8 @@ export class InventoryComponent extends SharedMessagesComponent implements OnIni
   evaluateScreenPermissions() {
     this.permissions = JSON.parse(this.localService.getData("permissions"));
 
-    this.hasImportingAuthority = this.permissions.findIndex(i => i === this.importingAuthorityPermission) != -1? true: false;
-    this.hasExportingAuthority = this.permissions.findIndex(i => i === this.exportingAuthorityPermission) != -1? true: false;
+    this.hasImportingAuthority = this.permissions.findIndex(i => i === this.importingAuthorityPermission) != -1 ? true : false;
+    this.hasExportingAuthority = this.permissions.findIndex(i => i === this.exportingAuthorityPermission) != -1 ? true : false;
   }
 
   getExcelDownlaodableFile() {
@@ -154,10 +154,10 @@ export class InventoryComponent extends SharedMessagesComponent implements OnIni
         this.excelLink = response.data;
 
       }, (error: any) => {
-        if (error.error.errors && error.error.errors.length >0)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader, error.error.message);
       }
     );
 
@@ -170,10 +170,10 @@ export class InventoryComponent extends SharedMessagesComponent implements OnIni
       (response: any) => {
         this.departments = response.data;
       }, (error: any) => {
-        if (error.error.errors && error.error.errors.length >0)
+        if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader, error.error.message);
       }
     );
 
@@ -191,13 +191,13 @@ export class InventoryComponent extends SharedMessagesComponent implements OnIni
     let departmentId = parseInt(this.inventoryImportForm.controls.department.value!);
     let subscription = this.inventoriesService.importExcelFile(departmentId, this.selectedFile).subscribe(
       (response: any) => {
-        this.toastr.success(response.message);
+        this.toastr.success(this.successImportOperationHeader, response.message);
         this.isImporting = false;
       }, (error: any) => {
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader, error.error.message);
 
         this.isImporting = false;
       }
@@ -216,7 +216,7 @@ export class InventoryComponent extends SharedMessagesComponent implements OnIni
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader, error.error.message);
 
         this.isExporting = false;
       }

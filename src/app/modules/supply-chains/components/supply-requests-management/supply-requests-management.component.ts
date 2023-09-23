@@ -7,13 +7,15 @@ import { SupplyRequest } from '../../models/supply-request';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UpdateOrder } from '../../models/update-order';
 import { ToasterService } from 'src/app/modules/master-layout/services/toaster.service';
+import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-supply-requests-management',
   templateUrl: './supply-requests-management.component.html',
   styleUrls: ['./supply-requests-management.component.css']
 })
-export class SupplyRequestsManagementComponent implements OnInit, OnDestroy {
+export class SupplyRequestsManagementComponent extends SharedMessagesComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
 
   @Input('firstPageTitle') firstPageTitle: string = '';
@@ -42,7 +44,9 @@ export class SupplyRequestsManagementComponent implements OnInit, OnDestroy {
 
 
   constructor(private toastr: ToasterService,
-    private supplyChainsService: SupplyChainsService) {
+    private supplyChainsService: SupplyChainsService,
+    private translateService: TranslateService) {
+      super(translateService);
   }
 
   ngOnInit(): void {
@@ -128,7 +132,7 @@ export class SupplyRequestsManagementComponent implements OnInit, OnDestroy {
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader,error.error.message);
       }
     );
 
@@ -146,7 +150,7 @@ export class SupplyRequestsManagementComponent implements OnInit, OnDestroy {
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader,error.error.message);
       }
     );
 
@@ -164,7 +168,7 @@ export class SupplyRequestsManagementComponent implements OnInit, OnDestroy {
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader,error.error.message);
       }
     );
 
@@ -174,7 +178,7 @@ export class SupplyRequestsManagementComponent implements OnInit, OnDestroy {
   updateOrderStatus(requestDTO: UpdateOrder) {
     let subscription = this.supplyChainsService.updateOrderStatus(requestDTO).subscribe(
       (response: any) => {
-        this.toastr.success(response.message);
+        this.toastr.success(this.successEditOperationHeader,response.message);
         this.group.data.splice(this.selectedIndex, 1);
         this.setupPagination();
         this.isLoading = false;
@@ -184,7 +188,7 @@ export class SupplyRequestsManagementComponent implements OnInit, OnDestroy {
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader,error.error.message);
       }
     );
 

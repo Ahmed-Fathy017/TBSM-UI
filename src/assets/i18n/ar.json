@@ -203,7 +203,13 @@
         "InvalidInputWarningHeader": "تحذير",
         "InvalidInputWarningMessage": "!برجاء ادخال القيم بطريقة صحيحة",
         "InvalidInputDuplicationMessage": "!هذه الخاصية موجودة بالفعل",
-        "InvalidInputCountMessage": "!لم يتم ادخال كل الخصائص المطلوبة"
+        "InvalidInputCountMessage": "!لم يتم ادخال كل الخصائص المطلوبة",
+        "ErrorOperationHeader": "خطأ",
+        "SuccessEditOperationHeader": "تعديل",
+        "SuccessCreateOperationHeader": "اضافة",
+        "SuccessDeleteOperationHeader": "حذف",
+        "SuccessWithdrawOperationHeader": "سحب",
+        "SuccessImportOperationHeader":"استيراد"
     },
     "ScreenNames": {
         "Home": "الرئيسية",

@@ -151,7 +151,7 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader,error.error.message);
       }
     );
 
@@ -171,7 +171,7 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader,error.error.message);
       }
     );
 
@@ -181,7 +181,7 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
   createUser(requestDTO: User) {
     let subscribtion = this.usersService.createUser(requestDTO).subscribe(
       (response: any) => {
-        this.toastr.success(response.message);
+        this.toastr.success(this.successCreateOperationHeader,response.message);
 
         this.users = response.data;
         this.isProcessing = false;
@@ -192,7 +192,7 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader,error.error.message);
       }
     );
 
@@ -210,7 +210,7 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
   updateUser(requestDTO: User) {
     let subscription = this.usersService.updateUser(requestDTO).subscribe(
       (response: any) => {
-        this.toastr.success(response.message);
+        this.toastr.success(this.successEditOperationHeader, response.message);
 
         let updatedRefrigerator = this.users.find(i => i.id == requestDTO.id);
         Object.assign(updatedRefrigerator!, response.data);
@@ -222,7 +222,7 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader,error.error.message);
       }
     );
 
@@ -233,7 +233,7 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
   deleteUser() {
     let subscription = this.usersService.deleteUser(this.selectedUser.id).subscribe(
       (response: any) => {
-        this.toastr.success(response.message);
+        this.toastr.success(this.successDeleteOperationHeader, response.message);
         this.users = response.data;
         this.isLoading = false;
       }, (error: any) => {
@@ -241,7 +241,7 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader,error.error.message);
       }
     );
 

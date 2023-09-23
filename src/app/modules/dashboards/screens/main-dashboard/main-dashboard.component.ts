@@ -5,13 +5,15 @@ import { AdminDashboardCard } from '../../models/admin-dashboard-card';
 import { DashboardsService } from '../../remote-services/dashboards.service';
 import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
 import { ToasterService } from 'src/app/modules/master-layout/services/toaster.service';
+import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-main-dashboard',
   templateUrl: './main-dashboard.component.html',
   styleUrls: ['./main-dashboard.component.css']
 })
-export class MainDashboardComponent implements OnInit, OnDestroy {
+export class MainDashboardComponent extends SharedMessagesComponent implements OnInit, OnDestroy {
 
   subscription = new Subscription();
 
@@ -24,7 +26,9 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
 
   constructor(private toastr: ToasterService,
     private dashboardsService: DashboardsService,
-    private screenTitleNavigationService: ScreenTitleNavigationService) { 
+    private screenTitleNavigationService: ScreenTitleNavigationService,
+    private translateService: TranslateService) { 
+      super(translateService);
       this.screenTitleNavigationService.setScreenKey('AdminDashboard');
     }
 
@@ -47,7 +51,7 @@ export class MainDashboardComponent implements OnInit, OnDestroy {
         if (error.error.errors && error.error.errors.length >0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader, error.error.message);
         this.isLoading = false;
       }
     );

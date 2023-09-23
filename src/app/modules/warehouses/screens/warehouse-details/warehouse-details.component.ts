@@ -9,13 +9,15 @@ import { UserTypes } from 'src/app/modules/authentication/models/user-types';
 import { WarehouseDataCard } from '../../models/warehouse-data-card';
 import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
 import { ToasterService } from 'src/app/modules/master-layout/services/toaster.service';
+import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-warehouse-details',
   templateUrl: './warehouse-details.component.html',
   styleUrls: ['./warehouse-details.component.css']
 })
-export class WarehouseDetailsComponent implements OnInit, OnDestroy {
+export class WarehouseDetailsComponent extends SharedMessagesComponent implements OnInit, OnDestroy {
 
   subscription = new Subscription();
 
@@ -53,11 +55,9 @@ export class WarehouseDetailsComponent implements OnInit, OnDestroy {
     private toastr: ToasterService,
     private localService: LocalService,
     private router: Router,
-    private screenTitleNavigationService: ScreenTitleNavigationService) {
-
-
-
-
+    private screenTitleNavigationService: ScreenTitleNavigationService,
+    private translateService: TranslateService) {
+    super(translateService);
     this.evaluateScreenPermissions();
   }
 
@@ -113,7 +113,7 @@ export class WarehouseDetailsComponent implements OnInit, OnDestroy {
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message);
+          this.toastr.error(this.errorOperationHeader, error.error.message);
       }
     );
 

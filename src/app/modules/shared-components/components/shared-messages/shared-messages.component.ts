@@ -16,10 +16,16 @@ export class SharedMessagesComponent implements OnInit, OnDestroy {
   invalidInputDuplicationMessage!: string;
   invalidInputCountMessage!: string;
 
+  errorOperationHeader!: string;
+  successEditOperationHeader!: string;
+  successCreateOperationHeader!: string;
+  successDeleteOperationHeader!: string;
+  successWithdrawOperationHeader!: string;
+  successImportOperationHeader!: string;
+
 
   constructor(private translate: TranslateService) {
-    this.setInvalidInputWarningMessages();
-
+    this.setNotificationMessages();
   }
 
   ngOnInit(): void {
@@ -29,17 +35,31 @@ export class SharedMessagesComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
   }
 
-  setInvalidInputWarningMessages() {
-    let subscribtion = this.translate.get(['GeneralMessages.InvalidInputWarningHeader', 
-    'GeneralMessages.InvalidInputWarningMessage', 
-    'GeneralMessages.InvalidInputDuplicationMessage', 
-    'GeneralMessages.InvalidInputCountMessage']).subscribe(
-      (translation: any) => {
-        this.invalidInputWarningHeader = translation['GeneralMessages.InvalidInputWarningHeader'];
-        this.invalidInputWarningMessage = translation['GeneralMessages.InvalidInputWarningMessage'];
-        this.invalidInputDuplicationMessage = translation['GeneralMessages.InvalidInputDuplicationMessage'];
-        this.invalidInputCountMessage = translation['GeneralMessages.InvalidInputCountMessage'];
-      });
+  setNotificationMessages() {
+    let subscribtion = this.translate.get([
+      'GeneralMessages.ErrorOperationHeader',
+      'GeneralMessages.SuccessEditOperationHeader',
+      'GeneralMessages.SuccessCreateOperationHeader',
+      'GeneralMessages.SuccessDeleteOperationHeader',
+      'GeneralMessages.SuccessWithdrawOperationHeader',
+      'GeneralMessages.SuccessImportOperationHeader',
+
+      'GeneralMessages.InvalidInputWarningHeader',
+      'GeneralMessages.InvalidInputWarningMessage',
+      'GeneralMessages.InvalidInputDuplicationMessage',
+      'GeneralMessages.InvalidInputCountMessage']).subscribe((translation: any) => {
+          this.errorOperationHeader = translation['GeneralMessages.ErrorOperationHeader'];
+          this.successEditOperationHeader = translation['GeneralMessages.SuccessEditOperationHeader'];
+          this.successCreateOperationHeader = translation['GeneralMessages.SuccessCreateOperationHeader'];
+          this.successDeleteOperationHeader = translation['GeneralMessages.SuccessDeleteOperationHeader'];
+          this.successDeleteOperationHeader = translation['GeneralMessages.SuccessWithdrawOperationHeader'];
+          this.successDeleteOperationHeader = translation['GeneralMessages.SuccessImportOperationHeader'];
+
+          this.invalidInputWarningHeader = translation['GeneralMessages.InvalidInputWarningHeader'];
+          this.invalidInputWarningMessage = translation['GeneralMessages.InvalidInputWarningMessage'];
+          this.invalidInputDuplicationMessage = translation['GeneralMessages.InvalidInputDuplicationMessage'];
+          this.invalidInputCountMessage = translation['GeneralMessages.InvalidInputCountMessage'];
+        });
 
     this.subscription.add(subscribtion);
   }
