@@ -108,7 +108,7 @@ export class RolesManagementComponent extends SharedMessagesComponent implements
 
     let subscribtion = this.rolesService.deleteRole(this.selectedRole.id).subscribe(
       (response: any) => {
-        this.toastr.success(this.successDeleteOperationHeader, response.message);
+        this.toastr.success(response.message, this.successDeleteOperationHeader);
         this.roles = response.data;
         this.isLoadingRoles = false;
 

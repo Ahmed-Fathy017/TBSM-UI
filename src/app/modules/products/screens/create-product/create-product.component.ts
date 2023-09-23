@@ -15,6 +15,7 @@ import { SharedMessagesComponent } from 'src/app/modules/shared-components/compo
 import { TranslateService } from '@ngx-translate/core';
 import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
 import { ToasterService } from 'src/app/modules/master-layout/services/toaster.service';
+import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 
 @Component({
   selector: 'app-create-product',
@@ -60,6 +61,9 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
   // productMessage: string = '';
   productRedirectLink: string = '';
 
+  successMessage: string = '';
+
+  isRtl: boolean = true;
 
   constructor(
     private toastr: ToasterService,
@@ -69,10 +73,12 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
     private productsService: ProductsService,
     private propertiesService: PropertiesService,
     private translateService: TranslateService,
-    private screenTitleNavigationService: ScreenTitleNavigationService
+    private screenTitleNavigationService: ScreenTitleNavigationService,
+    private localService: LocalService
   ) {
     super(translateService);
     this.screenTitleNavigationService.setScreenKey('CreateProduct');
+    this.isRtl = this.localService.getData('lang') != 'en' ? true : false;
   }
 
   ngOnInit(): void {
@@ -156,6 +162,10 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
       this.toastr.warning(this.invalidInputWarningMessage, this.invalidInputWarningHeader);
   }
 
+  onCloseSnackbarButtonClick() {
+    this.snackbar.nativeElement.classList.remove("show");
+  }
+
   getDepartments() {
     this.isLoading = true;
 
@@ -168,7 +178,7 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(this.errorOperationHeader,error.error.message);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
       }
     );
 
@@ -186,7 +196,7 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(this.errorOperationHeader,error.error.message);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
         this.isLoading = false;
       }
     );
@@ -205,7 +215,7 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(this.errorOperationHeader,error.error.message);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
         this.isLoading = false;
       }
     );
@@ -218,12 +228,13 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
       (response: any) => {
 
         this.createdProductId = response.data.id;
+        this.successMessage = response.message;
         this.getProductInvoice();
       }, (error: any) => {
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(this.errorOperationHeader,error.error.message);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
         this.isProcessing = false;
       }
     );
@@ -241,7 +252,7 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(this.errorOperationHeader,error.error.message);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
         this.isProcessing = false;
       }
     );

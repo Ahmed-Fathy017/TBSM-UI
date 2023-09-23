@@ -147,7 +147,7 @@ export class WithdrawProductComponent extends SharedMessagesComponent implements
     let subscribtion = this.productsService.withdrawProduct(requestDTO).subscribe(
       (response: any) => {
         this.isProcessing = false;
-        this.toastr.success(this.successWithdrawOperationHeader, response.message);
+        this.toastr.success(response.message,this.successWithdrawOperationHeader);
         this.products = [];
       }, (error: any) => {
         this.isProcessing = false;

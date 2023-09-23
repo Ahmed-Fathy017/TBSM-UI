@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-// import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { AdminDashboardCard } from '../../models/admin-dashboard-card';
 import { DashboardsService } from '../../remote-services/dashboards.service';
@@ -51,7 +50,7 @@ export class MainDashboardComponent extends SharedMessagesComponent implements O
         if (error.error.errors && error.error.errors.length >0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(this.errorOperationHeader, error.error.message);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
         this.isLoading = false;
       }
     );

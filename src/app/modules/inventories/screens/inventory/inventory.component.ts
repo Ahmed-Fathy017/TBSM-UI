@@ -157,7 +157,7 @@ export class InventoryComponent extends SharedMessagesComponent implements OnIni
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(this.errorOperationHeader, error.error.message);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
       }
     );
 
@@ -173,7 +173,7 @@ export class InventoryComponent extends SharedMessagesComponent implements OnIni
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(this.errorOperationHeader, error.error.message);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
       }
     );
 
@@ -191,13 +191,13 @@ export class InventoryComponent extends SharedMessagesComponent implements OnIni
     let departmentId = parseInt(this.inventoryImportForm.controls.department.value!);
     let subscription = this.inventoriesService.importExcelFile(departmentId, this.selectedFile).subscribe(
       (response: any) => {
-        this.toastr.success(this.successImportOperationHeader, response.message);
+        this.toastr.success( response.message, this.successImportOperationHeader);
         this.isImporting = false;
       }, (error: any) => {
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(this.errorOperationHeader, error.error.message);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
 
         this.isImporting = false;
       }
@@ -216,7 +216,7 @@ export class InventoryComponent extends SharedMessagesComponent implements OnIni
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(this.errorOperationHeader, error.error.message);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
 
         this.isExporting = false;
       }

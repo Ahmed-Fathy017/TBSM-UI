@@ -27,16 +27,16 @@ export class ToasterService {
 
 
   /** show toast */
-  public show(title: string, message: string = '', positionClass: string = this.position) {
+  public show(message: string, title: string = '', positionClass: string = this.position) {
     this.toastr.show(title, message, { positionClass, toastClass: this.isRtl ? '' : '' });
   }
   /** show successful toast */
   public success(title: string, message: string = '', positionClass: string = this.position) {
-    this.toastr.success(title, message, { positionClass, toastClass: this.isRtl ? 'ngx-toastr custom-toast-rtl' : 'ngx-toastr custom-toast-ltr', closeButton: true });
+    this.toastr.success(title, message, { positionClass,toastClass: this.isRtl ? 'ngx-toastr custom-toast-rtl' : 'ngx-toastr custom-toast-ltr', closeButton: true});
   }
   /** show error toast */
   public error(title: string, message: string = '', positionClass: string = this.position) {
-    this.toastr.error(title, message, { positionClass, toastClass: this.isRtl ? 'ngx-toastr custom-toast-rtl' : 'ngx-toastr custom-toast-ltr', closeButton: true });
+    this.toastr.error(title, message, { positionClass,toastClass: this.isRtl ? 'ngx-toastr custom-toast-rtl' : 'ngx-toastr custom-toast-ltr', closeButton: true});
   }
   /** show info toast */
   public info(title: string, message: string = '', positionClass: string = this.position) {

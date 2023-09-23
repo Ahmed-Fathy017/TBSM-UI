@@ -488,7 +488,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
   updateProduct(requestDTO: Product) {
     let subscribtion = this.productsService.updateProduct(requestDTO).subscribe(
       (response: any) => {
-        this.toastr.success(this.successEditOperationHeader,response.message);
+        this.toastr.success(response.message, this.successEditOperationHeader);
 
         let updatedProduct = this.selectedDepartment.products.find(i => i.id == requestDTO.id)!;
         Object.assign(updatedProduct!, response.data);
@@ -518,7 +518,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
   deleteProduct() {
     let subscription = this.productsService.deleteProduct(this.selectedProduct.id).subscribe(
       (response: any) => {
-        this.toastr.success(this.successDeleteOperationHeader,response.message);
+        this.toastr.success(response.message,this.successDeleteOperationHeader);
 
         this.productsList.find(i => i.id = this.selectedDepartment.id)?.products.splice(this.selectedProductIndex, 1);
         this.productsList.map(i => i.lastSelectedPage = i.selectedPage);
@@ -556,7 +556,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
   addOrderRequest(requestDTO: AddOrder) {
     let subscribtion = this.supplyChainsService.addOrderRequest(requestDTO).subscribe(
       (response: any) => {
-        this.toastr.success(this.successCreateOperationHeader, response.message);
+        this.toastr.success(response.message, this.successCreateOperationHeader);
       }, (error: any) => {
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);

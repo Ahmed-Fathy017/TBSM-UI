@@ -162,7 +162,7 @@ export class PropertiesManagementComponent extends SharedMessagesComponent imple
   createWarehouseProperty(requestDTO: Property) {
     let subscribtion = this.propertiesService.createProperty(requestDTO).subscribe(
       (response: any) => {
-        this.toastr.success(this.successCreateOperationHeader,response.message);
+        this.toastr.success(response.message, this.successCreateOperationHeader);
         this.properties = response.data;
         this.isProcessing = false;
         this.isLoading = false;
@@ -191,7 +191,7 @@ export class PropertiesManagementComponent extends SharedMessagesComponent imple
   updateWarehouseProperty(requestDTO: Property) {
     let subscribtion = this.propertiesService.updateProperty(requestDTO).subscribe(
       (response: any) => {
-        this.toastr.success(this.successEditOperationHeader,response.message);
+        this.toastr.success(response.message, this.successEditOperationHeader);
 
         let updatedPackage = this.properties.find(i => i.id == requestDTO.id);
         Object.assign(updatedPackage!, response.data);
@@ -211,7 +211,7 @@ export class PropertiesManagementComponent extends SharedMessagesComponent imple
   deleteWarehouseProperty() {
     let subscribtion = this.propertiesService.deleteProperty(this.selectedProperty.id).subscribe(
       (response: any) => {
-        this.toastr.success(this.successDeleteOperationHeader, response.message);
+        this.toastr.success(response.message, this.successDeleteOperationHeader);
         this.properties = response.data;
         this.isLoading = false;
       }, (error: any) => {

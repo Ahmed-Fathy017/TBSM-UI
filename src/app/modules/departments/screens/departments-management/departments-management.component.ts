@@ -2,7 +2,6 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/co
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Department } from '../../models/department';
-// import { ToastrService } from 'ngx-toastr';
 import { DepartmentsService } from '../../remote-services/departments.service';
 import { TranslateService } from '@ngx-translate/core';
 import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
@@ -117,7 +116,7 @@ export class DepartmentsManagementComponent extends SharedMessagesComponent impl
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(this.errorOperationHeader, error.error.message);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
       }
     );
 
@@ -127,7 +126,7 @@ export class DepartmentsManagementComponent extends SharedMessagesComponent impl
   createDepartment(requestDTO: Department) {
     let subscribtion = this.departmentsService.createDepartment(requestDTO).subscribe(
       (response: any) => {
-        this.toastr.success(this.successCreateOperationHeader,response.message);
+        this.toastr.success(response.message, this.successCreateOperationHeader);
 
         this.departments = response.data;
         this.isProcessing = false;
@@ -138,7 +137,7 @@ export class DepartmentsManagementComponent extends SharedMessagesComponent impl
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(this.errorOperationHeader, error.error.message);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
       }
     );
 
@@ -148,7 +147,7 @@ export class DepartmentsManagementComponent extends SharedMessagesComponent impl
   deleteDepartment() {
     let subscribtion = this.departmentsService.deleteDepartment(this.selectedDepartment.id).subscribe(
       (response: any) => {
-        this.toastr.success(this.successDeleteOperationHeader,response.message);
+        this.toastr.success( response.message, this.successDeleteOperationHeader);
         this.departments = response.data;
         this.isLoading = false;
       }, (error: any) => {
@@ -156,7 +155,7 @@ export class DepartmentsManagementComponent extends SharedMessagesComponent impl
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(this.errorOperationHeader,error.error.message);
+          this.toastr.error(this.errorOperationHeader, error.error.message);
       }
     );
 
@@ -173,7 +172,7 @@ export class DepartmentsManagementComponent extends SharedMessagesComponent impl
 
     let subscription = this.departmentsService.updateDepartment(requestDTO).subscribe(
       (response: any) => {
-        this.toastr.success(this.successEditOperationHeader,response.message);
+        this.toastr.success(response.message, this.successEditOperationHeader);
 
         let updatedDepartment = this.departments.find(i => i.id == requestDTO.id);
         Object.assign(updatedDepartment!, response.data);
@@ -185,7 +184,7 @@ export class DepartmentsManagementComponent extends SharedMessagesComponent impl
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(this.errorOperationHeader,error.error.message);
+          this.toastr.error(this.errorOperationHeader, error.error.message);
       }
     );
 

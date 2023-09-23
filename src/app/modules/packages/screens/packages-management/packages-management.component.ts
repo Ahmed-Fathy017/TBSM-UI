@@ -177,7 +177,7 @@ export class PackagesManagementComponent extends SharedMessagesComponent impleme
   createPackage(requestDTO: Package) {
     let subscribtion = this.packagesService.createPackage(requestDTO).subscribe(
       (response: any) => {
-        this.toastr.success(this.successCreateOperationHeader,response.message);
+        this.toastr.success(response.message, this.successCreateOperationHeader);
 
         this.packages = response.data;
         this.isProcessing = false;
@@ -210,7 +210,7 @@ export class PackagesManagementComponent extends SharedMessagesComponent impleme
 
     let subscription = this.packagesService.updatePackage(requestDTO).subscribe(
       (response: any) => {
-        this.toastr.success(this.successEditOperationHeader, response.message);
+        this.toastr.success( response.message, this.successEditOperationHeader);
 
         let updatedPackage = this.packages.find(i => i.id == requestDTO.id);
         Object.assign(updatedPackage!, response.data);
@@ -234,7 +234,7 @@ export class PackagesManagementComponent extends SharedMessagesComponent impleme
   deletePackage() {
     let subscription = this.packagesService.deletePackage(this.selectedPackage!.id).subscribe(
       (response: any) => {
-        this.toastr.success(this.successDeleteOperationHeader,response.message);
+        this.toastr.success(response.message, this.successDeleteOperationHeader);
         this.packages = response.data;
         this.isLoading = false;
       }, (error: any) => {

@@ -52,8 +52,8 @@ export class SharedMessagesComponent implements OnInit, OnDestroy {
           this.successEditOperationHeader = translation['GeneralMessages.SuccessEditOperationHeader'];
           this.successCreateOperationHeader = translation['GeneralMessages.SuccessCreateOperationHeader'];
           this.successDeleteOperationHeader = translation['GeneralMessages.SuccessDeleteOperationHeader'];
-          this.successDeleteOperationHeader = translation['GeneralMessages.SuccessWithdrawOperationHeader'];
-          this.successDeleteOperationHeader = translation['GeneralMessages.SuccessImportOperationHeader'];
+          this.successWithdrawOperationHeader = translation['GeneralMessages.SuccessWithdrawOperationHeader'];
+          this.successImportOperationHeader = translation['GeneralMessages.SuccessImportOperationHeader'];
 
           this.invalidInputWarningHeader = translation['GeneralMessages.InvalidInputWarningHeader'];
           this.invalidInputWarningMessage = translation['GeneralMessages.InvalidInputWarningMessage'];

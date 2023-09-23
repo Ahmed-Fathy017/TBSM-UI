@@ -181,7 +181,7 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
   createUser(requestDTO: User) {
     let subscribtion = this.usersService.createUser(requestDTO).subscribe(
       (response: any) => {
-        this.toastr.success(this.successCreateOperationHeader,response.message);
+        this.toastr.success(response.message, this.successCreateOperationHeader);
 
         this.users = response.data;
         this.isProcessing = false;
@@ -210,7 +210,7 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
   updateUser(requestDTO: User) {
     let subscription = this.usersService.updateUser(requestDTO).subscribe(
       (response: any) => {
-        this.toastr.success(this.successEditOperationHeader, response.message);
+        this.toastr.success(response.message, this.successEditOperationHeader);
 
         let updatedRefrigerator = this.users.find(i => i.id == requestDTO.id);
         Object.assign(updatedRefrigerator!, response.data);
@@ -233,7 +233,7 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
   deleteUser() {
     let subscription = this.usersService.deleteUser(this.selectedUser.id).subscribe(
       (response: any) => {
-        this.toastr.success(this.successDeleteOperationHeader, response.message);
+        this.toastr.success(response.message, this.successDeleteOperationHeader);
         this.users = response.data;
         this.isLoading = false;
       }, (error: any) => {

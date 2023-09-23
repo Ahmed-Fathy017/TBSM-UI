@@ -178,7 +178,7 @@ export class SupplyRequestsManagementComponent extends SharedMessagesComponent i
   updateOrderStatus(requestDTO: UpdateOrder) {
     let subscription = this.supplyChainsService.updateOrderStatus(requestDTO).subscribe(
       (response: any) => {
-        this.toastr.success(this.successEditOperationHeader,response.message);
+        this.toastr.success(response.message, this.successEditOperationHeader);
         this.group.data.splice(this.selectedIndex, 1);
         this.setupPagination();
         this.isLoading = false;

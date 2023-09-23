@@ -112,7 +112,7 @@ export class CreateRoleComponent extends SharedMessagesComponent implements OnIn
   createRole(role: Role) {
     let subscribtion = this.rolesService.createRole(role).subscribe(
       (response: any) => {
-        this.toastr.success(this.successCreateOperationHeader,response.message);
+        this.toastr.success(response.message, this.successCreateOperationHeader);
         this.roles = response.data;
         this.isLoadingRoles = false;
         this.isProcessing = false;

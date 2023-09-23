@@ -1,12 +1,17 @@
-<div id="snackbar" #snackbar class="my-2 mx-2 py-2 px-3" (click)="onProductSnackbarClick()">
-    <div class="d-flex justify-content-between align-items-center ">
-        <div class="d-flex  justify-content-center align-items-center ">
-            {{'General.PrintProductBarcode' | translate}}
-        </div>
-        <div>
-            <i class="fa-solid fa-barcode barcode"></i>
+<div id="snackbar" #snackbar class="my-2 mx-2 py-2 px-3" [class]="isRtl? 'snackbar-rtl' : 'snackbar-ltr'">
+    <div class="d-flex justify-content-between align-items-center text">
+        <div class="d-flex flex-column  justify-content-center ">
 
+            <p class="fw-bold p-0 m-0">{{'GeneralMessages.SuccessCreateOperationHeader' | translate}}</p>
+
+            <p class="p-0 m-0">{{successMessage}}</p>
         </div>
+        <div class="d-flex flex-column  justify-content-end align-items-center " (click)="onProductSnackbarClick()">
+            <button class="print-btn d-flex   align-items-center"><span class="text-light mx-2 small-text"> {{'General.PrintProductBarcode' | translate}}</span>
+                <i class="fa-solid fa-barcode barcode mx-2"></i></button>
+        </div>
+
+        <i class="fa-solid fa-x close-btn" (click)="onCloseSnackbarButtonClick()"></i>
     </div>
 </div>
 
@@ -73,84 +78,83 @@
 
         </form>
 
-        
+
     </div>
 
 
     <app-page-header [pageTitle]="secondPageTitle"></app-page-header>
-        <app-loading *ngIf="isLoading"></app-loading>
+    <app-loading *ngIf="isLoading"></app-loading>
 
-        <div class="container " *ngIf="!isLoading">
-            <div class="row">
-                <div class="col-md-6 col-lg-6 col-xl-6">
-                    <label class="form-check-label mb-1" for="properties">
-                        {{'CreateProductScreen.Properties' | translate}}
-                    </label>
-                    <select name="properties" id="properties" class="form-select"
-                        (change)="onPropetyOptionChange($event)">
-                        <option *ngFor="let property of properties" [value]="property.id">{{property.name}}</option>
-                    </select>
-                </div>
+    <div class="container " *ngIf="!isLoading">
+        <div class="row">
+            <div class="col-md-6 col-lg-6 col-xl-6">
+                <label class="form-check-label mb-1" for="properties">
+                    {{'CreateProductScreen.Properties' | translate}}
+                </label>
+                <select name="properties" id="properties" class="form-select" (change)="onPropetyOptionChange($event)">
+                    <option *ngFor="let property of properties" [value]="property.id">{{property.name}}</option>
+                </select>
+            </div>
 
-                <div class="col-md-6 col-lg-6 col-xl-6 mb-2" *ngIf="selectedProperty">
+            <div class="col-md-6 col-lg-6 col-xl-6 mb-2" *ngIf="selectedProperty">
 
-                    <div class="row">
+                <div class="row">
 
-                        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
-                            <label for="propertyValue" class="d-flex mb-1">{{selectedProperty.name}}
-                            </label>
+                    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
+                        <label for="propertyValue" class="d-flex mb-1">{{selectedProperty.name}}
+                        </label>
 
-                            <input [type]="selectedProperty.type" name="propertyValue" id="propertyValue"
-                                class="form-control" formControlName="property" #valueInput>
-                        </div>
-
-                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 d-flex align-items-center justify-content-end mt-4"
-                            (click)="onAddPropertyButtonClick()">
-                            <i class="fa-solid fa-plus bg-success p-2 rounded-1" style="color: #ffffff;"></i>
-                        </div>
+                        <input [type]="selectedProperty.type" name="propertyValue" id="propertyValue"
+                            class="form-control" formControlName="property" #valueInput>
                     </div>
 
-                </div>
-
-                <div class="">
-
-                    <div class="row">
-                        <div class="col-md-6 col-lg-6 col-xl-6" *ngFor="let property of addedProperties; let i = index">
-                            <div class="row mt-2">
-                                <div class="col-md-10 col-lg-10 col-xl-10">
-                                    <label [for]="'property-' + i" class="mb-1 d-flex">{{property.name}}
-                                    </label>
-
-                                    <input type="text" [name]="'property-' + i" class="form-control"
-                                        [value]="property.value">
-                                </div>
-
-                                <div class="col-md-2 col-lg-2 col-xl-2 d-flex align-items-center justify-content-end mt-4"
-                                    (click)="onRemovePropertyButtonClick(i)">
-                                    <i class="fa-solid fa-x bg-danger p-2 rounded-1" style="color: #ffffff;"></i>
-                                </div>
-                            </div>
-                        </div>
-
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 d-flex align-items-center justify-content-end mt-4"
+                        (click)="onAddPropertyButtonClick()">
+                        <i class="fa-solid fa-plus bg-success p-2 rounded-1" style="color: #ffffff;"></i>
                     </div>
                 </div>
 
             </div>
 
-            <div class=" row mb-2 d-flex justify-content-end ">
+            <div class="">
 
-                <div class="col-md-6 col-lg-6 col-xl-6">
-    
-                    <div class="btn" (click)="onCreateButtonClick()">
-                        <app-loading-button [processing]="isProcessing">
-                            {{'Modal.CreateButton' | translate}}
-                        </app-loading-button>
+                <div class="row">
+                    <div class="col-md-6 col-lg-6 col-xl-6" *ngFor="let property of addedProperties; let i = index">
+                        <div class="row mt-2">
+                            <div class="col-md-10 col-lg-10 col-xl-10">
+                                <label [for]="'property-' + i" class="mb-1 d-flex">{{property.name}}
+                                </label>
+
+                                <input type="text" [name]="'property-' + i" class="form-control"
+                                    [value]="property.value">
+                            </div>
+
+                            <div class="col-md-2 col-lg-2 col-xl-2 d-flex align-items-center justify-content-end mt-4"
+                                (click)="onRemovePropertyButtonClick(i)">
+                                <i class="fa-solid fa-x bg-danger p-2 rounded-1" style="color: #ffffff;"></i>
+                            </div>
+                        </div>
                     </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class=" row mb-2 d-flex justify-content-end ">
+
+            <div class="col-md-6 col-lg-6 col-xl-6">
+
+                <div class="btn" (click)="onCreateButtonClick()">
+                    <app-loading-button [processing]="isProcessing">
+                        {{'Modal.CreateButton' | translate}}
+                    </app-loading-button>
                 </div>
             </div>
         </div>
+    </div>
 
-        
+
 
 
 

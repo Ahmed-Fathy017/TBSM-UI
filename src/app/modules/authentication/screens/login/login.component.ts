@@ -50,11 +50,14 @@ export class LoginComponent implements OnInit {
   /*************** Events  **********************/
   ngOnInit(): void {
 
-    // this.activatedRoute.queryParams.subscribe(params => {
-    //   this.returnURL = params['returnUrl'];
-    // });
-
-    // this.tryGetUserProfile();
+   // re clearing local storage data
+    // this.localStore.clearData();
+    // resetting navData array
+    this.localStore.removeData('navData');
+    // resetting permissions array
+    this.localStore.removeData("permissions");
+    // resetting type
+    this.localStore.removeData('type');
   }
 
   ngOnDestroy() {
@@ -106,12 +109,7 @@ export class LoginComponent implements OnInit {
 
   // login
   login(requestDTO: LoginRequest) {
-    // re clearing local storage data
-    // this.localStore.clearData();
-    // resetting navData array
-    this.localStore.saveData('navData', JSON.stringify([]));
-    // resetting permissions array
-    this.localStore.saveData("permissions", JSON.stringify([]));
+    
     
     this.hideErrorMessage();
     let tokenReqSubscription = this.authenticationService
