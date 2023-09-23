@@ -12,7 +12,7 @@
 }
 
 .packages {
-    height: 150px;
+    max-height: 50vh;
 }
 
 .form-check-input {

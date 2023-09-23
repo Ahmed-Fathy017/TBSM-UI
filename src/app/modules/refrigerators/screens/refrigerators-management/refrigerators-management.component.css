@@ -13,5 +13,13 @@
 
 
 .refrigerators {
-    height: 320px;
+    max-height: 60vh;
 }
+
+
+
+.custom-input {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+}
+

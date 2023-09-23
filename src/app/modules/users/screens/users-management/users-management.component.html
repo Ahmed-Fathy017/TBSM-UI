@@ -59,7 +59,7 @@
 
     <app-loading *ngIf="isLoading"></app-loading>
 
-    <div class="container" *ngIf="!isLoading">
+    <div class="container" *ngIf="!isLoading && users && users.length > 0">
 
         <table class=" table table-bordered">
             <thead>

@@ -28,3 +28,36 @@
     background-color: #F15A6052;
     color: #F15A60;
 }
+
+.static-value-secondside {
+    font-size: 1rem;
+    top: 0;
+    left: 0;
+    background-color: #F15A60;
+    height: 100%;
+    width: 10%;
+    cursor: pointer;
+}
+
+.static-value-firstside {
+    font-size: 1rem;
+    top: 0;
+    right: 0;
+    background-color: #F15A60;
+    height: 100%;
+    width: 10%;
+    cursor: pointer;
+}
+
+.padding-left {
+    padding-left: 65px;
+}
+
+.padding-right {
+    padding-right: 65px;
+}
+
+
+.icon-wrapper {
+    padding-top: 10px;
+}

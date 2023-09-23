@@ -25,11 +25,16 @@
     opacity: 0.9;
 }
 
+.logs-wrapper {
+    max-height: 50vh;
+}
+
 .logs {
     background-color: #F6F6FB;
     height: 220px;
     overflow: auto;
 }
+
 
 
 @media (max-width: 819px) {

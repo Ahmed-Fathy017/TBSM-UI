@@ -12,5 +12,5 @@
 }
 
 .warehouses {
-    height: 300px;
+    max-height: 50vh;
 }

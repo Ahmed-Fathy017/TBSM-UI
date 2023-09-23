@@ -12,6 +12,7 @@ import { SharedMessagesComponent } from 'src/app/modules/shared-components/compo
 import { TranslateService } from '@ngx-translate/core';
 import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
 import { ToasterService } from 'src/app/modules/master-layout/services/toaster.service';
+import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 
 
 @Component({
@@ -47,12 +48,16 @@ export class OperationLogsComponent extends SharedMessagesComponent implements O
 
   excelLink: string = '';
 
+  isRtl: boolean = false;
+
   constructor(private toastr: ToasterService,
     private operationLogsService: OperationLogsService,
     private translateService: TranslateService,
-    private screenTitleNavigationService: ScreenTitleNavigationService) {
+    private screenTitleNavigationService: ScreenTitleNavigationService,
+    private localService: LocalService) {
     super(translateService);
     this.screenTitleNavigationService.setScreenKey('OperationLogs');
+    this.isRtl = this.localService.getData('lang') != 'en' ? true : false;
   }
 
   ngOnInit(): void {

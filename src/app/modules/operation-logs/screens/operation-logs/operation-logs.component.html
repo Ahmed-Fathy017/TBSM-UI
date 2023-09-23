@@ -17,7 +17,9 @@
                         translate}} </label>
                     <input id="toDate" class="form-control" type="date" formControlName="toDate">
                 </div>
-                <div class="col-md-6 col-lg-3 col-xl-3">
+
+                <!-- old implementation -->
+                <!-- <div class="col-md-6 col-lg-3 col-xl-3">
                     <label for="type" class="mb-1 d-flex">{{'OprationsLogsScreen.OperationType' |
                         translate}} </label>
                     <div class="input-group flex-nowrap">
@@ -30,6 +32,31 @@
                         <span class="input-group-text small-search-btn rounded-2" id="addon-wrapping"
                             (click)="onSearchButtonClick()"><i class="fa-solid fa-magnifying-glass"></i></span>
                     </div>
+                </div> -->
+
+                <div class="col-md-6 col-lg-3 col-xl-3">
+                    <label for="type" class="mb-1 d-flex">{{'OprationsLogsScreen.OperationType' |
+                        translate}} </label>
+
+                        <div class="form-text">
+
+                            <!-- <input id="value"  [ngClass]="isRtl? 'form-control ps-5': 'form-control pe-5'" type="text" formControlName="value"> -->
+    
+                            <select name="type" id="type" formControlName="type"  [ngClass]="isRtl? 'form-select ps-5': 'form-select pe-5'">
+                                <option *ngFor="let type of operationTypes" [value]="type.value">
+                                    {{type.name | translate}}
+                                </option>
+                            </select>
+                            
+                            <label [ngClass]="isRtl ? 'static-value-secondside' : 'static-value-firstside'" (click)="onSearchButtonClick()" ><i
+                                    class="fa-solid fa-magnifying-glass"></i></label>
+                        </div>
+    
+
+<!--                        
+                        <span class="input-group-text small-search-btn rounded-2" id="addon-wrapping"
+                            (click)="onSearchButtonClick()"><i class="fa-solid fa-magnifying-glass"></i></span> -->
+
                 </div>
 
                 <div class="col-md-6 col-lg-3 col-xl-3">

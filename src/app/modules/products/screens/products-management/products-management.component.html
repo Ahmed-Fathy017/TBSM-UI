@@ -14,7 +14,8 @@
                     </select>
                 </div>
 
-                <div class="col-md-6 col-lg-6 col-xl-6">
+                <!-- old implemntation -->
+                <!-- <div class="col-md-6 col-lg-6 col-xl-6">
 
                     <label for="value" class="mb-1 d-flex">{{'ProductsManagmentScreen.Value' |
                         translate}}</label>
@@ -25,6 +26,25 @@
                         <span class="input-group-text small-search-btn rounded-2" id="addon-wrapping"
                             (click)="onSearchButtonClick()"><i class="fa-solid fa-magnifying-glass"></i></span>
                     </div>
+                </div> -->
+
+                <div class="col-md-6 col-lg-6 col-xl-6">
+
+                    <label for="value" class="mb-1 d-flex">{{'ProductsManagmentScreen.Value' |
+                        translate}}</label>
+
+                    <div class="form-text">
+
+                        <input id="value"  [ngClass]="isRtl? 'form-control ps-5': 'form-control pe-5'" type="text" formControlName="value">
+
+                        <label [ngClass]="isRtl ? 'static-value-secondside' : 'static-value-firstside'" (click)="onSearchButtonClick()" ><i
+                                class="fa-solid fa-magnifying-glass"></i></label>
+                    </div>
+
+                    <!-- <input id="value" class="form-control" type="text" formControlName="value">
+                    <span class="input-group-text small-search-btn rounded-2" id="addon-wrapping"
+                        (click)="onSearchButtonClick()"></span> -->
+
                 </div>
             </div>
 
@@ -39,12 +59,11 @@
         <div *ngFor="let item of productsList; let i = index">
             <div *ngIf="item.products && item.products.length > 0">
                 <div class="title p-3 my-4 d-flex justify-content-between cursor-pointer" data-bs-toggle="collapse"
-                [attr.data-bs-target]="'#collapse-' + i" aria-expanded="false"
-                aria-controls="collapseExample">
+                    [attr.data-bs-target]="'#collapse-' + i" aria-expanded="false" aria-controls="collapseExample">
                     <h5 class="fw-bold m-0">{{item.category}}</h5>
 
                     <div>
-                        <i class="fa-solid fa-minimize cursor-pointer" ></i>
+                        <i class="fa-solid fa-minimize cursor-pointer"></i>
                     </div>
 
 
@@ -101,7 +120,8 @@
                                                 </div>
 
                                                 <div class="rounded-1 view d-flex justify-content-center align-items-center mx-2 px-3 py-2"
-                                                    *ngIf="hasProductViewingAuthority" data-bs-toggle="modal" data-bs-target="#editModal" 
+                                                    *ngIf="hasProductViewingAuthority" data-bs-toggle="modal"
+                                                    data-bs-target="#editModal"
                                                     (click)="onViewProductButtonClick(item.id, product.id)">
                                                     <i class="fa-solid fa-eye"></i>
                                                 </div>
@@ -168,9 +188,10 @@
         <div class="modal-content">
             <div class="modal-header d-flex justify-content-between">
                 <div>
-                    <h5 class="modal-title" *ngIf="isEditMode; else viewMode;">{{'Modal.EditModalHeader' | translate}}</h5>
+                    <h5 class="modal-title" *ngIf="isEditMode; else viewMode;">{{'Modal.EditModalHeader' | translate}}
+                    </h5>
                     <ng-template #viewMode>
-                        <h5 class="modal-title" >{{'Modal.ViewModalHeader' | translate}}</h5>
+                        <h5 class="modal-title">{{'Modal.ViewModalHeader' | translate}}</h5>
                     </ng-template>
                 </div>
 
@@ -225,7 +246,8 @@
                                 (click)="onDeleteProperty(i)" *ngIf="isEditMode"></i>
                         </div>
                         <input [id]="'quantity'+ option.id" class="form-control" [type]="option.property.type"
-                            [value]="option.value" (change)="onUpdateProperty(option.id, $event)" [disabled]="!isEditMode">
+                            [value]="option.value" (change)="onUpdateProperty(option.id, $event)"
+                            [disabled]="!isEditMode">
                     </div>
 
 
@@ -235,7 +257,7 @@
                 <hr *ngIf="isEditMode">
 
                 <!-- properties section -->
-                <div class="mt-1" *ngIf="isEditMode" >
+                <div class="mt-1" *ngIf="isEditMode">
                     <div class="row">
                         <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
                             <label class="form-check-label mb-1" for="properties">

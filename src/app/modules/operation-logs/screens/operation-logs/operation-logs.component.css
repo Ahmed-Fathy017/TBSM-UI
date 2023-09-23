@@ -18,3 +18,20 @@
 .item-card {
     background-color: #F6F6FB;
 }
+
+.static-value-secondside {
+    font-size: 1rem;
+    top: 6px;
+    cursor: pointer;
+}
+
+.static-value-firstside {
+    font-size: 1rem;
+    top: 6px;
+    cursor: pointer;
+
+}
+
+.form-select {
+    background-image: none;
+}

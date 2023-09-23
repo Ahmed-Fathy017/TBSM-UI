@@ -22,7 +22,7 @@ tr td:last-child .edit {
 }
 
 .table-body {
-    height: 100px;
+    max-height: 50vh;
     overflow: auto;
 }
 

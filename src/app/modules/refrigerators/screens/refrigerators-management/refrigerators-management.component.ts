@@ -8,6 +8,7 @@ import { SharedMessagesComponent } from 'src/app/modules/shared-components/compo
 import { TranslateService } from '@ngx-translate/core';
 import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
 import { ToasterService } from 'src/app/modules/master-layout/services/toaster.service';
+import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 
 @Component({
   selector: 'app-refrigerators-management',
@@ -43,15 +44,19 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
   refrigerators: Refrigerator[] = [];
   selectedRefrigerator: Refrigerator = new Refrigerator();
 
+  isRtl: boolean = false;
+
   @ViewChild('updateModalCloseButtonRef') updateModalCloseButtonRef!: ElementRef;
 
   constructor(
     private toastr: ToasterService,
     private refrigeratorsService: RefrigeratorsService,
-    private translateService: TranslateService, 
-    private screenTitleNavigationService: ScreenTitleNavigationService) {
-      super(translateService);
-      this.screenTitleNavigationService.setScreenKey('RefrigeratorsManagement');
+    private translateService: TranslateService,
+    private screenTitleNavigationService: ScreenTitleNavigationService,
+    private localService: LocalService) {
+    super(translateService);
+    this.screenTitleNavigationService.setScreenKey('RefrigeratorsManagement');
+    this.isRtl = this.localService.getData('lang') != 'en' ? true : false;
   }
 
   ngOnInit(): void {

@@ -64,6 +64,7 @@ export class InventoryComponent extends SharedMessagesComponent implements OnIni
   importingAuthorityPermission: string = 'Inventory.import';
   exportingAuthorityPermission: string = 'Inventory.export';
 
+  isRtl: boolean = false;
 
   constructor(private toastr: ToasterService,
     private departmentsService: DepartmentsService,
@@ -74,9 +75,8 @@ export class InventoryComponent extends SharedMessagesComponent implements OnIni
     private screenTitleNavigationService: ScreenTitleNavigationService) {
     super(translateService);
     this.screenTitleNavigationService.setScreenKey('Inventory');
-
-
     this.evaluateScreenPermissions();
+    this.isRtl = this.localService.getData('lang') != 'en' ? true : false;
   }
 
   ngOnInit(): void {

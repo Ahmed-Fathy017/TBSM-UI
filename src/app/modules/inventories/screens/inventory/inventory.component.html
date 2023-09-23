@@ -22,7 +22,8 @@
 
             </div>
 
-            <div class="col-md-5 col-lg-5 col-xl-5">
+            <!-- old implementation -->
+            <!-- <div class="col-md-5 col-lg-5 col-xl-5">
 
                 <label for="fileName" class="mb-1 d-flex">{{'InventoryScreen.UploadFile' |
                     translate}} </label>
@@ -40,6 +41,28 @@
                                 (change)="onFileChange($event)">
                         </label>
                     </span>
+                </div>
+            </div> -->
+
+            <div class="col-md-5 col-lg-5 col-xl-5">
+
+                <label for="fileName" class="mb-1 d-flex">{{'InventoryScreen.UploadFile' |
+                    translate}} </label>
+
+
+                <div class="form-text">
+                    <input type="text" formControlName="file"
+                        [ngClass]="isRtl? 'form-control padding-left': 'form-control padding-right'" id="fileName" name="fileName">
+
+                    <label
+                        [ngClass]="isRtl ? 'static-value-secondside rounded-start-2' : 'static-value-firstside rounded-end-2'"
+                        for="file">
+
+                        <div class="d-flex align-content-center justify-content-center icon-wrapper"> <i
+                                class="fa-solid fa-cloud-arrow-up" style="color: #ffffff;"></i></div>
+                        <input id="file" class="form-control d-none" type="file" accept=".xlsx, .xls"
+                            (change)="onFileChange($event)">
+                    </label>
                 </div>
             </div>
 

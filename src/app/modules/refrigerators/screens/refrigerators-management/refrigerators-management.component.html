@@ -13,7 +13,8 @@
                     <input id="refrigeratorName01" class="form-control" type="text" formControlName="refrigeratorName">
                 </div>
 
-                <div class="col-md-3 col-lg-3 col-xl-3">
+                <!-- old implemntation -->
+                <!-- <div class="col-md-3 col-lg-3 col-xl-3">
                     <div class="input-group mb-3">
                         <label for="refrigeratorFromTemp01"
                             class="mb-1 d-flex col-12">{{'RefrigeratorsManagementScreen.Temperature' |
@@ -29,10 +30,31 @@
                             <span class="input-group-text">C°</span>
                         </div>
                     </div>
+                </div> -->
+
+                <!-- test -->
+                <div class="col-md-3 col-lg-3 col-xl-3">
+
+                    <label for="refrigeratorFromTemp01"
+                        class="mb-1 d-flex col-12">{{'RefrigeratorsManagementScreen.Temperature' |
+                        translate}} </label>
+
+                    <div class="form-text">
+                        <label class="static-value-firstside">{{isRtl? ('RefrigeratorsManagementScreen.From' |
+                            translate) : 'C°'}}</label>
+
+                        <input type="text " class="form-control custom-input"
+                            aria-label="Amount (to the nearest dollar)" formControlName="fromTemperature">
+
+                        <label class="static-value-secondside">{{isRtl? 'C°' : ('RefrigeratorsManagementScreen.From' |
+                            translate)}} </label>
+                    </div>
+
+
                 </div>
 
-
-                <div class="col-md-3 col-lg-3 col-xl-3">
+                <!-- old implementation -->
+                <!-- <div class="col-md-3 col-lg-3 col-xl-3">
                     <div class="input-group mb-3">
                         <label for="refrigeratorToTemp01"
                             class="mb-1 d-flex col-12">{{'RefrigeratorsManagementScreen.Temperature' |
@@ -48,9 +70,27 @@
                             <span class="input-group-text">C°</span>
                         </div>
                     </div>
+                </div> -->
+
+                <!-- test -->
+                <div class="col-md-3 col-lg-3 col-xl-3">
+
+                    <label for="refrigeratorFromTemp01"
+                        class="mb-1 d-flex col-12">{{'RefrigeratorsManagementScreen.Temperature' |
+                        translate}} </label>
+
+                    <div class="form-text">
+                        <label class="static-value-firstside">{{isRtl? ('RefrigeratorsManagementScreen.To' | translate)
+                            : 'C°'}}</label>
+
+                        <input type="text" class="form-control custom-input" aria-label="Amount (to the nearest dollar)"
+                            formControlName="toTemperature">
+
+                        <label class="static-value-secondside">{{isRtl? 'C°' : ('RefrigeratorsManagementScreen.To' |
+                            translate)}} </label>
+                    </div>
+
                 </div>
-
-
             </div>
 
 
@@ -83,9 +123,9 @@
 
                 <div class="d-flex">
                     <div class="mx-4 d-flex justify-content-center align-items-center ">20°</div>
-                    <div class="mx-2 edit d-flex justify-content-center align-items-center rounded-2" data-bs-toggle="modal"
-                        data-bs-target="#editModal" (click)="onUpdateButtonClick(refrigerator.id)"><i
-                            class="fa-solid fa-pen-to-square"></i></div>
+                    <div class="mx-2 edit d-flex justify-content-center align-items-center rounded-2"
+                        data-bs-toggle="modal" data-bs-target="#editModal"
+                        (click)="onUpdateButtonClick(refrigerator.id)"><i class="fa-solid fa-pen-to-square"></i></div>
                     <div class="mx-2 delete d-flex justify-content-center align-items-center rounded-2"
                         data-bs-toggle="modal" data-bs-target="#deleteModal"
                         (click)="onDeleteButtonClick(refrigerator.id)"><i class="fa-solid fa-trash-can"></i></div>
@@ -128,40 +168,44 @@
                         </div>
 
                         <div class="col-md-12 col-lg-12 col-xl-12">
-                            <div class="input-group mb-3">
-                                <label for="refrigeratorFromTemp02"
-                                    class="mb-1 d-flex col-12">{{'RefrigeratorsManagementScreen.Temperature' |
-                                    translate}} </label>
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">{{'RefrigeratorsManagementScreen.From' |
-                                        translate}}</span>
-                                </div>
 
-                                <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)"
-                                    formControlName="fromTemperature">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">C°</span>
-                                </div>
+                            <label for="refrigeratorFromTemp02"
+                                class="mb-1 d-flex col-12">{{'RefrigeratorsManagementScreen.Temperature' |
+                                translate}} </label>
+
+                            <div class="form-text">
+                                <label class="static-value-firstside">{{isRtl? ('RefrigeratorsManagementScreen.From' |
+                                    translate) : 'C°'}}</label>
+
+                                <input type="text " class="form-control custom-input" formControlName="fromTemperature">
+
+                                <label class="static-value-secondside">{{isRtl? 'C°' :
+                                    ('RefrigeratorsManagementScreen.From' |
+                                    translate)}} </label>
                             </div>
+
+
                         </div>
 
 
                         <div class="col-md-12 col-lg-12 col-xl-12">
-                            <div class="input-group mb-3">
-                                <label for="refrigeratorToTemp02"
-                                    class="mb-1 d-flex col-12">{{'RefrigeratorsManagementScreen.Temperature' |
-                                    translate}} </label>
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">{{'RefrigeratorsManagementScreen.To' |
-                                        translate}}</span>
-                                </div>
 
-                                <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)"
-                                    formControlName="toTemperature">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">C°</span>
-                                </div>
+                            <label for="refrigeratorToTemp02"
+                                class="mb-1 d-flex col-12">{{'RefrigeratorsManagementScreen.Temperature' |
+                                translate}} </label>
+
+
+
+                            <div class="form-text">
+                                <label class="static-value-firstside">{{isRtl? ('RefrigeratorsManagementScreen.To' |
+                                    translate) : 'C°'}}</label>
+
+                                <input type="text" class="form-control custom-input" formControlName="toTemperature">
+
+                                <label class="static-value-secondside">{{isRtl? 'C°' :
+                                    ('RefrigeratorsManagementScreen.To' | translate)}} </label>
                             </div>
+
                         </div>
 
 
