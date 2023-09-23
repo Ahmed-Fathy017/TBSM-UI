@@ -126,7 +126,7 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(this.errorOperationHeader,error.error.message);
+          this.toastr.error(error.error.message,this.errorOperationHeader);
         this.isLoading = false;
       }
     );
@@ -148,7 +148,7 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(this.errorOperationHeader,error.error.message);
+          this.toastr.error(error.error.message,this.errorOperationHeader);
       }
     );
 
@@ -178,7 +178,7 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(this.errorOperationHeader,error.error.message);
+          this.toastr.error(error.error.message,this.errorOperationHeader);
       }
     );
 
@@ -197,7 +197,7 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(this.errorOperationHeader,error.error.message);
+          this.toastr.error(error.error.message,this.errorOperationHeader);
       }
     );
 
