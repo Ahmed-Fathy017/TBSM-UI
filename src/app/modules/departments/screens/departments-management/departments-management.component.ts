@@ -63,6 +63,13 @@ export class DepartmentsManagementComponent extends SharedMessagesComponent impl
   }
 
   onUpdateConfirmationClick() {
+    Object.keys(this.updateDepartmentForm.controls).forEach(field => {  
+      const control = this.updateDepartmentForm.get(field);            
+      if (control instanceof FormControl) {             
+        control.markAsTouched({ onlySelf: true });
+      } 
+    });
+
     if (this.updateDepartmentForm.valid) {
       this.isLoading = true;
 
@@ -88,6 +95,12 @@ export class DepartmentsManagementComponent extends SharedMessagesComponent impl
   }
 
   onCreateButtonClick() {
+    Object.keys(this.createDepartmentForm.controls).forEach(field => {  
+      const control = this.createDepartmentForm.get(field);            
+      if (control instanceof FormControl) {             
+        control.markAsTouched({ onlySelf: true });
+      } 
+    });
     if (this.createDepartmentForm.valid) {
 
       let requestDTO = new Department();

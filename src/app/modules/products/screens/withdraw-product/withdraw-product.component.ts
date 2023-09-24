@@ -91,6 +91,13 @@ export class WithdrawProductComponent extends SharedMessagesComponent implements
   // }
 
   onWihdrawButtonClick() {
+    Object.keys(this.withdrawProductForm.controls).forEach(field => {  
+      const control = this.withdrawProductForm.get(field);            
+      if (control instanceof FormControl) {             
+        control.markAsTouched({ onlySelf: true });
+      } 
+    });
+
     if (this.withdrawProductForm.valid) {
       let productNumber = this.withdrawProductForm.controls.number.value!;
       this.isProcessing = true;

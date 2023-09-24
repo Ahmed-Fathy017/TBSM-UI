@@ -121,6 +121,13 @@ export class InventoryComponent extends SharedMessagesComponent implements OnIni
   }
 
   onImportButtonClick() {
+    Object.keys(this.inventoryImportForm.controls).forEach(field => {  
+      const control = this.inventoryImportForm.get(field);            
+      if (control instanceof FormControl) {             
+        control.markAsTouched({ onlySelf: true });
+      } 
+    });
+
     if (this.inventoryImportForm.valid) {
       this.isImporting = true;
       this.importExcelFile();
@@ -130,6 +137,13 @@ export class InventoryComponent extends SharedMessagesComponent implements OnIni
   }
 
   onExportButtonClick() {
+    Object.keys(this.inventoryExportForm.controls).forEach(field => {  
+      const control = this.inventoryExportForm.get(field);            
+      if (control instanceof FormControl) {             
+        control.markAsTouched({ onlySelf: true });
+      } 
+    });
+
     if (this.inventoryExportForm.valid)
       this.modalShowButtonRef.nativeElement.click();
     else

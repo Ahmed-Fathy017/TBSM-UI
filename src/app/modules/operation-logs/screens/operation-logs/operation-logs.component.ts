@@ -69,6 +69,13 @@ export class OperationLogsComponent extends SharedMessagesComponent implements O
   }
 
   onSearchButtonClick() {
+    Object.keys(this.operationLogsForm.controls).forEach(field => {  
+      const control = this.operationLogsForm.get(field);            
+      if (control instanceof FormControl) {             
+        control.markAsTouched({ onlySelf: true });
+      } 
+    });
+
     if (this.operationLogsForm.valid) {
       let requestDTO: GetOperationLogs = new GetOperationLogs();
 
@@ -98,6 +105,13 @@ export class OperationLogsComponent extends SharedMessagesComponent implements O
     // }
     // else
     //   this.toastr.info('لا توجد بيانات');
+
+    Object.keys(this.operationLogsForm.controls).forEach(field => {  
+      const control = this.operationLogsForm.get(field);            
+      if (control instanceof FormControl) {             
+        control.markAsTouched({ onlySelf: true });
+      } 
+    });
 
     if (this.operationLogsForm.valid) {
       let requestDTO: GetOperationLogs = new GetOperationLogs();

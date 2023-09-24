@@ -15,6 +15,7 @@ export class NavBarComponent implements OnInit {
   
   lang: string = '';
   userName: string = '';
+  initials: string = '';
 
   constructor(private navService: NavigationService,
     private router: Router,
@@ -24,6 +25,7 @@ export class NavBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.userName = this.localService.getData('username');
+    this.initials = this.userName.charAt(0);
   }
 
   changeLanguage(event: any) {

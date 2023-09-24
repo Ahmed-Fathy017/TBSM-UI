@@ -85,6 +85,21 @@ input[type=number]:focus,
     border-color: #dee2e6 !important;
 }
 
+.form-select {
+    background-image: url('./assets/images/common/select-input.svg') !important;
+    background-size: 0.6rem !important;
+}
+
+.form-control[type="date"]::-webkit-calendar-picker-indicator {
+    background-image: url('./assets/images/common/date.svg');
+}
+
+.form-control[type="date"] {
+    direction: rtl !important;
+}
+
+
+
 /************ Bootstrap Checkboxes Color Edit ************/
 .form-check-input:checked {
     background-color: #F15A60;
@@ -317,6 +332,7 @@ body::-webkit-scrollbar {
     color: #B8B8B8;
     top: 9px;
     font-size: 0.8rem;
+    color: #F15A60;
 }
 
 .static-value-secondside {
@@ -325,7 +341,17 @@ body::-webkit-scrollbar {
     color: #B8B8B8;
     top: 9px;
     font-size: 0.8rem;
+    color: #F15A60;
 }
+
+/************ Errors ************/
+
+input.ng-touched.ng-invalid,
+select.ng-touched.ng-invalid {
+    border: 0.1px solid #F15A60;
+}
+
+
 
 
 @media screen and (min-width: 1920px) {

@@ -86,6 +86,13 @@ export class PropertiesManagementComponent extends SharedMessagesComponent imple
   }
 
   onCreateButtonClick() {
+    Object.keys(this.createPropertyForm.controls).forEach(field => {  
+      const control = this.createPropertyForm.get(field);            
+      if (control instanceof FormControl) {             
+        control.markAsTouched({ onlySelf: true });
+      } 
+    });
+
     if (this.createPropertyForm.valid) {
       let requestDTO = new Property();
 
@@ -108,6 +115,13 @@ export class PropertiesManagementComponent extends SharedMessagesComponent imple
   }
 
   onUpdateConfirmationClick() {
+    Object.keys(this.updatePropertyForm.controls).forEach(field => {  
+      const control = this.updatePropertyForm.get(field);            
+      if (control instanceof FormControl) {             
+        control.markAsTouched({ onlySelf: true });
+      } 
+    });
+
     if (this.updatePropertyForm.valid) {
       this.isLoading = true;
 

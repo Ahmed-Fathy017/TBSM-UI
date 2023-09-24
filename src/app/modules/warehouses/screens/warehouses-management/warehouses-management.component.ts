@@ -80,9 +80,9 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
     private translateService: TranslateService,
     private localService: LocalService,
     private screenTitleNavigationService: ScreenTitleNavigationService) {
-      super(translateService);
-      this.screenTitleNavigationService.setScreenKey('WarehousesManagement')
-    }
+    super(translateService);
+    this.screenTitleNavigationService.setScreenKey('WarehousesManagement')
+  }
 
 
   // events
@@ -98,7 +98,7 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
   onViewButtonClick(id: number) {
     this.selectedWarehouse = this.warehouses.find(i => i.id == id)!;
     this.localService.saveData('warehouseId', String(id));
-    this.router.navigate([`warehouses/warehouse/${id}`, {warehouseName: this.selectedWarehouse.warehouse_name}])
+    this.router.navigate([`warehouses/warehouse/${id}`, { warehouseName: this.selectedWarehouse.warehouse_name }])
   }
 
   onUpdateButtonClick(id: number) {
@@ -114,6 +114,13 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
       this.updateWarehouseForm.controls.password.setValidators([Validators.minLength(4)]);
     else
       this.updateWarehouseForm.controls.password.clearValidators();
+
+    Object.keys(this.updateWarehouseForm.controls).forEach(field => {
+      const control = this.updateWarehouseForm.get(field);
+      if (control instanceof FormControl) {
+        control.markAsTouched({ onlySelf: true });
+      }
+    });
 
 
     if (this.updateWarehouseForm.valid) {
@@ -146,6 +153,13 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
   }
 
   onCreateButtonClick() {
+    Object.keys(this.createWarehouseForm.controls).forEach(field => {  
+      const control = this.createWarehouseForm.get(field);            
+      if (control instanceof FormControl) {             
+        control.markAsTouched({ onlySelf: true });
+      } 
+    });
+
     if (this.createWarehouseForm.valid) {
 
       let warehouse = new Warehouse();
@@ -175,7 +189,7 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message,this.errorOperationHeader);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
         this.isLoading = false;
       }
     );
@@ -191,7 +205,7 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message,this.errorOperationHeader);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
       }
     );
 
@@ -213,7 +227,7 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message,this.errorOperationHeader);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
       }
     );
 
@@ -247,7 +261,7 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message,this.errorOperationHeader);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
       }
     );
 
@@ -258,7 +272,7 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
   deleteWarehouse() {
     let subscription = this.warehousesService.deleteWarehouse(this.selectedWarehouse!.id).subscribe(
       (response: any) => {
-        this.toastr.success( response.message, this.successDeleteOperationHeader);
+        this.toastr.success(response.message, this.successDeleteOperationHeader);
         this.warehouses = response.data;
         this.isLoading = false;
       }, (error: any) => {
@@ -266,7 +280,7 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message,this.errorOperationHeader);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
       }
     );
 

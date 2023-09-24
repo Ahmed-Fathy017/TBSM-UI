@@ -68,6 +68,13 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
   }
 
   onCreateButtonClick() {
+    Object.keys(this.createRefrigeratorForm.controls).forEach(field => {  
+      const control = this.createRefrigeratorForm.get(field);            
+      if (control instanceof FormControl) {             
+        control.markAsTouched({ onlySelf: true });
+      } 
+    });
+
     if (this.createRefrigeratorForm.valid) {
 
       let requestDTO = new Refrigerator();
@@ -90,6 +97,13 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
   }
 
   onUpdateConfirmationClick() {
+    Object.keys(this.updateRefrigeratorForm.controls).forEach(field => {  
+      const control = this.createRefrigeratorForm.get(field);            
+      if (control instanceof FormControl) {             
+        control.markAsTouched({ onlySelf: true });
+      } 
+    });
+
     if (this.updateRefrigeratorForm.valid) {
       this.isLoading = true;
 

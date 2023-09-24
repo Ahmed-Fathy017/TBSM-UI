@@ -59,6 +59,13 @@ export class CreateRoleComponent extends SharedMessagesComponent implements OnIn
   }
 
   onCreateButtonClick() {
+    Object.keys(this.createRoleForm.controls).forEach(field => {  
+      const control = this.createRoleForm.get(field);            
+      if (control instanceof FormControl) {             
+        control.markAsTouched({ onlySelf: true });
+      } 
+    });
+
     if (this.createRoleForm.valid) {
       let role = new Role();
 

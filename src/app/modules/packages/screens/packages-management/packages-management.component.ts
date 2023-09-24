@@ -96,6 +96,13 @@ export class PackagesManagementComponent extends SharedMessagesComponent impleme
 
   onUpdateConfirmationClick() {
 
+    Object.keys(this.updatePackageForm.controls).forEach(field => {  
+      const control = this.updatePackageForm.get(field);            
+      if (control instanceof FormControl) {             
+        control.markAsTouched({ onlySelf: true });
+      } 
+    });
+
     if (this.updatePackageForm.valid) {
       this.isLoading = true;
 
@@ -125,6 +132,13 @@ export class PackagesManagementComponent extends SharedMessagesComponent impleme
   }
 
   onCreateButtonClick() {
+    Object.keys(this.createPackageForm.controls).forEach(field => {  
+      const control = this.createPackageForm.get(field);            
+      if (control instanceof FormControl) {             
+        control.markAsTouched({ onlySelf: true });
+      } 
+    });
+
     if (this.createPackageForm.valid) {
 
       let requestDTO = new Package();

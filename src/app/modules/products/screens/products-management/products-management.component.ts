@@ -257,6 +257,13 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
       return;
     }
 
+    Object.keys(this.updateProductForm.controls).forEach(field => {  
+      const control = this.updateProductForm.get(field);            
+      if (control instanceof FormControl) {             
+        control.markAsTouched({ onlySelf: true });
+      } 
+    });
+
     if (this.updateProductForm.valid) {
       this.isLoading = true;
 
@@ -296,6 +303,14 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
   }
 
   onProductSupplyDemandConfirmationClick() {
+
+    Object.keys(this.supplyChainForm.controls).forEach(field => {  
+      const control = this.supplyChainForm.get(field);            
+      if (control instanceof FormControl) {             
+        control.markAsTouched({ onlySelf: true });
+      } 
+    });
+
     if (this.supplyChainForm.valid) {
       let requestDTO = new AddOrder();
       requestDTO.product_id = this.selectedProduct.id;

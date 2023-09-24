@@ -143,6 +143,13 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
       return;
     }
 
+    Object.keys(this.createProductForm.controls).forEach(field => {  
+      const control = this.createProductForm.get(field);            
+      if (control instanceof FormControl) {             
+        control.markAsTouched({ onlySelf: true });
+      } 
+    });
+
     if (this.createProductForm.valid) {
       let requestDTO = new Product();
 

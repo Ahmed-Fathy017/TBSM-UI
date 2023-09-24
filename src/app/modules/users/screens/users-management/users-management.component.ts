@@ -86,6 +86,13 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
   }
 
   onCreateButtonClick() {
+    Object.keys(this.createUserForm.controls).forEach(field => {  
+      const control = this.createUserForm.get(field);            
+      if (control instanceof FormControl) {             
+        control.markAsTouched({ onlySelf: true });
+      } 
+    });
+
     if (this.createUserForm.valid) {
 
       let requestDTO = new User();
@@ -118,6 +125,13 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
   }
 
   onUpdateConfirmationClick() {
+    Object.keys(this.updateUserForm.controls).forEach(field => {  
+      const control = this.updateUserForm.get(field);            
+      if (control instanceof FormControl) {             
+        control.markAsTouched({ onlySelf: true });
+      } 
+    });
+
     if (this.updateUserForm.valid) {
       this.isLoading = true;
 

@@ -17,6 +17,7 @@
   height: 100%;
   -o-object-fit: cover;
   object-fit: cover;
+  background: #F15A60;
 }
 
 .rounded-circle {
@@ -45,5 +46,4 @@ li {
 .lang-container i {
   color: #F15A60;
   font-size: 1.2rem;
-  ;
 }
