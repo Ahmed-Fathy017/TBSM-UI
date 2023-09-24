@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter, HostListener, OnInit } from '@angular/core';
 import { adminNavbarData, userNavbarData } from '../../models/nav-data';
-import { animate, style, transition, trigger } from '@angular/animations';
+import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 import { UserTypes } from 'src/app/modules/authentication/models/user-types';
 import { INavbarData } from '../../models/helper';

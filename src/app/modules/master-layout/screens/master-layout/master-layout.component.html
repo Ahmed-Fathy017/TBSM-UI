@@ -2,12 +2,12 @@
     <app-sidenav (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
 
     <div [class]="lang !== 'en' ? 'body-arabic' : 'body-english'" [ngClass]="getBodyClass()">
-        <app-nav-bar> </app-nav-bar>
 
+        <app-nav-bar> </app-nav-bar>
 
         <app-page-header [screenNavigators]="screenNavigators" [isNavigator]="true"></app-page-header>
 
-        <div class="mb-4">
+        <div class="pb-2">
             <router-outlet></router-outlet>
         </div>
     </div>

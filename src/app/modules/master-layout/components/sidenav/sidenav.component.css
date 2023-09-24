@@ -172,8 +172,6 @@
 }
 
 .active-sublevel {
-    /* background-color: #f3f6f9382B; */
-    /* opacity: 1 !important; */
     .sublevel-link-text {
         color: #F15A60;
     }
@@ -203,9 +201,6 @@
             text-decoration: none;
             font-size: 0.7rem;
             padding: 0 1rem;
-            /* opacity: 0.6; */
-            /* min-width: 18rem; */
-
 
             /* border-radius: 0.625rem; */
             transition: all .3s ease;
@@ -232,9 +227,6 @@
         }
 
         .sublevel-nav-link:hover {
-            /* background-color: #f3f6f9382B; */
-            /* opacity: 1; */
-
             .sublevel-link-text {
                 color: #F15A60;
             }
@@ -297,6 +289,11 @@
 .absolute-left-position {
     left: 94%;
 }
+
+
+
+
+
 
 
 @media (max-width: 768px) {

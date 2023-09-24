@@ -27,7 +27,7 @@
                 </div>
                 <span class="sidenav-link-text m-0" @fadeInOut *ngIf="collapsed">{{data.label | translate}}</span>
                 <i *ngIf="data.items && collapsed && lang != 'en'; else caret;" class="menu-collapse-item"
-                    [ngClass]="!data.expanded? 'fa-solid fa-caret-left' : 'fa-solid fa-caret-down'"></i>
+                    [ngClass]="!data.expanded? 'fa-solid fa-caret-left' : 'fa-solid fa-caret-down'" @fadeInOut></i>
                 <ng-template #caret>
                     <i *ngIf="data.items && collapsed" class="menu-collapse-item"
                         [ngClass]="!data.expanded? 'fa-solid fa-caret-right' : 'fa-solid fa-caret-down'"></i>

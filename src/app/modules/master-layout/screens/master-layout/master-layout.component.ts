@@ -52,7 +52,6 @@ export class MasterLayoutComponent implements OnInit {
       styleClass = this.lang !== 'en' ? 'body-trimmed-arabic' : 'body-trimmed-english';
     else if (this.isSideNavCollapsed && this.screenWidth <= 768 && this.screenWidth > 0)
       styleClass = this.lang !== 'en' ? 'body-md-screen-arabic' : 'body-md-screen-english';
-    console.log(styleClass)
     return styleClass;
   }
 

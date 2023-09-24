@@ -24,9 +24,6 @@ export class InventoriesService extends AbstractRemoteService {
     formData.append("category_id", String(departmentId));
     formData.append('file', file);
 
-    formData.forEach((value, key) => {
-      console.log(key, value);
-    });
 
     return this.http.post(apiUrl, formData);
   }
