@@ -1,19 +1,25 @@
 .card {
     background-color: #F6F6FB;
     border: none;
-    width: 230px;
+    width: 250px;
     height: 190px;
 }
 
-.card .icon {
-    color: #F15A60;
-    background-color: white;
-    Width: 30px;
-    Height: 30px;
+.wrapper {
+    height: 90%;
+}
+
+.card .img-container {
+    width: 2.5rem;
+}
+
+.card img {
+    width: 1.2rem;
 }
 
 .card-title {
     color: #2B2F42;
+    font-size: 1.1rem;
 } 
 
 

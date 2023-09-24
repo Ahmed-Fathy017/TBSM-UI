@@ -52,7 +52,7 @@
     --bs-btn-close-opacity: 1;
     --bs-btn-close-hover-opacity: 1;
     color: #ffffff !important;
-    --bs-btn-close-bg: url('assets/images/x-solid.svg') !important;
+    --bs-btn-close-bg: url('./assets/images/common/x-mark.svg') !important;
 }
 
 /************ Bootstrap Shadows Removal ************/

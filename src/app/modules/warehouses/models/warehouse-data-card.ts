@@ -4,6 +4,7 @@ export interface WarehouseDataCard {
     count: number;
     backgroundColor: string;
     iconClass: string;
+    iconUrl: string;
     visibility: string;
     filter: string;
 }

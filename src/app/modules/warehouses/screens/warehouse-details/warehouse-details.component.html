@@ -5,14 +5,16 @@
 
     <div class="container-fluid cards" *ngIf="!isLoadingWarehouseData">
         <div class="row d-flex justify-content-center">
-            <div class="card col-md-6 col-lg-6 col-xl-4   d-flex justify-content-around" *ngFor="let card of cards"
+            <div class="card col-md-6 col-lg-6 col-xl-4  d-flex justify-content-around" *ngFor="let card of cards"
                 [class]="card.visibility">
 
                 <div class="card-content d-flex flex-column justify-content-around  px-4 py-3 m-4 rounded-5"
                     [ngStyle]="{'background-color': card.backgroundColor}"
                     (click)="onCardClick(card.filter)">
-                    <div class="icon rounded-2 d-flex align-items-center justify-content-center"><i
-                            [class]="card.iconClass"></i></div>
+                    <div class="icon rounded-2 d-flex align-items-center justify-content-center">
+                        <!-- <i [class]="card.iconClass"></i> -->
+                        <img [src]="card.iconUrl" alt="">
+                    </div>
                     <div class="h3 mb-0">{{card.count}}</div>
                     <div class="card-title">{{card.name}}</div>
                 </div>

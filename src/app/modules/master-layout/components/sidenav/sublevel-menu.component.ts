@@ -18,7 +18,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
           *ngIf="item.items && item.items.length > 0 && item.showInMenu" 
           (click)="handleClick(item)"
         >
-          <i class="sublevel-link-icon " [class]="item.icon"></i>
+          <i class="sublevel-link-icon " [class]="item.icon" style="color: #ffffff"></i>
           <span class="sublevel-link-text" *ngIf="collapsed">{{item.label | translate}}</span>
           <i *ngIf="item.items && collapsed" class="menu-collapse-icon"
             [ngClass]="!item.expanded ? 'fal fa-caret-right' : 'fal fa-caret-down'"
@@ -32,7 +32,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
           routerLinkActive="active-sublevel"
           [routerLinkActiveOptions]="{exact: true}"
         >
-          <i class="sublevel-link-icon " [class]="item.icon"></i>
+          <i class="sublevel-link-icon " [class]="item.icon" style="color: #ffffff"></i>
           <span class="sublevel-link-text" *ngIf="collapsed">{{item.label | translate}}</span>
 
           <span class="tooltiptext p-2" @fadeInOut *ngIf="!collapsed" (click)="$event.stopPropagation()">{{item.label | translate}}</span>

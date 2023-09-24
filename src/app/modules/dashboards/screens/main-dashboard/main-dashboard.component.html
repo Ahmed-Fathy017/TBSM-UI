@@ -4,18 +4,21 @@
     <app-loading *ngIf="isLoading"></app-loading>
     <div class="container" *ngIf="!isLoading">
         <div class="row d-flex ">
-            <div class="col-md-6 col-lg-4 col-xl-4 d-flex justify-content-center"  *ngFor="let card of cards">
+            <div class="col-md-6 col-lg-4 col-xl-4 d-flex justify-content-center" *ngFor="let card of cards">
                 <div class="card  rounded-5 py-3 px-4 mx-4 my-4 d-flex justify-content-around">
 
-                    <div class="icon rounded-2 d-flex align-items-center justify-content-center"><i
-                            class="fa-solid fa-chart-simple"></i></div>
-                    <div class="h3 mb-0">{{card.count}}</div>
-                    <div class="card-title">{{card.name}}</div>
+                    <div class="wrapper d-flex flex-column align-items-start justify-content-between ">
+                        <!-- <i class="fa-solid fa-chart-simple"></i></div> -->
+                        <div class="img-container rounded-3 bg-white p-2">
+                            <img src="../../../../../assets/images/dashboard/stats.svg" alt="">
+                        </div>
+                        <div class="h3 mb-0">{{card.count}}</div>
+                        <div class="card-title">{{card.name}}</div>
 
+                    </div>
                 </div>
+
             </div>
-
         </div>
-    </div>
 
-</div>
+    </div>

@@ -131,30 +131,35 @@ export class WarehouseDetailsComponent extends SharedMessagesComponent implement
       if (i.title == 'products_quantity_empty') {
         i.backgroundColor = '#0D99FF';
         i.iconClass = 'fa-solid fa-box';
+        i.iconUrl = '../../../../../assets/images/dashboard/package.svg';
         i.visibility = this.hasProductsEmptyQuantityViewAuthority ? 'visible' : 'invisible';
         i.filter = 'empty-quantity';
       }
       else if (i.title == 'products_quantity_little') {
         i.backgroundColor = '#FFA629';
         i.iconClass = 'fa-solid fa-box';
+        i.iconUrl = '../../../../../assets/images/dashboard/package.svg';
         i.visibility = this.hasProductsLittleQuantityViewAuthority ? 'visible' : 'invisible';
         i.filter = 'little-quantity';
       }
       else if (i.title == 'variable_temperature') {
         i.backgroundColor = '#F15A60';
         i.iconClass = 'fa-solid fa-temperature-three-quarters';
+        i.iconUrl = '../../../../../assets/images/dashboard/temperature.svg';
         i.visibility = this.hasProductsVariableTemperatureViewAuthority ? 'visible' : 'invisible';
         i.filter = 'variable-temperature';
       }
       else if (i.title == 'expiration_date_expired') {
         i.backgroundColor = '#0D99FF';
         i.iconClass = 'fa-solid fa-calendar-days';
+        i.iconUrl = '../../../../../assets/images/dashboard/date.svg';
         i.visibility = this.hasProductsExpiredViewAuthority ? 'visible' : 'invisible';
         i.filter = 'expired-date';
       }
       else if (i.title == 'expiration_date_about_expired') {
         i.backgroundColor = '#FFA629';
         i.iconClass = 'fa-solid fa-calendar-days';
+        i.iconUrl = '../../../../../assets/images/dashboard/date.svg';
         i.visibility = this.hasProductsAlmostExpiredViewAuthority ? 'visible' : 'invisible';
         i.filter = 'almost-expired-date';
       }

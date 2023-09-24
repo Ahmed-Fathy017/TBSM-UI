@@ -21,7 +21,10 @@
                 *ngIf="data.items && data.items.length > 0 && data.showInMenu"
                 [ngClass]="lang === 'ar'? 'sidenav-nav-link-padding-right': 'sidenav-nav-link-padding-left'"
                 [class]="getActiveClass(data)">
-                <i class="sidenav-link-icon" [class]="data.icon"></i>
+                <!-- <i class="sidenav-link-icon" [class]="data.icon"></i> -->
+                <div class="sidenav-link-icon">
+                    <img class=" icon-img" [src]="data.iconUrl" alt="">
+                </div>
                 <span class="sidenav-link-text m-0" @fadeInOut *ngIf="collapsed">{{data.label | translate}}</span>
                 <i *ngIf="data.items && collapsed && lang != 'en'; else caret;" class="menu-collapse-item"
                     [ngClass]="!data.expanded? 'fa-solid fa-caret-left' : 'fa-solid fa-caret-down'"></i>
@@ -37,7 +40,10 @@
                 *ngIf="(!data.items || (data.items && data.items.length === 0)) && data.showInMenu"
                 [ngClass]="lang === 'ar'? 'sidenav-nav-link-padding-right': 'sidenav-nav-link-padding-left'"
                 [routerLink]="data.routeLink" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <i class="sidenav-link-icon" [class]="data.icon"></i>
+                <!-- <i class="sidenav-link-icon" [class]="data.icon"></i> -->
+                <div class="sidenav-link-icon">
+                    <img class=" icon-img" [src]="data.iconUrl" alt="">
+                </div>
                 <span class="sidenav-link-text m-0" @fadeInOut *ngIf="collapsed">{{data.label | translate}}</span>
                 <span class="tooltiptext p-2" @fadeInOut *ngIf="!collapsed" (click)="$event.stopPropagation()">{{data.label | translate}}</span>
 
