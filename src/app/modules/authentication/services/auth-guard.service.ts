@@ -12,13 +12,11 @@ import { ScreenTitleNavigationService } from '../../master-layout/services/scree
 
 export class AuthGuardService implements CanActivate, CanActivateChild {
 
-  permissions: string[] = [];
 
   constructor(private authenticationService: AuthenticationService,
     private router: Router,
     private localService: LocalService,
     private screenTitleNavigationService: ScreenTitleNavigationService) {
-    this.permissions = JSON.parse(this.localService.getData("permissions"));
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
@@ -31,6 +29,8 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
   }
 
   canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+    let permissions: string[] = JSON.parse(this.localService.getData("permissions"));
+    
     if (!this.authenticationService.isAuthenticated()) {
       this.logout();
       return false;
@@ -45,7 +45,7 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
       return true;
 
       // this should be map key, value for O(1) execution enhancement
-    if (!this.permissions.find(i => i === screenConfig) ||
+    if (!permissions.find(i => i === screenConfig) ||
       (screenConfig === 'admin' && this.localService.getData('type') != UserTypes.ADMIN) ||
       (screenConfig === 'user' && this.localService.getData('type') == UserTypes.ADMIN)) {
       this.router.navigate(['unauthorized']);

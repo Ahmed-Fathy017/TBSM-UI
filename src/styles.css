@@ -150,7 +150,7 @@ input[type=checkbox]:checked {
 }
 
 
-body::-webkit-scrollbar-track {
+/* body::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 	border-radius: 10px;
 	background-color: #F5F5F5;
@@ -166,26 +166,40 @@ body::-webkit-scrollbar-thumb {
     border-radius: 10px;
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
 	background-color:  #100F37;
+} */
+
+/************  hiding the scrollbar while being able to scroll  ************/
+body {
+    overflow-y: scroll;
+    /* Adding the ability to scroll */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+}
+
+body::-webkit-scrollbar {
+    display: none;
 }
 
 /************  Scrollbar Styling ************/
 
 *::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	border-radius: 10px;
-	background-color: #F5F5F5;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
 }
 
 *::-webkit-scrollbar {
     width: 8px;
-	background-color: #F5F5F5;
+    background-color: #F5F5F5;
 }
 
 
 *::-webkit-scrollbar-thumb {
     border-radius: 10px;
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color:  #F15A60;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #F15A60;
 }
 
 /************  Pagination Styling ************/
