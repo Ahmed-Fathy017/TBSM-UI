@@ -11,6 +11,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SharedMessagesComponent } from './components/shared-messages/shared-messages.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { RouterModule } from '@angular/router';
+import { LocalService } from './services/local.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -25,6 +27,7 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     TranslateModule,
+    RouterModule,
     RouterModule
   ],
   exports : [

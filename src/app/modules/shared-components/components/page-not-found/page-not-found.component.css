@@ -7,3 +7,25 @@
     left: 0px;
     color: #ffffff;
 }
+
+button {
+    background-color: #F15A60;
+    border: none;
+    width: 15rem;
+    color: #ffffff;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:active {
+    background-color: #F15A60 !important;
+    transform: scale(0.95); 
+}
+
+button:hover {
+    background-color: #F15A60 !important;
+
+}
+
+button:focus {
+    background-color: #F15A60 !important;
+}
