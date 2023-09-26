@@ -48,7 +48,7 @@
 .header .form-check-input:checked {
     border: 2px solid #ffffff;
     background-color: #100F37 !important;
-    background-image: url('../../../../../assets/images/common/check-white.svg') !important;
+    background-image: url('http://54.38.85.127/tbsm/assets/images/common/check-white.svg') !important;
     background-size: 0.9rem;
 }
 
@@ -60,7 +60,7 @@
     border: 2px solid #100F37;
     color: #100F37;
 
-    background-image: url('../../../../../assets/images/common/check.svg') !important;
+    background-image: url('http://54.38.85.127/tbsm/assets/images/common/check.svg') !important;
     background-size: 0.9rem;
 }
 
