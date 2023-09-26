@@ -42,7 +42,10 @@ export class NavBarComponent implements OnInit {
   }
 
   logout() {
+    let lang = this.localService.getData('lang');
+
     this.localService.clearData();
+    this.localService.saveData('lang', lang);
     this.router.navigate(["login"]);
   }
 

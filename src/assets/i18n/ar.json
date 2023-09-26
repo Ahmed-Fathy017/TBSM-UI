@@ -28,6 +28,13 @@
         "AddOperation": "عملية اضافة",
         "WithdrawOperation": "عملية سحب"
     },
+    "LoginScreen": {
+        "Username": "اسم المستخدم",
+        "Password": "الرقم السري",
+        "FirstMessage": "مرحباً بك في اداره المستودعات",
+        "SecondMessage": "الرجاء تسجيل الدخول إلى حسابك وبدء المغامرة",
+        "LoginButton": "تسجيل الدخول"
+    },
     "AdminDashboardScreen": {
         "Home": "الرئيسية"
     },

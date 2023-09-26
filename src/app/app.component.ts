@@ -12,14 +12,17 @@ export class AppComponent {
 
   translationsLoaded = false;
 
+  lang: string = '';
+
   constructor(
     private translateService: TranslateService,
     private localService: LocalService) {
     this.translateService.setDefaultLang('ar');
     this.translateService.use(localService.getData('lang') || 'ar').subscribe(() => {
+      this.localService.saveData('lang', localService.getData('lang') || 'ar');
+      this.lang = this.localService.getData('lang')
       this.translationsLoaded = true;
     });;
-    this.localService.saveData('lang', localService.getData('lang') || 'ar');
   }
 
   translate(event: any) {
