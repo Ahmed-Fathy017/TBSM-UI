@@ -56,7 +56,7 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
     private localService: LocalService) {
     super(translateService);
     this.screenTitleNavigationService.setScreenKey('RefrigeratorsManagement');
-    this.isRtl = this.localService.getData('lang') != 'en' ? true : false;
+    this.isRtl = sessionStorage.getItem('lang') != 'en' ? true : false;
   }
 
   ngOnInit(): void {

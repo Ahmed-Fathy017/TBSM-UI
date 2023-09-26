@@ -76,7 +76,7 @@ export class InventoryComponent extends SharedMessagesComponent implements OnIni
     super(translateService);
     this.screenTitleNavigationService.setScreenKey('Inventory');
     this.evaluateScreenPermissions();
-    this.isRtl = this.localService.getData('lang') != 'en' ? true : false;
+    this.isRtl = sessionStorage.getItem('lang') != 'en' ? true : false;
   }
 
   ngOnInit(): void {

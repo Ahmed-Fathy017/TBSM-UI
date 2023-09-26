@@ -28,6 +28,13 @@
         "AddOperation": "Adding Operation",
         "WithdrawOperation": "Withdrawal Operation"
     },
+    "LoginScreen": {
+        "Username": "Username",
+        "Password": "Password",
+        "FirstMessage": "Welcome to Warehouses Management",
+        "SecondMessage": "Please Login With Your Account, and Start the adventure",
+        "LoginButton": "Sign In"
+    },
     "AdminDashboardScreen": {
         "Home": "Home"
     },
@@ -210,7 +217,7 @@
         "SuccessCreateOperationHeader": "Adding",
         "SuccessDeleteOperationHeader": "Deleting",
         "SuccessWithdrawOperationHeader": "Withdraw",
-        "SuccessImportOperationHeader":"Import"
+        "SuccessImportOperationHeader": "Import"
     },
     "ScreenNames": {
         "Home": "Home",

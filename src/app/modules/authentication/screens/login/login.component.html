@@ -4,19 +4,22 @@
             <div class="logo">
                 <h1><span>TBSM</span></h1>
             </div>
+           
+            <div class="col-12 col-md-6 logintxt">
+                <img src="assets/images/logo.svg" alt="logo">
+            </div>
             <div class="col-12 col-md-6 loginform">
                 <div class="container">
                     <div class="form">
                         <div class="header d-flex flex-column align-items-center fw-bold">
-                            <span class="block mb-2"> 👋 مرحباً بك في اداره المستودعات </span>
-                            <span class="block">الرجاء تسجيل الدخول إلى
-                                حسابك وبدء المغامرة</span>
+                            <span class="block mb-2"> 👋 {{'LoginScreen.FirstMessage' | translate }} </span>
+                            <span class="block"> {{'LoginScreen.SecondMessage' | translate }}</span>
                         </div>
                         <h2 class="d-flex align-items-center justify-content-center"></h2>
                         <form class="mt-5" [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()">
                             <div>
 
-                                <label for="username" class="d-flex flex-row-reverse">اسم المستخدم</label>
+                                <label for="username" class="d-flex"> {{'LoginScreen.Username' | translate }}</label>
                                 <input type="text" id="username" formControlName="userName"
                                     [ngClass]="{'inputerror': loginForm.controls.userName.errors && loginForm.controls.userName.touched}" />
 
@@ -29,14 +32,14 @@
                             </div>
 
                             <div>
-                                <label for="password" class="d-flex flex-row-reverse">الرقم السري</label>
+                                <label for="password" class="d-flex">{{'LoginScreen.Password' | translate }}</label>
 
                                 <input type="password" id="password" #password
                                     formControlName="password"
                                     [ngClass]="{'inputerror': loginForm.controls.password.errors && loginForm.controls.password.touched}" />
                                 <div class="eye">
-                                    <i class="far fa-eye-slash hidden" #hidden (click)="togglePassword()"></i>
-                                    <i class="far fa-eye show" #show (click)="togglePassword()"></i>
+                                    <i class="far fa-eye-slash hidden px-2" #hidden (click)="togglePassword()"></i>
+                                    <i class="far fa-eye show px-2" #show (click)="togglePassword()"></i>
                                 </div>
                                 <div class="errors"
                                     *ngIf="loginForm.controls.password.errors && loginForm.controls.password.touched">
@@ -52,15 +55,12 @@
                                 role="alert">{{message}}</label>
                             <div class="btn">
                                 <app-loading-button [processing]="isProcessing" [formValid]="loginForm.valid" >
-                                    تسجيل الدخول
+                                    {{'LoginScreen.LoginButton' | translate }}
                                 </app-loading-button>
                             </div>
                         </form>
                     </div>
                 </div>
-            </div>
-            <div class="col-12 col-md-6 logintxt">
-                <img src="assets/images/logo.svg" alt="logo">
             </div>
         </div>
     </div>

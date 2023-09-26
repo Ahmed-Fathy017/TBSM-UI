@@ -23,7 +23,7 @@ export class AuthenticationService extends AbstractRemoteService {
     
     let httpHeaders: HttpHeaders = new HttpHeaders();
     httpHeaders.append('Content-Type', 'application/json');
-    httpHeaders.append('Accept-Language', 'ar');
+    httpHeaders.append('Accept-Language', sessionStorage.getItem('lang') || 'ar');
     let options = { headers: httpHeaders };
 
     return this.http.post(apiRoute, requestDTO, options);

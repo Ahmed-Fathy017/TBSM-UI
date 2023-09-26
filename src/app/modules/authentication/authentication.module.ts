@@ -5,6 +5,7 @@ import { SharedComponentsModule } from '../shared-components/shared-components.m
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationService } from './remote-services/authentication.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -17,6 +18,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
     SharedComponentsModule,
     FormsModule,
     ReactiveFormsModule,
+    TranslateModule
   ],
   providers: [
     AuthenticationService,

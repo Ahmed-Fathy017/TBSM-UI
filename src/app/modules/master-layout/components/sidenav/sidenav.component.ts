@@ -6,6 +6,7 @@ import { UserTypes } from 'src/app/modules/authentication/models/user-types';
 import { INavbarData } from '../../models/helper';
 import { Router } from '@angular/router';
 import { SideNavToggle } from '../../models/sidenav-toggle';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -37,16 +38,20 @@ export class SidenavComponent implements OnInit {
   lang!: string;
 
   constructor(private localService: LocalService,
-    private router: Router) {
+    private router: Router,
+    private languageService: LanguageService) {
 
     this.navData = JSON.parse(this.localService.getData('navData'));
 
-    this.lang = localService.getData('lang') || 'ar';
+    // this.lang = sessionStorage.getItem('lang') || 'ar';
 
   }
 
   ngOnInit(): void {
-    this.screenWidth = window.innerWidth;
+    this.languageService.getAppLanguage().subscribe((state) => {
+      this.screenWidth = window.innerWidth;
+      this.lang = state;
+    });
 
   }
 

@@ -14,7 +14,7 @@ export class ToasterService {
 
   constructor(private toastr: ToastrService,
     localService: LocalService) {
-    this.lang = localService.getData('lang');
+    this.lang = sessionStorage.getItem('lang')!;
     if (this.lang != 'en') {
       this.position = ToasterPosition.topLeft;
       this.isRtl = true;

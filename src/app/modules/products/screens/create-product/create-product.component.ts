@@ -78,7 +78,7 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
   ) {
     super(translateService);
     this.screenTitleNavigationService.setScreenKey('CreateProduct');
-    this.isRtl = this.localService.getData('lang') != 'en' ? true : false;
+    this.isRtl = sessionStorage.getItem('lang') != 'en' ? true : false;
   }
 
   ngOnInit(): void {

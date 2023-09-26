@@ -1,1 +1,4 @@
-<router-outlet *ngIf="translationsLoaded"></router-outlet>
+<div [dir]="lang != 'en'? 'rtl':'ltr'">
+    <router-outlet *ngIf="translationsLoaded"></router-outlet>
+
+</div>

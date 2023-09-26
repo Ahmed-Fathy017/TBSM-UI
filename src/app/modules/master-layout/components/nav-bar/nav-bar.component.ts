@@ -3,6 +3,8 @@ import { NavigationService } from '../../services/navigation.service';
 import { Router } from '@angular/router';
 import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 import { SideNavToggle } from '../../models/sidenav-toggle';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -12,15 +14,17 @@ import { SideNavToggle } from '../../models/sidenav-toggle';
 export class NavBarComponent implements OnInit {
 
   // @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();
-  
+
   lang: string = '';
   userName: string = '';
   initials: string = '';
 
   constructor(private navService: NavigationService,
     private router: Router,
-    private localService: LocalService) {
-    this.lang = this.localService.getData('lang') || 'ar';
+    private localService: LocalService,
+    private translateService: TranslateService,
+    private languageService: LanguageService) {
+    this.lang = sessionStorage.getItem('lang') || 'ar';
   }
 
   ngOnInit(): void {
@@ -29,8 +33,14 @@ export class NavBarComponent implements OnInit {
   }
 
   changeLanguage(event: any) {
-    this.localService.saveData('lang', event.target.value);
-    window.location.reload();
+
+    this.translateService.setDefaultLang(event.target.value);
+    this.languageService.setAppLanguage(event.target.value);
+
+    this.languageService.getAppLanguage().subscribe((state) => {
+      this.lang = state;
+    });
+
   }
 
   toggleSideNav() {

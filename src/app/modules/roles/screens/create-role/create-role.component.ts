@@ -138,7 +138,7 @@ export class CreateRoleComponent extends SharedMessagesComponent implements OnIn
   }
 
   reevaluateGroupCheckbox(groupName: string, permissionId: string) {
-    let group = this.permissionGroups.find(i => i.group_name === groupName);
+    let group = this.permissionGroups.find(i => i.group_name_en === groupName);
     if (group) {
       let permission = group.permissions.find(i => i.id === permissionId);
 
@@ -151,7 +151,7 @@ export class CreateRoleComponent extends SharedMessagesComponent implements OnIn
   }
 
   reevaluateGroupPermissionsCheckboxes(groupName: string) {
-    let group = this.permissionGroups.find(i => i.group_name === groupName);
+    let group = this.permissionGroups.find(i => i.group_name_en === groupName);
     if (group) {
       if (group.checked)
         group.permissions.map(i => i.checked = false);

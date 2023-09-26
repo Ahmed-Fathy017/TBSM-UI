@@ -1,7 +1,8 @@
-<div [dir]="'dir' | translate">
+
+<div>
     <app-sidenav (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
 
-    <div [class]="lang !== 'en' ? 'body-arabic' : 'body-english'" [ngClass]="getBodyClass()">
+    <div [class]="lang != 'en' ? 'body-arabic' : 'body-english'" [ngClass]="getBodyClass()">
 
         <app-nav-bar> </app-nav-bar>
 

@@ -57,7 +57,7 @@ export class OperationLogsComponent extends SharedMessagesComponent implements O
     private localService: LocalService) {
     super(translateService);
     this.screenTitleNavigationService.setScreenKey('OperationLogs');
-    this.isRtl = this.localService.getData('lang') != 'en' ? true : false;
+    this.isRtl = sessionStorage.getItem('lang') != 'en' ? true : false;
   }
 
   ngOnInit(): void {

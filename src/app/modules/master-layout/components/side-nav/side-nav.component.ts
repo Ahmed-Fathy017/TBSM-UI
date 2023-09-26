@@ -25,7 +25,7 @@ export class SideNavComponent implements OnInit {
 
   ngOnInit(): void {
     this.showSideNav = this.navService.getShowNav();
-    this.direction = this.localService.getData('lang') === 'en' ? SideNavDirection.Left : SideNavDirection.Right;
+    this.direction = sessionStorage.getItem('lang') === 'en' ? SideNavDirection.Left : SideNavDirection.Right;
   }
 
   onSidebarClose() {

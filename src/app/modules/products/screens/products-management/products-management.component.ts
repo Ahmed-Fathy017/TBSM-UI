@@ -127,7 +127,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
 
     this.isAdmin = this.localService.getData('type') === UserTypes.ADMIN;
     this.evaluateScreenPermissions();
-    this.isRtl = this.localService.getData('lang') != 'en' ? true : false;
+    this.isRtl = sessionStorage.getItem('lang') != 'en' ? true : false;
   }
 
 
