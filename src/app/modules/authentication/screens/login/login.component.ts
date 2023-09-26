@@ -149,9 +149,9 @@ export class LoginComponent implements OnInit {
   setupUserPermissions(response: any) {
     let permissions: string[] = [];
     response.data.permissions.map((i: PermissionGroup) => {
-      let groupName = i.group_name;
+      let groupName = i.group_name_en;
       i.permissions.map((j: Permission) => {
-        let permission = `${groupName}.${j.name}`;
+        let permission = `${groupName}.${j.value}`;
         permissions.push(permission);
       });
     });

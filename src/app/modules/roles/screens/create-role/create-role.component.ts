@@ -9,6 +9,7 @@ import { SharedMessagesComponent } from 'src/app/modules/shared-components/compo
 import { TranslateService } from '@ngx-translate/core';
 import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
 import { ToasterService } from 'src/app/modules/master-layout/services/toaster.service';
+import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 
 @Component({
   selector: 'app-create-role',
@@ -38,14 +39,17 @@ export class CreateRoleComponent extends SharedMessagesComponent implements OnIn
   // button loading
   isProcessing: boolean = false;
 
+  lang: string = '';
 
   constructor(
     private toastr: ToasterService,
     private rolesService: RolesService,
     private translateService: TranslateService,
-     private screenTitleNavigationService: ScreenTitleNavigationService) {
-      super(translateService);
-      this.screenTitleNavigationService.setScreenKey('CreateRole');
+    private screenTitleNavigationService: ScreenTitleNavigationService,
+    private localService: LocalService) {
+    super(translateService);
+    this.screenTitleNavigationService.setScreenKey('CreateRole');
+    this.lang = localService.getData('lang');
   }
 
 
@@ -59,11 +63,11 @@ export class CreateRoleComponent extends SharedMessagesComponent implements OnIn
   }
 
   onCreateButtonClick() {
-    Object.keys(this.createRoleForm.controls).forEach(field => {  
-      const control = this.createRoleForm.get(field);            
-      if (control instanceof FormControl) {             
+    Object.keys(this.createRoleForm.controls).forEach(field => {
+      const control = this.createRoleForm.get(field);
+      if (control instanceof FormControl) {
         control.markAsTouched({ onlySelf: true });
-      } 
+      }
     });
 
     if (this.createRoleForm.valid) {
@@ -106,9 +110,9 @@ export class CreateRoleComponent extends SharedMessagesComponent implements OnIn
 
       }, (error: any) => {
         if (error.error.errors && error.error.errors.length > 0)
-        this.toastr.error(error.error.errors[0].value, error.error.message);
-      else
-        this.toastr.error(error.error.message,this.errorOperationHeader);
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message, this.errorOperationHeader);
         this.isLoadingPermissions = false;
       }
     );
@@ -126,9 +130,9 @@ export class CreateRoleComponent extends SharedMessagesComponent implements OnIn
 
       }, (error: any) => {
         if (error.error.errors && error.error.errors.length > 0)
-        this.toastr.error(error.error.errors[0].value, error.error.message);
-      else
-        this.toastr.error(error.error.message,this.errorOperationHeader);
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message, this.errorOperationHeader);
         this.isLoadingRoles = false;
         this.isProcessing = false;
       }
@@ -138,7 +142,7 @@ export class CreateRoleComponent extends SharedMessagesComponent implements OnIn
   }
 
   reevaluateGroupCheckbox(groupName: string, permissionId: string) {
-    let group = this.permissionGroups.find(i => i.group_name === groupName);
+    let group = this.permissionGroups.find(i => i.group_name_en === groupName);
     if (group) {
       let permission = group.permissions.find(i => i.id === permissionId);
 
@@ -151,11 +155,11 @@ export class CreateRoleComponent extends SharedMessagesComponent implements OnIn
   }
 
   reevaluateGroupPermissionsCheckboxes(groupName: string) {
-    let group = this.permissionGroups.find(i => i.group_name === groupName);
+    let group = this.permissionGroups.find(i => i.group_name_en === groupName);
     if (group) {
       if (group.checked)
         group.permissions.map(i => i.checked = false);
-      else 
+      else
         group.permissions.map(i => i.checked = true);
       group.checked = !group.checked;
     }

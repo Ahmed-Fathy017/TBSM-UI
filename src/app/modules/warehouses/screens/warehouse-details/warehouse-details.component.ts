@@ -43,11 +43,11 @@ export class WarehouseDetailsComponent extends SharedMessagesComponent implement
   hasProductsLittleQuantityViewAuthority: boolean = true;
   hasProductsVariableTemperatureViewAuthority: boolean = true;
 
-  productsAlmostExpiredViewAuthorityPermission: string = 'Main_page.expiration_date_about_expired';
-  productsExpiredViewAuthorityPermission: string = 'Main_page.expiration_date_expired';
-  productsEmptyQuantityViewAuthorityPermission: string = 'Main_page.products_quantity_empty';
-  productsLittleQuantityViewAuthorityPermission: string = 'Main_page.products_quantity_little';
-  productsVariableTemperatureViewAuthorityPermission: string = 'Main_page.variable_temperature';
+  productsAlmostExpiredViewAuthorityPermission: string = 'Main page.expiration_date_about_expired';
+  productsExpiredViewAuthorityPermission: string = 'Main page.expiration_date_expired';
+  productsEmptyQuantityViewAuthorityPermission: string = 'Main page.products_quantity_empty';
+  productsLittleQuantityViewAuthorityPermission: string = 'Main page.products_quantity_little';
+  productsVariableTemperatureViewAuthorityPermission: string = 'Main page.variable_temperature';
 
   constructor(
     private warehousesService: WarehousesService,
