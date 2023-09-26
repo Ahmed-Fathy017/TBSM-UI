@@ -14,15 +14,18 @@ export class ToasterService {
 
   constructor(private toastr: ToastrService,
     localService: LocalService) {
-    this.lang = sessionStorage.getItem('lang')!;
-    if (this.lang != 'en') {
-      this.position = ToasterPosition.topLeft;
-      this.isRtl = true;
-    }
-    else {
-      this.position = ToasterPosition.topRight;
-      this.isRtl = false;
-    }
+
+      this.lang = sessionStorage.getItem('lang')!;
+
+      if (this.lang != 'en') {
+        this.position = ToasterPosition.topLeft;
+        this.isRtl = true;
+      }
+      else {
+        this.position = ToasterPosition.topRight;
+        this.isRtl = false;
+      }
+
   }
 
 
@@ -32,11 +35,11 @@ export class ToasterService {
   }
   /** show successful toast */
   public success(title: string, message: string = '', positionClass: string = this.position) {
-    this.toastr.success(title, message, { positionClass,toastClass: this.isRtl ? 'ngx-toastr custom-toast-rtl' : 'ngx-toastr custom-toast-ltr', closeButton: true});
+    this.toastr.success(title, message, { positionClass, toastClass: this.isRtl ? 'ngx-toastr custom-toast-rtl' : 'ngx-toastr custom-toast-ltr', closeButton: true });
   }
   /** show error toast */
   public error(title: string, message: string = '', positionClass: string = this.position) {
-    this.toastr.error(title, message, { positionClass,toastClass: this.isRtl ? 'ngx-toastr custom-toast-rtl' : 'ngx-toastr custom-toast-ltr', closeButton: true});
+    this.toastr.error(title, message, { positionClass, toastClass: this.isRtl ? 'ngx-toastr custom-toast-rtl' : 'ngx-toastr custom-toast-ltr', closeButton: true });
   }
   /** show info toast */
   public info(title: string, message: string = '', positionClass: string = this.position) {
@@ -44,6 +47,6 @@ export class ToasterService {
   }
   /** show warning toast */
   public warning(title: string, message: string = '', positionClass: string = this.position) {
-    this.toastr.warning(title, message, { positionClass,toastClass: this.isRtl ? 'ngx-toastr custom-toast-rtl' : 'ngx-toastr custom-toast-ltr', closeButton: true});
+    this.toastr.warning(title, message, { positionClass, toastClass: this.isRtl ? 'ngx-toastr custom-toast-rtl' : 'ngx-toastr custom-toast-ltr', closeButton: true });
   }
 }

@@ -4,7 +4,6 @@ import { ScreenTitleNavigationService } from '../../services/screen-title-naviga
 import { IScreenNavigator } from '../../models/screen-navigator';
 import { NgZone } from '@angular/core';
 import { switchMap } from 'rxjs/operators';
-import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-master-layout',
@@ -22,15 +21,12 @@ export class MasterLayoutComponent implements OnInit {
   screenNavigators: IScreenNavigator[] = [{ name: 'ScreenNames.Home', routeLink: 'warehouses/home' }];
 
   constructor(private localService: LocalService,
-    private screenTitleNavigationService: ScreenTitleNavigationService,
-    private languageService: LanguageService) {
+    private screenTitleNavigationService: ScreenTitleNavigationService) {
 
   }
 
   ngOnInit(): void {
-    this.languageService.getAppLanguage().subscribe((state) => {
-      this.lang = state;
-    });
+    this.lang = sessionStorage.getItem('lang')!;
 
     this.screenTitleNavigationService.getScreenKey().subscribe((state) => {
       // This code will only run when the getScreenKey() observable emits a value

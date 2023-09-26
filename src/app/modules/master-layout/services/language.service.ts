@@ -1,23 +1,27 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+// import { Injectable } from '@angular/core';
+// import { BehaviorSubject, Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class LanguageService {
+// @Injectable({
+//   providedIn: 'root'
+// })
+// export class LanguageService {
 
-  private readonly languageKey = 'lang';
+//   private readonly languageKey = 'lang';
 
-  private appLanguage$: BehaviorSubject<string> = new BehaviorSubject<string>(sessionStorage.setItem(this.languageKey, sessionStorage.getItem(this.languageKey) || 'ar')!);
+//   private appLanguage$: BehaviorSubject<string> = new BehaviorSubject<string>(sessionStorage.getItem(this.languageKey)!);
 
 
-  constructor() { }
+//   constructor() {
+//     sessionStorage.getItem(sessionStorage.getItem(this.languageKey)!)
+//   }
 
-  getAppLanguage(): Observable<string> {
-    return this.appLanguage$.asObservable();
-  }
+//   getAppLanguage(): Observable<string> {
+//     return this.appLanguage$.asObservable();
+//   }
 
-  setAppLanguage(newState: string) {
-    this.appLanguage$.next(newState);
-  }
-}
+//   setAppLanguage(newState: string) {
+//     sessionStorage.setItem(this.languageKey, newState)
+//     //this.appLanguage$.next(newState);
+
+//   }
+// }

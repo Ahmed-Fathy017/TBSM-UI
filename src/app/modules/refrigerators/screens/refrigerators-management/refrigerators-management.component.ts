@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
 import { ToasterService } from 'src/app/modules/master-layout/services/toaster.service';
 import { LocalService } from 'src/app/modules/shared-components/services/local.service';
+// import { LanguageService } from 'src/app/modules/master-layout/services/language.service';
 
 @Component({
   selector: 'app-refrigerators-management',
@@ -56,11 +57,15 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
     private localService: LocalService) {
     super(translateService);
     this.screenTitleNavigationService.setScreenKey('RefrigeratorsManagement');
-    this.isRtl = sessionStorage.getItem('lang') != 'en' ? true : false;
   }
 
   ngOnInit(): void {
     this.getRefrigerators();
+
+    this.isRtl = sessionStorage.getItem('lang') != 'en' ? true : false;
+    // this.languageService.getAppLanguage().subscribe((state) => {
+    //   this.isRtl = state != 'en' ? true : false;
+    // });
   }
 
   ngOnDestroy(): void {
@@ -68,11 +73,11 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
   }
 
   onCreateButtonClick() {
-    Object.keys(this.createRefrigeratorForm.controls).forEach(field => {  
-      const control = this.createRefrigeratorForm.get(field);            
-      if (control instanceof FormControl) {             
+    Object.keys(this.createRefrigeratorForm.controls).forEach(field => {
+      const control = this.createRefrigeratorForm.get(field);
+      if (control instanceof FormControl) {
         control.markAsTouched({ onlySelf: true });
-      } 
+      }
     });
 
     if (this.createRefrigeratorForm.valid) {
@@ -97,11 +102,11 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
   }
 
   onUpdateConfirmationClick() {
-    Object.keys(this.updateRefrigeratorForm.controls).forEach(field => {  
-      const control = this.createRefrigeratorForm.get(field);            
-      if (control instanceof FormControl) {             
+    Object.keys(this.updateRefrigeratorForm.controls).forEach(field => {
+      const control = this.createRefrigeratorForm.get(field);
+      if (control instanceof FormControl) {
         control.markAsTouched({ onlySelf: true });
-      } 
+      }
     });
 
     if (this.updateRefrigeratorForm.valid) {
@@ -140,7 +145,7 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message,this.errorOperationHeader);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
         this.isLoading = false;
       }
     );
@@ -162,7 +167,7 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message,this.errorOperationHeader);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
       }
     );
 
@@ -192,7 +197,7 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message,this.errorOperationHeader);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
       }
     );
 
@@ -211,7 +216,7 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message,this.errorOperationHeader);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
       }
     );
 
