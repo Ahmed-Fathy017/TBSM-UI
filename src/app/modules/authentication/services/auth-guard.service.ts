@@ -30,6 +30,7 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
 
   canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     let permissions: string[] = JSON.parse(this.localService.getData("permissions"));
+    console.log(permissions)
     
     if (!this.authenticationService.isAuthenticated()) {
       this.logout();

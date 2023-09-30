@@ -167,7 +167,7 @@ export var userNavbarData: INavbarData[] = [
         icon: 'fa-solid fa-folder-open',
         iconUrl: 'http://54.38.85.127/tbsm/assets/images/menu/operations.svg',
         label: 'SideNav.OperationLogs',
-        screenConfig: 'Operations_log.view',
+        screenConfig: 'Operations log.view',
         showInMenu: true
     },
     {

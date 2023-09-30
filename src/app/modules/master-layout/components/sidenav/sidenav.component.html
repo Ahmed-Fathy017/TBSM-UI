@@ -16,7 +16,7 @@
     </div>
 
     <ul class="sidenav-nav mt-4">
-        <li class="sidenav-nav-item " *ngFor="let data of navData">
+        <li class="sidenav-nav-item " *ngFor="let data of navData" [class]="data.showInMenu? 'd-block' : 'd-none'">
             <a class="sidenav-nav-link" (click)="handleClick(data)"
                 *ngIf="data.items && data.items.length > 0 && data.showInMenu"
                 [ngClass]="lang === 'ar'? 'sidenav-nav-link-padding-right': 'sidenav-nav-link-padding-left'"

@@ -39,7 +39,7 @@ export class ScreensConfigProvider {
     static UsersManagementScreen: string = 'Users.view';
 
     // operation logs module screens
-    static OperationLogsManagementScreen: string = 'Operations_log.view';
+    static OperationLogsManagementScreen: string = 'Operations log.view';
 
     // inventories module screens
     static InventoryScreen: string = 'Inventory.view';
