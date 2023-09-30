@@ -23,13 +23,14 @@
 
 .permissions .header {
     background-color: #100F37;
+    
 }
 
-.content-wrapper {
+/* .content-wrapper {
     height: 200px;
     overflow: auto;
     font-size: 0.9rem;
-}
+} */
 
 
 /************ Bootstrap Checkboxes Color Edit ************/
@@ -52,6 +53,10 @@
     background-size: 0.9rem;
 }
 
+.custom-margin {
+    margin: 0 5.5px !important;
+}
+
 .content .form-check-input {
     border: solid 2px #100F37 !important;
 }
@@ -65,12 +70,11 @@
 }
 
 
-
+/* 
 .content-wrapper::-webkit-scrollbar {
     width: 6px;
     background-color: #F5F5F5;
     border-radius: 5px;
-    /* margin: -2px; */
 }
 
 .content-wrapper::-webkit-scrollbar-track {
@@ -82,4 +86,33 @@
 .content-wrapper::-webkit-scrollbar-thumb {
     background-color: #100F37;
     border-radius: 2px;
+} */
+
+/* Ensure consistent alignment with the header */
+.content-wrapper {
+    height: 200px;
+    overflow-y: scroll;
+    /* Use 'scroll' instead of 'auto' to always show the scrollbar */
+    font-size: 0.9rem;
+}
+
+/* Adjust the scrollbar styles */
+.content-wrapper::-webkit-scrollbar {
+    width: 6px;
+}
+
+.content-wrapper::-webkit-scrollbar-track {
+    background-color: transparent;
+    /* Set the track background to transparent */
+}
+
+.content-wrapper::-webkit-scrollbar-thumb {
+    background-color: #100F37;
+    border-radius: 2px;
+}
+
+/* Ensure the content doesn't overflow horizontally */
+.content {
+    white-space: nowrap;
+    overflow-x: hidden;
 }

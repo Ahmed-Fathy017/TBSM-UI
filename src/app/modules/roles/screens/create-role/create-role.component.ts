@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 // import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
@@ -16,7 +16,7 @@ import { LocalService } from 'src/app/modules/shared-components/services/local.s
   templateUrl: './create-role.component.html',
   styleUrls: ['./create-role.component.css']
 })
-export class CreateRoleComponent extends SharedMessagesComponent implements OnInit, OnDestroy {
+export class CreateRoleComponent extends SharedMessagesComponent implements OnInit, OnDestroy, AfterViewInit {
 
   subscription = new Subscription();
 
@@ -41,25 +41,51 @@ export class CreateRoleComponent extends SharedMessagesComponent implements OnIn
 
   lang: string = '';
 
+  @ViewChildren('contentWrapper') contentWrappers!: QueryList<ElementRef>;
+
   constructor(
     private toastr: ToasterService,
     private rolesService: RolesService,
     private translateService: TranslateService,
     private screenTitleNavigationService: ScreenTitleNavigationService,
-    private localService: LocalService) {
+    private localService: LocalService,
+    private renderer: Renderer2) {
     super(translateService);
     this.screenTitleNavigationService.setScreenKey('CreateRole');
     this.lang = localService.getData('lang');
   }
-
 
   // events
   ngOnInit(): void {
     this.getPermissions();
   }
 
+  ngAfterViewInit(): void {
+    this.checkScrollbar();
+  }
+
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  // Check if the content overflows and adjust the scrollbar visibility
+  checkScrollbar() {
+    this.contentWrappers.changes.subscribe(() => {
+      this.contentWrappers.toArray().forEach((contentWrapper) => {
+        const contentWrapperElement = contentWrapper.nativeElement as HTMLElement;
+        if (contentWrapperElement.scrollHeight > contentWrapperElement.clientHeight) {
+          this.renderer.setStyle(contentWrapperElement, 'overflow-y', 'scroll');
+          if (this.lang != 'en')
+            this.renderer.setStyle(contentWrapperElement, 'margin-right', '4px');
+          else
+            this.renderer.setStyle(contentWrapperElement, 'margin-left', '4px');
+        } else {
+          this.renderer.setStyle(contentWrapperElement, 'overflow-y', 'hidden');
+          this.renderer.setStyle(contentWrapperElement, 'margin', '0 5.5px');
+        }
+      });
+    });
   }
 
   onCreateButtonClick() {
