@@ -77,12 +77,12 @@ export class CreateRoleComponent extends SharedMessagesComponent implements OnIn
         if (contentWrapperElement.scrollHeight > contentWrapperElement.clientHeight) {
           this.renderer.setStyle(contentWrapperElement, 'overflow-y', 'scroll');
           if (this.lang != 'en')
-            this.renderer.setStyle(contentWrapperElement, 'margin-right', '4px');
+            this.renderer.setStyle(contentWrapperElement, 'margin-right', '5.5px');
           else
-            this.renderer.setStyle(contentWrapperElement, 'margin-left', '4px');
+            this.renderer.setStyle(contentWrapperElement, 'margin-left', '5.5px');
         } else {
           this.renderer.setStyle(contentWrapperElement, 'overflow-y', 'hidden');
-          this.renderer.setStyle(contentWrapperElement, 'margin', '0 5.5px');
+          this.renderer.setStyle(contentWrapperElement, 'margin', '0 5.8px');
         }
       });
     });
