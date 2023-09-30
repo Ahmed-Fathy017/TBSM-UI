@@ -19,11 +19,11 @@ export class ScreensConfigProvider {
     static WithdrawProductScreen: string = 'Products.withdraw';
 
     // products filter 
-    static AlmostExpiredProductsViewManagementScreen: string = 'Main_page.expiration_date_about_expired';
-    static ExpiredProductsViewManagementScreen: string = 'Main_page.expiration_date_expired';
-    static EmptyQuantityProductsViewManagementScreen: string = 'Main_page.products_quantity_empty';
-    static LittleQuantityProductsViewManagementScreen: string = 'Main_page.products_quantity_little';
-    static VairableTemperatureProductsViewManagementScreen: string = 'Main_page.variable_temperature';
+    static AlmostExpiredProductsViewManagementScreen: string = 'Main page.expiration_date_about_expired';
+    static ExpiredProductsViewManagementScreen: string = 'Main page.expiration_date_expired';
+    static EmptyQuantityProductsViewManagementScreen: string = 'Main page.products_quantity_empty';
+    static LittleQuantityProductsViewManagementScreen: string = 'Main page.products_quantity_little';
+    static VairableTemperatureProductsViewManagementScreen: string = 'Main page.variable_temperature';
 
     // supply chains module screens
     static ExternalRequestsManagementScreen: string = 'Orders.external_supply_requests';
