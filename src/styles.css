@@ -298,6 +298,10 @@ body::-webkit-scrollbar {
     box-shadow: 0 0 12px #999999;
     color: #FFFFFF;
 
+    /* Start with the element outside of the viewport on the left */
+    transform: translateX(100%);
+    animation: slideLeftToRight 0.3s ease-out forwards;
+
     .toast-close-button {
         position: relative;
         right: -0.3em;
@@ -312,6 +316,11 @@ body::-webkit-scrollbar {
 }
 
 .custom-toast-ltr {
+
+    /* Start with the element outside of the viewport on the right */
+    transform: translateX(100%);
+    animation: slideRightToLeft 0.3s ease-out forwards;
+
     .toast-close-button {
         position: relative;
         left: -0.3em;
@@ -320,6 +329,29 @@ body::-webkit-scrollbar {
         font-weight: bold;
         color: #333C48 !important;
         text-shadow: 0 1px 0 #ffffff;
+    }
+}
+
+
+/* Define the keyframes for the animation */
+@keyframes slideRightToLeft {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* Define the keyframes for the animation */
+@keyframes slideLeftToRight {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(0);
     }
 }
 
