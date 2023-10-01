@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { INavbarData } from '../../models/helper';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 // removed collapsed flag from ul
 @Component({
   selector: 'app-sublevel-menu',
@@ -14,7 +15,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
       class="sublevel-nav"
     >
       <li *ngFor="let item of data.items" class="sublevel-nav-item">
-        <a class="sublevel-nav-link"
+        <a class="sublevel-nav-link" [class]="lang != 'en'? 'custom-border-rtl' : 'custom-border-ltr'"
           *ngIf="item.items && item.items.length > 0 && item.showInMenu" 
           (click)="handleClick(item)"
         >
@@ -26,7 +27,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 
 
         </a>
-        <a class="sublevel-nav-link"
+        <a class="sublevel-nav-link" [class]="lang != 'en'? 'custom-border-rtl' : 'custom-border-ltr'"
           *ngIf="(!item.items || (item.items && item.items.length === 0))  && item.showInMenu"
           [routerLink]="[item.routeLink]"
           routerLinkActive="active-sublevel"
@@ -58,8 +59,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
       state('visible', style({
         height: '*'
       })),
-      transition('visible <=> hidden', [style({overflow: 'hidden'}), 
-        animate('{{transitionParams}}')]),
+      transition('visible <=> hidden', [style({ overflow: 'hidden' }),
+      animate('{{transitionParams}}')]),
       transition('void => *', animate(0))
     ]),
 
@@ -92,10 +93,16 @@ export class SublevelMenuComponent implements OnInit {
   @Input() expanded: boolean | undefined;
   @Input() multiple: boolean = false;
 
+  lang: string = '';
+
+  constructor(private localService: LocalService) {
+    this.lang = this.localService.getData('lang');
+  }
+
   ngOnInit(): void {
   }
 
-  handleClick(item: any) : void {
+  handleClick(item: any): void {
     if (!this.multiple) {
       if (this.data.items && this.data.items.length > 0) {
         for (let modelItem of this.data.items) {

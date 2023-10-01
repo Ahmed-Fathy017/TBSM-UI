@@ -39,7 +39,7 @@
             text-align: center;
             width: 2.6rem;
             min-width: 2.6rem;
-            border-radius:  0rem 0.5rem 0.5rem 0rem;
+            border-radius: 0rem 0.5rem 0.5rem 0rem;
             padding: 0.2rem 0rem 0rem 0.2rem;
             font-size: 18px;
             font-weight: 900;
@@ -100,7 +100,7 @@
     .sidenav-nav-item {
         width: 100%;
         margin-bottom: 0.625rem;
-        
+
         .sidenav-nav-link {
             display: flex;
             align-items: center;
@@ -112,7 +112,7 @@
 
             /* border-radius: 0.625rem; */
             transition: all .3s ease;
-            border-right: 4px solid transparent;
+            /* border-right: 4px solid transparent; */
 
             .sidenav-link-icon {
                 display: flex;
@@ -143,7 +143,7 @@
             }
         }
 
-       
+
     }
 }
 
@@ -159,16 +159,29 @@
 
 }
 
-.active {
+.custom-border-rtl {
+    border-right: 4px solid transparent !important;
+    border-left: 0 !important;
+}
+
+.custom-border-ltr {
+    border-left: 4px solid transparent !important;
+    border-right: 0 !important;
+}
+
+/* .active {
     background-color: #f3f6f938;
     border-right: 4px solid #F15A60 !important;
+} */
 
-    /* .sidenav-link-icon,
-    .sidenav-link-text,
-    .sidenav-link-icon,
-    .menu-collapse-icon {
-        color: #100F37;
-    } */
+.active-rtl {
+    background-color: #f3f6f938;
+    border-right: 4px solid #F15A60 !important;
+}
+
+.active-ltr {
+    background-color: #f3f6f938;
+    border-left: 4px solid #F15A60 !important;
 }
 
 .active-sublevel {
@@ -204,7 +217,7 @@
 
             /* border-radius: 0.625rem; */
             transition: all .3s ease;
-            border-right: 4px solid transparent;
+            /* border-right: 4px solid transparent; */
 
 
             .sublevel-link-icon {
@@ -236,7 +249,7 @@
             }
         }
 
-        
+
     }
 }
 
@@ -297,6 +310,7 @@
 
 
 @media (max-width: 768px) {
+
     /* Your CSS styles for screens less than or equal to 768px wide */
     /* For example, you can modify the font size for smaller screens */
     .logo-arabic {
@@ -306,4 +320,4 @@
     .logo-english {
         visibility: hidden;
     }
-  }
+}

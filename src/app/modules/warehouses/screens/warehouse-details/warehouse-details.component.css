@@ -3,6 +3,7 @@
     border: none;
     width: 250px;
     height: 190px;
+    cursor: pointer;
 }
 
 .wrapper {

@@ -83,8 +83,11 @@ export class SidenavComponent implements OnInit {
     item.expanded = !item.expanded;
   }
 
-  getActiveClass(data: INavbarData) : string {
-    return this.router.url.includes(data.routeLink) ? 'active': '';
+  getActiveClass(data: INavbarData): string {
+    if (this.lang != 'en')
+      return this.router.url.includes(data.routeLink) ? 'active-rtl' : 'custom-border-rtl';
+    else
+      return this.router.url.includes(data.routeLink) ? 'active-ltr' : 'custom-border-ltr';
   }
 
 }

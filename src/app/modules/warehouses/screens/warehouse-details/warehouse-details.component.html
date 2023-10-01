@@ -3,12 +3,14 @@
 
     <div class="container" *ngIf="!isLoadingWarehouseData">
         <div class="row d-flex ">
-            <div class="col-md-6 col-lg-4 col-xl-4 d-flex justify-content-center" *ngFor="let card of cards" [class]="card.display">
-                <div class="card  rounded-5 py-3 px-4 mx-4 my-4 d-flex justify-content-around"
+            <div class="col-md-6 col-lg-4 col-xl-4 d-flex justify-content-center" *ngFor="let card of cards"
+                [class]="card.display">
+                <div class="card  rounded-5 py-3 px-4 mx-4 my-4 d-flex justify-content-around" (click)="onCardClick(card.filter)"
                     [ngStyle]="{'background-color': card.backgroundColor}">
 
                     <div class="wrapper d-flex flex-column align-items-start justify-content-between ">
-                        <div class="img-container d-flex align-items-center justify-content-center  rounded-3 bg-white p-2">
+                        <div
+                            class="img-container d-flex align-items-center justify-content-center  rounded-3 bg-white p-2">
                             <img [src]="card.iconUrl" alt="">
                         </div>
                         <div class="h3 mb-0 text-light ">{{card.count}}</div>
