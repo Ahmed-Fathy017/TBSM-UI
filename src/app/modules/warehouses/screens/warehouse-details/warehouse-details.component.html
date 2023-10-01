@@ -1,35 +1,29 @@
 <div class="container-fluid mb-5">
-    <!-- <app-page-header [pageTitle]="pageTitle" [coloredPageTitle]="coloredPageTitle"></app-page-header> -->
-
     <app-loading *ngIf="isLoadingWarehouseData"></app-loading>
 
-    <div class="container-fluid cards" *ngIf="!isLoadingWarehouseData">
-        <div class="row d-flex justify-content-center">
-            <div class="card col-md-6 col-lg-6 col-xl-4  d-flex justify-content-around" *ngFor="let card of cards"
-                [class]="card.visibility">
+    <div class="container" *ngIf="!isLoadingWarehouseData">
+        <div class="row d-flex ">
+            <div class="col-md-6 col-lg-4 col-xl-4 d-flex justify-content-center" *ngFor="let card of cards" [class]="card.display">
+                <div class="card  rounded-5 py-3 px-4 mx-4 my-4 d-flex justify-content-around"
+                    [ngStyle]="{'background-color': card.backgroundColor}">
 
-                <div class="card-content d-flex flex-column justify-content-around  px-4 py-3 m-4 rounded-5"
-                    [ngStyle]="{'background-color': card.backgroundColor}"
-                    (click)="onCardClick(card.filter)">
-                    <div class="icon rounded-2 d-flex align-items-center justify-content-center">
-                        <!-- <i [class]="card.iconClass"></i> -->
-                        <img [src]="card.iconUrl" alt="">
+                    <div class="wrapper d-flex flex-column align-items-start justify-content-between ">
+                        <div class="img-container d-flex align-items-center justify-content-center  rounded-3 bg-white p-2">
+                            <img [src]="card.iconUrl" alt="">
+                        </div>
+                        <div class="h3 mb-0 text-light ">{{card.count}}</div>
+                        <div class="card-title">{{card.name}}</div>
+
                     </div>
-                    <div class="h3 mb-0">{{card.count}}</div>
-                    <div class="card-title">{{card.name}}</div>
                 </div>
-
 
             </div>
         </div>
-
     </div>
 
-    <div class="container py-2 logs-wrapper"  *ngIf="!isLoadingWarehouseData && logs && logs.length > 0">
-        <div class="logs py-4 px-3 d-flex flex-column" >
+    <div class="container py-2 logs-wrapper" *ngIf="!isLoadingWarehouseData && logs && logs.length > 0">
+        <div class="logs py-4 px-3 d-flex flex-column">
             <p *ngFor="let log of logs">{{log}}</p>
         </div>
     </div>
-   
-
 </div>

@@ -35,9 +35,16 @@ export class MasterLayoutComponent implements OnInit {
       }
     });
 
-    // initial state for expanded menu
-    this.isSideNavCollapsed = true;
-    this.screenWidth = window.innerWidth;
+    if (window.innerWidth > 768) {
+      // initial state for expanded menu
+      this.isSideNavCollapsed = true;
+      this.screenWidth = window.innerWidth;
+    }
+    else {
+      this.isSideNavCollapsed = false;
+      this.screenWidth = window.innerWidth;
+    }
+
   }
 
   onToggleSideNav(data: SideNavToggle) {

@@ -6,5 +6,6 @@ export interface WarehouseDataCard {
     iconClass: string;
     iconUrl: string;
     visibility: string;
+    display: string;
     filter: string;
 }

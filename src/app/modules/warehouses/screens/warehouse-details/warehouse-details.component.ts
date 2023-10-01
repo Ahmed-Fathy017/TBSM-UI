@@ -121,18 +121,19 @@ export class WarehouseDetailsComponent extends SharedMessagesComponent implement
   }
 
   setupScreenView() {
-    let dummyCard = <WarehouseDataCard>{};
-    dummyCard.title = 'dummy';
-    dummyCard.visibility = 'invisible';
-    dummyCard.filter = '';
+    // let dummyCard = <WarehouseDataCard>{};
+    // dummyCard.title = 'dummy';
+    // dummyCard.visibility = 'invisible';
+    // dummyCard.filter = '';
 
-    this.cards.push(dummyCard)
+    // this.cards.push(dummyCard)
     this.cards.map(i => {
       if (i.title == 'products_quantity_empty') {
         i.backgroundColor = '#0D99FF';
         i.iconClass = 'fa-solid fa-box';
         i.iconUrl = 'http://54.38.85.127/tbsm/assets/images/dashboard/package.svg';
         i.visibility = this.hasProductsEmptyQuantityViewAuthority ? 'visible' : 'invisible';
+        i.display = this.hasProductsEmptyQuantityViewAuthority ? 'd-block' : 'd-none';
         i.filter = 'empty-quantity';
       }
       else if (i.title == 'products_quantity_little') {
@@ -140,6 +141,7 @@ export class WarehouseDetailsComponent extends SharedMessagesComponent implement
         i.iconClass = 'fa-solid fa-box';
         i.iconUrl = 'http://54.38.85.127/tbsm/assets/images/dashboard/package.svg';
         i.visibility = this.hasProductsLittleQuantityViewAuthority ? 'visible' : 'invisible';
+        i.display = this.hasProductsLittleQuantityViewAuthority ? 'd-block' : 'd-none';
         i.filter = 'little-quantity';
       }
       else if (i.title == 'variable_temperature') {
@@ -147,6 +149,7 @@ export class WarehouseDetailsComponent extends SharedMessagesComponent implement
         i.iconClass = 'fa-solid fa-temperature-three-quarters';
         i.iconUrl = 'http://54.38.85.127/tbsm/assets/images/dashboard/temperature.svg';
         i.visibility = this.hasProductsVariableTemperatureViewAuthority ? 'visible' : 'invisible';
+        i.display = this.hasProductsVariableTemperatureViewAuthority ? 'd-block' : 'd-none';
         i.filter = 'variable-temperature';
       }
       else if (i.title == 'expiration_date_expired') {
@@ -154,6 +157,7 @@ export class WarehouseDetailsComponent extends SharedMessagesComponent implement
         i.iconClass = 'fa-solid fa-calendar-days';
         i.iconUrl = 'http://54.38.85.127/tbsm/assets/images/dashboard/date.svg';
         i.visibility = this.hasProductsExpiredViewAuthority ? 'visible' : 'invisible';
+        i.display = this.hasProductsExpiredViewAuthority ? 'd-block' : 'd-none';
         i.filter = 'expired-date';
       }
       else if (i.title == 'expiration_date_about_expired') {
@@ -161,6 +165,7 @@ export class WarehouseDetailsComponent extends SharedMessagesComponent implement
         i.iconClass = 'fa-solid fa-calendar-days';
         i.iconUrl = 'http://54.38.85.127/tbsm/assets/images/dashboard/date.svg';
         i.visibility = this.hasProductsAlmostExpiredViewAuthority ? 'visible' : 'invisible';
+        i.display = this.hasProductsAlmostExpiredViewAuthority ? 'd-block' : 'd-none';
         i.filter = 'almost-expired-date';
       }
 

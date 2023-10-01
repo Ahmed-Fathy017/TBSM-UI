@@ -48,6 +48,9 @@ export class SidenavComponent implements OnInit {
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;
 
+    if (this.screenWidth < 768)
+      this.collapsed = false;
+
   }
 
   @HostListener('window:resize', ['$event'])

@@ -1,25 +1,26 @@
-.cards {
-    width: 70%;
-}
-
 .card {
+    background-color: #F6F6FB;
     border: none;
-    color: white;
+    width: 250px;
+    height: 190px;
 }
 
-.card-content {
-    width: 230px;
-    height: 200px;
-    cursor: pointer;
+.wrapper {
+    height: 90%;
 }
 
-.card .icon {
-    color: #F15A60;
-    background-color: white;
-    Width: 40px;
-    Height: 40px;
-    font-size: 1.4rem;
+.card .img-container {
+    width: 2.5rem;
 }
+
+.card img {
+    width: 1.7rem;
+}
+
+.card-title {
+    color: #ffffff;
+    font-size: 1.1rem;
+} 
 
 .card:hover {
     opacity: 0.9;
@@ -33,17 +34,4 @@
     background-color: #F6F6FB;
     height: 220px;
     overflow: auto;
-}
-
-
-
-@media (max-width: 819px) {
-
-    /* Styles for screens less than 820 pixels wide */
-    /* Add your CSS rules here */
-    .card:last-child {
-        /* Styles for the last child element of .cards */
-        /* Add your CSS rules here */
-        display: none !important;
-    }
 }
