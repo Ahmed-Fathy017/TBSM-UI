@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  apiUrl: 'http://54.38.85.127/tbsm_api/public/api/',
+  apiUrl: 'https://tbsm_api.tbit.sa/api/',
   encryptionKey: 'test',
   production: false
 };

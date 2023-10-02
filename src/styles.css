@@ -52,7 +52,7 @@
     --bs-btn-close-opacity: 1;
     --bs-btn-close-hover-opacity: 1;
     color: #ffffff !important;
-    --bs-btn-close-bg: url('http://54.38.85.127/tbsm/assets/images/common/x-mark.svg') !important;
+    --bs-btn-close-bg: url('https://tbsm.tbit.sa/tbsm/assets/images/common/x-mark.svg') !important;
 }
 
 /************ Bootstrap Shadows Removal ************/
@@ -86,12 +86,12 @@ input[type=number]:focus,
 }
 
 .form-select {
-    background-image: url('http://54.38.85.127/tbsm/assets/images/common/select-input.svg') !important;
+    background-image: url('https://tbsm.tbit.sa/tbsm/assets/images/common/select-input.svg') !important;
     background-size: 0.6rem !important;
 }
 
 .form-control[type="date"]::-webkit-calendar-picker-indicator {
-    background-image: url('http://54.38.85.127/tbsm/assets/images/common/date.svg');
+    background-image: url('https://tbsm.tbit.sa/tbsm/assets/images/common/date.svg');
 }
 
 .form-control[type="date"] {

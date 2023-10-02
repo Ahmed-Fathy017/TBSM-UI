@@ -131,7 +131,7 @@ export class WarehouseDetailsComponent extends SharedMessagesComponent implement
       if (i.title == 'products_quantity_empty') {
         i.backgroundColor = '#0D99FF';
         i.iconClass = 'fa-solid fa-box';
-        i.iconUrl = 'http://54.38.85.127/tbsm/assets/images/dashboard/package.svg';
+        i.iconUrl = 'https://tbsm.tbit.sa/tbsm/assets/images/dashboard/package.svg';
         i.visibility = this.hasProductsEmptyQuantityViewAuthority ? 'visible' : 'invisible';
         i.display = this.hasProductsEmptyQuantityViewAuthority ? 'd-block' : 'd-none';
         i.filter = 'empty-quantity';
@@ -139,7 +139,7 @@ export class WarehouseDetailsComponent extends SharedMessagesComponent implement
       else if (i.title == 'products_quantity_little') {
         i.backgroundColor = '#FFA629';
         i.iconClass = 'fa-solid fa-box';
-        i.iconUrl = 'http://54.38.85.127/tbsm/assets/images/dashboard/package.svg';
+        i.iconUrl = 'https://tbsm.tbit.sa/tbsm/assets/images/dashboard/package.svg';
         i.visibility = this.hasProductsLittleQuantityViewAuthority ? 'visible' : 'invisible';
         i.display = this.hasProductsLittleQuantityViewAuthority ? 'd-block' : 'd-none';
         i.filter = 'little-quantity';
@@ -147,7 +147,7 @@ export class WarehouseDetailsComponent extends SharedMessagesComponent implement
       else if (i.title == 'variable_temperature') {
         i.backgroundColor = '#F15A60';
         i.iconClass = 'fa-solid fa-temperature-three-quarters';
-        i.iconUrl = 'http://54.38.85.127/tbsm/assets/images/dashboard/temperature.svg';
+        i.iconUrl = 'https://tbsm.tbit.sa/tbsm/assets/images/dashboard/temperature.svg';
         i.visibility = this.hasProductsVariableTemperatureViewAuthority ? 'visible' : 'invisible';
         i.display = this.hasProductsVariableTemperatureViewAuthority ? 'd-block' : 'd-none';
         i.filter = 'variable-temperature';
@@ -155,7 +155,7 @@ export class WarehouseDetailsComponent extends SharedMessagesComponent implement
       else if (i.title == 'expiration_date_expired') {
         i.backgroundColor = '#0D99FF';
         i.iconClass = 'fa-solid fa-calendar-days';
-        i.iconUrl = 'http://54.38.85.127/tbsm/assets/images/dashboard/date.svg';
+        i.iconUrl = 'https://tbsm.tbit.sa/tbsm/assets/images/dashboard/date.svg';
         i.visibility = this.hasProductsExpiredViewAuthority ? 'visible' : 'invisible';
         i.display = this.hasProductsExpiredViewAuthority ? 'd-block' : 'd-none';
         i.filter = 'expired-date';
@@ -163,7 +163,7 @@ export class WarehouseDetailsComponent extends SharedMessagesComponent implement
       else if (i.title == 'expiration_date_about_expired') {
         i.backgroundColor = '#FFA629';
         i.iconClass = 'fa-solid fa-calendar-days';
-        i.iconUrl = 'http://54.38.85.127/tbsm/assets/images/dashboard/date.svg';
+        i.iconUrl = 'https://tbsm.tbit.sa/tbsm/assets/images/dashboard/date.svg';
         i.visibility = this.hasProductsAlmostExpiredViewAuthority ? 'visible' : 'invisible';
         i.display = this.hasProductsAlmostExpiredViewAuthority ? 'd-block' : 'd-none';
         i.filter = 'almost-expired-date';
