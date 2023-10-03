@@ -195,12 +195,6 @@
     .login .loginform .form .forgetpw {
         display: none;
     }
-    /* .login {
-    background-image: url("../../../../../assets/images/loginbg.png"), url("../../../../../assets/images/loginbg2.png");
-    background-position: top right, bottom left;
-    background-size: 50%, 50%;
-    background-repeat: no-repeat no-repeat;
-  } */
     .login {
         background-position: top;
         background-size: 150% 50%;

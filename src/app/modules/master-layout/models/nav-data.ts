@@ -4,7 +4,7 @@ export var adminNavbarData: INavbarData[] = [
     {
         routeLink: 'dashboard',
         icon: 'fa-solid fa-chart-line',
-        iconUrl: 'https://tbsm.tbit.sa/tbsm/assets/images/menu/home.svg',
+        iconUrl: '../../../../../assets/images/menu/home.svg',
         label: 'SideNav.Home',
         screenConfig: undefined,
         showInMenu: true
@@ -12,7 +12,7 @@ export var adminNavbarData: INavbarData[] = [
     {
         routeLink: 'warehouses',
         icon: 'fa-solid fa-warehouse',
-        iconUrl: 'https://tbsm.tbit.sa/tbsm/assets/images/menu/warehouses.svg',
+        iconUrl: '../../../../../assets/images/menu/warehouses.svg',
         label: 'SideNav.Warehouses',
         screenConfig: undefined,
         showInMenu: true
@@ -20,7 +20,7 @@ export var adminNavbarData: INavbarData[] = [
     {
         routeLink: 'packages',
         icon: 'fa-solid fa-circle-dollar-to-slot',
-        iconUrl: 'https://tbsm.tbit.sa/tbsm/assets/images/menu/packages.svg',
+        iconUrl: '../../../../../assets/images/menu/packages.svg',
         label: 'SideNav.Packages',
         screenConfig: undefined,
         showInMenu: true
@@ -32,7 +32,7 @@ export var userNavbarData: INavbarData[] = [
     {
         routeLink: 'warehouses/home',
         icon: 'fa-solid fa-chart-line',
-        iconUrl: 'https://tbsm.tbit.sa/tbsm/assets/images/menu/home.svg',
+        iconUrl: '../../../../../assets/images/menu/home.svg',
         label: 'SideNav.Home',
         screenConfig: undefined,
         showInMenu: true
@@ -40,7 +40,7 @@ export var userNavbarData: INavbarData[] = [
     {
         routeLink: 'management',
         icon: 'fa-solid fa-gear',
-        iconUrl: 'https://tbsm.tbit.sa/tbsm/assets/images/menu/management.png',
+        iconUrl: '../../../../../assets/images/menu/management.png',
         label: 'SideNav.Management',
         screenConfig: undefined,
         showInMenu: true,
@@ -71,7 +71,7 @@ export var userNavbarData: INavbarData[] = [
     {
         routeLink: 'roles',
         icon: 'fa-solid fa-user-gear',
-        iconUrl: 'https://tbsm.tbit.sa/tbsm/assets/images/menu/roles.svg',
+        iconUrl: '../../../../../assets/images/menu/roles.svg',
         label: 'SideNav.Roles',
         screenConfig: undefined,
         showInMenu: true,
@@ -95,7 +95,7 @@ export var userNavbarData: INavbarData[] = [
     {
         routeLink: 'users',
         icon: 'fa-solid fa-users',
-        iconUrl: 'https://tbsm.tbit.sa/tbsm/assets/images/menu/users.svg',
+        iconUrl: '../../../../../assets/images/menu/users.svg',
         label: 'SideNav.Users',
         screenConfig: 'Users.view',
         showInMenu: true
@@ -103,7 +103,7 @@ export var userNavbarData: INavbarData[] = [
     {
         routeLink: 'products',
         icon: 'fa-solid fa-box',
-        iconUrl: 'https://tbsm.tbit.sa/tbsm/assets/images/menu/products.svg',
+        iconUrl: '../../../../../assets/images/menu/products.svg',
         label: 'SideNav.Products',
         screenConfig: undefined,
         showInMenu: true,
@@ -134,7 +134,7 @@ export var userNavbarData: INavbarData[] = [
     {
         routeLink: 'supply-chains',
         icon: 'fa-solid fa-parachute-box',
-        iconUrl: 'https://tbsm.tbit.sa/tbsm/assets/images/menu/products.svg',
+        iconUrl: '../../../../../assets/images/menu/products.svg',
         label: 'SideNav.SupplyChains',
         screenConfig: undefined,
         showInMenu: true,
@@ -165,7 +165,7 @@ export var userNavbarData: INavbarData[] = [
     {
         routeLink: 'operation-logs',
         icon: 'fa-solid fa-folder-open',
-        iconUrl: 'https://tbsm.tbit.sa/tbsm/assets/images/menu/operations.svg',
+        iconUrl: '../../../../../assets/images/menu/operations.svg',
         label: 'SideNav.OperationLogs',
         screenConfig: 'Operations log.view',
         showInMenu: true
@@ -173,7 +173,7 @@ export var userNavbarData: INavbarData[] = [
     {
         routeLink: 'inventories',
         icon: 'fa-solid fa-warehouse',
-        iconUrl: 'https://tbsm.tbit.sa/tbsm/assets/images/menu/warehouses.svg',
+        iconUrl: '../../../../../assets/images/menu/warehouses.svg',
         label: 'SideNav.Inventory',
         screenConfig: 'Inventory.view',
         showInMenu: true
