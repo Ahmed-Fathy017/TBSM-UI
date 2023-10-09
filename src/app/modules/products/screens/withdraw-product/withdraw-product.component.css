@@ -37,23 +37,36 @@ td {
 
 /* Apply styles to the button(s) inside the scanner container */
 .scanner-container button {
-    background-color: #FF5733  !important;
+    background-color: #FF5733 !important;
     color: #FFF;
     /* Add other styles as needed */
-  }
+}
 
-  .html5-qrcode-element {
-    background-color: #FF5733  !important;
+.html5-qrcode-element {
+    background-color: #FF5733 !important;
     color: #FFF;
-  }
+}
 
-  .qrcode-button {
+.qrcode-button {
     background-color: #FF5733;
     color: #FFF;
     /* Add other styles as needed */
-  }
+}
 
-  #reader__dashboard_section_csr {
+#reader__dashboard_section_csr {
     background-color: #FF5733 !important;
     color: #FFF;
-  }
+}
+
+.qr-code-container {
+    width: 200px;
+    height: 200px;
+    margin: 20px;
+    border: 2px solid #000;
+    background-color: #fff;
+}
+
+#html5-qrcode-button-camera-start {
+    background-color: #FF5733 !important;
+    color: #FFF;
+}

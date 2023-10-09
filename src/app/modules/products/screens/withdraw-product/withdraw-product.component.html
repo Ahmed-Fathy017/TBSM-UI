@@ -3,7 +3,10 @@
 
     <div class="container ">
         <div class="d-flex row">
+
+
             <div class="col-md-12 col-lg-6 col-xl-6 mb-2">
+
                 <form [formGroup]="withdrawProductForm">
                     <div class="header d-flex flex-column align-items-start fw-bold mb-3">
                         <span class="block mb-2"> {{'ProductWihdrawalScreen.Message' | translate}}
@@ -17,8 +20,10 @@
                         </div>
                     </div>
 
+                    <!-- <app-loading *ngIf="isLoading"></app-loading> -->
+
                     <!-- scanning section -->
-                    <div class="scanner-container" class="mt-2">
+                    <div class="scanner-container" class="mt-2" >
                         <div id="reader" width="600px" class="mt-2"></div>
                     </div>
 

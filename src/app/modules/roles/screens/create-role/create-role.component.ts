@@ -74,12 +74,19 @@ export class CreateRoleComponent extends SharedMessagesComponent implements OnIn
     this.contentWrappers.changes.subscribe(() => {
       this.contentWrappers.toArray().forEach((contentWrapper) => {
         const contentWrapperElement = contentWrapper.nativeElement as HTMLElement;
+
+        if (this.lang != 'en')
+          this.renderer.setStyle(contentWrapperElement, 'direction', 'ltr');
+        else
+          this.renderer.setStyle(contentWrapperElement, 'direction', 'rtl');
+
         if (contentWrapperElement.scrollHeight > contentWrapperElement.clientHeight) {
           this.renderer.setStyle(contentWrapperElement, 'overflow-y', 'scroll');
           if (this.lang != 'en')
-            this.renderer.setStyle(contentWrapperElement, 'margin-right', '5.5px');
-          else
             this.renderer.setStyle(contentWrapperElement, 'margin-left', '5.5px');
+          else
+            this.renderer.setStyle(contentWrapperElement, 'margin-right', '5.5px');
+
         } else {
           this.renderer.setStyle(contentWrapperElement, 'overflow-y', 'hidden');
           this.renderer.setStyle(contentWrapperElement, 'margin', '0 5.8px');

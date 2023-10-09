@@ -23,7 +23,7 @@
 
 .permissions .header {
     background-color: #100F37;
-    
+
 }
 
 /* .content-wrapper {
@@ -35,15 +35,17 @@
 
 /************ Bootstrap Checkboxes Color Edit ************/
 .form-check-input {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1.8rem;
+    height: 1.8rem;
     color: #100F37 !important;
     background-color: #ffffff !important;
+    
+
 }
 
 .header .form-check-input {
     border: 2px solid #ffffff;
-
+    background-color: #100F37 !important;
 }
 
 .header .form-check-input:checked {

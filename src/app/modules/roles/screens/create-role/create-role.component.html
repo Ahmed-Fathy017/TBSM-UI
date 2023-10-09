@@ -33,8 +33,8 @@
                             </div>
                             <div class="content-wrapper mb-2" #contentWrapper>
                                 <div class="content py-2 px-3" *ngFor="let permission of group.permissions">
-                                    <div class="d-flex  justify-content-between ">
-                                        <label class="form-check-label fw-bold " for="flexCheckIndeterminate01">
+                                    <div class="d-flex  justify-content-between flex-row-reverse ">
+                                        <label class="form-check-label h6 fw-bold pt-2" for="flexCheckIndeterminate01">
                                             {{lang != 'en'? permission.name_ar : permission.name_en}}
 
                                         </label>

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 // import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
@@ -33,7 +33,7 @@ export class WithdrawProductComponent extends SharedMessagesComponent implements
   scannedCode!: string;
 
   // page loading
-  isLoading: boolean = false;
+  isLoading: boolean = true;
 
   // button loading
   isProcessing: boolean = false;
@@ -50,7 +50,9 @@ export class WithdrawProductComponent extends SharedMessagesComponent implements
     private toastr: ToasterService,
     private productsService: ProductsService,
     private translateService: TranslateService,
-    private screenTitleNavigationService: ScreenTitleNavigationService) {
+    private screenTitleNavigationService: ScreenTitleNavigationService,
+    private renderer: Renderer2,
+    private elementRef: ElementRef) {
     super(translateService);
     this.screenTitleNavigationService.setScreenKey('WithdrawProduct');
 
@@ -60,6 +62,7 @@ export class WithdrawProductComponent extends SharedMessagesComponent implements
 
   // events
   ngOnInit(): void {
+
   }
 
   ngAfterViewInit(): void {
@@ -69,9 +72,39 @@ export class WithdrawProductComponent extends SharedMessagesComponent implements
       /* verbose= */ false);
 
     this.html5QrcodeScanner.render(this.onScanSuccess, undefined);
+
+    // styling scanner
+    setTimeout(() => {
+      const startCameraButton = this.elementRef.nativeElement.querySelector(`#html5-qrcode-button-camera-start`);
+      const stopCameraButton = this.elementRef.nativeElement.querySelector(`#html5-qrcode-button-camera-stop`);
+
+      if (startCameraButton) {
+        this.renderer.removeAttribute(startCameraButton, 'style');
+        this.renderer.setStyle(startCameraButton, 'background-color', '#F15A60');
+        this.renderer.setStyle(startCameraButton, 'color', 'white');
+        this.renderer.setStyle(startCameraButton, 'border-radius', '2rem');
+        this.renderer.setStyle(startCameraButton, 'border', 'none');
+        this.renderer.setStyle(startCameraButton, 'width', '10rem');
+        this.renderer.setStyle(startCameraButton, 'height', '2rem');
+      }
+
+      if (stopCameraButton) {
+        this.renderer.removeAttribute(stopCameraButton, 'style');
+        this.renderer.setStyle(stopCameraButton, 'background-color', '#F15A60');
+        this.renderer.setStyle(stopCameraButton, 'color', 'white');
+        this.renderer.setStyle(stopCameraButton, 'border-radius', '2rem');
+        this.renderer.setStyle(stopCameraButton, 'border', 'none');
+        this.renderer.setStyle(stopCameraButton, 'width', '10rem');
+        this.renderer.setStyle(stopCameraButton, 'height', '2rem');
+      }
+
+      this.isLoading = false;
+    }, 1700);
+
   }
 
   ngOnDestroy(): void {
+    this.closeScanCamera();
     this.subscription.unsubscribe();
   }
 
@@ -90,12 +123,21 @@ export class WithdrawProductComponent extends SharedMessagesComponent implements
   //   // console.warn(`Code scan error = ${error}`);
   // }
 
+  closeScanCamera() {
+    this.html5QrcodeScanner.clear().then(_ => {
+      // the UI should be cleared here      
+    }).catch(error => {
+      // Could not stop scanning for reasons specified in `error`.
+      // This conditions should ideally not happen.
+    });
+  }
+
   onWihdrawButtonClick() {
-    Object.keys(this.withdrawProductForm.controls).forEach(field => {  
-      const control = this.withdrawProductForm.get(field);            
-      if (control instanceof FormControl) {             
+    Object.keys(this.withdrawProductForm.controls).forEach(field => {
+      const control = this.withdrawProductForm.get(field);
+      if (control instanceof FormControl) {
         control.markAsTouched({ onlySelf: true });
-      } 
+      }
     });
 
     if (this.withdrawProductForm.valid) {
@@ -128,7 +170,7 @@ export class WithdrawProductComponent extends SharedMessagesComponent implements
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message,this.errorOperationHeader);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
       }
     );
 
@@ -154,14 +196,14 @@ export class WithdrawProductComponent extends SharedMessagesComponent implements
     let subscribtion = this.productsService.withdrawProduct(requestDTO).subscribe(
       (response: any) => {
         this.isProcessing = false;
-        this.toastr.success(response.message,this.successWithdrawOperationHeader);
+        this.toastr.success(response.message, this.successWithdrawOperationHeader);
         this.products = [];
       }, (error: any) => {
         this.isProcessing = false;
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message,this.errorOperationHeader);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
       }
     );
 
