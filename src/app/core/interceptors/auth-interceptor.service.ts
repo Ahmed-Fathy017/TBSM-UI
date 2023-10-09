@@ -17,8 +17,8 @@ export class AuthInterceptor implements HttpInterceptor {
     req = req.clone({
       headers: req.headers
         .set('Authorization', `Bearer ${this.localService.getData('token')}`)
-        // .set('Content-Type', 'application/json')
         .set('Accept-Language', this.localService.getData('lang') || 'ar')
+      // .set('Content-Type', 'application/json')
     });
 
     // if the warehouseId (in super admin case) will add the warehouse-id header to the request

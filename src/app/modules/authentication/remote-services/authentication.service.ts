@@ -12,7 +12,7 @@ import { LocalService } from '../../shared-components/services/local.service';
 export class AuthenticationService extends AbstractRemoteService {
 
   constructor(private http: HttpClient,
-    public jwtHelper: JwtHelperService,
+    // public jwtHelper: JwtHelperService,
     private localService: LocalService) {
     super()
   }
@@ -35,6 +35,7 @@ export class AuthenticationService extends AbstractRemoteService {
 
     // Check whether the token is expired and return
     // true or false
-    return !this.jwtHelper.isTokenExpired(token);
+    // return !this.jwtHelper.isTokenExpired(token);
+    return true;
   }
 }

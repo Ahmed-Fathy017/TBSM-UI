@@ -25,12 +25,12 @@ export function httpTranslateLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
-const JWT_Module_Options: JwtModuleOptions = {
-  config: {
-    tokenGetter: tokenGetter,
-    allowedDomains: [environment.apiUrl]
-  }
-};
+// const JWT_Module_Options: JwtModuleOptions = {
+//   config: {
+//     tokenGetter: tokenGetter,
+//     allowedDomains: [environment.apiUrl]
+//   }
+// };
 
 @NgModule({
   declarations: [
@@ -46,7 +46,7 @@ const JWT_Module_Options: JwtModuleOptions = {
     BrowserAnimationsModule,
     
     // adding JwtModule
-    JwtModule.forRoot(JWT_Module_Options),
+    // JwtModule.forRoot(JWT_Module_Options),
 
     // adding TranslateModule to our imports array along with a configuration object
     TranslateModule.forRoot({
@@ -61,7 +61,7 @@ const JWT_Module_Options: JwtModuleOptions = {
   ],
   providers: [
     AuthenticationService,
-    JwtHelperService,
+    // JwtHelperService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
