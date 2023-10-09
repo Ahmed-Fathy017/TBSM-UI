@@ -155,6 +155,8 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
 
         this.refrigerators = response.data;
         this.isProcessing = false;
+
+        this.createRefrigeratorForm.reset();
         this.isLoading = false;
       }, (error: any) => {
         this.isProcessing = false;

@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, MinLengthValidator, Validators } from '@angular/forms';
 // import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { Package } from 'src/app/modules/packages/models/package';
@@ -199,6 +199,8 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
 
         this.users = response.data;
         this.isProcessing = false;
+
+        this.createUserForm.reset();
         this.isLoading = false;
       }, (error: any) => {
         this.isProcessing = false;

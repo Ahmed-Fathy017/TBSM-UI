@@ -195,6 +195,7 @@ export class PackagesManagementComponent extends SharedMessagesComponent impleme
 
         this.packages = response.data;
         this.isProcessing = false;
+        this.createPackageForm.reset();
         this.isLoading = false;
       }, (error: any) => {
         this.isProcessing = false;

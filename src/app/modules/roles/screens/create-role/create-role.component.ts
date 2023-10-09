@@ -10,6 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
 import { ToasterService } from 'src/app/modules/master-layout/services/toaster.service';
 import { LocalService } from 'src/app/modules/shared-components/services/local.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-role',
@@ -49,7 +50,8 @@ export class CreateRoleComponent extends SharedMessagesComponent implements OnIn
     private translateService: TranslateService,
     private screenTitleNavigationService: ScreenTitleNavigationService,
     private localService: LocalService,
-    private renderer: Renderer2) {
+    private renderer: Renderer2,
+    private router: Router) {
     super(translateService);
     this.screenTitleNavigationService.setScreenKey('CreateRole');
     this.lang = localService.getData('lang');
@@ -137,6 +139,12 @@ export class CreateRoleComponent extends SharedMessagesComponent implements OnIn
         this.permissionGroups.forEach(group => {
           group.checked = false;
           group.permissions.map(i => i.checked = false);
+
+          // reversing the categories group permissions
+          // to solve the problem of english words after
+          // the arabic words
+          if (group.group_name_en.toLowerCase() == 'categories')
+            group.permissions.reverse();
         });
 
         this.isLoadingPermissions = false;
@@ -160,6 +168,8 @@ export class CreateRoleComponent extends SharedMessagesComponent implements OnIn
         this.roles = response.data;
         this.isLoadingRoles = false;
         this.isProcessing = false;
+
+        this.router.navigate(['roles']);
 
       }, (error: any) => {
         if (error.error.errors && error.error.errors.length > 0)

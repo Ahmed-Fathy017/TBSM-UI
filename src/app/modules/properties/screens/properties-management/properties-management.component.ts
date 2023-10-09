@@ -179,6 +179,7 @@ export class PropertiesManagementComponent extends SharedMessagesComponent imple
         this.toastr.success(response.message, this.successCreateOperationHeader);
         this.properties = response.data;
         this.isProcessing = false;
+        this.createPropertyForm.reset();
         this.isLoading = false;
       }, (error: any) => {
         if (error.error.errors && error.error.errors.length > 0)

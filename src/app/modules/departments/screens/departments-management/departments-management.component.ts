@@ -143,6 +143,9 @@ export class DepartmentsManagementComponent extends SharedMessagesComponent impl
 
         this.departments = response.data;
         this.isProcessing = false;
+
+        this.createDepartmentForm.reset();
+        
         this.isLoading = false;
       }, (error: any) => {
         this.isProcessing = false;

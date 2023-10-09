@@ -220,6 +220,7 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
 
         this.warehouses = response.data;
         this.isProcessing = false;
+        this.createWarehouseForm.reset();
         this.isLoading = false;
       }, (error: any) => {
         this.isProcessing = false;
