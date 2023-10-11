@@ -57,6 +57,17 @@ i {
     top: 6px;
 }
 
+img {
+    width: 1.2rem;
+}
+
+.view {
+    background-color: #0D99FF30;
+}
+
+.custom-padding {
+    padding: 0.4rem 1rem;
+}
 
 
 @media only screen and (max-width: 767px) {

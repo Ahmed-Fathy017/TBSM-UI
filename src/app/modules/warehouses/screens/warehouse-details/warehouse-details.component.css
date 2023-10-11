@@ -36,3 +36,7 @@
     height: 220px;
     overflow: auto;
 }
+
+.logs-wrapper {
+    cursor: pointer;
+}

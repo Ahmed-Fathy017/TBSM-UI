@@ -85,6 +85,10 @@ export class WarehouseDetailsComponent extends SharedMessagesComponent implement
     this.router.navigate([`products/${filter}`]);
   }
 
+  onLogsSectionClick() {
+    this.router.navigate(['operation-logs']);
+  }
+
   // functions
   evaluateScreenPermissions() {
     this.permissions = JSON.parse(this.localService.getData("permissions"));
