@@ -1,5 +1,4 @@
 <div class="container-fluid">
-    <!-- <app-page-header [pageTitle]="firstPageTitle" [coloredPageTitle]="coloredPageTitle"></app-page-header> -->
 
     <div class="container " *ngIf="this.hasImportingAuthority">
         <form [formGroup]="inventoryImportForm" class="row">
@@ -20,29 +19,16 @@
                     </option>
                 </select>
 
-            </div>
+                <div *ngIf="inventoryImportForm.controls.department.invalid && (inventoryImportForm.controls.department.dirty || inventoryImportForm.controls.department.touched)"
+                    class="alert p-0 m-1 h6">
 
-            <!-- old implementation -->
-            <!-- <div class="col-md-5 col-lg-5 col-xl-5">
-
-                <label for="fileName" class="mb-1 d-flex">{{'InventoryScreen.UploadFile' |
-                    translate}} </label>
-
-                <div class="input-group flex-nowrap">
-
-                    <input type="text" formControlName="file" class="form-control rounded-2 " id="fileName"
-                        name="fileName">
-
-                    <span class="input-group-text small-search-btn rounded-2" id="addon-wrapping">
-
-                        <label class="inputTag w-100 h-100" for="file">
-                            <i class="fa-solid fa-cloud-arrow-up" style="color: #ffffff;"></i>
-                            <input id="file" class="form-control d-none" type="file" accept=".xlsx, .xls"
-                                (change)="onFileChange($event)">
-                        </label>
-                    </span>
+                    <div class="p-0 m-0" *ngIf="inventoryImportForm.controls.department.errors?.['required']">
+                        {{'InventoryScreen.Department' | translate}}
+                        {{'GeneralMessages.Required' | translate}}
+                    </div>
                 </div>
-            </div> -->
+
+            </div>
 
             <div class="col-md-5 col-lg-5 col-xl-5">
 
@@ -52,7 +38,8 @@
 
                 <div class="form-text">
                     <input type="text" formControlName="file"
-                        [ngClass]="isRtl? 'form-control padding-left': 'form-control padding-right'" id="fileName" name="fileName">
+                        [ngClass]="isRtl? 'form-control padding-left': 'form-control padding-right'" id="fileName"
+                        name="fileName">
 
                     <label
                         [ngClass]="isRtl ? 'static-value-secondside rounded-start-2' : 'static-value-firstside rounded-end-2'"
@@ -63,6 +50,15 @@
                         <input id="file" class="form-control d-none" type="file" accept=".xlsx, .xls"
                             (change)="onFileChange($event)">
                     </label>
+                </div>
+
+                <div *ngIf="inventoryImportForm.controls.file.invalid && (inventoryImportForm.controls.file.dirty || inventoryImportForm.controls.file.touched)"
+                    class="alert p-0 m-1 h6">
+
+                    <div class="p-0 m-0" *ngIf="inventoryImportForm.controls.file.errors?.['required']">
+                        {{'InventoryScreen.Department' | translate}}
+                        {{'GeneralMessages.Required' | translate}}
+                    </div>
                 </div>
             </div>
 
@@ -100,6 +96,16 @@
                         {{department.name | translate}}
                     </option>
                 </select>
+
+                
+                <div *ngIf="inventoryExportForm.controls.department.invalid && (inventoryExportForm.controls.department.dirty || inventoryExportForm.controls.department.touched)"
+                    class="alert p-0 m-1 h6">
+
+                    <div class="p-0 m-0" *ngIf="inventoryExportForm.controls.department.errors?.['required']">
+                        {{'InventoryScreen.Department' | translate}}
+                        {{'GeneralMessages.Required' | translate}}
+                    </div>
+                </div>
 
             </div>
 

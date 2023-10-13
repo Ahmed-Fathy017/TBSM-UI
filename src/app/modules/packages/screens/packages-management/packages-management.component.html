@@ -9,6 +9,15 @@
                     <label for="warehouseName" class="mb-1 d-flex">{{'PackagesManagementScreen.PackageName' |
                         translate}}</label>
                     <input id="warehouseName" class="form-control" type="text" formControlName="packageName">
+
+                    <div *ngIf="createPackageForm.controls.packageName.invalid && (createPackageForm.controls.packageName.dirty || createPackageForm.controls.packageName.touched)"
+                        class="alert p-0 m-1 h6">
+
+                        <div *ngIf="createPackageForm.controls.packageName.errors?.['required']">
+                            {{'PackagesManagementScreen.PackageName' | translate}}
+                            {{'GeneralMessages.Required' | translate}}
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -18,6 +27,15 @@
                     <label for="settings01" class="mb-1 d-flex "> {{'PackagesManagementScreen.RefrigeratorsNumber' |
                         translate}}</label>
                     <input id="settings01" class="form-control" type="number" formControlName="refrigeratorSetting">
+
+                    <div *ngIf="createPackageForm.controls.refrigeratorSetting.invalid && (createPackageForm.controls.refrigeratorSetting.dirty || createPackageForm.controls.refrigeratorSetting.touched)"
+                        class="alert p-0 m-1 h6">
+
+                        <div *ngIf="createPackageForm.controls.refrigeratorSetting.errors?.['required']">
+                            {{'PackagesManagementScreen.RefrigeratorsNumber' | translate}}
+                            {{'GeneralMessages.FeminineRequired' | translate}}
+                        </div>
+                    </div>
                 </div>
 
                 <div class="col-md-4 col-lg-4 col-xl-4">
@@ -25,6 +43,15 @@
                     <label for="settings02" class="mb-1 d-flex "> {{'PackagesManagementScreen.ProductsNumber' |
                         translate}}</label>
                     <input id="settings02" class="form-control" type="number" formControlName="productSetting">
+
+                    <div *ngIf="createPackageForm.controls.productSetting.invalid && (createPackageForm.controls.productSetting.dirty || createPackageForm.controls.productSetting.touched)"
+                        class="alert p-0 m-1 h6">
+
+                        <div *ngIf="createPackageForm.controls.productSetting.errors?.['required']">
+                            {{'PackagesManagementScreen.ProductsNumber' | translate}}
+                            {{'GeneralMessages.FeminineRequired' | translate}}
+                        </div>
+                    </div>
                 </div>
 
                 <div class="col-md-4 col-lg-4 col-xl-4">
@@ -32,6 +59,15 @@
                     <label for="settings03" class="mb-1 d-flex">{{'PackagesManagementScreen.DepartmentsNumber' |
                         translate}}</label>
                     <input id="settings03" class="form-control" type="number" formControlName="departmentSetting">
+
+                    <div *ngIf="createPackageForm.controls.departmentSetting.invalid && (createPackageForm.controls.departmentSetting.dirty || createPackageForm.controls.departmentSetting.touched)"
+                        class="alert p-0 m-1 h6">
+
+                        <div *ngIf="createPackageForm.controls.departmentSetting.errors?.['required']">
+                            {{'PackagesManagementScreen.DepartmentsNumber' | translate}}
+                            {{'GeneralMessages.FeminineRequired' | translate}}
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -126,22 +162,58 @@
                             {{'PackagesManagementScreen.PackageName' |
                             translate}}</label>
                         <input id="warehouseName" class="form-control" type="text" formControlName="packageName">
+
+                        <div *ngIf="updatePackageForm.controls.packageName.invalid && (updatePackageForm.controls.packageName.dirty || updatePackageForm.controls.packageName.touched)"
+                            class="alert p-0 m-1 h6">
+
+                            <div *ngIf="updatePackageForm.controls.packageName.errors?.['required']">
+                                {{'PackagesManagementScreen.PackageName' | translate}}
+                                {{'GeneralMessages.Required' | translate}}
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
                         <label for="settings01" class="mb-1 d-flex">
                             {{'PackagesManagementScreen.RefrigeratorsNumber' |
                             translate}}</label>
                         <input id="settings01" class="form-control" type="number" formControlName="refrigeratorSetting">
+
+                        <div *ngIf="updatePackageForm.controls.refrigeratorSetting.invalid && (updatePackageForm.controls.refrigeratorSetting.dirty || updatePackageForm.controls.refrigeratorSetting.touched)"
+                            class="alert p-0 m-1 h6">
+
+                            <div *ngIf="updatePackageForm.controls.refrigeratorSetting.errors?.['required']">
+                                {{'PackagesManagementScreen.RefrigeratorsNumber' | translate}}
+                                {{'GeneralMessages.FeminineRequired' | translate}}
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
                         <label for="settings02" class="mb-1 d-flex">{{'PackagesManagementScreen.ProductsNumber' |
                             translate}} </label>
                         <input id="settings02" class="form-control" type="number" formControlName="productSetting">
+
+                        <div *ngIf="updatePackageForm.controls.productSetting.invalid && (updatePackageForm.controls.productSetting.dirty || updatePackageForm.controls.productSetting.touched)"
+                            class="alert p-0 m-1 h6">
+
+                            <div *ngIf="updatePackageForm.controls.productSetting.errors?.['required']">
+                                {{'PackagesManagementScreen.ProductsNumber' | translate}}
+                                {{'GeneralMessages.FeminineRequired' | translate}}
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
                         <label for="settings03" class="mb-1 d-flex">{{'PackagesManagementScreen.DepartmentsNumber' |
                             translate}} </label>
                         <input id="settings03" class="form-control" type="number" formControlName="departmentSetting">
+
+                        <div *ngIf="updatePackageForm.controls.departmentSetting.invalid && (updatePackageForm.controls.departmentSetting.dirty || updatePackageForm.controls.departmentSetting.touched)"
+                            class="alert p-0 m-1 h6">
+
+                            <div *ngIf="updatePackageForm.controls.departmentSetting.errors?.['required']">
+                                {{'PackagesManagementScreen.DepartmentsNumber' | translate}}
+                                {{'GeneralMessages.FeminineRequired' | translate}}
+                            </div>
+                        </div>
                     </div>
 
                     <div class=" row mb-2 d-flex">

@@ -107,6 +107,17 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
     this.fetchSelectedWarehouseDataIntoModal();
   }
 
+  onPasswordInput() {
+    // the password is not required to be entered, 
+    // so if entered validation is set to min length of 4 characters
+    if (this.updateWarehouseForm.controls.password.value)
+      this.updateWarehouseForm.controls.password.setValidators([Validators.minLength(4)]);
+    else
+      this.updateWarehouseForm.controls.password.clearValidators();
+
+    this.updateWarehouseForm.controls.password.updateValueAndValidity();
+  }
+
   onUpdateConfirmationClick() {
     // the password is not required to be entered, 
     // so if entered validation is set to min length of 4 characters
@@ -114,6 +125,9 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
       this.updateWarehouseForm.controls.password.setValidators([Validators.minLength(4)]);
     else
       this.updateWarehouseForm.controls.password.clearValidators();
+
+    this.updateWarehouseForm.controls.password.updateValueAndValidity();
+
 
     Object.keys(this.updateWarehouseForm.controls).forEach(field => {
       const control = this.updateWarehouseForm.get(field);
@@ -153,11 +167,11 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
   }
 
   onCreateButtonClick() {
-    Object.keys(this.createWarehouseForm.controls).forEach(field => {  
-      const control = this.createWarehouseForm.get(field);            
-      if (control instanceof FormControl) {             
+    Object.keys(this.createWarehouseForm.controls).forEach(field => {
+      const control = this.createWarehouseForm.get(field);
+      if (control instanceof FormControl) {
         control.markAsTouched({ onlySelf: true });
-      } 
+      }
     });
 
     if (this.createWarehouseForm.valid) {

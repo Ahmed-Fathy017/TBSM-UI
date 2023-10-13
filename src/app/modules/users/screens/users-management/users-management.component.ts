@@ -124,6 +124,18 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
     this.fetchSelectedDataIntoModal();
   }
 
+  onPasswordInput() {
+    // the password is not required to be entered, 
+    // so if entered validation is set to min length of 4 characters
+    if (this.updateUserForm.controls.password.value)
+      this.updateUserForm.controls.password.setValidators([Validators.minLength(4)]);
+    else
+      this.updateUserForm.controls.password.clearValidators();
+
+    this.updateUserForm.controls.password.updateValueAndValidity();
+  }
+
+
   onUpdateConfirmationClick() {
 
     // the password is not required to be entered, 

@@ -1,5 +1,4 @@
 <div class="container-fluid">
-    <!-- <app-page-header [pageTitle]="firstPageTitle" [coloredPageTitle]="coloredPageTitle"></app-page-header> -->
 
     <div class="container ">
         <form action="" [formGroup]="createWarehouseForm">
@@ -10,6 +9,15 @@
                     <label for="warehouseName" class="mb-1 d-flex">{{'WarehousesManagementScreen.WarehouseName' |
                         translate}} </label>
                     <input id="warehouseName" class="form-control" type="text" formControlName="warehouseName">
+
+                    <div *ngIf="createWarehouseForm.controls.warehouseName.invalid && (createWarehouseForm.controls.warehouseName.dirty || createWarehouseForm.controls.warehouseName.touched)"
+                        class="alert p-0 m-1 h6">
+
+                        <div class="p-0 m-0" *ngIf="createWarehouseForm.controls.warehouseName.errors?.['required']">
+                            {{'WarehousesManagementScreen.WarehouseName' | translate}}
+                            {{'GeneralMessages.Required' | translate}}
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -19,6 +27,15 @@
                     <label for="userName" class="mb-1 d-flex">{{'WarehousesManagementScreen.Username' | translate}}
                     </label>
                     <input id="userName" class="form-control" type="text" formControlName="username">
+
+                    <div *ngIf="createWarehouseForm.controls.username.invalid && (createWarehouseForm.controls.username.dirty || createWarehouseForm.controls.username.touched)"
+                        class="alert p-0 m-1 h6">
+
+                        <div class="p-0 m-0" *ngIf="createWarehouseForm.controls.username.errors?.['required']">
+                            {{'WarehousesManagementScreen.Username' | translate}}
+                            {{'GeneralMessages.Required' | translate}}
+                        </div>
+                    </div>
                 </div>
 
                 <div class="col-md-6 col-lg-6 col-xl-6">
@@ -26,6 +43,20 @@
                     <label for="password" class="mb-1 d-flex"> {{'WarehousesManagementScreen.Password' | translate}}
                     </label>
                     <input id="password" class="form-control" type="password" formControlName="password">
+
+                    <div *ngIf="createWarehouseForm.controls.password.invalid && (createWarehouseForm.controls.password.dirty || createWarehouseForm.controls.password.touched)"
+                        class="alert p-0 m-1 h6">
+
+                        <div class="p-0 m-0" *ngIf="createWarehouseForm.controls.password.errors?.['required']">
+                            {{'WarehousesManagementScreen.Password' | translate}}
+                            {{'GeneralMessages.FeminineRequired' | translate}}
+                        </div>
+
+                        <div *ngIf="createWarehouseForm.controls.password.errors?.['minlength']">
+                            {{'WarehousesManagementScreen.Password' | translate}}
+                            {{'GeneralMessages.PasswordLengthError' | translate}}
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -41,6 +72,15 @@
                     <select id="package01" class="form-select" name="package01" formControlName="package">
                         <option *ngFor="let package of packages" [value]="package.id">{{package.name}}</option>
                     </select>
+
+                    <div *ngIf="createWarehouseForm.controls.package.invalid && (createWarehouseForm.controls.package.dirty || createWarehouseForm.controls.package.touched)"
+                        class="alert p-0 m-1 h6">
+
+                        <div class="p-0 m-0" *ngIf="createWarehouseForm.controls.package.errors?.['required']">
+                            {{'WarehousesManagementScreen.Packages' | translate}}
+                            {{'GeneralMessages.Required' | translate}}
+                        </div>
+                    </div>
                 </div>
 
 
@@ -82,13 +122,13 @@
                     <div class="mx-2 view d-flex justify-content-center align-items-center rounded-2"
                         (click)="onViewButtonClick(warehouse.id)"><i class="fa-solid fa-eye"></i>
                     </div>
-                    <div class="mx-2 edit d-flex justify-content-center align-items-center rounded-2" data-bs-toggle="modal"
-                        data-bs-target="#editWarehouseModal" (click)="onUpdateButtonClick(warehouse.id)"><i
-                            class="fa-solid fa-pen-to-square"></i></div>
+                    <div class="mx-2 edit d-flex justify-content-center align-items-center rounded-2"
+                        data-bs-toggle="modal" data-bs-target="#editWarehouseModal"
+                        (click)="onUpdateButtonClick(warehouse.id)"><i class="fa-solid fa-pen-to-square"></i></div>
 
-                    <div class="mx-2 delete d-flex justify-content-center align-items-center rounded-2" data-bs-toggle="modal"
-                        data-bs-target="#deleteWarehouseModal" (click)="onDeleteButtonClick(warehouse.id)"><i
-                            class="fa-solid fa-trash-can"></i></div>
+                    <div class="mx-2 delete d-flex justify-content-center align-items-center rounded-2"
+                        data-bs-toggle="modal" data-bs-target="#deleteWarehouseModal"
+                        (click)="onDeleteButtonClick(warehouse.id)"><i class="fa-solid fa-trash-can"></i></div>
                 </div>
             </div>
         </div>
@@ -119,16 +159,44 @@
                         <label for="warehouseNameEdit" class="mb-1 d-flex"> {{'WarehousesManagementScreen.WarehouseName'
                             | translate}} </label>
                         <input id="warehouseNameEdit" class="form-control" type="text" formControlName="warehouseName">
+
+                        <div *ngIf="updateWarehouseForm.controls.warehouseName.invalid && (updateWarehouseForm.controls.warehouseName.dirty || updateWarehouseForm.controls.warehouseName.touched)"
+                            class="alert p-0 m-1 h6">
+
+                            <div class="p-0 m-0"
+                                *ngIf="updateWarehouseForm.controls.warehouseName.errors?.['required']">
+                                {{'WarehousesManagementScreen.WarehouseName' | translate}}
+                                {{'GeneralMessages.Required' | translate}}
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
                         <label for="userNameEdit" class="mb-1 d-flex"> {{'WarehousesManagementScreen.Username' |
                             translate}}</label>
                         <input id="userNameEdit" class="form-control" type="text" formControlName="username">
+
+                        <div *ngIf="updateWarehouseForm.controls.username.invalid && (updateWarehouseForm.controls.username.dirty || updateWarehouseForm.controls.username.touched)"
+                            class="alert p-0 m-1 h6">
+
+                            <div class="p-0 m-0" *ngIf="updateWarehouseForm.controls.username.errors?.['required']">
+                                {{'WarehousesManagementScreen.Username' | translate}}
+                                {{'GeneralMessages.Required' | translate}}
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
                         <label for="passwordEdit" class="mb-1 d-flex"> {{'WarehousesManagementScreen.Password' |
                             translate}}</label>
-                        <input id="passwordEdit" class="form-control" type="password" formControlName="password">
+                        <input id="passwordEdit" class="form-control" type="password" formControlName="password" (input)="onPasswordInput()">
+
+                        <div *ngIf="updateWarehouseForm.controls.password.invalid && (updateWarehouseForm.controls.password.dirty || updateWarehouseForm.controls.password.touched)"
+                            class="alert p-0 m-1 h6">
+
+                            <div *ngIf="updateWarehouseForm.controls.password.errors?.['minlength']">
+                                {{'WarehousesManagementScreen.Password' | translate}}
+                                {{'GeneralMessages.PasswordLengthError' | translate}}
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
                         <label for="packageEdit" class="mb-1 d-flex">{{'WarehousesManagementScreen.Packages' |
@@ -137,6 +205,15 @@
                         <select id="packageEdit" class="form-select" name="" id="" formControlName="package">
                             <option *ngFor="let package of packages" [value]="package.id">{{package.name}}</option>
                         </select>
+
+                        <div *ngIf="updateWarehouseForm.controls.package.invalid && (updateWarehouseForm.controls.package.dirty || updateWarehouseForm.controls.package.touched)"
+                            class="alert p-0 m-1 h6">
+
+                            <div class="p-0 m-0" *ngIf="updateWarehouseForm.controls.package.errors?.['required']">
+                                {{'WarehousesManagementScreen.Packages' | translate}}
+                                {{'GeneralMessages.Required' | translate}}
+                            </div>
+                        </div>
                     </div>
 
 
