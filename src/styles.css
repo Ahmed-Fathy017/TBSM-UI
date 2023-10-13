@@ -384,10 +384,19 @@ body::-webkit-scrollbar {
 
 input.ng-touched.ng-invalid,
 select.ng-touched.ng-invalid {
-    border: 0.1px solid #F15A60;
+    border: 0.1px solid #f44336;
 }
 
-
+.alert {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #f44336 !important;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 0.9rem !important;
+}
 
 
 @media screen and (min-width: 1920px) {

@@ -1,5 +1,4 @@
 <div class="container-fluid">
-    <!-- <app-page-header [pageTitle]="firstPageTitle" [coloredPageTitle]="coloredPageTitle"></app-page-header> -->
 
     <div class="container ">
         <form action="" [formGroup]="createRefrigeratorForm">
@@ -11,28 +10,18 @@
                         class="mb-1 d-flex">{{'RefrigeratorsManagementScreen.RefrigeratorName' |
                         translate}} </label>
                     <input id="refrigeratorName01" class="form-control" type="text" formControlName="refrigeratorName">
-                </div>
 
-                <!-- old implemntation -->
-                <!-- <div class="col-md-3 col-lg-3 col-xl-3">
-                    <div class="input-group mb-3">
-                        <label for="refrigeratorFromTemp01"
-                            class="mb-1 d-flex col-12">{{'RefrigeratorsManagementScreen.Temperature' |
-                            translate}} </label>
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">{{'RefrigeratorsManagementScreen.From' |
-                                translate}}</span>
-                        </div>
+                    <div *ngIf="createRefrigeratorForm.controls.refrigeratorName.invalid && (createRefrigeratorForm.controls.refrigeratorName.dirty || createRefrigeratorForm.controls.refrigeratorName.touched)"
+                        class="alert p-0 m-1 h6">
 
-                        <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)"
-                            formControlName="fromTemperature">
-                        <div class="input-group-append">
-                            <span class="input-group-text">C°</span>
+                        <div class="p-0 m-0"
+                            *ngIf="createRefrigeratorForm.controls.refrigeratorName.errors?.['required']">
+                            {{'RefrigeratorsManagementScreen.RefrigeratorName' | translate}}
+                            {{'GeneralMessages.Required' | translate}}
                         </div>
                     </div>
-                </div> -->
+                </div>
 
-                <!-- test -->
                 <div class="col-md-3 col-lg-3 col-xl-3">
 
                     <label for="refrigeratorFromTemp01"
@@ -50,29 +39,18 @@
                             translate)}} </label>
                     </div>
 
+                    <div *ngIf="createRefrigeratorForm.controls.fromTemperature.invalid && (createRefrigeratorForm.controls.fromTemperature.dirty || createRefrigeratorForm.controls.fromTemperature.touched)"
+                        class="alert p-0 m-1 h6">
+
+                        <div class="p-0 m-0"
+                            *ngIf="createRefrigeratorForm.controls.fromTemperature.errors?.['required']">
+                            {{'RefrigeratorsManagementScreen.Temperature' | translate}}
+                            {{'GeneralMessages.FeminineRequired' | translate}}
+                        </div>
+                    </div>
 
                 </div>
 
-                <!-- old implementation -->
-                <!-- <div class="col-md-3 col-lg-3 col-xl-3">
-                    <div class="input-group mb-3">
-                        <label for="refrigeratorToTemp01"
-                            class="mb-1 d-flex col-12">{{'RefrigeratorsManagementScreen.Temperature' |
-                            translate}} </label>
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">{{'RefrigeratorsManagementScreen.To' |
-                                translate}}</span>
-                        </div>
-
-                        <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)"
-                            formControlName="toTemperature">
-                        <div class="input-group-append">
-                            <span class="input-group-text">C°</span>
-                        </div>
-                    </div>
-                </div> -->
-
-                <!-- test -->
                 <div class="col-md-3 col-lg-3 col-xl-3">
 
                     <label for="refrigeratorFromTemp01"
@@ -90,10 +68,17 @@
                             translate)}} </label>
                     </div>
 
+                    <div *ngIf="createRefrigeratorForm.controls.toTemperature.invalid && (createRefrigeratorForm.controls.toTemperature.dirty || createRefrigeratorForm.controls.toTemperature.touched)"
+                        class="alert p-0 m-1 h6">
+
+                        <div class="p-0 m-0" *ngIf="createRefrigeratorForm.controls.toTemperature.errors?.['required']">
+                            {{'RefrigeratorsManagementScreen.Temperature' | translate}}
+                            {{'GeneralMessages.FeminineRequired' | translate}}
+                        </div>
+                    </div>
+
                 </div>
             </div>
-
-
 
             <div class="row mb-2 d-flex justify-content-end">
                 <div class="col-md-6 col-lg-6 col-xl-6">
@@ -165,6 +150,16 @@
                                 translate}} </label>
                             <input id="refrigeratorName02" class="form-control" type="text"
                                 formControlName="refrigeratorName">
+
+                            <div *ngIf="updateRefrigeratorForm.controls.refrigeratorName.invalid && (updateRefrigeratorForm.controls.refrigeratorName.dirty || updateRefrigeratorForm.controls.refrigeratorName.touched)"
+                                class="alert p-0 m-1 h6">
+
+                                <div class="p-0 m-0"
+                                    *ngIf="updateRefrigeratorForm.controls.refrigeratorName.errors?.['required']">
+                                    {{'RefrigeratorsManagementScreen.RefrigeratorName' | translate}}
+                                    {{'GeneralMessages.Required' | translate}}
+                                </div>
+                            </div>
                         </div>
 
                         <div class="col-md-12 col-lg-12 col-xl-12">
@@ -185,6 +180,16 @@
                             </div>
 
 
+                            <div *ngIf="updateRefrigeratorForm.controls.fromTemperature.invalid && (updateRefrigeratorForm.controls.fromTemperature.dirty || updateRefrigeratorForm.controls.fromTemperature.touched)"
+                                class="alert p-0 m-1 h6">
+
+                                <div class="p-0 m-0"
+                                    *ngIf="updateRefrigeratorForm.controls.fromTemperature.errors?.['required']">
+                                    {{'RefrigeratorsManagementScreen.Temperature' | translate}}
+                                    {{'GeneralMessages.FeminineRequired' | translate}}
+                                </div>
+                            </div>
+
                         </div>
 
 
@@ -194,8 +199,6 @@
                                 class="mb-1 d-flex col-12">{{'RefrigeratorsManagementScreen.Temperature' |
                                 translate}} </label>
 
-
-
                             <div class="form-text">
                                 <label class="static-value-firstside">{{isRtl? ('RefrigeratorsManagementScreen.To' |
                                     translate) : 'C°'}}</label>
@@ -204,6 +207,16 @@
 
                                 <label class="static-value-secondside">{{isRtl? 'C°' :
                                     ('RefrigeratorsManagementScreen.To' | translate)}} </label>
+                            </div>
+
+                            <div *ngIf="updateRefrigeratorForm.controls.toTemperature.invalid && (updateRefrigeratorForm.controls.toTemperature.dirty || updateRefrigeratorForm.controls.toTemperature.touched)"
+                                class="alert p-0 m-1 h6">
+
+                                <div class="p-0 m-0"
+                                    *ngIf="updateRefrigeratorForm.controls.toTemperature.errors?.['required']">
+                                    {{'RefrigeratorsManagementScreen.Temperature' | translate}}
+                                    {{'GeneralMessages.FeminineRequired' | translate}}
+                                </div>
                             </div>
 
                         </div>

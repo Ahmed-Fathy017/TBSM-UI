@@ -222,7 +222,10 @@
         "SuccessCreateOperationHeader": "Adding",
         "SuccessDeleteOperationHeader": "Deleting",
         "SuccessWithdrawOperationHeader": "Withdraw",
-        "SuccessImportOperationHeader":"Import"
+        "SuccessImportOperationHeader":"Import",
+        "Required": "Required",
+        "FeminineRequired": "Required",
+        "PasswordLengthError": "You have to enter at least 4 characters"
     },
     "ScreenNames": {
         "Home": "Home",

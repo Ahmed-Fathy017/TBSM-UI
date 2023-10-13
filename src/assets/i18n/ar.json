@@ -221,7 +221,10 @@
         "SuccessCreateOperationHeader": "اضافة",
         "SuccessDeleteOperationHeader": "حذف",
         "SuccessWithdrawOperationHeader": "سحب",
-        "SuccessImportOperationHeader":"استيراد"
+        "SuccessImportOperationHeader": "استيراد",
+        "Required": "مطلوب",
+        "FeminineRequired": "مطلوبة",
+        "PasswordLengthError": "يجب ادخال ٤ أحرف على الاقل "
     },
     "ScreenNames": {
         "Home": "الرئيسية",
@@ -237,7 +240,7 @@
         "ExternalSupplyRequests": "طلبات الامداد الخارجي",
         "InternalSupplyRequests": "طلبات الامداد الداخلي",
         "MySupplyRequests": "طلباتي",
-        "OperationLogs":"سجل العمليات",
+        "OperationLogs": "سجل العمليات",
         "Inventory": "الجرد",
         "WarehousesManagement": "المستودعات",
         "PackagesManagement": "الباقات"

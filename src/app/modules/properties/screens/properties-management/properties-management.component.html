@@ -1,5 +1,4 @@
 <div class="container-fluid">
-    <!-- <app-page-header [pageTitle]="firstPageTitle" [coloredPageTitle]="coloredPageTitle"></app-page-header> -->
 
     <div class="container" *ngIf="hasCreatingAuthority">
         <form class="row mb-2" [formGroup]="createPropertyForm">
@@ -10,6 +9,15 @@
                     <option *ngFor="let property of propetyTypes" [value]="property.value"> {{property.name |
                         translate}}</option>
                 </select>
+
+                <div *ngIf="createPropertyForm.controls.type.invalid && (createPropertyForm.controls.type.dirty || createPropertyForm.controls.type.touched)"
+                    class="alert p-0 m-1 h6">
+
+                    <div class="p-0 m-0" *ngIf="createPropertyForm.controls.type.errors?.['required']">
+                        {{'PropertiesManagementScreen.PropertyType' | translate}}
+                        {{'GeneralMessages.Required' | translate}}
+                    </div>
+                </div>
             </div>
             <div class="col-md-6 col-lg-6 col-xl-6">
                 <label for="propertyName" class="mb-1 d-flex">{{'PropertiesManagementScreen.PropertyName' |
@@ -18,6 +26,14 @@
 
                 <input type="text" name="propertyName" class="form-control" formControlName="name">
 
+                <div *ngIf="createPropertyForm.controls.name.invalid && (createPropertyForm.controls.name.dirty || createPropertyForm.controls.name.touched)"
+                    class="alert p-0 m-1 h6">
+
+                    <div class="p-0 m-0" *ngIf="createPropertyForm.controls.name.errors?.['required']">
+                        {{'PropertiesManagementScreen.PropertyName' | translate}}
+                        {{'GeneralMessages.Required' | translate}}
+                    </div>
+                </div>
             </div>
 
             <div class="col-md-4 col-lg-4 col-xl-4 d-flex mt-2">
@@ -98,6 +114,15 @@
                             <option *ngFor="let property of propetyTypes" [value]="property.value"> {{property.name |
                                 translate}}</option>
                         </select>
+
+                        <div *ngIf="updatePropertyForm.controls.type.invalid && (updatePropertyForm.controls.type.dirty || updatePropertyForm.controls.type.touched)"
+                            class="alert p-0 m-1 h6">
+
+                            <div class="p-0 m-0" *ngIf="updatePropertyForm.controls.type.errors?.['required']">
+                                {{'PropertiesManagementScreen.PropertyType' | translate}}
+                                {{'GeneralMessages.Required' | translate}}
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
                         <label for="propertyName" class="mb-1 d-flex">{{'PropertiesManagementScreen.PropertyName' |
@@ -106,6 +131,14 @@
 
                         <input type="text" name="propertyName" class="form-control" formControlName="name">
 
+                        <div *ngIf="updatePropertyForm.controls.name.invalid && (updatePropertyForm.controls.name.dirty || updatePropertyForm.controls.name.touched)"
+                            class="alert p-0 m-1 h6">
+
+                            <div class="p-0 m-0" *ngIf="updatePropertyForm.controls.name.errors?.['required']">
+                                {{'PropertiesManagementScreen.PropertyName' | translate}}
+                                {{'GeneralMessages.Required' | translate}}
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-md-12 col-lg-12 col-xl-12 d-flex">

@@ -1,5 +1,4 @@
 <div class="container-fluid">
-    <!-- <app-page-header [pageTitle]="firstPageTitle" [coloredPageTitle]="coloredPageTitle"></app-page-header> -->
 
     <div class="container ">
         <form action="" [formGroup]="createDepartmentForm">
@@ -10,6 +9,15 @@
                     <label for="departmentName" class="mb-1 d-flex">{{'DepartmentsManagementScreen.DepartmentName' |
                         translate}} </label>
                     <input id="departmentName" class="form-control" type="text" formControlName="departmentName">
+
+                    <div *ngIf="createDepartmentForm.controls.departmentName.invalid && (createDepartmentForm.controls.departmentName.dirty || createDepartmentForm.controls.departmentName.touched)"
+                        class="alert p-0 m-1 h6">
+
+                        <div class="p-0 m-0" *ngIf="createDepartmentForm.controls.departmentName.errors?.['required']">
+                            {{'DepartmentsManagementScreen.DepartmentName' | translate}}
+                            {{'GeneralMessages.Required' | translate}}
+                        </div>
+                    </div>
                 </div>
 
                 <div class="col-md-6 col-lg-6 col-xl-6">
@@ -38,12 +46,12 @@
                 </div>
 
                 <div class="d-flex">
-                    <div class="mx-2 edit d-flex justify-content-center align-items-center rounded-2" data-bs-toggle="modal"
-                    data-bs-target="#editDepartmentModal" (click)="onUpdateButtonClick(department.id)"><i
-                        class="fa-solid fa-pen-to-square"></i></div>
-                    <div class="mx-2 delete d-flex justify-content-center align-items-center rounded-2" data-bs-toggle="modal"
-                        data-bs-target="#deleteDepartmentModal" (click)="onDeleteButtonClick(department.id)"><i
-                            class="fa-solid fa-trash-can"></i></div>
+                    <div class="mx-2 edit d-flex justify-content-center align-items-center rounded-2"
+                        data-bs-toggle="modal" data-bs-target="#editDepartmentModal"
+                        (click)="onUpdateButtonClick(department.id)"><i class="fa-solid fa-pen-to-square"></i></div>
+                    <div class="mx-2 delete d-flex justify-content-center align-items-center rounded-2"
+                        data-bs-toggle="modal" data-bs-target="#deleteDepartmentModal"
+                        (click)="onDeleteButtonClick(department.id)"><i class="fa-solid fa-trash-can"></i></div>
                 </div>
 
             </div>
@@ -74,12 +82,24 @@
 
                     <div class=" row mb-2 ">
                         <div class="col-md-12 col-lg-12 col-xl-12">
-        
-                            <label for="departmentName01" class="mb-1 d-flex">{{'DepartmentsManagementScreen.DepartmentName' |
+
+                            <label for="departmentName01"
+                                class="mb-1 d-flex">{{'DepartmentsManagementScreen.departmentName' |
                                 translate}} </label>
-                            <input id="departmentName01" class="form-control" type="text" formControlName="departmentName">
+                            <input id="departmentName01" class="form-control" type="text"
+                                formControlName="departmentName">
+
+                            <div *ngIf="updateDepartmentForm.controls.departmentName.invalid && (updateDepartmentForm.controls.departmentName.dirty || updateDepartmentForm.controls.departmentName.touched)"
+                                class="alert p-0 m-1 h6">
+
+                                <div class="p-0 m-0"
+                                    *ngIf="updateDepartmentForm.controls.departmentName.errors?.['required']">
+                                    {{'DepartmentsManagementScreen.DepartmentName' | translate}}
+                                    {{'GeneralMessages.Required' | translate}}
+                                </div>
+                            </div>
                         </div>
-        
+
                     </div>
                 </form>
             </div>
@@ -106,7 +126,8 @@
                 </div>
 
                 <div class="d-flex justify-content-center mt-4">
-                    <p class="h5 fw-bold">{{'Modal.DeletionConsentMessage' | translate}} {{'DepartmentsManagementScreen.EntityName' |
+                    <p class="h5 fw-bold">{{'Modal.DeletionConsentMessage' | translate}}
+                        {{'DepartmentsManagementScreen.EntityName' |
                         translate}} {{selectedDepartment.name}}</p>
                 </div>
 
