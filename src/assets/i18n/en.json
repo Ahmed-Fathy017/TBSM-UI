@@ -112,7 +112,7 @@
         "EnglishFullName": "Name in English",
         "FullName": "Name",
         "Password": "Password",
-        "Roles": "ٌRoles",
+        "Roles": "ٌRole",
         "Status": "Status",
         "Properties": "Properties",
         "CreateAccount": "Create Account"
@@ -225,7 +225,7 @@
         "SuccessImportOperationHeader":"Import",
         "Required": "Required",
         "FeminineRequired": "Required",
-        "PasswordLengthError": "You have to enter at least 4 characters"
+        "PasswordLengthError": "Must contain at least 4 characters"
     },
     "ScreenNames": {
         "Home": "Home",

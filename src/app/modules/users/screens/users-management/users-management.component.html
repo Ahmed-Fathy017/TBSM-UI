@@ -10,6 +10,15 @@
                     <label for="username" class="mb-1 d-flex">{{'UsersManagementScreen.Username' |
                         translate}} </label>
                     <input id="username" class="form-control" type="text" formControlName="username">
+
+                    <div *ngIf="createUserForm.controls.username.invalid && (createUserForm.controls.username.dirty || createUserForm.controls.username.touched)"
+                        class="alert p-0 m-1 h6">
+
+                        <div class="p-0 m-0" *ngIf="createUserForm.controls.username.errors?.['required']">
+                            {{'UsersManagementScreen.Username' | translate}}
+                            {{'GeneralMessages.Required' | translate}}
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -19,6 +28,15 @@
                     <label for="fullname" class="mb-1 d-flex">{{'UsersManagementScreen.EnglishFullName' | translate}}
                     </label>
                     <input id="fullname" class="form-control" type="text" formControlName="fullname">
+
+                    <div *ngIf="createUserForm.controls.fullname.invalid && (createUserForm.controls.fullname.dirty || createUserForm.controls.fullname.touched)"
+                        class="alert p-0 m-1 h6">
+
+                        <div class="p-0 m-0" *ngIf="createUserForm.controls.fullname.errors?.['required']">
+                            {{'UsersManagementScreen.EnglishFullName' | translate}}
+                            {{'GeneralMessages.Required' | translate}}
+                        </div>
+                    </div>
                 </div>
 
                 <div class="col-md-6 col-lg-6 col-xl-6">
@@ -26,6 +44,20 @@
                     <label for="password" class="mb-1 d-flex"> {{'UsersManagementScreen.Password' | translate}}
                     </label>
                     <input id="password" class="form-control" type="password" formControlName="password">
+
+                    <div *ngIf="createUserForm.controls.password.invalid && (createUserForm.controls.password.dirty || createUserForm.controls.password.touched)"
+                        class="alert p-0 m-1 h6">
+
+                        <div class="p-0 m-0" *ngIf="createUserForm.controls.password.errors?.['required']">
+                            {{'UsersManagementScreen.Password' | translate}}
+                            {{'GeneralMessages.FeminineRequired' | translate}}
+                        </div>
+
+                        <div *ngIf="createUserForm.controls.password.errors?.['minlength']">
+                            {{'UsersManagementScreen.Password' | translate}}
+                            {{'GeneralMessages.PasswordLengthError' | translate}}
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -41,6 +73,15 @@
                     <select id="role" class="form-select" name="" formControlName="role">
                         <option *ngFor="let role of roles" [value]="role.id">{{role.name}}</option>
                     </select>
+
+                    <div *ngIf="createUserForm.controls.role.invalid && (createUserForm.controls.role.dirty || createUserForm.controls.role.touched)"
+                        class="alert p-0 m-1 h6">
+
+                        <div class="p-0 m-0" *ngIf="createUserForm.controls.role.errors?.['required']">
+                            {{'UsersManagementScreen.Roles' | translate}}
+                            {{'GeneralMessages.Required' | translate}}
+                        </div>
+                    </div>
                 </div>
 
                 <div class="col-md-6 col-lg-6 col-xl-6">
@@ -61,9 +102,9 @@
 
     <div class="container" *ngIf="!isLoading && users && users.length > 0">
 
-        <table class=" table table-bordered">
-            <thead>
-                <tr>
+        <table class=" table table-bordered rounded-table">
+            <thead >
+                <tr >
                     <th scope="col" class="text-center">{{'UsersManagementScreen.Username' | translate}}</th>
                     <th scope="col" class="text-center">{{'UsersManagementScreen.FullName' | translate}}</th>
                     <th scope="col" class="text-center">{{'UsersManagementScreen.Roles' | translate}}</th>
@@ -134,6 +175,15 @@
                             <label for="username01" class="mb-1 d-flex">{{'UsersManagementScreen.Username' |
                                 translate}} </label>
                             <input id="username01" class="form-control" type="text" formControlName="username">
+
+                            <div *ngIf="updateUserForm.controls.username.invalid && (updateUserForm.controls.username.dirty || updateUserForm.controls.username.touched)"
+                                class="alert p-0 m-1 h6">
+
+                                <div class="p-0 m-0" *ngIf="updateUserForm.controls.username.errors?.['required']">
+                                    {{'UsersManagementScreen.Username' | translate}}
+                                    {{'GeneralMessages.Required' | translate}}
+                                </div>
+                            </div>
                         </div>
 
                         <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
@@ -142,6 +192,15 @@
                                 translate}}
                             </label>
                             <input id="fullname01" class="form-control" type="text" formControlName="fullname">
+
+                            <div *ngIf="updateUserForm.controls.fullname.invalid && (updateUserForm.controls.fullname.dirty || updateUserForm.controls.fullname.touched)"
+                                class="alert p-0 m-1 h6">
+
+                                <div class="p-0 m-0" *ngIf="updateUserForm.controls.fullname.errors?.['required']">
+                                    {{'UsersManagementScreen.EnglishFullName' | translate}}
+                                    {{'GeneralMessages.Required' | translate}}
+                                </div>
+                            </div>
                         </div>
 
                         <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
@@ -150,6 +209,15 @@
                                 translate}}
                             </label>
                             <input id="password01" class="form-control" type="password" formControlName="password">
+
+                            <div *ngIf="updateUserForm.controls.password.invalid && (updateUserForm.controls.password.dirty || updateUserForm.controls.password.touched)"
+                                class="alert p-0 m-1 h6">
+
+                                <div *ngIf="updateUserForm.controls.password.errors?.['minlength']">
+                                    {{'UsersManagementScreen.Password' | translate}}
+                                    {{'GeneralMessages.PasswordLengthError' | translate}}
+                                </div>
+                            </div>
                         </div>
 
 
@@ -161,6 +229,15 @@
                             <select id="role01" class="form-select" name="" id="" formControlName="role">
                                 <option *ngFor="let role of roles" [value]="role.id">{{role.name}}</option>
                             </select>
+
+                            <div *ngIf="updateUserForm.controls.role.invalid && (updateUserForm.controls.role.dirty || updateUserForm.controls.role.touched)"
+                                class="alert p-0 m-1 h6">
+
+                                <div class="p-0 m-0" *ngIf="updateUserForm.controls.role.errors?.['required']">
+                                    {{'UsersManagementScreen.Roles' | translate}}
+                                    {{'GeneralMessages.Required' | translate}}
+                                </div>
+                            </div>
                         </div>
                     </div>
 

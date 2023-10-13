@@ -31,7 +31,7 @@
     "LoginScreen": {
         "Username": "اسم المستخدم",
         "Password": "الرقم السري",
-        "FirstMessage": "مرحباً بك في اداره المستودعات",
+        "FirstMessage": "مرحباً بك في ادارة المستودعات",
         "SecondMessage": "الرجاء تسجيل الدخول إلى حسابك وبدء المغامرة",
         "LoginButton": "تسجيل الدخول"
     },
@@ -39,7 +39,7 @@
         "Home": "الرئيسية"
     },
     "General": {
-        "PrintProductBarcode": "طباعه الباركود"
+        "PrintProductBarcode": "طباعة الباركود"
     },
     "WarehousesManagementScreen": {
         "EntityName": "المستودع",
@@ -48,7 +48,7 @@
         "SecondaryPageTitle": "جميع المستودعات",
         "WarehouseName": "اسم المستودع",
         "Username": "اسم المستخدم",
-        "Password": "كلمه السر",
+        "Password": "كلمة السر",
         "Packages": "الباقات"
     },
     "WarehouseDetailsScreen": {
@@ -75,8 +75,8 @@
         "RefrigeratorsNumber": "اعداد الثلاجات",
         "ProductsNumber": "اعداد المنتجات",
         "DepartmentsNumber": "اعداد الافسام",
-        "TemperatureChangeAlert": "تنبيه بتغيير درجه الحراره",
-        "ExternalSupplyPrivilage": "ميزه طلب الامداد الخارجي"
+        "TemperatureChangeAlert": "تنبيه بتغيير درجة الحرارة",
+        "ExternalSupplyPrivilage": "ميزة طلب الامداد الخارجي"
     },
     "RolesManagementScreen": {
         "EntityName": "الدور",
@@ -110,8 +110,8 @@
         "Username": "اسم المستخدم",
         "EnglishFullName": "الاسم بالانجليزية",
         "FullName": "الاسم",
-        "Password": "كلمه السر",
-        "Roles": "الادوار",
+        "Password": "كلمة السر",
+        "Roles": "الدور",
         "Status": "الحالة",
         "Properties": "الخصائص",
         "CreateAccount": "انشاء حساب"
@@ -224,7 +224,7 @@
         "SuccessImportOperationHeader": "استيراد",
         "Required": "مطلوب",
         "FeminineRequired": "مطلوبة",
-        "PasswordLengthError": "يجب ادخال ٤ أحرف على الاقل "
+        "PasswordLengthError": "يجب ان تتكون من ٤ أحرف على الاقل "
     },
     "ScreenNames": {
         "Home": "الرئيسية",

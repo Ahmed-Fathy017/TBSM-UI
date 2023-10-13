@@ -42,7 +42,7 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
   createUserForm = new FormGroup({
     username: new FormControl('', [Validators.required]),
     fullname: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required, Validators.minLength(4)]),
     role: new FormControl('', [Validators.required])
   });
 
@@ -86,11 +86,11 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
   }
 
   onCreateButtonClick() {
-    Object.keys(this.createUserForm.controls).forEach(field => {  
-      const control = this.createUserForm.get(field);            
-      if (control instanceof FormControl) {             
+    Object.keys(this.createUserForm.controls).forEach(field => {
+      const control = this.createUserForm.get(field);
+      if (control instanceof FormControl) {
         control.markAsTouched({ onlySelf: true });
-      } 
+      }
     });
 
     if (this.createUserForm.valid) {
@@ -125,11 +125,21 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
   }
 
   onUpdateConfirmationClick() {
-    Object.keys(this.updateUserForm.controls).forEach(field => {  
-      const control = this.updateUserForm.get(field);            
-      if (control instanceof FormControl) {             
+
+    // the password is not required to be entered, 
+    // so if entered validation is set to min length of 4 characters
+    if (this.updateUserForm.controls.password.value)
+      this.updateUserForm.controls.password.setValidators([Validators.minLength(4)]);
+    else
+      this.updateUserForm.controls.password.clearValidators();
+
+    this.updateUserForm.controls.password.updateValueAndValidity();
+
+    Object.keys(this.updateUserForm.controls).forEach(field => {
+      const control = this.updateUserForm.get(field);
+      if (control instanceof FormControl) {
         control.markAsTouched({ onlySelf: true });
-      } 
+      }
     });
 
     if (this.updateUserForm.valid) {
@@ -165,7 +175,7 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message,this.errorOperationHeader);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
       }
     );
 
@@ -185,7 +195,7 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message,this.errorOperationHeader);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
       }
     );
 
@@ -208,7 +218,7 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message,this.errorOperationHeader);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
       }
     );
 
@@ -238,7 +248,7 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message,this.errorOperationHeader);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
       }
     );
 
@@ -257,7 +267,7 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message,this.errorOperationHeader);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
       }
     );
 

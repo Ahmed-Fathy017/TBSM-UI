@@ -1,5 +1,4 @@
 <div class="container-fluid ">
-    <!-- <app-page-header [pageTitle]="firstPageTitle" [coloredPageTitle]="coloredPageTitle"></app-page-header> -->
 
     <div class="container ">
         <form class="mb-4" [formGroup]="createRoleForm">
@@ -7,9 +6,18 @@
             <div class="row mb-4">
                 <div class="col-md-12 col-lg-12 col-xl-12">
 
-                    <label for="warehouseName" class="mb-1 d-flex">{{'RolesManagementScreen.RoleName' |
+                    <label for="roleName" class="mb-1 d-flex">{{'RolesManagementScreen.RoleName' |
                         translate}} </label>
-                    <input id="warehouseName" class="form-control" type="text" formControlName="roleName">
+                    <input id="roleName" class="form-control" type="text" formControlName="roleName">
+                    
+                    <div *ngIf="createRoleForm.controls.roleName.invalid && (createRoleForm.controls.roleName.dirty || createRoleForm.controls.roleName.touched)"
+                            class="alert p-0 m-1 h6">
+
+                            <div class="p-0 m-0" *ngIf="createRoleForm.controls.roleName.errors?.['required']">
+                                {{'RolesManagementScreen.RoleName' | translate}}
+                                {{'GeneralMessages.Required' | translate}}
+                            </div>
+                        </div>
                 </div>
             </div>
 

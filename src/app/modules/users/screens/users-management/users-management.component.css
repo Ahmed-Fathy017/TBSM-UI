@@ -11,6 +11,7 @@
     color: white;
 }
 
+
 th {
     background-color: #F6F6FB;
     color: #F15A60;
@@ -26,6 +27,6 @@ tr td:last-child .edit {
     overflow: auto;
 }
 
-i {
-    font-size: 0.7rem;
+.center {
+    text-align: center;
 }
