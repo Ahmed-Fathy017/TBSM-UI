@@ -41,6 +41,8 @@
 
 i {
     cursor: pointer;
+    font-size: 1.1rem;
+    padding: 1.45px 0px;
 }
 
 .property-deletion {
@@ -65,8 +67,63 @@ img {
     background-color: #0D99FF30;
 }
 
+.view img {
+    padding: 3.46px 0px;
+}
+
 .custom-padding {
     padding: 0.4rem 1rem;
+}
+
+.action {
+    position: relative;
+}
+
+/* tooltip styling */
+.action .tooltip {
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    /* color: #fff; */
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s;
+    z-index: 1;
+    width: 5rem;
+}
+
+.action:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
+.tooltip-edit {
+    color: #FFCD29;
+    background-color: #FFCD2930;
+}
+
+.tooltip-delete {
+    color: #F15A60;
+    background-color: #F15A6021;
+}
+
+.tooltip-view {
+    background-color: #0D99FF30;
+    color: #0D99FF;
+}
+
+.tooltip-supply {
+    color: #14AE5C;
+    background-color: #4ECB7130;
+}
+
+.tooltip-qrcode {
+    color: #757575;
+    background-color: #75757530;
 }
 
 

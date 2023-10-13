@@ -36,7 +36,7 @@
                     <div class="form-text">
 
                         <input id="value" [ngClass]="isRtl? 'form-control ps-5': 'form-control pe-5'" type="text"
-                            formControlName="value" >
+                            formControlName="value">
 
                         <label [ngClass]="isRtl ? 'static-value-secondside' : 'static-value-firstside'"
                             (click)="onSearchButtonClick()"><i class="fa-solid fa-magnifying-glass"></i></label>
@@ -107,45 +107,59 @@
                                     <div class="row d-flex justify-content-end">
                                         <div class="col-lg-4 col-md-6">
                                             <div class="d-flex justify-content-center">
-                                                <div class="rounded-1 upload d-flex justify-content-center align-items-center mx-2 custom-padding"
-                                                    data-bs-toggle="modal" data-bs-target="#supplyModal"
-                                                    (click)="onProductSupplyDemandButtonClick(item.id, product.id)"
-                                                    *ngIf="hasProductSupplyDemandingAuthority">
-                                                    <!-- <i class="fa-solid fa-upload"></i> -->
-                                                    <img src="../../../../../assets/images/products/supply.svg" alt="">
-
-                                                </div>
-                                                
-
-                                                <div class="rounded-1 code d-flex justify-content-center align-items-center mx-2 custom-padding"
-                                                    (click)="onProductBarcodeButtonClick(item.id, product.id)"
-                                                    *ngIf="hasProductBarcodePrintingAuthority">
-                                                    <!-- <i class="fa-solid fa-qrcode" style="color: #787878;"></i> -->
-                                                    <img src="../../../../../assets/images/products/qrcode.svg" alt="">
+                                                <div class="action">
+                                                    <div class="rounded-1 upload d-flex justify-content-center align-items-center mx-2 custom-padding"
+                                                        data-bs-toggle="modal" data-bs-target="#supplyModal">
+                                                        <img src="../../../../../assets/images/products/supply.svg"
+                                                            alt="">
+                                                    </div>
+                                                    <div class="tooltip tooltip-supply text-center">{{'ProductsManagmentScreen.SupplyAction' | translate}}</div>
                                                 </div>
 
-                                                <div class="rounded-1 view d-flex justify-content-center align-items-center mx-2 custom-padding"
-                                                    *ngIf="hasProductViewingAuthority" data-bs-toggle="modal"
-                                                    data-bs-target="#editModal"
-                                                    (click)="onViewProductButtonClick(item.id, product.id)">
-                                                    <!-- <i class="fa-solid fa-eye"></i> -->
-                                                    <img src="../../../../../assets/images/products/eye.svg" alt="">
+
+                                                <div class="action">
+                                                    <div class="rounded-1 code d-flex justify-content-center align-items-center mx-2 custom-padding"
+                                                        (click)="onProductBarcodeButtonClick(item.id, product.id)"
+                                                        *ngIf="hasProductBarcodePrintingAuthority">
+                                                        <!-- <i class="fa-solid fa-qrcode" style="color: #787878;"></i> -->
+                                                        <img src="../../../../../assets/images/products/qrcode.svg"
+                                                            alt="">
+                                                    </div>
+                                                    <div class="tooltip tooltip-qrcode text-center">{{'ProductsManagmentScreen.QRCodeAction' | translate}}</div>
                                                 </div>
 
-                                                <div class="rounded-1 edit d-flex justify-content-center align-items-center mx-2 custom-padding"
-                                                    data-bs-toggle="modal" data-bs-target="#editModal"
-                                                    (click)="onUpdateButtonClick(item.id, product.id)"
-                                                    *ngIf="hasProductUpdatingAuthority">
-                                                    <i class="fa-solid fa-pen-to-square"></i>
-                                                    <!-- <img src="../../../../../assets/images/products/edit.svg" alt=""> -->
+
+                                                <div class="action">
+                                                    <div class="rounded-1 view d-flex justify-content-center align-items-center mx-2 custom-padding"
+                                                        *ngIf="hasProductViewingAuthority" data-bs-toggle="modal"
+                                                        data-bs-target="#editModal"
+                                                        (click)="onViewProductButtonClick(item.id, product.id)">
+                                                        <!-- <i class="fa-solid fa-eye"></i> -->
+                                                        <img src="../../../../../assets/images/products/eye.svg" alt="">
+                                                    </div>
+                                                    <div class="tooltip tooltip-view text-center">{{'ProductsManagmentScreen.ViewAction' | translate}}</div>
                                                 </div>
 
-                                                <div class="rounded-1 delete d-flex justify-content-center align-items-center mx-2 custom-padding"
-                                                    data-bs-toggle="modal" data-bs-target="#deleteModal"
-                                                    (click)="onDeleteButtonClick(item.id, product.id, i)"
-                                                    *ngIf="hasProductDeletionAuthority">
-                                                    <i class="fa-solid fa-trash-can"></i>
-                                                    <!-- <img src="../../../../../assets/images/products/delete.svg" alt=""> -->
+                                                <div class="action">
+                                                    <div class="rounded-1 edit d-flex justify-content-center align-items-center mx-2 custom-padding"
+                                                        data-bs-toggle="modal" data-bs-target="#editModal"
+                                                        (click)="onUpdateButtonClick(item.id, product.id)"
+                                                        *ngIf="hasProductUpdatingAuthority">
+                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                        <!-- <img src="../../../../../assets/images/products/edit.svg" alt=""> -->
+                                                    </div>
+                                                    <div class="tooltip tooltip-edit text-center">{{'ProductsManagmentScreen.EditAction' | translate}}</div>
+                                                </div>
+
+                                                <div class="action">
+                                                    <div class="rounded-1 delete d-flex justify-content-center align-items-center mx-2 custom-padding"
+                                                        data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                                        (click)="onDeleteButtonClick(item.id, product.id, i)"
+                                                        *ngIf="hasProductDeletionAuthority">
+                                                        <i class="fa-solid fa-trash-can"></i>
+                                                        <!-- <img src="../../../../../assets/images/products/delete.svg" alt=""> -->
+                                                    </div>
+                                                    <div class="tooltip tooltip-delete text-center">{{'ProductsManagmentScreen.DeleteAction' | translate}}</div>
                                                 </div>
                                             </div>
                                         </div>

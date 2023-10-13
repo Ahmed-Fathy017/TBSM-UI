@@ -128,7 +128,12 @@
         "OtherSearch": "Other",
         "Quantity": "Quantity",
         "Refrigerator": "Refrigerator",
-        "ProductCode": "Product Code"
+        "ProductCode": "Product Code",
+        "DeleteAction": "Delete",
+        "EditAction": "Edit",
+        "ViewAction": "View",
+        "QRCodeAction": "Print",
+        "SupplyAction": "Request Supply"
     },
     "CreateProductScreen": {
         "PrimaryTitle": "Home / Products /",

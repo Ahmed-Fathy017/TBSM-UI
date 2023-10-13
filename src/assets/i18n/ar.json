@@ -127,7 +127,12 @@
         "OtherSearch": "اخرى",
         "Quantity": "الكمية",
         "Refrigerator": "الثلاجة",
-        "ProductCode": "كود المنتج"
+        "ProductCode": "كود المنتج",
+        "DeleteAction": "حذف",
+        "EditAction": "تعديل",
+        "ViewAction": "عرض",
+        "QRCodeAction": "طباعة",
+        "SupplyAction": "طلب امداد"
     },
     "CreateProductScreen": {
         "PrimaryTitle": "الرئيسية / المنتجات /",
