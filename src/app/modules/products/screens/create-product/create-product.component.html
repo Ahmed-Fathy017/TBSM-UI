@@ -7,7 +7,8 @@
             <p class="p-0 m-0">{{successMessage}}</p>
         </div>
         <div class="d-flex flex-column  justify-content-end align-items-center " (click)="onProductSnackbarClick()">
-            <button class="print-btn d-flex   align-items-center"><span class="text-light mx-2 small-text"> {{'General.PrintProductBarcode' | translate}}</span>
+            <button class="print-btn d-flex   align-items-center"><span class="text-light mx-2 small-text">
+                    {{'General.PrintProductBarcode' | translate}}</span>
                 <i class="fa-solid fa-barcode barcode mx-2"></i></button>
         </div>
 
@@ -17,7 +18,6 @@
 
 
 <div class="container-fluid">
-    <!-- <app-page-header [pageTitle]="firstPageTitle" [coloredPageTitle]="coloredPageTitle"></app-page-header> -->
 
     <div class="container ">
         <form [formGroup]="createProductForm">
@@ -27,6 +27,15 @@
                     <label for="name01" class="mb-1 d-flex">{{'CreateProductScreen.Name' |
                         translate}}</label>
                     <input id="name01" class="form-control" type="text" formControlName="name">
+
+                    <div *ngIf="createProductForm.controls.name.invalid && (createProductForm.controls.name.dirty || createProductForm.controls.name.touched)"
+                        class="alert p-0 m-1 h6">
+
+                        <div class="p-0 m-0" *ngIf="createProductForm.controls.name.errors?.['required']">
+                            {{'CreateProductScreen.Name' | translate}}
+                            {{'GeneralMessages.Required' | translate}}
+                        </div>
+                    </div>
                 </div>
 
                 <div class="col-md-6 col-lg-6 col-xl-6">
@@ -38,6 +47,15 @@
                             {{department.name}}
                         </option>
                     </select>
+
+                    <div *ngIf="createProductForm.controls.department.invalid && (createProductForm.controls.department.dirty || createProductForm.controls.department.touched)"
+                        class="alert p-0 m-1 h6">
+
+                        <div class="p-0 m-0" *ngIf="createProductForm.controls.department.errors?.['required']">
+                            {{'CreateProductScreen.Department' | translate}}
+                            {{'GeneralMessages.Required' | translate}}
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -49,6 +67,15 @@
                     <label for="quantity01" class="mb-1 d-flex">{{'CreateProductScreen.Quantity' |
                         translate}}</label>
                     <input id="quantity01" class="form-control" type="number" formControlName="quantity">
+
+                    <div *ngIf="createProductForm.controls.quantity.invalid && (createProductForm.controls.quantity.dirty || createProductForm.controls.quantity.touched)"
+                        class="alert p-0 m-1 h6">
+
+                        <div class="p-0 m-0" *ngIf="createProductForm.controls.quantity.errors?.['required']">
+                            {{'CreateProductScreen.Quantity' | translate}}
+                            {{'GeneralMessages.FeminineRequired' | translate}}
+                        </div>
+                    </div>
                 </div>
 
                 <div class="col-md-6 col-lg-6 col-xl-6">
@@ -60,6 +87,15 @@
                             {{refrigerator.name}}
                         </option>
                     </select>
+
+                    <div *ngIf="createProductForm.controls.refrigerator.invalid && (createProductForm.controls.refrigerator.dirty || createProductForm.controls.refrigerator.touched)"
+                        class="alert p-0 m-1 h6">
+
+                        <div class="p-0 m-0" *ngIf="createProductForm.controls.refrigerator.errors?.['required']">
+                            {{'CreateProductScreen.Refrigerator' | translate}}
+                            {{'GeneralMessages.FeminineRequired' | translate}}
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -72,6 +108,25 @@
                     <label class="form-check-label" for="flexCheckIndeterminate01">
                         {{'CreateProductScreen.ExternalSupply' | translate}}
                     </label>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-lg-6 col-xl-6" *ngFor="let property of addedProperties; let i = index">
+                    <div class="row mt-2">
+                        <div class="col-md-10 col-lg-10 col-xl-10">
+                            <label [for]="'property-' + i" class="mb-1 d-flex">{{property.name}}
+                            </label>
+
+                            <input type="text" [name]="'property-' + i" class="form-control" [value]="property.value">
+                        </div>
+
+                        <div class="col-md-2 col-lg-2 col-xl-2 d-flex align-items-center justify-content-end mt-4"
+                            (click)="onRemovePropertyButtonClick(i)">
+                            <i class="fa-solid fa-x bg-danger p-2 rounded-1" style="color: #ffffff;"></i>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -116,29 +171,6 @@
 
             </div>
 
-            <div class="">
-
-                <div class="row">
-                    <div class="col-md-6 col-lg-6 col-xl-6" *ngFor="let property of addedProperties; let i = index">
-                        <div class="row mt-2">
-                            <div class="col-md-10 col-lg-10 col-xl-10">
-                                <label [for]="'property-' + i" class="mb-1 d-flex">{{property.name}}
-                                </label>
-
-                                <input type="text" [name]="'property-' + i" class="form-control"
-                                    [value]="property.value">
-                            </div>
-
-                            <div class="col-md-2 col-lg-2 col-xl-2 d-flex align-items-center justify-content-end mt-4"
-                                (click)="onRemovePropertyButtonClick(i)">
-                                <i class="fa-solid fa-x bg-danger p-2 rounded-1" style="color: #ffffff;"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
         </div>
 
         <div class=" row mb-2 d-flex justify-content-end ">
@@ -153,9 +185,5 @@
             </div>
         </div>
     </div>
-
-
-
-
 
 </div>

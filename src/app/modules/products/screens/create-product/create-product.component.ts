@@ -140,7 +140,7 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
     let allRequiredPropertiesExist = this.addedProperties.some(i => this.requiredPropertiesIds.every(j => j == i.property_id));
     if (!allRequiredPropertiesExist) {
       this.toastr.warning(this.invalidInputCountMessage, this.invalidInputWarningHeader);
-      return;
+      // return;
     }
 
     Object.keys(this.createProductForm.controls).forEach(field => {  

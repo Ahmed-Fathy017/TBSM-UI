@@ -10,53 +10,48 @@
                     <label for="fromDate" class="mb-1 d-flex">{{'OprationsLogsScreen.FromDate' |
                         translate}} </label>
                     <input id="fromDate" class="form-control" type="date" formControlName="fromDate">
+
+                    <div *ngIf="operationLogsForm.controls.fromDate.invalid && (operationLogsForm.controls.fromDate.dirty || operationLogsForm.controls.fromDate.touched)"
+                        class="alert p-0 m-1 h6">
+
+                        <div class="p-0 m-0" *ngIf="operationLogsForm.controls.fromDate.errors?.['required']">
+                            {{'OprationsLogsScreen.FromDate' | translate}}
+                            {{'GeneralMessages.Required' | translate}}
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-6 col-lg-3 col-xl-3">
 
                     <label for="toDate" class="mb-1 d-flex">{{'OprationsLogsScreen.ToDate' |
                         translate}} </label>
                     <input id="toDate" class="form-control" type="date" formControlName="toDate">
-                </div>
 
-                <!-- old implementation -->
-                <!-- <div class="col-md-6 col-lg-3 col-xl-3">
-                    <label for="type" class="mb-1 d-flex">{{'OprationsLogsScreen.OperationType' |
-                        translate}} </label>
-                    <div class="input-group flex-nowrap">
+                    <div *ngIf="operationLogsForm.controls.toDate.invalid && (operationLogsForm.controls.toDate.dirty || operationLogsForm.controls.toDate.touched)"
+                    class="alert p-0 m-1 h6">
 
-                        <select name="type" id="type" formControlName="type" class="form-select rounded-2">
-                            <option *ngFor="let type of operationTypes" [value]="type.value">
-                                {{type.name | translate}}
-                            </option>
-                        </select>
-                        <span class="input-group-text small-search-btn rounded-2" id="addon-wrapping"
-                            (click)="onSearchButtonClick()"><i class="fa-solid fa-magnifying-glass"></i></span>
+                    <div class="p-0 m-0" *ngIf="operationLogsForm.controls.toDate.errors?.['required']">
+                        {{'OprationsLogsScreen.ToDate' | translate}}
+                        {{'GeneralMessages.Required' | translate}}
                     </div>
-                </div> -->
+                </div>
+                </div>
 
                 <div class="col-md-6 col-lg-3 col-xl-3">
                     <label for="type" class="mb-1 d-flex">{{'OprationsLogsScreen.OperationType' |
                         translate}} </label>
 
-                        <div class="form-text">
+                    <div class="form-text">
 
-                            <!-- <input id="value"  [ngClass]="isRtl? 'form-control ps-5': 'form-control pe-5'" type="text" formControlName="value"> -->
-    
-                            <select name="type" id="type" formControlName="type"  [ngClass]="isRtl? 'form-select ps-5': 'form-select pe-5'">
-                                <option *ngFor="let type of operationTypes" [value]="type.value">
-                                    {{type.name | translate}}
-                                </option>
-                            </select>
-                            
-                            <label [ngClass]="isRtl ? 'static-value-secondside' : 'static-value-firstside'" (click)="onSearchButtonClick()" ><i
-                                    class="fa-solid fa-magnifying-glass"></i></label>
-                        </div>
-    
+                        <select name="type" id="type" formControlName="type"
+                            [ngClass]="isRtl? 'form-select ps-5': 'form-select pe-5'">
+                            <option *ngFor="let type of operationTypes" [value]="type.value">
+                                {{type.name | translate}}
+                            </option>
+                        </select>
 
-<!--                        
-                        <span class="input-group-text small-search-btn rounded-2" id="addon-wrapping"
-                            (click)="onSearchButtonClick()"><i class="fa-solid fa-magnifying-glass"></i></span> -->
-
+                        <label [ngClass]="isRtl ? 'static-value-secondside' : 'static-value-firstside'"
+                            (click)="onSearchButtonClick()"><i class="fa-solid fa-magnifying-glass"></i></label>
+                    </div>
                 </div>
 
                 <div class="col-md-6 col-lg-3 col-xl-3">

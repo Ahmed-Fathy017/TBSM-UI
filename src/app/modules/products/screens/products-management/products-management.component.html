@@ -113,7 +113,8 @@
                                                         <img src="../../../../../assets/images/products/supply.svg"
                                                             alt="">
                                                     </div>
-                                                    <div class="tooltip tooltip-supply text-center">{{'ProductsManagmentScreen.SupplyAction' | translate}}</div>
+                                                    <div class="tooltip tooltip-supply text-center">
+                                                        {{'ProductsManagmentScreen.SupplyAction' | translate}}</div>
                                                 </div>
 
 
@@ -125,7 +126,8 @@
                                                         <img src="../../../../../assets/images/products/qrcode.svg"
                                                             alt="">
                                                     </div>
-                                                    <div class="tooltip tooltip-qrcode text-center">{{'ProductsManagmentScreen.QRCodeAction' | translate}}</div>
+                                                    <div class="tooltip tooltip-qrcode text-center">
+                                                        {{'ProductsManagmentScreen.QRCodeAction' | translate}}</div>
                                                 </div>
 
 
@@ -137,7 +139,8 @@
                                                         <!-- <i class="fa-solid fa-eye"></i> -->
                                                         <img src="../../../../../assets/images/products/eye.svg" alt="">
                                                     </div>
-                                                    <div class="tooltip tooltip-view text-center">{{'ProductsManagmentScreen.ViewAction' | translate}}</div>
+                                                    <div class="tooltip tooltip-view text-center">
+                                                        {{'ProductsManagmentScreen.ViewAction' | translate}}</div>
                                                 </div>
 
                                                 <div class="action">
@@ -148,7 +151,8 @@
                                                         <i class="fa-solid fa-pen-to-square"></i>
                                                         <!-- <img src="../../../../../assets/images/products/edit.svg" alt=""> -->
                                                     </div>
-                                                    <div class="tooltip tooltip-edit text-center">{{'ProductsManagmentScreen.EditAction' | translate}}</div>
+                                                    <div class="tooltip tooltip-edit text-center">
+                                                        {{'ProductsManagmentScreen.EditAction' | translate}}</div>
                                                 </div>
 
                                                 <div class="action">
@@ -159,7 +163,8 @@
                                                         <i class="fa-solid fa-trash-can"></i>
                                                         <!-- <img src="../../../../../assets/images/products/delete.svg" alt=""> -->
                                                     </div>
-                                                    <div class="tooltip tooltip-delete text-center">{{'ProductsManagmentScreen.DeleteAction' | translate}}</div>
+                                                    <div class="tooltip tooltip-delete text-center">
+                                                        {{'ProductsManagmentScreen.DeleteAction' | translate}}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -228,6 +233,15 @@
                         <label for="name" class="mb-1 d-flex">{{'CreateProductScreen.Name' |
                             translate}}</label>
                         <input id="name" class="form-control" type="text" formControlName="name">
+
+                        <div *ngIf="updateProductForm.controls.name.invalid && (updateProductForm.controls.name.dirty || updateProductForm.controls.name.touched)"
+                            class="alert p-0 m-1 h6">
+
+                            <div class="p-0 m-0" *ngIf="updateProductForm.controls.name.errors?.['required']">
+                                {{'CreateProductScreen.Name' | translate}}
+                                {{'GeneralMessages.Required' | translate}}
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
@@ -239,6 +253,15 @@
                                 {{department.name}}
                             </option>
                         </select>
+
+                        <div *ngIf="updateProductForm.controls.department.invalid && (updateProductForm.controls.department.dirty || updateProductForm.controls.department.touched)"
+                            class="alert p-0 m-1 h6">
+
+                            <div class="p-0 m-0" *ngIf="updateProductForm.controls.department.errors?.['required']">
+                                {{'CreateProductScreen.Department' | translate}}
+                                {{'GeneralMessages.Required' | translate}}
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
@@ -246,6 +269,15 @@
                         <label for="quantity" class="mb-1 d-flex">{{'CreateProductScreen.Quantity' |
                             translate}}</label>
                         <input id="quantity" class="form-control" type="number" formControlName="quantity">
+
+                        <div *ngIf="updateProductForm.controls.quantity.invalid && (updateProductForm.controls.quantity.dirty || updateProductForm.controls.quantity.touched)"
+                            class="alert p-0 m-1 h6">
+
+                            <div class="p-0 m-0" *ngIf="updateProductForm.controls.quantity.errors?.['required']">
+                                {{'CreateProductScreen.Quantity' | translate}}
+                                {{'GeneralMessages.FeminineRequired' | translate}}
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
@@ -257,6 +289,15 @@
                                 {{refrigerator.name}}
                             </option>
                         </select>
+
+                        <div *ngIf="updateProductForm.controls.refrigerator.invalid && (updateProductForm.controls.refrigerator.dirty || updateProductForm.controls.refrigerator.touched)"
+                            class="alert p-0 m-1 h6">
+
+                            <div class="p-0 m-0" *ngIf="updateProductForm.controls.refrigerator.errors?.['required']">
+                                {{'CreateProductScreen.Refrigerator' | translate}}
+                                {{'GeneralMessages.FeminineRequired' | translate}}
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-md-12 col-lg-12 col-xl-12 mb-2"
@@ -271,8 +312,6 @@
                             [value]="option.value" (change)="onUpdateProperty(option.id, $event)"
                             [disabled]="!isEditMode">
                     </div>
-
-
 
                 </form>
 
