@@ -225,7 +225,8 @@
         "SuccessImportOperationHeader":"Import",
         "Required": "Required",
         "FeminineRequired": "Required",
-        "PasswordLengthError": "Must contain at least 4 characters"
+        "PasswordLengthError": "Must contain at least 4 characters",
+        "NoData": "No Data Found"
     },
     "ScreenNames": {
         "Home": "Home",

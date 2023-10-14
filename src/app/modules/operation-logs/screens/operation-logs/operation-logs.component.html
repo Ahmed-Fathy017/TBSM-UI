@@ -71,7 +71,7 @@
     <app-loading *ngIf="isLoading"></app-loading>
 
     <div class="container list mt-3" *ngIf="!isLoading">
-        <div class="row g-2">
+        <div class="row g-2" *ngIf="logs.data.length > 0">
             <div class="item-card shadow-none col-md-12 col-lg-12 col-xl-12 d-flex justify-content-between rounded-4 px-4 py-3 mb-2"
                 *ngFor="let log of logs.paginatedData">
 
@@ -81,6 +81,9 @@
 
             </div>
         </div>
+
+        <app-no-data *ngIf="logs.data.length == 0 && isSearchApplied"></app-no-data>
+
     </div>
 
     <div class="container d-flex justify-content-end" *ngIf="logs.data.length > 0">

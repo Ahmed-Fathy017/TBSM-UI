@@ -1,6 +1,5 @@
 import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-// import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { Package } from 'src/app/modules/packages/models/package';
 import { PackagesService } from 'src/app/modules/packages/remote-services/packages.service';
@@ -108,6 +107,8 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
   isEditMode: boolean = true;
 
   isRtl: boolean = false;
+
+  noDataFound: boolean = false;
 
   // constructor
   constructor(
@@ -378,6 +379,8 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
       (response: any) => {
 
         this.productsList = response.data;
+        this.noDataFound = this.productsList.every(i => i.products.length == 0);
+        console.log(response.data)
         this.setupProductsList();
 
         this.isLoading = false;

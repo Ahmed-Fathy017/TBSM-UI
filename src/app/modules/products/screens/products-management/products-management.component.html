@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <!-- <app-page-header [pageTitle]="firstPageTitle" [coloredPageTitle]="coloredPageTitle"></app-page-header> -->
+
 
     <div class="container ">
         <form [formGroup]="searchProductForm" (keyup.enter)="onSearchButtonClick()">
@@ -14,20 +14,6 @@
                     </select>
                 </div>
 
-                <!-- old implemntation -->
-                <!-- <div class="col-md-6 col-lg-6 col-xl-6">
-
-                    <label for="value" class="mb-1 d-flex">{{'ProductsManagmentScreen.Value' |
-                        translate}}</label>
-
-                    <div class="input-group flex-nowrap">
-
-                        <input id="value" class="form-control" type="text" formControlName="value">
-                        <span class="input-group-text small-search-btn rounded-2" id="addon-wrapping"
-                            (click)="onSearchButtonClick()"><i class="fa-solid fa-magnifying-glass"></i></span>
-                    </div>
-                </div> -->
-
                 <div class="col-md-6 col-lg-6 col-xl-6">
 
                     <label for="value" class="mb-1 d-flex">{{'ProductsManagmentScreen.Value' |
@@ -41,10 +27,6 @@
                         <label [ngClass]="isRtl ? 'static-value-secondside' : 'static-value-firstside'"
                             (click)="onSearchButtonClick()"><i class="fa-solid fa-magnifying-glass"></i></label>
                     </div>
-
-                    <!-- <input id="value" class="form-control" type="text" formControlName="value">
-                    <span class="input-group-text small-search-btn rounded-2" id="addon-wrapping"
-                        (click)="onSearchButtonClick()"></span> -->
 
                 </div>
             </div>
@@ -203,6 +185,8 @@
 
 
         </div>
+        <app-no-data *ngIf="noDataFound"></app-no-data>
+
     </div>
 </div>
 

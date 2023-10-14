@@ -148,6 +148,8 @@
         </table>
     </div>
 
+    <app-no-data *ngIf="users.length == 0 && !isLoading"></app-no-data>
+
 </div>
 
 

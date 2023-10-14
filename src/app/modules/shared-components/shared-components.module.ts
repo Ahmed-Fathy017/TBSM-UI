@@ -13,6 +13,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { RouterModule } from '@angular/router';
 import { LocalService } from './services/local.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NoDataComponent } from './components/no-data/no-data.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     LoadingDotsComponent,
     PageHeaderComponent,
     SharedMessagesComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    NoDataComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +37,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     LoadingComponent,
     LoadingDotsComponent,
     PageHeaderComponent,
-    SharedMessagesComponent
+    SharedMessagesComponent,
+    NoDataComponent
   ]
 })
 export class SharedComponentsModule { }

@@ -224,7 +224,8 @@
         "SuccessImportOperationHeader": "استيراد",
         "Required": "مطلوب",
         "FeminineRequired": "مطلوبة",
-        "PasswordLengthError": "يجب ان تتكون من ٤ أحرف على الاقل "
+        "PasswordLengthError": "يجب ان تتكون من ٤ أحرف على الاقل ",
+        "NoData": "لا توجد بيانات"
     },
     "ScreenNames": {
         "Home": "الرئيسية",

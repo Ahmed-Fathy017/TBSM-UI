@@ -50,6 +50,8 @@ export class OperationLogsComponent extends SharedMessagesComponent implements O
 
   isRtl: boolean = false;
 
+  isSearchApplied: boolean = false;
+
   constructor(private toastr: ToasterService,
     private operationLogsService: OperationLogsService,
     private translateService: TranslateService,
@@ -163,7 +165,7 @@ export class OperationLogsComponent extends SharedMessagesComponent implements O
           this.setupPagination();
         }
 
-
+        this.isSearchApplied = true;
         this.isProcessing = false;
         this.isLoading = false;
       }, (error: any) => {

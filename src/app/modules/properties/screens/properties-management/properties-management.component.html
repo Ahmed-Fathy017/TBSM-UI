@@ -66,7 +66,7 @@
     <app-loading *ngIf="isLoading"></app-loading>
 
     <div class="container list warehouses mb-4" *ngIf="!isLoading">
-        <div class="row g-2 mb-2">
+        <div class="row g-2 mb-2" *ngIf="properties.length > 0">
             <div class="item-card col-md-12 col-lg-12 col-xl-12 d-flex justify-content-between rounded-4 border px-4 py-3 mb-3"
                 *ngFor="let property of properties">
 
@@ -85,6 +85,9 @@
                 </div>
             </div>
         </div>
+
+        <app-no-data *ngIf="properties.length == 0"></app-no-data>
+
     </div>
 
 </div>
