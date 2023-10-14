@@ -78,9 +78,22 @@ export class WithdrawProductComponent extends SharedMessagesComponent implements
 
       this.html5QrcodeScanner.render(this.onScanSuccess, undefined);
 
+      const cameraPermissionButton = this.elementRef.nativeElement.querySelector(`#html5-qrcode-button-camera-permission`);
+      if (cameraPermissionButton) {
+        this.renderer.removeAttribute(cameraPermissionButton, 'style');
+        this.renderer.setStyle(cameraPermissionButton, 'background-color', '#F15A60');
+        this.renderer.setStyle(cameraPermissionButton, 'color', 'white');
+        this.renderer.setStyle(cameraPermissionButton, 'border-radius', '2rem');
+        this.renderer.setStyle(cameraPermissionButton, 'border', 'none');
+        this.renderer.setStyle(cameraPermissionButton, 'width', '15rem');
+        this.renderer.setStyle(cameraPermissionButton, 'height', '2rem');
+      }
+
       setTimeout(() => {
         const startCameraButton = this.elementRef.nativeElement.querySelector(`#html5-qrcode-button-camera-start`);
         const stopCameraButton = this.elementRef.nativeElement.querySelector(`#html5-qrcode-button-camera-stop`);
+
+       
 
         if (startCameraButton) {
           this.renderer.removeAttribute(startCameraButton, 'style');
@@ -102,8 +115,8 @@ export class WithdrawProductComponent extends SharedMessagesComponent implements
           this.renderer.setStyle(stopCameraButton, 'height', '2rem');
         }
 
-        this.isLoading = false;
       }, 1500);
+      this.isLoading = false;
 
     }, 1000);
 
