@@ -33,8 +33,8 @@
 
 .logs {
     background-color: #F6F6FB;
-    height: 220px;
-    overflow: auto;
+    height: 240px;
+    overflow: hidden;
 }
 
 .logs-wrapper {

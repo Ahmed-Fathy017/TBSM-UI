@@ -18,6 +18,8 @@ export class Product {
     category_id: number = 0;
     category: Department = new Department();
 
-    properties: Property[] | null = []
+    properties: Property[] | null = [];
+
+    UIId: number = 0;
 }
 

@@ -34,6 +34,11 @@ td {
     color: #100F37;
 }
 
+i {
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
 
 /* Apply styles to the button(s) inside the scanner container */
 .scanner-container button {

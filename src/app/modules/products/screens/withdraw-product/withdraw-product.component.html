@@ -17,13 +17,22 @@
                             <label for="number" class="mb-1 d-flex">{{'ProductWihdrawalScreen.ProductNumber' |
                                 translate}}</label>
                             <input id="number" class="form-control" type="text" formControlName="number">
+                            <div *ngIf="withdrawProductForm.controls.number.invalid && (withdrawProductForm.controls.number.dirty || withdrawProductForm.controls.number.touched)"
+                                class="alert p-0 m-1 h6">
+
+                                <div class="p-0 m-0" *ngIf="withdrawProductForm.controls.number.errors?.['required']">
+                                    {{'ProductWihdrawalScreen.ProductNumber' | translate}}
+                                    {{'GeneralMessages.Required' | translate}}
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- <app-loading *ngIf="isLoading"></app-loading> -->
+                    <app-loading *ngIf="isLoading"></app-loading>
 
                     <!-- scanning section -->
-                    <div class="scanner-container" class="mt-2" >
+                    <div class="scanner-container" class="mt-2"
+                        [ngStyle]="{'visiblity': !isLoading? 'visible': 'hidden'}">
                         <div id="reader" width="600px" class="mt-2"></div>
                     </div>
 
@@ -47,19 +56,24 @@
                             <table class="table table-borderless">
                                 <thead>
                                     <tr class="text-center border-bottom">
+                                        <th scope="col" colspan="1"></th>
                                         <th scope="col" colspan="2">{{'ProductWihdrawalScreen.ProductNumber' |
                                             translate}}</th>
                                         <th scope="col" colspan="2"> {{'ProductWihdrawalScreen.ProductName' |
                                             translate}}</th>
+                                        <th scope="col" colspan="1"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="text-center" *ngFor="let product of products">
+                                    <tr class="text-center" *ngFor="let product of products; let i = index;">
+                                        <td style="width: 20px;">
+                                            <i class="fa-solid fa-x bg-danger p-1 rounded-1 text-white"
+                                                (click)="onDeleteProduct(i)" style="vertical-align: middle;"></i>
+                                        </td>
                                         <td colspan="2">{{product.number}}</td>
                                         <td colspan="2">{{product.name}}</td>
-
+                                        <td style="width: 20px;"></td>
                                     </tr>
-
                                 </tbody>
                             </table>
 

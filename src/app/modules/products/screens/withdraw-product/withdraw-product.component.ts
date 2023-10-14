@@ -66,46 +66,56 @@ export class WithdrawProductComponent extends SharedMessagesComponent implements
   }
 
   ngAfterViewInit(): void {
-    this.html5QrcodeScanner = new Html5QrcodeScanner(
-      "reader",
-      { fps: 10, qrbox: { width: 250, height: 250 }, supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA], aspectRatio: 2.2 },
-      /* verbose= */ false);
 
-    this.html5QrcodeScanner.render(this.onScanSuccess, undefined);
 
     // styling scanner
     setTimeout(() => {
-      const startCameraButton = this.elementRef.nativeElement.querySelector(`#html5-qrcode-button-camera-start`);
-      const stopCameraButton = this.elementRef.nativeElement.querySelector(`#html5-qrcode-button-camera-stop`);
 
-      if (startCameraButton) {
-        this.renderer.removeAttribute(startCameraButton, 'style');
-        this.renderer.setStyle(startCameraButton, 'background-color', '#F15A60');
-        this.renderer.setStyle(startCameraButton, 'color', 'white');
-        this.renderer.setStyle(startCameraButton, 'border-radius', '2rem');
-        this.renderer.setStyle(startCameraButton, 'border', 'none');
-        this.renderer.setStyle(startCameraButton, 'width', '10rem');
-        this.renderer.setStyle(startCameraButton, 'height', '2rem');
-      }
+      this.html5QrcodeScanner = new Html5QrcodeScanner(
+        "reader",
+        { fps: 10, qrbox: { width: 250, height: 250 }, supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA], aspectRatio: 2.2 },
+        /* verbose= */ false);
 
-      if (stopCameraButton) {
-        this.renderer.removeAttribute(stopCameraButton, 'style');
-        this.renderer.setStyle(stopCameraButton, 'background-color', '#F15A60');
-        this.renderer.setStyle(stopCameraButton, 'color', 'white');
-        this.renderer.setStyle(stopCameraButton, 'border-radius', '2rem');
-        this.renderer.setStyle(stopCameraButton, 'border', 'none');
-        this.renderer.setStyle(stopCameraButton, 'width', '10rem');
-        this.renderer.setStyle(stopCameraButton, 'height', '2rem');
-      }
+      this.html5QrcodeScanner.render(this.onScanSuccess, undefined);
 
-      this.isLoading = false;
-    }, 1700);
+      setTimeout(() => {
+        const startCameraButton = this.elementRef.nativeElement.querySelector(`#html5-qrcode-button-camera-start`);
+        const stopCameraButton = this.elementRef.nativeElement.querySelector(`#html5-qrcode-button-camera-stop`);
+
+        if (startCameraButton) {
+          this.renderer.removeAttribute(startCameraButton, 'style');
+          this.renderer.setStyle(startCameraButton, 'background-color', '#F15A60');
+          this.renderer.setStyle(startCameraButton, 'color', 'white');
+          this.renderer.setStyle(startCameraButton, 'border-radius', '2rem');
+          this.renderer.setStyle(startCameraButton, 'border', 'none');
+          this.renderer.setStyle(startCameraButton, 'width', '10rem');
+          this.renderer.setStyle(startCameraButton, 'height', '2rem');
+        }
+
+        if (stopCameraButton) {
+          this.renderer.removeAttribute(stopCameraButton, 'style');
+          this.renderer.setStyle(stopCameraButton, 'background-color', '#F15A60');
+          this.renderer.setStyle(stopCameraButton, 'color', 'white');
+          this.renderer.setStyle(stopCameraButton, 'border-radius', '2rem');
+          this.renderer.setStyle(stopCameraButton, 'border', 'none');
+          this.renderer.setStyle(stopCameraButton, 'width', '10rem');
+          this.renderer.setStyle(stopCameraButton, 'height', '2rem');
+        }
+
+        this.isLoading = false;
+      }, 1500);
+
+    }, 1000);
 
   }
 
   ngOnDestroy(): void {
     this.closeScanCamera();
     this.subscription.unsubscribe();
+  }
+
+  onDeleteProduct(index: number) {
+    this.products.splice(index, 1);
   }
 
   onScanSuccess = (decodedText: any, decodedResult: any) => {
@@ -143,7 +153,7 @@ export class WithdrawProductComponent extends SharedMessagesComponent implements
     if (this.withdrawProductForm.valid) {
       let productNumber = this.withdrawProductForm.controls.number.value!;
       this.isProcessing = true;
-      let quanitity = this.products.filter(i => i.number == productNumber)?.length;
+      let quanitity = this.products.filter(i => i.number == productNumber)?.length + 1;
       this.getProdcuctByNumber(productNumber, quanitity);
     } else
       this.toastr.warning(this.invalidInputWarningMessage, this.invalidInputWarningHeader);
@@ -162,7 +172,10 @@ export class WithdrawProductComponent extends SharedMessagesComponent implements
   getProdcuctByNumber(productNumber: string, quanitity: number) {
     let subscription = this.productsService.getProdcuctByNumber(productNumber, quanitity).subscribe(
       (response: any) => {
-        this.products.push(response.data)
+        let product = response.data as Product;
+        product.UIId = this.products?.length + 1;
+
+        this.products.push(product);
         this.isProcessing = false;
       },
       (error: any) => {
