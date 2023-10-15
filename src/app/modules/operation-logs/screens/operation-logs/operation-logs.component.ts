@@ -88,7 +88,7 @@ export class OperationLogsComponent extends SharedMessagesComponent implements O
 
       this.isLoading = true;
 
-      this.getOperationLogs(requestDTO);
+      this.getOperationLogs(requestDTO, true);
     } else
       this.toastr.warning(this.invalidInputWarningMessage, this.invalidInputWarningHeader);
   }
@@ -154,7 +154,7 @@ export class OperationLogsComponent extends SharedMessagesComponent implements O
 
   // functions
 
-  getOperationLogs(requestDTO: GetOperationLogs) {
+  getOperationLogs(requestDTO: GetOperationLogs, isFromSearchClick: boolean = false) {
 
     let subscribtion = this.operationLogsService.getOperationLogs(requestDTO).subscribe(
       (response: any) => {
@@ -165,7 +165,7 @@ export class OperationLogsComponent extends SharedMessagesComponent implements O
           this.setupPagination();
         }
 
-        this.isSearchApplied = true;
+        this.isSearchApplied = isFromSearchClick;
         this.isProcessing = false;
         this.isLoading = false;
       }, (error: any) => {
