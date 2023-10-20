@@ -23,6 +23,8 @@ export class SharedMessagesComponent implements OnInit, OnDestroy {
   successWithdrawOperationHeader!: string;
   successImportOperationHeader!: string;
 
+  invalidReferigeratorTemperature!: string;
+
 
   constructor(private translate: TranslateService) {
     this.setNotificationMessages();
@@ -47,19 +49,24 @@ export class SharedMessagesComponent implements OnInit, OnDestroy {
       'GeneralMessages.InvalidInputWarningHeader',
       'GeneralMessages.InvalidInputWarningMessage',
       'GeneralMessages.InvalidInputDuplicationMessage',
-      'GeneralMessages.InvalidInputCountMessage']).subscribe((translation: any) => {
-          this.errorOperationHeader = translation['GeneralMessages.ErrorOperationHeader'];
-          this.successEditOperationHeader = translation['GeneralMessages.SuccessEditOperationHeader'];
-          this.successCreateOperationHeader = translation['GeneralMessages.SuccessCreateOperationHeader'];
-          this.successDeleteOperationHeader = translation['GeneralMessages.SuccessDeleteOperationHeader'];
-          this.successWithdrawOperationHeader = translation['GeneralMessages.SuccessWithdrawOperationHeader'];
-          this.successImportOperationHeader = translation['GeneralMessages.SuccessImportOperationHeader'];
+      'GeneralMessages.InvalidInputCountMessage',
 
-          this.invalidInputWarningHeader = translation['GeneralMessages.InvalidInputWarningHeader'];
-          this.invalidInputWarningMessage = translation['GeneralMessages.InvalidInputWarningMessage'];
-          this.invalidInputDuplicationMessage = translation['GeneralMessages.InvalidInputDuplicationMessage'];
-          this.invalidInputCountMessage = translation['GeneralMessages.InvalidInputCountMessage'];
-        });
+      'RefrigeratorsManagementScreen.InvalidTemperature']).subscribe((translation: any) => {
+        this.errorOperationHeader = translation['GeneralMessages.ErrorOperationHeader'];
+        this.successEditOperationHeader = translation['GeneralMessages.SuccessEditOperationHeader'];
+        this.successCreateOperationHeader = translation['GeneralMessages.SuccessCreateOperationHeader'];
+        this.successDeleteOperationHeader = translation['GeneralMessages.SuccessDeleteOperationHeader'];
+        this.successWithdrawOperationHeader = translation['GeneralMessages.SuccessWithdrawOperationHeader'];
+        this.successImportOperationHeader = translation['GeneralMessages.SuccessImportOperationHeader'];
+
+        this.invalidInputWarningHeader = translation['GeneralMessages.InvalidInputWarningHeader'];
+        this.invalidInputWarningMessage = translation['GeneralMessages.InvalidInputWarningMessage'];
+        this.invalidInputDuplicationMessage = translation['GeneralMessages.InvalidInputDuplicationMessage'];
+        this.invalidInputCountMessage = translation['GeneralMessages.InvalidInputCountMessage'];
+
+        this.invalidReferigeratorTemperature = translation['RefrigeratorsManagementScreen.InvalidTemperature'];
+
+      });
 
     this.subscription.add(subscribtion);
   }

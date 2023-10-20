@@ -100,7 +100,8 @@
         "RefrigeratorName": "اسم الثلاجة",
         "Temperature": "درجة الحرارة",
         "From": "من",
-        "To": "الى"
+        "To": "الى",
+        "InvalidTemperature": "برجاء ادخال درجات الحرارة بطريقة صحيحة"
     },
     "UsersManagementScreen": {
         "EntityName": "المستخدم",

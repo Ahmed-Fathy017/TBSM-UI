@@ -75,13 +75,24 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
       } 
     });
 
+    let fromTemperature = parseFloat(this.createRefrigeratorForm.controls.fromTemperature.value!);
+    let toTemperature = parseFloat(this.createRefrigeratorForm.controls.toTemperature.value!);
+
+    if (fromTemperature > toTemperature) {
+      this.toastr.warning(this.invalidReferigeratorTemperature, this.invalidInputWarningHeader);
+      return;
+    }
+
+
+    
+
     if (this.createRefrigeratorForm.valid) {
 
       let requestDTO = new Refrigerator();
 
       requestDTO.name = this.createRefrigeratorForm.controls.refrigeratorName.value!;
-      requestDTO.temperature_from = parseFloat(this.createRefrigeratorForm.controls.fromTemperature.value!);
-      requestDTO.temperature_to = parseFloat(this.createRefrigeratorForm.controls.toTemperature.value!);
+      requestDTO.temperature_from = fromTemperature;
+      requestDTO.temperature_to = toTemperature;
 
       this.isProcessing = true;
       this.isLoading = true;

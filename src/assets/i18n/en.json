@@ -101,7 +101,8 @@
         "RefrigeratorName": "Refrigerator Name",
         "Temperature": "Temperature",
         "From": "From",
-        "To": "To"
+        "To": "To",
+        "InvalidTemperature": "Please enter temperatue values correctly"
     },
     "UsersManagementScreen": {
         "EntityName": "User",
