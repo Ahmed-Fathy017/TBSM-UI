@@ -82,7 +82,7 @@ export class WarehouseDetailsComponent extends SharedMessagesComponent implement
   }
 
   onCardClick(filter: string) {
-    this.router.navigate([`products/${filter}`]);
+    this.router.navigate([`products`, {filter: filter}]);
   }
 
   onLogsSectionClick() {
