@@ -138,7 +138,7 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
   onCreateButtonClick() {
 
     let allRequiredPropertiesExist = this.addedProperties.some(i => this.requiredPropertiesIds.every(j => j == i.property_id));
-    if (!allRequiredPropertiesExist) {
+    if (!allRequiredPropertiesExist && this.addedProperties?.length > 0) {
       this.toastr.warning(this.invalidInputCountMessage, this.invalidInputWarningHeader);
       // return;
     }
@@ -254,6 +254,7 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
       (response: any) => {
         this.productRedirectLink = response.data;
         this.showProductSnackbar();
+        this.createProductForm.reset();
         this.isProcessing = false;
       }, (error: any) => {
         if (error.error.errors && error.error.errors.length > 0)
