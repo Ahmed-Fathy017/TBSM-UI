@@ -132,7 +132,8 @@
         "EditAction": "تعديل",
         "ViewAction": "عرض",
         "QRCodeAction": "طباعة",
-        "SupplyAction": "طلب امداد"
+        "SupplyAction": "طلب امداد",
+        "ProductCreatedSuccessMessage": " تم اضافة المنتج بنجاح" 
     },
     "CreateProductScreen": {
         "PrimaryTitle": "الرئيسية / المنتجات /",

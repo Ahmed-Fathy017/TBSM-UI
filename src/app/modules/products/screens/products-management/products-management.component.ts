@@ -110,6 +110,11 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
 
   noDataFound: boolean = false;
 
+  createdProductId: string = '';
+  productRedirectLink: string = '';
+  successMessage: string = '';
+  @ViewChild('snackbar', { static: false }) snackbar!: ElementRef;
+
   // constructor
   constructor(
     private toastr: ToasterService,
@@ -136,7 +141,11 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
   ngOnInit(): void {
 
     this.filter = this.productFilters.get(this.activatedRoute.snapshot.params.filter) ?? '';
-    console.log(this.filter)
+    this.createdProductId = this.activatedRoute.snapshot.params.createdProductId ?? '';
+
+    if (this.createdProductId)
+      this.getProductInvoice(true);
+
 
     let requestDTO = new GetProductsRequest();
     requestDTO.product_filter = this.filter;
@@ -259,11 +268,11 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
       return;
     }
 
-    Object.keys(this.updateProductForm.controls).forEach(field => {  
-      const control = this.updateProductForm.get(field);            
-      if (control instanceof FormControl) {             
+    Object.keys(this.updateProductForm.controls).forEach(field => {
+      const control = this.updateProductForm.get(field);
+      if (control instanceof FormControl) {
         control.markAsTouched({ onlySelf: true });
-      } 
+      }
     });
 
     if (this.updateProductForm.valid) {
@@ -306,11 +315,11 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
 
   onProductSupplyDemandConfirmationClick() {
 
-    Object.keys(this.supplyChainForm.controls).forEach(field => {  
-      const control = this.supplyChainForm.get(field);            
-      if (control instanceof FormControl) {             
+    Object.keys(this.supplyChainForm.controls).forEach(field => {
+      const control = this.supplyChainForm.get(field);
+      if (control instanceof FormControl) {
         control.markAsTouched({ onlySelf: true });
-      } 
+      }
     });
 
     if (this.supplyChainForm.valid) {
@@ -353,6 +362,14 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
     this.fetchDataIntoUpdateModal();
   }
 
+  onProductSnackbarClick() {
+    window.open(this.productRedirectLink, "_blank");
+  }
+
+  onCloseSnackbarButtonClick() {
+    this.snackbar.nativeElement.classList.remove("show");
+  }
+
   // funtions
 
   evaluateScreenPermissions() {
@@ -381,7 +398,6 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
 
         this.productsList = response.data;
         this.noDataFound = this.productsList.every(i => i.products.length == 0);
-        console.log(response.data)
         this.setupProductsList();
 
         this.isLoading = false;
@@ -389,13 +405,15 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message,this.errorOperationHeader);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
         this.isLoading = false;
       }
     );
 
     this.subscription.add(subscription);
   }
+
+
 
   getProperties() {
     let subscribtion = this.propertiesService.getProperties().subscribe(
@@ -407,7 +425,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message,this.errorOperationHeader);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
         this.isLoading = false;
       }
     );
@@ -427,7 +445,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message,this.errorOperationHeader);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
       }
     );
 
@@ -445,7 +463,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message,this.errorOperationHeader);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
         this.isLoading = false;
       }
     );
@@ -527,7 +545,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message,this.errorOperationHeader);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
       }
     );
 
@@ -537,7 +555,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
   deleteProduct() {
     let subscription = this.productsService.deleteProduct(this.selectedProduct.id).subscribe(
       (response: any) => {
-        this.toastr.success(response.message,this.successDeleteOperationHeader);
+        this.toastr.success(response.message, this.successDeleteOperationHeader);
 
         this.productsList.find(i => i.id = this.selectedDepartment.id)?.products.splice(this.selectedProductIndex, 1);
         this.productsList.map(i => i.lastSelectedPage = i.selectedPage);
@@ -549,27 +567,44 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message,this.errorOperationHeader);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
       }
     );
 
     this.subscription.add(subscription);
   }
 
-  getProductInvoice() {
-    let subscribtion = this.productsService.getProductInvoice(this.selectedProduct.id).subscribe(
+  getProductInvoice(isNewlyCreatedProduct: boolean = false) {
+    let productId = isNewlyCreatedProduct ? parseInt(this.createdProductId) : this.selectedProduct.id;
+    let subscribtion = this.productsService.getProductInvoice(productId).subscribe(
       (response: any) => {
-        window.open(response.data, "_blank");
+
+        this.productRedirectLink = response.data;
+
+        if (!isNewlyCreatedProduct)
+          window.open(response.data, "_blank");
+        else
+          this.showProductSnackbar();
 
       }, (error: any) => {
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message,this.errorOperationHeader);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
       }
     );
 
     this.subscription.add(subscribtion);
+  }
+
+  showProductSnackbar() {
+    // Add the 'show' class to display the snackbar
+    this.snackbar.nativeElement.classList.add("show");
+
+    // After 3 seconds (3000 milliseconds), remove the 'show' class to hide the snackbar
+    setTimeout(() => {
+      this.snackbar.nativeElement.classList.remove("show");
+    }, 3000); // Adjust the duration as needed (3 seconds in this example)
   }
 
   addOrderRequest(requestDTO: AddOrder) {
@@ -580,7 +615,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message,this.errorOperationHeader);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
       }
     );
 

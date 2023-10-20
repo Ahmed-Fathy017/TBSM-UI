@@ -126,6 +126,173 @@ img {
     background-color: #75757530;
 }
 
+/* custom toast */
+.snackbar-rtl {
+    visibility: hidden;
+    color: #fff;
+    border-radius: 2px;
+    position: absolute;
+    z-index: 5;
+    top: -0px;
+    overflow: hidden;
+    margin: 0 0 6px;
+    width: 400px;
+    border-radius: 3px 3px 3px 3px;
+    background-position: 15px center;
+    background-repeat: no-repeat;
+    background-size: 24px;
+    /* box-shadow: 0 0 12px #999999; */
+    color: #FFFFFF;
+    background-color: #51A351;
+    text-decoration: none;
+    background-color: #E5EFFA;
+    border: 1px solid #006CE3;
+    border-radius: 8px;
+    color: #333C48;
+    background-image: url('../../../../../assets/images/toast-sucess.png');
+    background-repeat: no-repeat;
+    padding: 15px 60px 15px 15px ;
+    background-position: right 15px center;
+    left: 0;
+    .text {
+        margin-right: 40px;
+        height: 50px;
+    }
+
+    .print-btn {
+        background-color: #006CE3 !important;
+        border: none;
+        border-radius: 5px;
+        padding: 5px;
+        text-align: center;
+    }
+
+    .barcode {
+        font-size: 1.5rem;
+    }
+
+    .small-text {
+        font-size: 0.8rem;
+    }
+
+    .close-btn {
+        width: 20px;
+    }
+
+}
+
+
+.snackbar-ltr {
+    visibility: hidden;
+    color: #fff;
+    border-radius: 2px;
+    position: absolute;
+    z-index: 5;
+    top: -0px;
+    overflow: hidden;
+    margin: 0 0 6px;
+    width: 400px;
+    border-radius: 3px 3px 3px 3px;
+    background-position: 15px center;
+    background-repeat: no-repeat;
+    background-size: 24px;
+    /* box-shadow: 0 0 12px #999999; */
+    color: #FFFFFF;
+    background-color: #51A351;
+    text-decoration: none;
+    background-color: #E5EFFA;
+    border: 1px solid #006CE3;
+    border-radius: 8px;
+    color: #333C48;
+    background-image: url('../../../../../assets/images/toast-sucess.png');
+    background-repeat: no-repeat;
+    padding: 15px 15px 15px 60px ;
+    background-position: left 15px center;
+    right: 0;
+    .text {
+        margin-left: 40px;
+        height: 50px;
+    }
+
+    .print-btn {
+        background-color: #006CE3 !important;
+        border: none;
+        border-radius: 5px;
+        padding: 5px;
+        text-align: center;
+    }
+
+    .barcode {
+        font-size: 1.5rem;
+    }
+
+    .small-text {
+        font-size: 0.8rem;
+    }
+
+    .close-btn {
+        width: 20px;
+    }
+
+}
+
+/* #snackbar .barcode {
+    font-size: 2.5rem;
+} */
+
+#snackbar:hover {
+    /* box-shadow: 0 0 12px #000000; */
+    opacity: 1;
+    cursor: pointer;
+}
+
+#snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 3s;
+    animation: fadein 0.5s, fadeout 0.5s 3s;
+}
+
+
+@-webkit-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
 
 @media only screen and (max-width: 767px) {
 

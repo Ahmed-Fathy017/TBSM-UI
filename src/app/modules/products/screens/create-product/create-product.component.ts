@@ -1,6 +1,5 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild, } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-// import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { Department } from 'src/app/modules/departments/models/department';
 import { DepartmentsService } from 'src/app/modules/departments/remote-services/departments.service';
@@ -16,6 +15,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
 import { ToasterService } from 'src/app/modules/master-layout/services/toaster.service';
 import { LocalService } from 'src/app/modules/shared-components/services/local.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-product',
@@ -58,11 +58,6 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
   });
 
   createdProductId: number = 0;
-  // productMessage: string = '';
-  productRedirectLink: string = '';
-
-  successMessage: string = '';
-
   isRtl: boolean = true;
 
   constructor(
@@ -74,7 +69,8 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
     private propertiesService: PropertiesService,
     private translateService: TranslateService,
     private screenTitleNavigationService: ScreenTitleNavigationService,
-    private localService: LocalService
+    private localService: LocalService,
+    private router: Router
   ) {
     super(translateService);
     this.screenTitleNavigationService.setScreenKey('CreateProduct');
@@ -131,23 +127,17 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
 
   }
 
-  onProductSnackbarClick() {
-    window.open(this.productRedirectLink, "_blank");
-  }
-
   onCreateButtonClick() {
 
     let allRequiredPropertiesExist = this.addedProperties.some(i => this.requiredPropertiesIds.every(j => j == i.property_id));
-    if (!allRequiredPropertiesExist && this.addedProperties?.length > 0) {
+    if (!allRequiredPropertiesExist && this.addedProperties?.length > 0) 
       this.toastr.warning(this.invalidInputCountMessage, this.invalidInputWarningHeader);
-      // return;
-    }
 
-    Object.keys(this.createProductForm.controls).forEach(field => {  
-      const control = this.createProductForm.get(field);            
-      if (control instanceof FormControl) {             
+    Object.keys(this.createProductForm.controls).forEach(field => {
+      const control = this.createProductForm.get(field);
+      if (control instanceof FormControl) {
         control.markAsTouched({ onlySelf: true });
-      } 
+      }
     });
 
     if (this.createProductForm.valid) {
@@ -235,8 +225,7 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
       (response: any) => {
 
         this.createdProductId = response.data.id;
-        this.successMessage = response.message;
-        this.getProductInvoice();
+        this.router.navigate(['products', { createdProductId: this.createdProductId }]);
       }, (error: any) => {
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
@@ -248,34 +237,4 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
 
     this.subscription.add(subscription);
   }
-
-  getProductInvoice() {
-    let subscribtion = this.productsService.getProductInvoice(this.createdProductId).subscribe(
-      (response: any) => {
-        this.productRedirectLink = response.data;
-        this.showProductSnackbar();
-        this.createProductForm.reset();
-        this.isProcessing = false;
-      }, (error: any) => {
-        if (error.error.errors && error.error.errors.length > 0)
-          this.toastr.error(error.error.errors[0].value, error.error.message);
-        else
-          this.toastr.error(error.error.message, this.errorOperationHeader);
-        this.isProcessing = false;
-      }
-    );
-
-    this.subscription.add(subscribtion);
-  }
-
-  showProductSnackbar() {
-    // Add the 'show' class to display the snackbar
-    this.snackbar.nativeElement.classList.add("show");
-
-    // After 3 seconds (3000 milliseconds), remove the 'show' class to hide the snackbar
-    setTimeout(() => {
-      this.snackbar.nativeElement.classList.remove("show");
-    }, 3000); // Adjust the duration as needed (3 seconds in this example)
-  }
-
 }

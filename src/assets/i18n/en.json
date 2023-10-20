@@ -133,7 +133,8 @@
         "EditAction": "Edit",
         "ViewAction": "View",
         "QRCodeAction": "Print",
-        "SupplyAction": "Request Supply"
+        "SupplyAction": "Request Supply",
+        "ProductCreatedSuccessMessage": "Product Added Successfully"
     },
     "CreateProductScreen": {
         "PrimaryTitle": "Home / Products /",
