@@ -28,8 +28,8 @@ export class OperationLogsComponent extends SharedMessagesComponent implements O
   secondPageTitle: string = 'OprationsLogsScreen.SecondaryPageTitle';
 
   operationLogsForm = new FormGroup({
-    fromDate: new FormControl('', [Validators.required]),
-    toDate: new FormControl('', [Validators.required]),
+    fromDate: new FormControl(''),
+    toDate: new FormControl(''),
     type: new FormControl(''),
   });
 
@@ -63,7 +63,7 @@ export class OperationLogsComponent extends SharedMessagesComponent implements O
   }
 
   ngOnInit(): void {
-    this.setupPagination();
+    this.onSearchButtonClick();
   }
 
   ngOnDestroy(): void {
@@ -71,12 +71,12 @@ export class OperationLogsComponent extends SharedMessagesComponent implements O
   }
 
   onSearchButtonClick() {
-    Object.keys(this.operationLogsForm.controls).forEach(field => {  
-      const control = this.operationLogsForm.get(field);            
-      if (control instanceof FormControl) {             
-        control.markAsTouched({ onlySelf: true });
-      } 
-    });
+    // Object.keys(this.operationLogsForm.controls).forEach(field => {  
+    //   const control = this.operationLogsForm.get(field);            
+    //   if (control instanceof FormControl) {             
+    //     control.markAsTouched({ onlySelf: true });
+    //   } 
+    // });
 
     if (this.operationLogsForm.valid) {
       let requestDTO: GetOperationLogs = new GetOperationLogs();
