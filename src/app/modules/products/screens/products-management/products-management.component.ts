@@ -136,6 +136,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
   ngOnInit(): void {
 
     this.filter = this.productFilters.get(this.activatedRoute.snapshot.params.filter) ?? '';
+    console.log(this.filter)
 
     let requestDTO = new GetProductsRequest();
     requestDTO.product_filter = this.filter;
