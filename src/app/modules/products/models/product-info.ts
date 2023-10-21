@@ -4,4 +4,5 @@ export interface ProductInfo {
     print_date: string;
     print_time: string;
     warehouse: string;
+    expiration_date: string;
 }

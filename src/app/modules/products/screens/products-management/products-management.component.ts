@@ -363,7 +363,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
   }
 
   onProductPrintClick() {
-    window.open('product/print', "_blank");
+    window.open('product/print', "_blank", 'noreferrer');
   }
 
   onCloseSnackbarButtonClick() {
