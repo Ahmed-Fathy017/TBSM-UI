@@ -119,7 +119,7 @@
                     <td>{{user.fullname}}</td>
                     <td>{{user.role.role}}</td>
                     <td>
-                        <div>
+                        <div (click)="onUpdateUserStatusClick(user.id)">
                             <i class="fa-solid fa-circle-check" style="color: #198526;"
                                 *ngIf="user.status; else xmark"></i>
                             <ng-template #xmark>

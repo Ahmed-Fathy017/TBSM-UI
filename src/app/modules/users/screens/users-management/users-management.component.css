@@ -30,3 +30,7 @@ tr td:last-child .edit {
 .center {
     text-align: center;
 }
+
+i {
+    cursor: pointer;
+}

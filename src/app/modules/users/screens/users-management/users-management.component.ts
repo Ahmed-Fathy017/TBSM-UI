@@ -135,6 +135,12 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
     this.updateUserForm.controls.password.updateValueAndValidity();
   }
 
+  onUpdateUserStatusClick(userId: number) {
+    this.selectedUser = this.users.find(i => i.id == userId)!;
+
+    this.updateUserStatus();
+  }
+
 
   onUpdateConfirmationClick() {
 
@@ -250,8 +256,8 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
       (response: any) => {
         this.toastr.success(response.message, this.successEditOperationHeader);
 
-        let updatedRefrigerator = this.users.find(i => i.id == requestDTO.id);
-        Object.assign(updatedRefrigerator!, response.data);
+        let updatedUser = this.users.find(i => i.id == requestDTO.id);
+        Object.assign(updatedUser!, response.data);
 
         this.isLoading = false;
       }, (error: any) => {
@@ -273,6 +279,26 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
       (response: any) => {
         this.toastr.success(response.message, this.successDeleteOperationHeader);
         this.users = response.data;
+        this.isLoading = false;
+      }, (error: any) => {
+        this.isLoading = false;
+        if (error.error.errors && error.error.errors.length > 0)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message, this.errorOperationHeader);
+      }
+    );
+
+    this.subscription.add(subscription);
+  }
+
+  updateUserStatus() {
+    let subscription = this.usersService.updateUserStatus(this.selectedUser.id).subscribe(
+      (response: any) => {
+        this.toastr.success(response.message, this.successDeleteOperationHeader);
+        this.selectedUser.status = !this.selectedUser.status;
+        let updatedUser = this.users.find(i => i.id == this.selectedUser.id);
+        Object.assign(updatedUser!, this.selectedUser);
         this.isLoading = false;
       }, (error: any) => {
         this.isLoading = false;

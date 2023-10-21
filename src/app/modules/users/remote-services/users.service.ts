@@ -32,7 +32,7 @@ export class UsersService extends AbstractRemoteService{
   }
 
   updateUserStatus(id: number) {
-    let apiUrl = this.apiURl + `warehouse/update_user/${id}`;
+    let apiUrl = this.apiURl + `warehouse/change_status/${id}`;
 
     return this.http.post(apiUrl, {});
   }
