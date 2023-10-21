@@ -1,0 +1,17 @@
+<div class="container-fluid d-flex flex-column  justify-content-center align-items-center w-100 h-100">
+    <div class="fw-bold">TBSM - {{productInfo?.warehouse!}}</div>
+
+    <div fxLayout="column">
+        <ngx-barcode bc-element-type="svg" [bc-value]="productInfo?.number!" bc-format="CODE128"
+            [bc-line-color]="lineColor" [bc-width]="width" [bc-height]="height" [bc-display-value]="displayValue"
+            [bc-font-options]="fontOptions" [bc-font]="font" [bc-text-align]="textAlign"
+            [bc-text-position]="textPosition" [bc-text-margin]="textMargin" [bc-font-size]="fontSize"
+            [bc-background]="background" [bc-margin]="margin" [bc-margin-top]="marginTop"
+            [bc-margin-bottom]="marginBottom" [bc-margin-left]="marginLeft"
+            [bc-margin-right]="marginRight"></ngx-barcode>
+    </div>
+
+    <div class="fw-bold ">({{productInfo?.print_time!}}) {{productInfo?.print_date!}}</div>
+    <div class="fw-bold ">{{productInfo?.name!}}</div>
+
+</div>

@@ -4,6 +4,7 @@ import { LoginComponent } from './modules/authentication/screens/login/login.com
 import { ScreensConfigProvider } from './modules/master-layout/providers/screens-config-provider';
 import { PageNotFoundComponent } from './modules/shared-components/components/page-not-found/page-not-found.component';
 import { UnauthorizedComponent } from './modules/shared-components/components/unauthorized/unauthorized.component';
+import { ProductPrintComponent } from './modules/shared-components/components/product-print/product-print.component';
 
 const routes: Routes = [];
 
@@ -13,6 +14,7 @@ const routes: Routes = [];
     //Register public routes (doesn't require login)
     { path: '', redirectTo: '/login', pathMatch: 'full', data: { config: ScreensConfigProvider.LoginScreen } },
     { path: 'login', component: LoginComponent, data: { config: ScreensConfigProvider.LoginScreen } },
+    { path: 'product/print', component: ProductPrintComponent, data: { config: ScreensConfigProvider.ProductPrintScreen } },
 
     // Register the secured routes in the master-layout module (requires login)
     {

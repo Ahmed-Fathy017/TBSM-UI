@@ -16,6 +16,7 @@ import { environment } from 'src/environments/environment';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxBarcodeModule } from 'ngx-barcode';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -44,6 +45,7 @@ export function httpTranslateLoaderFactory(http: HttpClient) {
     MasterLayoutModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    NgxBarcodeModule,
     
     // adding JwtModule
     // JwtModule.forRoot(JWT_Module_Options),

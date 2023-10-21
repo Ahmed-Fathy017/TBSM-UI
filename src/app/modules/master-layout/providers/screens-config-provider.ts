@@ -8,6 +8,7 @@ export class ScreensConfigProvider {
     static WarehouseDetailsScreen: string = 'admin';
     static MyRequestsManagementScreen: string = 'user';
     static UserDashboardScreen: string = 'user';
+    static ProductPrintScreen: string = 'public';
 
     // roles module screens
     static RolesManagementScreen: string = 'Roles.view';

@@ -362,8 +362,8 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
     this.fetchDataIntoUpdateModal();
   }
 
-  onProductSnackbarClick() {
-    window.open(this.productRedirectLink, "_blank");
+  onProductPrintClick() {
+    window.open('product/print', "_blank");
   }
 
   onCloseSnackbarButtonClick() {
@@ -582,9 +582,11 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
         this.productRedirectLink = response.data;
 
         if (!isNewlyCreatedProduct)
-          window.open(response.data, "_blank");
+          this.localService.saveData('productInfo', JSON.stringify(response.data));
         else
           this.showProductSnackbar();
+
+        this.onProductPrintClick();
 
       }, (error: any) => {
         if (error.error.errors && error.error.errors.length > 0)

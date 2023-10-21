@@ -14,6 +14,8 @@ import { RouterModule } from '@angular/router';
 import { LocalService } from './services/local.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NoDataComponent } from './components/no-data/no-data.component';
+import { ProductPrintComponent } from './components/product-print/product-print.component';
+import { NgxBarcodeModule } from 'ngx-barcode';
 
 
 @NgModule({
@@ -24,13 +26,15 @@ import { NoDataComponent } from './components/no-data/no-data.component';
     PageHeaderComponent,
     SharedMessagesComponent,
     PageNotFoundComponent,
-    NoDataComponent
+    NoDataComponent,
+    ProductPrintComponent
   ],
   imports: [
     CommonModule,
     TranslateModule,
     RouterModule,
-    RouterModule
+    RouterModule,
+    NgxBarcodeModule
   ],
   exports : [
     LoadingButtonComponent,
