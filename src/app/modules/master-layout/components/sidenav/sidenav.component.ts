@@ -54,7 +54,7 @@ export class SidenavComponent implements OnInit {
     if (this.screenWidth < 768)
       this.collapsed = false;
 
-    // warehouse mode chagne subscription 
+    // warehouse mode change subscription 
     this.navbarService.getWarehouseMode().subscribe((state) => {
       let data = '';
       let permissions = '';

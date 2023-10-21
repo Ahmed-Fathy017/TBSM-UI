@@ -18,9 +18,9 @@ export class NavbarService {
     this.warehouseMode$.next(showHide);
   }
 
-  toggleWarehouseMode() {
-    this.warehouseMode$.next(!this.warehouseMode$.value);
-  }
+  // toggleWarehouseMode() {
+  //   this.warehouseMode$.next(!this.warehouseMode$.value);
+  // }
 
   // isNavOpen() {
   //   return this.showWarehouseMode$.value;

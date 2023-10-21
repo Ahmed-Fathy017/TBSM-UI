@@ -9,9 +9,9 @@ import { UserTypes } from '../../models/user-types';
 import { PermissionGroup } from 'src/app/modules/roles/models/permission-group';
 import { Permission } from 'src/app/modules/roles/models/permission';
 import { ScreensConfigProvider } from 'src/app/modules/master-layout/providers/screens-config-provider';
-import { adminNavbarData, userNavbarData } from 'src/app/modules/master-layout/models/nav-data';
+import { adminNavbarData, adminSecondaryNavbarData, userNavbarData } from 'src/app/modules/master-layout/models/nav-data';
 import { INavbarData } from 'src/app/modules/master-layout/models/helper';
-import { adminPermissions } from 'src/app/modules/master-layout/models/permissions';
+import { adminPermissions, secondaryAdminPermissions } from 'src/app/modules/master-layout/models/permissions';
 
 @Component({
   selector: 'app-login',
@@ -197,22 +197,30 @@ export class LoginComponent implements OnInit {
     // setting the initial permissions array for the admin
     // this is considered a temp variable, its value changes
     // upon selecting and de-seclecting specific warehouse
-    this.localStore.saveData("permissions", JSON.stringify(adminPermissions));
+    if (this.localStore.getData('warehouseId') && this.localStore.getData('warehouseName'))
+      this.localStore.saveData("permissions", JSON.stringify(secondaryAdminPermissions));
+    else
+      this.localStore.saveData("permissions", JSON.stringify(adminPermissions));
   }
 
   setupAdminNavbarData() {
     // no need for implementation as all the menu items will be shown to
     // the user by default (as two separated arrays, can be enhanced and merged into one array later)
-    this.localStore.saveData('navData', JSON.stringify(adminNavbarData));
+
+    if (this.localStore.getData('warehouseId') && this.localStore.getData('warehouseName'))
+      this.localStore.saveData('navData', JSON.stringify(adminSecondaryNavbarData));
+    else
+      this.localStore.saveData('navData', JSON.stringify(adminNavbarData));
+
   }
 
 
 
   navigateToHomePage() {
-    if (this.localStore.getData('type') === UserTypes.ADMIN)
+    // if (this.localStore.getData('type') === UserTypes.ADMIN)
       this.router.navigate(['dashboard']);
-    else
-      this.router.navigate(['warehouses/home']);
+    // else
+    //   this.router.navigate(['warehouses/home']);
   }
 
   showErrorMessage(message: string) {

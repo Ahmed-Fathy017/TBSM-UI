@@ -16,9 +16,9 @@ export class PageNotFoundComponent {
   }
 
   onClick() {
-    if (this.localService.getData('type') == UserTypes.ADMIN)
+    // if (this.localService.getData('type') == UserTypes.ADMIN)
       this.router.navigate(['dashboard'])
-    else
-      this.router.navigate(['warehouses/home'])
+    // else
+    //   this.router.navigate(['warehouses/home'])
   }
 }

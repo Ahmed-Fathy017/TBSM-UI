@@ -3,7 +3,6 @@ import { Subscription } from 'rxjs';
 import { WarehousesService } from '../../remote-services/warehouses.service';
 import { Warehouse } from '../../models/warehouse';
 import { ActivatedRoute, Router } from '@angular/router';
-// import { ToastrService } from 'ngx-toastr';
 import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 import { UserTypes } from 'src/app/modules/authentication/models/user-types';
 import { WarehouseDataCard } from '../../models/warehouse-data-card';
@@ -63,15 +62,15 @@ export class WarehouseDetailsComponent extends SharedMessagesComponent implement
 
   ngOnInit(): void {
 
-    if (this.localService.getData('type') === UserTypes.ADMIN) {
-      if (this.route.snapshot.paramMap.get('warehouseName'))
-        this.localService.saveData('warehouseName', this.route.snapshot.paramMap.get('warehouseName')!);
-      this.screenTitleNavigationService.setScreenKey('SelectedWarehouse');
-    }
-    else
-      this.screenTitleNavigationService.setScreenKey('UserDashboard');
+    // if (this.localService.getData('type') === UserTypes.ADMIN) {
+    //   // if (this.route.snapshot.paramMap.get('warehouseName'))
+    //   //   this.localService.saveData('warehouseName', this.route.snapshot.paramMap.get('warehouseName')!);
+    //   this.screenTitleNavigationService.setScreenKey('SelectedWarehouse');
+    // }
+    // else
+    this.screenTitleNavigationService.setScreenKey('UserDashboard');
 
-    this.warehouseId = parseInt(this.route.snapshot.paramMap.get('id')!);
+    // this.warehouseId = parseInt(this.route.snapshot.paramMap.get('id')!);
 
 
     this.getWarehouse();
@@ -82,7 +81,7 @@ export class WarehouseDetailsComponent extends SharedMessagesComponent implement
   }
 
   onCardClick(filter: string) {
-    this.router.navigate([`products`, {filter: filter}]);
+    this.router.navigate([`products`, { filter: filter }]);
   }
 
   onLogsSectionClick() {
@@ -135,7 +134,7 @@ export class WarehouseDetailsComponent extends SharedMessagesComponent implement
       if (i.title == 'products_quantity_empty') {
         i.backgroundColor = '#0D99FF';
         i.iconClass = 'fa-solid fa-box';
-        i.iconUrl = '../../../../../assets/images/dashboard/package.svg'; 
+        i.iconUrl = '../../../../../assets/images/dashboard/package.svg';
         i.visibility = this.hasProductsEmptyQuantityViewAuthority ? 'visible' : 'invisible';
         i.display = this.hasProductsEmptyQuantityViewAuthority ? 'd-block' : 'd-none';
         i.filter = 'empty-quantity';

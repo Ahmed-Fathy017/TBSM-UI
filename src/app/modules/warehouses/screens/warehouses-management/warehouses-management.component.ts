@@ -99,16 +99,18 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
 
   onViewButtonClick(id: number) {
     this.selectedWarehouse = this.warehouses.find(i => i.id == id)!;
+    console.log(this.selectedWarehouse)
 
     // setting the selected warehouse data in the local storage for further usage
     this.localService.saveData('warehouseId', String(id));
-    this.localService.saveData('warhouseName', this.selectedWarehouse.warehouse_name);
+    this.localService.saveData('warehouseName', this.selectedWarehouse.warehouse_name);
 
     // setting warehouse mode
     this.navbarService.setWarehouseMode(true);
 
     // navigating to dashboard screen
-    this.router.navigate([`warehouses/warehouse/${id}`, { warehouseName: this.selectedWarehouse.warehouse_name }])
+    this.router.navigate(['dashboard']);
+    // this.router.navigate([`warehouses/warehouse/${id}`, { warehouseName: this.selectedWarehouse.warehouse_name }]);
   }
 
   onUpdateButtonClick(id: number) {

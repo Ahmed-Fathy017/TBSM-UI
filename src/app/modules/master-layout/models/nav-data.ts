@@ -30,7 +30,7 @@ export var adminNavbarData: INavbarData[] = [
 
 export var adminSecondaryNavbarData: INavbarData[] = [
     {
-        routeLink: 'warehouses/home',
+        routeLink: 'dashboard',
         icon: 'fa-solid fa-chart-line',
         iconUrl: '../../../../../assets/images/menu/home.svg',
         label: 'SideNav.Home',

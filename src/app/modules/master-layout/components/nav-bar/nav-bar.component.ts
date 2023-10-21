@@ -15,7 +15,6 @@ import { adminPermissions, secondaryAdminPermissions } from '../../models/permis
 })
 export class NavBarComponent implements OnInit {
 
-  // @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();
 
   lang: string = '';
   userName: string = '';
@@ -41,6 +40,9 @@ export class NavBarComponent implements OnInit {
 
     this.navbarService.getWarehouseMode().subscribe((state) => {
       this.warehouseName = state ? this.localService.getData('warehouseName') : '';
+      console.log(state)
+      console.log(this.warehouseName)
+
     });
   }
 
@@ -61,7 +63,7 @@ export class NavBarComponent implements OnInit {
     this.navbarService.setWarehouseMode(false);
     this.localService.removeData('warehouseName');
     this.localService.removeData('warehouseId');
-
+    this.router.navigate(['dashboard']);
   }
 
   logout() {
