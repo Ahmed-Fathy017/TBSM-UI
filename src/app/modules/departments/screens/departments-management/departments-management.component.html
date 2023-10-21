@@ -1,6 +1,6 @@
 <div class="container-fluid">
 
-    <div class="container ">
+    <div class="container " *ngIf="!isAdmin">
         <form action="" [formGroup]="createDepartmentForm">
 
             <div class=" row mb-2 ">
@@ -32,7 +32,7 @@
         </form>
     </div>
 
-    <app-page-header [pageTitle]="secondPageTitle"></app-page-header>
+    <app-page-header [pageTitle]="secondPageTitle" *ngIf="!isAdmin"></app-page-header>
 
     <app-loading *ngIf="isLoading"></app-loading>
 
@@ -45,7 +45,7 @@
                     {{department.name}}
                 </div>
 
-                <div class="d-flex">
+                <div class="d-flex" *ngIf="!isAdmin">
                     <div class="mx-2 edit d-flex justify-content-center align-items-center rounded-2"
                         data-bs-toggle="modal" data-bs-target="#editDepartmentModal"
                         (click)="onUpdateButtonClick(department.id)"><i class="fa-solid fa-pen-to-square"></i></div>

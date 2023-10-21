@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
 import { ToasterService } from 'src/app/modules/master-layout/services/toaster.service';
 import { LocalService } from 'src/app/modules/shared-components/services/local.service';
+import { UserTypes } from 'src/app/modules/authentication/models/user-types';
 
 @Component({
   selector: 'app-refrigerators-management',
@@ -46,6 +47,8 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
 
   isRtl: boolean = false;
 
+  isAdmin: boolean = false;
+
   @ViewChild('updateModalCloseButtonRef') updateModalCloseButtonRef!: ElementRef;
 
   constructor(
@@ -57,6 +60,8 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
     super(translateService);
     this.screenTitleNavigationService.setScreenKey('RefrigeratorsManagement');
     this.isRtl = this.localService.getData('lang') != 'en' ? true : false;
+    this.isAdmin = this.localService.getData('type') == UserTypes.ADMIN;
+
   }
 
   ngOnInit(): void {

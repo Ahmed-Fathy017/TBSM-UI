@@ -12,6 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
 import { ToasterService } from 'src/app/modules/master-layout/services/toaster.service';
+import { UserTypes } from 'src/app/modules/authentication/models/user-types';
 
 @Component({
   selector: 'app-properties-management',
@@ -61,6 +62,8 @@ export class PropertiesManagementComponent extends SharedMessagesComponent imple
   deletingAuthorityPermission: string = 'Properties.delete';
   updatingAuthorityPermission: string = 'Properties.update';
 
+  isAdmin: boolean = false;
+
   constructor(
     private toastr: ToasterService,
     private propertiesService: PropertiesService,
@@ -70,8 +73,8 @@ export class PropertiesManagementComponent extends SharedMessagesComponent imple
     private screenTitleNavigationService: ScreenTitleNavigationService) {
     super(translateService);
     this.screenTitleNavigationService.setScreenKey('PropertiesManagement');
-
     this.evaluateScreenPermissions();
+    this.isAdmin = this.localService.getData('type') == UserTypes.ADMIN;
   }
 
 

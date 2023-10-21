@@ -1,5 +1,4 @@
 <div class="container-fluid">
-    <!-- <app-page-header [pageTitle]="firstPageTitle" [coloredPageTitle]="coloredPageTitle"></app-page-header> -->
 
     <div class="container " *ngIf="hasCreatingAuthority">
         <form action="" [formGroup]="createUserForm">
@@ -96,20 +95,21 @@
         </form>
     </div>
 
-    <app-page-header [pageTitle]="secondPageTitle"></app-page-header>
+    <app-page-header [pageTitle]="secondPageTitle" *ngIf="!isAdmin"></app-page-header>
 
     <app-loading *ngIf="isLoading"></app-loading>
 
     <div class="container" *ngIf="!isLoading && users && users.length > 0">
 
         <table class=" table table-bordered rounded-table">
-            <thead >
-                <tr >
+            <thead>
+                <tr>
                     <th scope="col" class="text-center">{{'UsersManagementScreen.Username' | translate}}</th>
                     <th scope="col" class="text-center">{{'UsersManagementScreen.FullName' | translate}}</th>
                     <th scope="col" class="text-center">{{'UsersManagementScreen.Roles' | translate}}</th>
                     <th scope="col" class="text-center">{{'UsersManagementScreen.Status' | translate}}</th>
-                    <th scope="col" class="text-center">{{'UsersManagementScreen.Properties' | translate}}</th>
+                    <th scope="col" class="text-center" *ngIf="hasDeletingAuthority || hasUpdatingAuthority">
+                        {{'UsersManagementScreen.Properties' | translate}}</th>
                 </tr>
             </thead>
             <tbody>
@@ -127,18 +127,18 @@
                             </ng-template>
                         </div>
                     </td>
-                    <td>
+                    <td *ngIf="hasDeletingAuthority || hasUpdatingAuthority">
                         <div class="d-flex justify-content-center">
 
                             <div class="mx-2 edit d-flex justify-content-center align-items-center rounded-2"
                                 data-bs-toggle="modal" data-bs-target="#editModal"
-                                (click)="onUpdateButtonClick(user.id)"><i class="fa-solid fa-pen-to-square"
-                                    *ngIf="hasUpdatingAuthority"></i>
+                                (click)="onUpdateButtonClick(user.id)" *ngIf="hasUpdatingAuthority"><i
+                                    class="fa-solid fa-pen-to-square"></i>
                             </div>
                             <div class="mx-2 delete d-flex justify-content-center align-items-center rounded-2"
                                 data-bs-toggle="modal" data-bs-target="#deleteModal"
-                                (click)="onDeleteButtonClick(user.id)"><i class="fa-solid fa-trash-can"
-                                    *ngIf="hasDeletingAuthority"></i>
+                                (click)="onDeleteButtonClick(user.id)" *ngIf="hasDeletingAuthority"><i
+                                    class="fa-solid fa-trash-can"></i>
                             </div>
                         </div>
 
@@ -210,7 +210,8 @@
                             <label for="password01" class="mb-1 d-flex"> {{'UsersManagementScreen.Password' |
                                 translate}}
                             </label>
-                            <input id="password01" class="form-control" type="password" formControlName="password" (input)="onPasswordInput()">
+                            <input id="password01" class="form-control" type="password" formControlName="password"
+                                (input)="onPasswordInput()">
 
                             <div *ngIf="updateUserForm.controls.password.invalid && (updateUserForm.controls.password.dirty || updateUserForm.controls.password.touched)"
                                 class="alert p-0 m-1 h6">

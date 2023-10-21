@@ -1,6 +1,6 @@
 <div class="container-fluid">
 
-    <div class="container" *ngIf="hasCreatingAuthority">
+    <div class="container" *ngIf="hasCreatingAuthority" >
         <form class="row mb-2" [formGroup]="createPropertyForm">
             <div class="col-md-6 col-lg-6 col-xl-6">
                 <label for="propertyType" class="mb-1 d-flex">{{'PropertiesManagementScreen.PropertyType' | translate}}
@@ -61,7 +61,7 @@
         </div>
     </div>
 
-    <app-page-header [pageTitle]="secondPageTitle"></app-page-header>
+    <app-page-header [pageTitle]="secondPageTitle" *ngIf="!isAdmin"></app-page-header>
 
     <app-loading *ngIf="isLoading"></app-loading>
 
