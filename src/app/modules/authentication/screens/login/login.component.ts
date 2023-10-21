@@ -211,16 +211,12 @@ export class LoginComponent implements OnInit {
       this.localStore.saveData('navData', JSON.stringify(adminSecondaryNavbarData));
     else
       this.localStore.saveData('navData', JSON.stringify(adminNavbarData));
-
   }
 
 
 
   navigateToHomePage() {
-    // if (this.localStore.getData('type') === UserTypes.ADMIN)
       this.router.navigate(['dashboard']);
-    // else
-    //   this.router.navigate(['warehouses/home']);
   }
 
   showErrorMessage(message: string) {
