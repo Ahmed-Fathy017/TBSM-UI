@@ -11,6 +11,7 @@ import { Permission } from 'src/app/modules/roles/models/permission';
 import { ScreensConfigProvider } from 'src/app/modules/master-layout/providers/screens-config-provider';
 import { adminNavbarData, userNavbarData } from 'src/app/modules/master-layout/models/nav-data';
 import { INavbarData } from 'src/app/modules/master-layout/models/helper';
+import { adminPermissions } from 'src/app/modules/master-layout/models/permissions';
 
 @Component({
   selector: 'app-login',
@@ -50,7 +51,7 @@ export class LoginComponent implements OnInit {
   /*************** Events  **********************/
   ngOnInit(): void {
 
-   // re clearing local storage data
+    // re clearing local storage data
     // this.localStore.clearData();
     // resetting navData array
     this.localStore.removeData('navData');
@@ -109,8 +110,8 @@ export class LoginComponent implements OnInit {
 
   // login
   login(requestDTO: LoginRequest) {
-    
-    
+
+
     this.hideErrorMessage();
     let tokenReqSubscription = this.authenticationService
       .login(requestDTO)
@@ -126,7 +127,7 @@ export class LoginComponent implements OnInit {
             this.setupAdminPermissions();
             this.setupAdminNavbarData();
           }
-          else if (this.localStore.getData('type') === UserTypes.WAREHOUSE){
+          else if (this.localStore.getData('type') === UserTypes.WAREHOUSE) {
 
             this.setupUserPermissions(response);
             this.setupUserNavbarData();
@@ -193,13 +194,10 @@ export class LoginComponent implements OnInit {
 
   setupAdminPermissions() {
 
-    this.localStore.saveData("permissions", JSON.stringify([
-      ScreensConfigProvider.AlmostExpiredProductsViewManagementScreen,
-      ScreensConfigProvider.ExpiredProductsViewManagementScreen,
-      ScreensConfigProvider.EmptyQuantityProductsViewManagementScreen,
-      ScreensConfigProvider.LittleQuantityProductsViewManagementScreen,
-      ScreensConfigProvider.VairableTemperatureProductsViewManagementScreen
-    ]));
+    // setting the initial permissions array for the admin
+    // this is considered a temp variable, its value changes
+    // upon selecting and de-seclecting specific warehouse
+    this.localStore.saveData("permissions", JSON.stringify(adminPermissions));
   }
 
   setupAdminNavbarData() {

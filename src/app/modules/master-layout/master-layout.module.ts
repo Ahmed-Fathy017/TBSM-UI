@@ -30,6 +30,7 @@ import { UnauthorizedComponent } from '../shared-components/components/unauthori
 import { ScreenTitleNavigationService } from './services/screen-title-navigation.service';
 import { ToastrModule } from 'ngx-toastr';
 import { ToasterService } from './services/toaster.service';
+import { NavbarService } from './services/navbar.service';
 
 
 
@@ -69,7 +70,8 @@ import { ToasterService } from './services/toaster.service';
     SupplyChainsService,
     TranslateService,
     ScreenTitleNavigationService,
-    ToasterService
+    ToasterService,
+    NavbarService
   ]
 })
 export class MasterLayoutModule { }

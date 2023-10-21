@@ -7,10 +7,6 @@
 
         <div class="d-flex  justify-content-between">
 
-            <!-- <div class="header-menu ms-3 d-flex align-items-center">
-                <span (click)="toggleSideNav()" class="menu-icon material-icons"><i class="fa-solid fa-bars"></i></span>
-            </div> -->
-
             <div [class]="lang !== 'en'? 'avatar-small-arabic' : 'avatar-small-english'">
                 <img class="avatar-img rounded-circle"
                     src="https://i.insider.com/5c007f32499ade0d21195b72?width=1100&format=jpeg&auto=webp" />
@@ -24,11 +20,19 @@
                     data-bs-toggle="dropdown" aria-expanded="false">
                     {{userName}}
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                    <li (click)="onLogoutClick()"><a class="dropdown-item active">{{'NavBar.Logout' | translate}}</a>
+                <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton2">
+                    <li (click)="onResetWarehouseModeButtonClick()" *ngIf="isAdmin && warehouseName">
+                        <a class="dropdown-item">Reset</a>
+                    </li>
+                    <li (click)="onLogoutClick()">
+                        <a class="dropdown-item">{{'NavBar.Logout' | translate}}</a>
                     </li>
 
                 </ul>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-center border rounded-2 px-2" *ngIf="warehouseName && isAdmin">
+                {{warehouseName}}
             </div>
         </div>
 
