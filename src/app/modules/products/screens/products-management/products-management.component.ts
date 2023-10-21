@@ -56,7 +56,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
     value: new FormControl('')
   });
 
-  searchItems = ProductSearchItems;
+  searchItems: { name: string, value: string }[] = [];
   productFilters = ProductFilters;
   filter: string = '';
 
@@ -419,7 +419,31 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
     let subscribtion = this.propertiesService.getProperties().subscribe(
       (response: any) => {
         this.properties = response.data;
-        this.requiredPropertiesIds = this.properties.filter(i => i.required_status).map(i => i.id);
+
+        let filteredProperties = this.properties.filter(i => i.required_status);
+        this.requiredPropertiesIds = filteredProperties.map(i => i.id);
+
+
+        // adding name search item
+        this.searchItems.push({
+          name: 'ProductsManagmentScreen.NameSearch',
+          value: 'name'
+        });
+
+        // adding required properties to the search items array
+        filteredProperties.map((property) => {
+          this.searchItems.push({
+            name: property.name,
+            value: 'properities'
+          })
+        });
+
+        // adding other search item
+        this.searchItems.push({
+          name: 'ProductsManagmentScreen.OtherSearch',
+          value: 'other'
+        });
+
         this.selectedProperty = this.properties[0];
       }, (error: any) => {
         if (error.error.errors && error.error.errors.length > 0)
