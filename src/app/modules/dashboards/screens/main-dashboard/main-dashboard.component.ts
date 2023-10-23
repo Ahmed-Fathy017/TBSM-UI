@@ -44,12 +44,14 @@ export class MainDashboardComponent extends SharedMessagesComponent implements O
   }
 
   ngOnInit(): void {
-    this.loadData();
+    if (this.isAdmin) {
+      this.loadData();
 
-    this.navbarService.getWarehouseMode().subscribe((state) => {
-      this.warehouseName = state ? this.localService.getData('warehouseName') : '';
-      this.warehouseId = state ? this.localService.getData('warehouseId') : '';
-    });
+      this.navbarService.getWarehouseMode().subscribe((state) => {
+        this.warehouseName = state ? this.localService.getData('warehouseName') : '';
+        this.warehouseId = state ? this.localService.getData('warehouseId') : '';
+      });
+    }
   }
 
   ngOnDestroy(): void {

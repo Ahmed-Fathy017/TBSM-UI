@@ -5,8 +5,7 @@ import { LocalService } from 'src/app/modules/shared-components/services/local.s
 import { SideNavToggle } from '../../models/sidenav-toggle';
 import { NavbarService } from '../../services/navbar.service';
 import { UserTypes } from 'src/app/modules/authentication/models/user-types';
-import { adminNavbarData, adminSecondaryNavbarData } from '../../models/nav-data';
-import { adminPermissions, secondaryAdminPermissions } from '../../models/permissions';
+
 
 @Component({
   selector: 'app-nav-bar',
@@ -40,9 +39,6 @@ export class NavBarComponent implements OnInit {
 
     this.navbarService.getWarehouseMode().subscribe((state) => {
       this.warehouseName = state ? this.localService.getData('warehouseName') : '';
-      console.log(state)
-      console.log(this.warehouseName)
-
     });
   }
 

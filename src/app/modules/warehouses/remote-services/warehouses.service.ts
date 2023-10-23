@@ -43,6 +43,11 @@ export class WarehousesService extends AbstractRemoteService {
   getWarehouse() {
     let apiUrl = this.apiURl + `warehouse/main`;
 
+    return this.http.get(apiUrl);
+  }
+
+  showWarehouse(id: number) {
+    let apiUrl = this.apiURl + `auth/show_warehouses/${id}`;
 
     return this.http.get(apiUrl);
   }

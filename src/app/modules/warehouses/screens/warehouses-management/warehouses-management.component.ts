@@ -16,6 +16,8 @@ import { LocalService } from 'src/app/modules/shared-components/services/local.s
 import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
 import { ToasterService } from 'src/app/modules/master-layout/services/toaster.service';
 import { NavbarService } from 'src/app/modules/master-layout/services/navbar.service';
+import { PermissionGroup } from 'src/app/modules/roles/models/permission-group';
+import { Permission } from 'src/app/modules/roles/models/permission';
 // import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -99,18 +101,8 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
 
   onViewButtonClick(id: number) {
     this.selectedWarehouse = this.warehouses.find(i => i.id == id)!;
-    console.log(this.selectedWarehouse)
 
-    // setting the selected warehouse data in the local storage for further usage
-    this.localService.saveData('warehouseId', String(id));
-    this.localService.saveData('warehouseName', this.selectedWarehouse.warehouse_name);
-
-    // setting warehouse mode
-    this.navbarService.setWarehouseMode(true);
-
-    // navigating to dashboard screen
-    this.router.navigate(['dashboard']);
-    // this.router.navigate([`warehouses/warehouse/${id}`, { warehouseName: this.selectedWarehouse.warehouse_name }]);
+    this.showWarehouse();
   }
 
   onUpdateButtonClick(id: number) {
@@ -217,6 +209,48 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
         else
           this.toastr.error(error.error.message, this.errorOperationHeader);
         this.isLoading = false;
+      }
+    );
+
+    this.subscription.add(subscription);
+  }
+
+  showWarehouse() {
+
+    this.isLoading = true;
+
+    let subscription = this.warehousesService.showWarehouse(this.selectedWarehouse.id).subscribe(
+      (response: any) => {
+        // setting permissions
+        let permissions: string[] = [];
+        response.data.permissions.map((i: PermissionGroup) => {
+          let groupName = i.group_name_en;
+          i.permissions.map((j: Permission) => {
+            let permission = `${groupName}.${j.value}`;
+            permissions.push(permission);
+          });
+        });
+    
+        this.localService.saveData("permissions", JSON.stringify(permissions));
+
+        // setting the selected warehouse data in the local storage for further usage
+        this.localService.saveData('warehouseId', String(this.selectedWarehouse.id));
+        this.localService.saveData('warehouseName', this.selectedWarehouse.warehouse_name);
+
+        // setting warehouse mode
+        this.navbarService.setWarehouseMode(true);
+
+        // navigating to dashboard screen
+        this.router.navigate(['dashboard']);
+        // this.router.navigate([`warehouses/warehouse/${id}`, { warehouseName: this.selectedWarehouse.warehouse_name }]);
+
+        this.isLoading = false;
+      }, (error: any) => {
+        this.isLoading = false;
+        if (error.error.errors && error.error.errors.length > 0)
+          this.toastr.error(error.error.errors[0].value, error.error.message);
+        else
+          this.toastr.error(error.error.message, this.errorOperationHeader);
       }
     );
 
