@@ -1,6 +1,7 @@
 {
     "dir": "rtl",
     "NavBar": {
+        "Reset": "إعادة ضبط",
         "Logout": "تسجيل الخروج"
     },
     "SideNav": {

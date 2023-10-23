@@ -22,16 +22,19 @@
                 </button>
                 <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton2">
                     <li (click)="onResetWarehouseModeButtonClick()" *ngIf="isAdmin && warehouseName">
-                        <a class="dropdown-item">Reset</a>
+                        <a class="dropdown-item  " [ngClass]="lang != 'en'? 'text-align-right' : ''">{{'NavBar.Reset' |
+                            translate}}</a>
                     </li>
                     <li (click)="onLogoutClick()">
-                        <a class="dropdown-item">{{'NavBar.Logout' | translate}}</a>
+                        <a class="dropdown-item " [ngClass]="lang != 'en'? 'text-align-right' : ''">{{'NavBar.Logout' |
+                            translate}}</a>
                     </li>
 
                 </ul>
             </div>
 
-            <div class="d-flex align-items-center justify-content-center border rounded-2 px-2" *ngIf="warehouseName && isAdmin">
+            <div class="d-flex align-items-center justify-content-center border rounded-2 px-2"
+                *ngIf="warehouseName && isAdmin">
                 {{warehouseName}}
             </div>
         </div>

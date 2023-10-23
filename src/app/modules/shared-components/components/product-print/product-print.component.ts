@@ -32,8 +32,10 @@ export class ProductPrintComponent implements OnInit, OnDestroy {
     private renderer: Renderer2) {
     this.productInfo = JSON.parse(this.localService.getData('productInfo'));
 
-    if (this.productInfo)
+    if (this.productInfo) {
       this.productInfo.expiration_date = this.productInfo.expiration_date?? 'none';
+      this.productInfo.productNameDepartment = `${this.productInfo.name} - ${this.productInfo.category_name}`
+    }
   }
 
   ngOnInit(): void {

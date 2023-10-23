@@ -230,6 +230,8 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
             permissions.push(permission);
           });
         });
+
+        console.log(permissions)
     
         this.localService.saveData("permissions", JSON.stringify(permissions));
 

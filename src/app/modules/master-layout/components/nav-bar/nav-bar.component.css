@@ -24,13 +24,28 @@
   border-radius: 50% !important;
 }
 
+.text-align-right {
+  text-align: right !important;
+}
+
+
+.dropdown-item:hover {
+  background-color: #100F37;
+  color: #ffffff;
+}
+
+.dropdown-item:active {
+  background-color: #100F37;
+  color: #ffffff;
+}
+
 .menu-icon {
   font-size: 1.4rem;
 
   cursor: pointer;
 }
 
-.dropdown-menu{
+.dropdown-menu {
   top: 117% !important;
 }
 
