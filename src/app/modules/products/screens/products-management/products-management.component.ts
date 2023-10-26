@@ -383,12 +383,12 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
     //   this.hasProductSupplyDemandingAuthority = true;
     //   this.hasProductIncreasingAuthority = true;
     // } else {
-      this.hasProductViewingAuthority = this.permissions.findIndex(i => i === this.productViewingAuthorityPermission) != -1 ? true : false;
-      this.hasProductDeletionAuthority = this.permissions.findIndex(i => i === this.productDeletionAuthorityPermission) != -1 ? true : false;
-      this.hasProductUpdatingAuthority = this.permissions.findIndex(i => i === this.productUpdatingAuthorityPermission) != -1 ? true : false;
-      this.hasProductBarcodePrintingAuthority = this.permissions.findIndex(i => i === this.productBarcodePrintingAuthorityPermission) != -1 ? true : false;
-      this.hasProductSupplyDemandingAuthority = this.permissions.findIndex(i => i === this.productSupplyDemandingAuthorityPermission) != -1 ? true : false;
-      this.hasProductIncreasingAuthority = this.permissions.findIndex(i => i === this.productIncreasingAuthorityPermission) != -1 ? true : false;
+    this.hasProductViewingAuthority = this.permissions.findIndex(i => i === this.productViewingAuthorityPermission) != -1 ? true : false;
+    this.hasProductDeletionAuthority = this.permissions.findIndex(i => i === this.productDeletionAuthorityPermission) != -1 ? true : false;
+    this.hasProductUpdatingAuthority = this.permissions.findIndex(i => i === this.productUpdatingAuthorityPermission) != -1 ? true : false;
+    this.hasProductBarcodePrintingAuthority = this.permissions.findIndex(i => i === this.productBarcodePrintingAuthorityPermission) != -1 ? true : false;
+    this.hasProductSupplyDemandingAuthority = this.permissions.findIndex(i => i === this.productSupplyDemandingAuthorityPermission) != -1 ? true : false;
+    this.hasProductIncreasingAuthority = this.permissions.findIndex(i => i === this.productIncreasingAuthorityPermission) != -1 ? true : false;
     // }
   }
 
@@ -604,13 +604,16 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
       (response: any) => {
 
         this.productRedirectLink = response.data;
+        
+        this.localService.saveData('productInfo', JSON.stringify(response.data));
 
         if (!isNewlyCreatedProduct)
-          this.localService.saveData('productInfo', JSON.stringify(response.data));
+          this.onProductPrintClick();
         else
           this.showProductSnackbar();
 
-        this.onProductPrintClick();
+        console.log(response.data)
+
 
       }, (error: any) => {
         if (error.error.errors && error.error.errors.length > 0)

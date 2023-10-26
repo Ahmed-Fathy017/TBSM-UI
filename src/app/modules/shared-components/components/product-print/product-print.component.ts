@@ -34,7 +34,7 @@ export class ProductPrintComponent implements OnInit, OnDestroy {
 
     if (this.productInfo) {
       this.productInfo.expiration_date = this.productInfo.expiration_date?? 'none';
-      this.productInfo.productNameDepartment = `${this.productInfo.name} - ${this.productInfo.category_name}`
+      this.productInfo.productNameDepartment = `${this.productInfo.name} - ${this.productInfo.category}`
     }
   }
 
