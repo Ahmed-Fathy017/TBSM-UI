@@ -110,6 +110,7 @@ export class WithdrawProductComponent extends SharedMessagesComponent implements
             this.renderer.setStyle(startCameraButton, 'border', 'none');
             this.renderer.setStyle(startCameraButton, 'width', '10rem');
             this.renderer.setStyle(startCameraButton, 'height', '2rem');
+            this.renderer.setStyle(startCameraButton, 'display', 'none');
           }
 
           if (stopCameraButton) {
