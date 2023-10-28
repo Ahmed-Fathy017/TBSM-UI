@@ -13,6 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
 import { ToasterService } from 'src/app/modules/master-layout/services/toaster.service';
+import { UserTypes } from 'src/app/modules/authentication/models/user-types';
 
 @Component({
   selector: 'app-users-management',
@@ -63,6 +64,8 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
   deletingAuthorityPermission: string = 'Users.delete';
   updatingAuthorityPermission: string = 'Users.update';
 
+  isAdmin: boolean = false;
+
   constructor(
     private toastr: ToasterService,
     private rolesService: RolesService,
@@ -72,8 +75,8 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
     private screenTitleNavigationService: ScreenTitleNavigationService) {
     super(translateService);
     this.screenTitleNavigationService.setScreenKey('UsersManagement');
-
     this.evaluateScreenPermissions();
+    this.isAdmin = this.localService.getData('type') == UserTypes.ADMIN;
   }
 
   ngOnInit(): void {
@@ -136,9 +139,11 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
   }
 
   onUpdateUserStatusClick(userId: number) {
-    this.selectedUser = this.users.find(i => i.id == userId)!;
+    if (!this.isAdmin) {
+      this.selectedUser = this.users.find(i => i.id == userId)!;
 
-    this.updateUserStatus();
+      this.updateUserStatus();
+    }
   }
 
 

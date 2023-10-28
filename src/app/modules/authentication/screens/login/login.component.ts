@@ -11,6 +11,8 @@ import { Permission } from 'src/app/modules/roles/models/permission';
 import { ScreensConfigProvider } from 'src/app/modules/master-layout/providers/screens-config-provider';
 import { adminNavbarData, userNavbarData } from 'src/app/modules/master-layout/models/nav-data';
 import { INavbarData } from 'src/app/modules/master-layout/models/helper';
+import { adminPermissions } from 'src/app/modules/master-layout/models/permissions';
+import { NavbarService } from 'src/app/modules/master-layout/services/navbar.service';
 
 @Component({
   selector: 'app-login',
@@ -44,13 +46,14 @@ export class LoginComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private localStore: LocalService
+    private localStore: LocalService,
+    private navbarService: NavbarService
   ) { }
 
   /*************** Events  **********************/
   ngOnInit(): void {
 
-   // re clearing local storage data
+    // re clearing local storage data
     // this.localStore.clearData();
     // resetting navData array
     this.localStore.removeData('navData');
@@ -109,13 +112,17 @@ export class LoginComponent implements OnInit {
 
   // login
   login(requestDTO: LoginRequest) {
-    
-    
+
+
     this.hideErrorMessage();
     let tokenReqSubscription = this.authenticationService
       .login(requestDTO)
       .subscribe(
         (response: any) => {
+          // clearing data in case of login without logout
+          // in order to reset views
+          this.localStore.clearData();
+
           this.localStore.saveData('token', response.auth_data.access_token);
           this.localStore.saveData('username', response.data.username);
           this.localStore.saveData('type', response.data.type.toLowerCase());
@@ -125,12 +132,14 @@ export class LoginComponent implements OnInit {
           if (this.localStore.getData('type') === UserTypes.ADMIN) {
             this.setupAdminPermissions();
             this.setupAdminNavbarData();
+            this.navbarService.setWarehouseMode(false);
           }
-          else if (this.localStore.getData('type') === UserTypes.WAREHOUSE){
+          else if (this.localStore.getData('type') === UserTypes.WAREHOUSE) {
 
             this.setupUserPermissions(response);
             this.setupUserNavbarData();
           }
+
 
           this.navigateToHomePage()
 
@@ -193,28 +202,29 @@ export class LoginComponent implements OnInit {
 
   setupAdminPermissions() {
 
-    this.localStore.saveData("permissions", JSON.stringify([
-      ScreensConfigProvider.AlmostExpiredProductsViewManagementScreen,
-      ScreensConfigProvider.ExpiredProductsViewManagementScreen,
-      ScreensConfigProvider.EmptyQuantityProductsViewManagementScreen,
-      ScreensConfigProvider.LittleQuantityProductsViewManagementScreen,
-      ScreensConfigProvider.VairableTemperatureProductsViewManagementScreen
-    ]));
+    // setting the initial permissions array for the admin
+    // this is considered a temp variable, its value changes
+    // upon selecting and de-seclecting specific warehouse
+    // if (this.localStore.getData('warehouseId') && this.localStore.getData('warehouseName'))
+    //   this.localStore.saveData("permissions", JSON.stringify(secondaryAdminPermissions));
+    // else
+    this.localStore.saveData("permissions", JSON.stringify(adminPermissions));
   }
 
   setupAdminNavbarData() {
     // no need for implementation as all the menu items will be shown to
     // the user by default (as two separated arrays, can be enhanced and merged into one array later)
+
+    // if (this.localStore.getData('warehouseId') && this.localStore.getData('warehouseName'))
+    //   this.localStore.saveData('navData', JSON.stringify(adminSecondaryNavbarData));
+    // else
     this.localStore.saveData('navData', JSON.stringify(adminNavbarData));
   }
 
 
 
   navigateToHomePage() {
-    if (this.localStore.getData('type') === UserTypes.ADMIN)
-      this.router.navigate(['dashboard']);
-    else
-      this.router.navigate(['warehouses/home']);
+    this.router.navigate(['dashboard']);
   }
 
   showErrorMessage(message: string) {

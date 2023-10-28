@@ -19,6 +19,8 @@ import { TranslateModule } from '@ngx-translate/core';
     TranslateModule
   ], providers: [
     WarehousesService
+  ], exports: [
+    WarehouseDetailsComponent
   ]
 })
 export class WarehousesModule { }

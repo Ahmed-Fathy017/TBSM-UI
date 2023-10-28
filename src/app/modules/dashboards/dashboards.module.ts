@@ -4,6 +4,7 @@ import { MainDashboardComponent } from './screens/main-dashboard/main-dashboard.
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
 import { DashboardsService } from './remote-services/dashboards.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { WarehousesModule } from '../warehouses/warehouses.module';
 
 
 
@@ -13,7 +14,8 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
   imports: [
     CommonModule,
-    SharedComponentsModule
+    SharedComponentsModule,
+    WarehousesModule
   ], providers: [
     DashboardsService
   ]

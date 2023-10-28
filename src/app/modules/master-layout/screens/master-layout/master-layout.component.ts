@@ -4,6 +4,7 @@ import { ScreenTitleNavigationService } from '../../services/screen-title-naviga
 import { IScreenNavigator } from '../../models/screen-navigator';
 import { NgZone } from '@angular/core';
 import { switchMap } from 'rxjs/operators';
+import { NavbarService } from '../../services/navbar.service';
 
 @Component({
   selector: 'app-master-layout',
@@ -21,12 +22,16 @@ export class MasterLayoutComponent implements OnInit {
   screenNavigators: IScreenNavigator[] = [{ name: 'ScreenNames.Home', routeLink: 'warehouses/home' }];
 
   constructor(private localService: LocalService,
-    private screenTitleNavigationService: ScreenTitleNavigationService) {
+    private screenTitleNavigationService: ScreenTitleNavigationService,
+    private navbarService: NavbarService) {
 
   }
 
   ngOnInit(): void {
     this.lang = this.localService.getData('lang');
+
+    if (this.localService.getData('warehouseId') && this.localService.getData('warehouseName'))
+      this.navbarService.setWarehouseMode(true);
 
     this.screenTitleNavigationService.getScreenKey().subscribe((state) => {
       // This code will only run when the getScreenKey() observable emits a value

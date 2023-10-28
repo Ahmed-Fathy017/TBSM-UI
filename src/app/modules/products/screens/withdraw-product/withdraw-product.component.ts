@@ -15,6 +15,7 @@ import { Html5QrcodeScanType, Html5QrcodeScanner } from "html5-qrcode";
 import { Html5Qrcode } from "html5-qrcode";
 import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
 import { ToasterService } from 'src/app/modules/master-layout/services/toaster.service';
+import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 
 @Component({
   selector: 'app-withdraw-product',
@@ -44,6 +45,8 @@ export class WithdrawProductComponent extends SharedMessagesComponent implements
 
   products: Product[] = [];
 
+  @ViewChild('startCameraButton', { static: false }) startCameraButton!: ElementRef;
+  @ViewChild('stopCameraButton', { static: false }) stopCameraButton!: ElementRef;
 
   // constructor
   constructor(
@@ -52,7 +55,8 @@ export class WithdrawProductComponent extends SharedMessagesComponent implements
     private translateService: TranslateService,
     private screenTitleNavigationService: ScreenTitleNavigationService,
     private renderer: Renderer2,
-    private elementRef: ElementRef) {
+    private elementRef: ElementRef,
+    private localService: LocalService) {
     super(translateService);
     this.screenTitleNavigationService.setScreenKey('WithdrawProduct');
 
@@ -62,7 +66,8 @@ export class WithdrawProductComponent extends SharedMessagesComponent implements
 
   // events
   ngOnInit(): void {
-
+    if (localStorage.getItem('HTML5_QRCODE_DATA'))
+      localStorage.removeItem('HTML5_QRCODE_DATA');
   }
 
   ngAfterViewInit(): void {
@@ -83,39 +88,44 @@ export class WithdrawProductComponent extends SharedMessagesComponent implements
         this.renderer.removeAttribute(cameraPermissionButton, 'style');
         this.renderer.setStyle(cameraPermissionButton, 'background-color', '#F15A60');
         this.renderer.setStyle(cameraPermissionButton, 'color', 'white');
-        this.renderer.setStyle(cameraPermissionButton, 'border-radius', '2rem');
+        this.renderer.setStyle(cameraPermissionButton, 'border-radius', '10px');
         this.renderer.setStyle(cameraPermissionButton, 'border', 'none');
         this.renderer.setStyle(cameraPermissionButton, 'width', '15rem');
-        this.renderer.setStyle(cameraPermissionButton, 'height', '2rem');
+        this.renderer.setStyle(cameraPermissionButton, 'height', '2.2rem');
       }
 
-      setTimeout(() => {
-        const startCameraButton = this.elementRef.nativeElement.querySelector(`#html5-qrcode-button-camera-start`);
-        const stopCameraButton = this.elementRef.nativeElement.querySelector(`#html5-qrcode-button-camera-stop`);
+      // Add an event listener
+      cameraPermissionButton.addEventListener('click', (event: any) => {
+        // Your event handler code here
+        // For example, you can do something when the button is clicked.
+        setTimeout(() => {
+          const startCameraButton = this.elementRef.nativeElement.querySelector(`#html5-qrcode-button-camera-start`);
+          const stopCameraButton = this.elementRef.nativeElement.querySelector(`#html5-qrcode-button-camera-stop`);
 
-       
+          if (startCameraButton) {
+            this.renderer.removeAttribute(startCameraButton, 'style');
+            this.renderer.setStyle(startCameraButton, 'background-color', '#F15A60');
+            this.renderer.setStyle(startCameraButton, 'color', 'white');
+            this.renderer.setStyle(startCameraButton, 'border-radius', '10px');
+            this.renderer.setStyle(startCameraButton, 'border', 'none');
+            this.renderer.setStyle(startCameraButton, 'width', '10rem');
+            this.renderer.setStyle(startCameraButton, 'height', '2.2rem');
+            this.renderer.setStyle(startCameraButton, 'display', 'none');
+          }
 
-        if (startCameraButton) {
-          this.renderer.removeAttribute(startCameraButton, 'style');
-          this.renderer.setStyle(startCameraButton, 'background-color', '#F15A60');
-          this.renderer.setStyle(startCameraButton, 'color', 'white');
-          this.renderer.setStyle(startCameraButton, 'border-radius', '2rem');
-          this.renderer.setStyle(startCameraButton, 'border', 'none');
-          this.renderer.setStyle(startCameraButton, 'width', '10rem');
-          this.renderer.setStyle(startCameraButton, 'height', '2rem');
-        }
+          if (stopCameraButton) {
+            this.renderer.removeAttribute(stopCameraButton, 'style');
+            this.renderer.setStyle(stopCameraButton, 'background-color', '#F15A60');
+            this.renderer.setStyle(stopCameraButton, 'color', 'white');
+            this.renderer.setStyle(stopCameraButton, 'border-radius', '10px');
+            this.renderer.setStyle(stopCameraButton, 'border', 'none');
+            this.renderer.setStyle(stopCameraButton, 'width', '10rem');
+            this.renderer.setStyle(stopCameraButton, 'height', '2.2rem');
+          }
 
-        if (stopCameraButton) {
-          this.renderer.removeAttribute(stopCameraButton, 'style');
-          this.renderer.setStyle(stopCameraButton, 'background-color', '#F15A60');
-          this.renderer.setStyle(stopCameraButton, 'color', 'white');
-          this.renderer.setStyle(stopCameraButton, 'border-radius', '2rem');
-          this.renderer.setStyle(stopCameraButton, 'border', 'none');
-          this.renderer.setStyle(stopCameraButton, 'width', '10rem');
-          this.renderer.setStyle(stopCameraButton, 'height', '2rem');
-        }
+        }, 1500);
+      });
 
-      }, 1500);
       this.isLoading = false;
 
     }, 1000);

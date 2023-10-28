@@ -6,6 +6,8 @@ import { UserTypes } from 'src/app/modules/authentication/models/user-types';
 import { INavbarData } from '../../models/helper';
 import { Router } from '@angular/router';
 import { SideNavToggle } from '../../models/sidenav-toggle';
+import { NavbarService } from '../../services/navbar.service';
+import { adminPermissions } from '../../models/permissions';
 
 @Component({
   selector: 'app-sidenav',
@@ -37,6 +39,7 @@ export class SidenavComponent implements OnInit {
   lang!: string;
 
   constructor(private localService: LocalService,
+    private navbarService: NavbarService,
     private router: Router) {
 
     this.navData = JSON.parse(this.localService.getData('navData'));
@@ -50,6 +53,28 @@ export class SidenavComponent implements OnInit {
 
     if (this.screenWidth < 768)
       this.collapsed = false;
+
+    // warehouse mode change subscription 
+    this.navbarService.getWarehouseMode().subscribe((state) => {
+      if (this.localService.getData('type') == UserTypes.ADMIN) {
+        let data = '';
+        let permissions = '';
+
+        if (state) {
+          data = JSON.stringify(userNavbarData);
+          // permissions = JSON.stringify(secondaryAdminPermissions);
+        }
+        else {
+          data = JSON.stringify(adminNavbarData);
+          permissions = JSON.stringify(adminPermissions);
+        }
+
+        this.localService.saveData('navData', data);
+        // this.localService.saveData('permissions', permissions);
+
+        this.navData = JSON.parse(data);
+      }
+    });
 
   }
 

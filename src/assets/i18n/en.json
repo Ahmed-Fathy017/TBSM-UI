@@ -1,6 +1,7 @@
 {
     "dir": "ltr",
     "NavBar": {
+        "Reset": "Reset",
         "Logout": "Logout"
     },
     "SideNav": {

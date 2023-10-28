@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild, } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Department } from 'src/app/modules/departments/models/department';
 import { DepartmentsService } from 'src/app/modules/departments/remote-services/departments.service';
@@ -41,6 +41,7 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
   departments: Department[] = [];
   refrigerators: Refrigerator[] = [];
   properties: Property[] = [];
+  optionalProperties: Property[] = [];
 
   addedProperties: Property[] = [];
   selectedProperty: Property | null = null;
@@ -55,7 +56,15 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
     refrigerator: new FormControl('', [Validators.required]),
     externalSupply: new FormControl(false),
     property: new FormControl(''),
+
+     // Define a FormArray for dynamic controls
+    //  dynamicControls: this.formBuilder.array([]),
   });
+
+  // Getter for the dynamicControls FormArray
+  // get dynamicControls() {
+  //   return this.createProductForm.get('dynamicControls') as FormArray;
+  // }
 
   createdProductId: number = 0;
   isRtl: boolean = true;
@@ -70,7 +79,8 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
     private translateService: TranslateService,
     private screenTitleNavigationService: ScreenTitleNavigationService,
     private localService: LocalService,
-    private router: Router
+    private router: Router,
+    private formBuilder: FormBuilder
   ) {
     super(translateService);
     this.screenTitleNavigationService.setScreenKey('CreateProduct');
@@ -129,16 +139,21 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
 
   onCreateButtonClick() {
 
-    let allRequiredPropertiesExist = this.addedProperties.some(i => this.requiredPropertiesIds.every(j => j == i.property_id));
-    if (!allRequiredPropertiesExist && this.addedProperties?.length > 0) 
-      this.toastr.warning(this.invalidInputCountMessage, this.invalidInputWarningHeader);
-
     Object.keys(this.createProductForm.controls).forEach(field => {
       const control = this.createProductForm.get(field);
       if (control instanceof FormControl) {
         control.markAsTouched({ onlySelf: true });
       }
     });
+
+    let allRequiredPropertiesExist = this.addedProperties.some(i => this.requiredPropertiesIds.every(j => j == i.property_id));
+    let allRequiredPropertiesHaveValues = this.addedProperties.filter(i => i.required_status).every(i => i.value);
+
+    if ((!allRequiredPropertiesExist || !allRequiredPropertiesHaveValues) && this.addedProperties?.length > 0) {
+      this.toastr.warning(this.invalidInputCountMessage, this.invalidInputWarningHeader);
+      return;
+    }
+
 
     if (this.createProductForm.valid) {
       let requestDTO = new Product();
@@ -161,6 +176,11 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
 
   onCloseSnackbarButtonClick() {
     this.snackbar.nativeElement.classList.remove("show");
+  }
+
+  onPropertyChange(event: any, index: number) {
+    this.addedProperties[index].value = event.target.value;
+    console.log(this.addedProperties[index])
   }
 
   getDepartments() {
@@ -205,8 +225,14 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
     let subscription = this.propertiesService.getProperties().subscribe(
       (response: any) => {
         this.properties = response.data;
+        console.log(this.optionalProperties)
         this.requiredPropertiesIds = this.properties.filter(i => i.required_status).map(i => i.id);
-        this.selectedProperty = this.properties[0];
+
+        this.optionalProperties = this.properties.filter(i => !i.required_status);
+        if (this.optionalProperties?.length > 0)
+          this.selectedProperty = this.optionalProperties[0];
+
+        this.setupRequiredPropertiesForRequestArray();
         this.isLoading = false;
       }, (error: any) => {
         if (error.error.errors && error.error.errors.length > 0)
@@ -218,6 +244,27 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
     );
 
     this.subscription.add(subscription);
+  }
+
+  setupRequiredPropertiesForRequestArray() {
+    let requiredProperties = this.properties.filter(i => i.required_status);
+    requiredProperties.map((item: Property) => {
+      let property = new Property();
+      property.property_id = item.id;
+      property.id = property.property_id;
+      property.type = item.type;
+      property.name = item.name;
+      property.required_status = item.required_status;
+      property.value = '';
+      property.formControl = new FormControl('', [Validators.required]);
+
+      this.addedProperties.push(property);
+
+      // this.dynamicControls.push(new FormControl(`property-${this.addedProperties?.length - 1}`, [Validators.required]));
+
+
+    })
+
   }
 
   createProduct(requestDTO: Product) {

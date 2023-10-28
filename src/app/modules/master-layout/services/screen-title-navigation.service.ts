@@ -10,7 +10,7 @@ export class ScreenTitleNavigationService {
   private screenKey$ = new BehaviorSubject<string>('');
 
   private screensMap = new Map<string, IScreenNavigator[]>([
-    ["UserDashboard", [{ name: 'ScreenNames.Home', routeLink: 'warehouses/home' }]],
+    ["UserDashboard", [{ name: 'ScreenNames.Home', routeLink: 'dashboard' }]],
     ["RefrigeratorsManagement", [{ name: 'ScreenNames.Home', routeLink: 'warehouses/home' }, { name: 'ScreenNames.RefrigeratorsManagement', routeLink: 'management/refrigerators' }]],
     ["DepartmentsManagement", [{ name: 'ScreenNames.Home', routeLink: 'warehouses/home' }, { name: 'ScreenNames.DepartmentsManagement', routeLink: 'management/departments' }]],
     ["PropertiesManagement", [{ name: 'ScreenNames.Home', routeLink: 'warehouses/home' }, { name: 'ScreenNames.PropertiesManagement', routeLink: 'management/properties' }]],
