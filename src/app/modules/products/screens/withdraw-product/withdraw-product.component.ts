@@ -88,10 +88,10 @@ export class WithdrawProductComponent extends SharedMessagesComponent implements
         this.renderer.removeAttribute(cameraPermissionButton, 'style');
         this.renderer.setStyle(cameraPermissionButton, 'background-color', '#F15A60');
         this.renderer.setStyle(cameraPermissionButton, 'color', 'white');
-        this.renderer.setStyle(cameraPermissionButton, 'border-radius', '2rem');
+        this.renderer.setStyle(cameraPermissionButton, 'border-radius', '10px');
         this.renderer.setStyle(cameraPermissionButton, 'border', 'none');
         this.renderer.setStyle(cameraPermissionButton, 'width', '15rem');
-        this.renderer.setStyle(cameraPermissionButton, 'height', '2rem');
+        this.renderer.setStyle(cameraPermissionButton, 'height', '2.2rem');
       }
 
       // Add an event listener
@@ -106,10 +106,10 @@ export class WithdrawProductComponent extends SharedMessagesComponent implements
             this.renderer.removeAttribute(startCameraButton, 'style');
             this.renderer.setStyle(startCameraButton, 'background-color', '#F15A60');
             this.renderer.setStyle(startCameraButton, 'color', 'white');
-            this.renderer.setStyle(startCameraButton, 'border-radius', '2rem');
+            this.renderer.setStyle(startCameraButton, 'border-radius', '10px');
             this.renderer.setStyle(startCameraButton, 'border', 'none');
             this.renderer.setStyle(startCameraButton, 'width', '10rem');
-            this.renderer.setStyle(startCameraButton, 'height', '2rem');
+            this.renderer.setStyle(startCameraButton, 'height', '2.2rem');
             this.renderer.setStyle(startCameraButton, 'display', 'none');
           }
 
@@ -117,10 +117,10 @@ export class WithdrawProductComponent extends SharedMessagesComponent implements
             this.renderer.removeAttribute(stopCameraButton, 'style');
             this.renderer.setStyle(stopCameraButton, 'background-color', '#F15A60');
             this.renderer.setStyle(stopCameraButton, 'color', 'white');
-            this.renderer.setStyle(stopCameraButton, 'border-radius', '2rem');
+            this.renderer.setStyle(stopCameraButton, 'border-radius', '10px');
             this.renderer.setStyle(stopCameraButton, 'border', 'none');
             this.renderer.setStyle(stopCameraButton, 'width', '10rem');
-            this.renderer.setStyle(stopCameraButton, 'height', '2rem');
+            this.renderer.setStyle(stopCameraButton, 'height', '2.2rem');
           }
 
         }, 1500);
