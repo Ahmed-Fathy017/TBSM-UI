@@ -231,8 +231,11 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
           });
         });
 
-        console.log(permissions)
-    
+        // saving the token as warehouse login instead of super admin
+        // to be able to make actions that warehouse only can do
+        this.localService.saveData('token', response.auth_data.access_token);
+
+
         this.localService.saveData("permissions", JSON.stringify(permissions));
 
         // setting the selected warehouse data in the local storage for further usage
@@ -244,7 +247,6 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
 
         // navigating to dashboard screen
         this.router.navigate(['dashboard']);
-        // this.router.navigate([`warehouses/warehouse/${id}`, { warehouseName: this.selectedWarehouse.warehouse_name }]);
 
         this.isLoading = false;
       }, (error: any) => {

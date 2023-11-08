@@ -56,9 +56,14 @@ export class NavBarComponent implements OnInit {
   }
 
   onResetWarehouseModeButtonClick() {
+    // resetting the token to the super admin token again
+    // after resetting the view from warehouse to super admin again
+    this.localService.saveData('token', this.localService.getData('baseAdminToken'));
+
     this.navbarService.setWarehouseMode(false);
     this.localService.removeData('warehouseName');
     this.localService.removeData('warehouseId');
+
     this.router.navigate(['dashboard']);
   }
 

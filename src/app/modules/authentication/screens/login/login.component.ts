@@ -130,6 +130,10 @@ export class LoginComponent implements OnInit {
 
 
           if (this.localStore.getData('type') === UserTypes.ADMIN) {
+            // saving the admin token in another variable in local storage
+            // to use it again on resetting the views between admin and warehouse
+            this.localStore.saveData('baseAdminToken', response.auth_data.access_token);
+
             this.setupAdminPermissions();
             this.setupAdminNavbarData();
             this.navbarService.setWarehouseMode(false);

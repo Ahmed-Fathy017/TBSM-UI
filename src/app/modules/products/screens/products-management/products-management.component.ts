@@ -612,9 +612,6 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
         else
           this.showProductSnackbar();
 
-        console.log(response.data)
-
-
       }, (error: any) => {
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
