@@ -46,9 +46,6 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
   addedProperties: Property[] = [];
   selectedProperty: Property | null = null;
 
-  requiredPropertiesIds: number[] = [];
-
-
   createProductForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     department: new FormControl('', [Validators.required]),
@@ -146,10 +143,9 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
       }
     });
 
-    let allRequiredPropertiesExist = this.addedProperties.some(i => this.requiredPropertiesIds.every(j => j == i.property_id));
     let allRequiredPropertiesHaveValues = this.addedProperties.filter(i => i.required_status).every(i => i.value);
 
-    if ((!allRequiredPropertiesExist || !allRequiredPropertiesHaveValues) && this.addedProperties?.length > 0) {
+    if (!allRequiredPropertiesHaveValues && this.addedProperties?.length > 0) {
       this.toastr.warning(this.invalidInputCountMessage, this.invalidInputWarningHeader);
       return;
     }
@@ -180,7 +176,6 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
 
   onPropertyChange(event: any, index: number) {
     this.addedProperties[index].value = event.target.value;
-    console.log(this.addedProperties[index])
   }
 
   getDepartments() {
@@ -225,8 +220,6 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
     let subscription = this.propertiesService.getProperties().subscribe(
       (response: any) => {
         this.properties = response.data;
-        console.log(this.optionalProperties)
-        this.requiredPropertiesIds = this.properties.filter(i => i.required_status).map(i => i.id);
 
         this.optionalProperties = this.properties.filter(i => !i.required_status);
         if (this.optionalProperties?.length > 0)
