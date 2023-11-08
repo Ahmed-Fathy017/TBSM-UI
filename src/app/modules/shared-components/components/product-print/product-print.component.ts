@@ -30,12 +30,15 @@ export class ProductPrintComponent implements OnInit, OnDestroy {
 
   productInfo: ProductInfo | null = null;
 
+  browserPrint!: ZebraBrowserPrintWrapper;
+
 
   constructor(private localService: LocalService,
     private renderer: Renderer2) {
     this.productInfo = JSON.parse(this.localService.getData('productInfo'));
 
     if (this.productInfo) {
+      this.productInfo.warehouse = this.productInfo.warehouse?.toUpperCase();
       this.productInfo.expiration_date = this.productInfo.expiration_date ?? 'none';
       this.productInfo.productNameDepartment = `${this.productInfo.name} - ${this.productInfo.category}`;
 
@@ -43,66 +46,38 @@ export class ProductPrintComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.renderer.listen('window', 'load', () => {
-      // window.print();
+    this.setup();
+  }
 
-      this.printBarcode(this.productInfo?.number);
+  private setup() {
+    this.browserPrint = new ZebraBrowserPrintWrapper();
+    // Create a new instance of the object
+
+    // Select default printer
+    let defaultPrinter = this.browserPrint.getDefaultPrinter();
+
+    console.log(defaultPrinter);
+    defaultPrinter.then(device => {
+
+      console.log("default browser setup done");
+      this.browserPrint.setPrinter(device);
+      this.printJob();
+
     });
   }
 
-  printBarcode = async (serial: any) => {
-    try {
+  async printJob() {
 
-      // Create a new instance of the object
-      const browserPrint = new ZebraBrowserPrintWrapper();
+    const zpl = `
+    ^XA^CI27^FO160,40^BY3^BCN,90,N,N^FD>;${this.productInfo?.number}
+    ^FS^FO90,150^CF0,18^FD ID:${this.productInfo?.number} / Receive: ${this.productInfo?.print_date!} (${this.productInfo?.print_time!}) 
+    ^FS^FO90,170^CF0,18^FD ${this.productInfo?.productNameDepartment}
+    ^FS^FO90,190^CF0,18^FD Expiry Date : ${this.productInfo?.expiration_date} 
+    ^FS^CF0,18^FO200,10^FD TBSM - ${this.productInfo?.warehouse!} ^FS^XZ`;
 
-      // Select default printer
-      const defaultPrinter = await browserPrint.getDefaultPrinter();
+    this.browserPrint.print(zpl);
+  }
 
-      // Set the printer
-      browserPrint.setPrinter(defaultPrinter);
-
-      // Check printer status
-      const printerStatus = await browserPrint.checkPrinterStatus();
-
-      // Check if the printer is ready
-      if (printerStatus.isReadyToPrint) {
-
-        // ZPL script to print a simple barcode
-        const zpl = `^XA
-
-        ^FX Top section with logo, name and address.
-        ^CF0,60
-        ^FO220,50^FD$TBSM-${this.productInfo?.warehouse!}}^FS
-        ^CF0,30
-        
-        ^FX Secondsection with bar code.
-        ^BY5,2,270
-        ^FO100,120^BC^FD${this.productInfo?.number}^FS
-        
-        ^CF0,40
-        ^FO30,470^FDReceive: ${this.productInfo?.print_date!} (${this.productInfo?.print_time!}}^FS
-        ^CF0,30
-        
-        ^CF0,40
-        ^FO30,520^FD${this.productInfo?.productNameDepartment}^FS
-        ^CF0,30
-        
-        ^CF0,40
-        ^FO30,570^FDExpiry: ${this.productInfo?.expiration_date}^FS
-        ^CF0,30
-        
-        ^XZ`;
-
-        browserPrint.print(zpl);
-      } else {
-        console.log("Error/s", printerStatus.errors);
-      }
-
-    } catch (error: any) {
-      throw new Error(error);
-    }
-  };
 
   ngOnDestroy(): void {
     this.localService.removeData('productInfo');
