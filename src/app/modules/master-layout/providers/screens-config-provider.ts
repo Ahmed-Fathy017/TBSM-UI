@@ -18,6 +18,7 @@ export class ScreensConfigProvider {
     static ProductsManagementScreen: string = 'Products.view';
     static CreateProductScreen: string = 'Products.create';
     static WithdrawProductScreen: string = 'Products.withdraw';
+    static AddProductScreen: string = 'Products.increase_product';
 
     // products filter 
     static AlmostExpiredProductsViewManagementScreen: string = 'Main page.expiration_date_about_expired';

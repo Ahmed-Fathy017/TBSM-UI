@@ -64,4 +64,10 @@ export class ProductsService extends AbstractRemoteService {
 
     return this.http.post(apiUrl, requestDTO);
   }
+
+  saveProductQuantity(requestDTO: object) {
+    let apiUrl = this.apiURl + `warehouse/save_quantity`;
+
+    return this.http.post(apiUrl, requestDTO);
+  }
 }

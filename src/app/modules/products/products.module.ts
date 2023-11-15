@@ -11,13 +11,15 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ProductsService } from './remote-services/products.service';
 import { SupplyChainsModule } from '../supply-chains/supply-chains.module';
 import { LocalService } from '../shared-components/services/local.service';
+import { AddProductComponent } from './screens/add-product/add-product.component';
 
 
 @NgModule({
   declarations: [
     ProductsManagementComponent,
     CreateProductComponent,
-    WithdrawProductComponent
+    WithdrawProductComponent,
+    AddProductComponent
   ],
   imports: [
     CommonModule,

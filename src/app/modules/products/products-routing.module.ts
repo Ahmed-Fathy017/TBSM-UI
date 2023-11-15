@@ -4,12 +4,14 @@ import { ProductsManagementComponent } from './screens/products-management/produ
 import { CreateProductComponent } from './screens/create-product/create-product.component';
 import { WithdrawProductComponent } from './screens/withdraw-product/withdraw-product.component';
 import { ScreensConfigProvider } from '../master-layout/providers/screens-config-provider';
+import { AddProductComponent } from './screens/add-product/add-product.component';
 
 const routes: Routes = [
   { path: '', component: ProductsManagementComponent, data: { config: ScreensConfigProvider.ProductsManagementScreen } },
   // { path: '/filtered/:filter', component: ProductsManagementComponent, data: { config: ScreensConfigProvider.ProductsManagementScreen } },
   { path: 'create', component: CreateProductComponent, data: { config: ScreensConfigProvider.CreateProductScreen } },
   { path: 'withdraw', component: WithdrawProductComponent, data: { config: ScreensConfigProvider.WithdrawProductScreen } },
+  { path: 'add', component: AddProductComponent, data: { config: ScreensConfigProvider.AddProductScreen } },
   // { path: 'empty-quantity', component: ProductsManagementComponent, data: { config: ScreensConfigProvider.EmptyQuantityProductsViewManagementScreen } },
   // { path: 'little-quantity', component: ProductsManagementComponent, data: { config: ScreensConfigProvider.LittleQuantityProductsViewManagementScreen } },
   // { path: 'variable-temperature', component: ProductsManagementComponent, data: { config: ScreensConfigProvider.VairableTemperatureProductsViewManagementScreen } },

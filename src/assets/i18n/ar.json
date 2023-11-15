@@ -21,6 +21,7 @@
         "AllProducts": "جميع المنتجات",
         "CreateProduct": "انشاء منتج",
         "WithdrawProduct": "سحب منتج",
+        "AddProduct": "اضافة منتج",
         "SupplyChains": "سلاسل الامداد",
         "InternalSupplyRequests": "طلبات الامداد الداخلي",
         "ExternalSupplyRequests": "طلبات الامداد الخارجي",
@@ -158,6 +159,15 @@
         "WithdrawButton": "سحب المنتجات",
         "SaveButton": "حفظ"
     },
+    "ProductAdditionScreen": {
+        "PrimaryTitle": "الرئيسية / المنتجات /",
+        "ColoredPrimaryTitle": "اضافة المنتج",
+        "Message": "من فضلك قم بتحديد الانبت الخاص برقم المنتج وقم بعمل سكان للباركود .",
+        "ProductNumber": "رقم المنتج",
+        "ProductName": "اسم المنتج",
+        "WithdrawButton": "اضافة المنتجات",
+        "SaveButton": "حفظ"
+    },
     "OprationsLogsScreen": {
         "PrimaryTitle": "الرئيسية /",
         "ColoredPrimaryTitle": "سجل العمليات",
@@ -241,6 +251,7 @@
         "ProductsManagement": "المنتجات",
         "CreateProduct": "انشاء منتج",
         "WithdrawProduct": "سحب منتج",
+        "AddProduct": "اضافة منتج",
         "ExternalSupplyRequests": "طلبات الامداد الخارجي",
         "InternalSupplyRequests": "طلبات الامداد الداخلي",
         "MySupplyRequests": "طلباتي",

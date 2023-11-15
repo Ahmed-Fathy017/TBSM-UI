@@ -1,0 +1,77 @@
+.btn {
+    color: #ffffff;
+    background-color: #F15A60;
+    border-radius: 12px;
+    width: 100%;
+    margin-top: 1.65rem;
+}
+
+.btn:active {
+    background-color: #F15A60;
+    color: white;
+}
+
+.secondary-action {
+    background-color: #100F37;
+}
+
+.secondary-action:hover {
+    background-color: #100F37;
+}
+
+.form-check-input {
+    box-shadow: none;
+}
+
+.products {
+    height: 520px;
+    overflow: auto;
+}
+
+.table th,
+tr,
+td {
+    color: #100F37;
+}
+
+i {
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+
+/* Apply styles to the button(s) inside the scanner container */
+.scanner-container button {
+    background-color: #FF5733 !important;
+    color: #FFF;
+    /* Add other styles as needed */
+}
+
+.html5-qrcode-element {
+    background-color: #FF5733 !important;
+    color: #FFF;
+}
+
+.qrcode-button {
+    background-color: #FF5733;
+    color: #FFF;
+    /* Add other styles as needed */
+}
+
+#reader__dashboard_section_csr {
+    background-color: #FF5733 !important;
+    color: #FFF;
+}
+
+.qr-code-container {
+    width: 200px;
+    height: 200px;
+    margin: 20px;
+    border: 2px solid #000;
+    background-color: #fff;
+}
+
+#html5-qrcode-button-camera-start {
+    background-color: #FF5733 !important;
+    color: #FFF;
+}

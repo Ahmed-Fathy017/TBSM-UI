@@ -21,6 +21,7 @@
         "AllProducts": "All Products",
         "CreateProduct": "Create Product",
         "WithdrawProduct": "Withdraw Product",
+        "AddProduct": "Add Product",
         "SupplyChains": "Supply Chains",
         "InternalSupplyRequests": "Internal Supply Requests",
         "ExternalSupplyRequests": "External Supply Requests",
@@ -159,6 +160,15 @@
         "WithdrawButton": "Withdraw Product",
         "SaveButton": "Save"
     },
+    "ProductAdditionScreen": {
+        "PrimaryTitle": "Home / Products /",
+        "ColoredPrimaryTitle": "Add Products",
+        "Message": "Please select the input related to product number and scan the barcode.",
+        "ProductNumber": "Product Number",
+        "ProductName": "Product Name",
+        "WithdrawButton": "Add Product",
+        "SaveButton": "Save"
+    },
     "OprationsLogsScreen": {
         "PrimaryTitle": "Home /",
         "ColoredPrimaryTitle": "Operation Logs",
@@ -242,6 +252,7 @@
         "ProductsManagement": "Products",
         "CreateProduct": "Create Product",
         "WithdrawProduct": "Withdraw Product",
+        "AddProduct": "Add Product",
         "ExternalSupplyRequests": "External Supply Requests",
         "InternalSupplyRequests": "Internal Supply Requests",
         "MySupplyRequests": "My Supply Requests",

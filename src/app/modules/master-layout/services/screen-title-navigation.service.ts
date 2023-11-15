@@ -20,6 +20,7 @@ export class ScreenTitleNavigationService {
     ["ProductsManagement", [{ name: 'ScreenNames.Home', routeLink: 'warehouses/home' }, { name: 'ScreenNames.ProductsManagement', routeLink: 'products' }]],
     ["CreateProduct", [{ name: 'ScreenNames.Home', routeLink: 'warehouses/home' }, { name: 'ScreenNames.CreateProduct', routeLink: 'products/create' }]],
     ["WithdrawProduct", [{ name: 'ScreenNames.Home', routeLink: 'warehouses/home' }, { name: 'ScreenNames.WithdrawProduct', routeLink: 'products/withdraw' }]],
+    ["AddProduct", [{ name: 'ScreenNames.Home', routeLink: 'warehouses/home' }, { name: 'ScreenNames.AddProduct', routeLink: 'products/add' }]],
     ["ExternalSupplyRequests", [{ name: 'ScreenNames.Home', routeLink: 'warehouses/home' }, { name: 'ScreenNames.ExternalSupplyRequests', routeLink: 'supply-chains/external-requests' }]],
     ["InternalSupplyRequests", [{ name: 'ScreenNames.Home', routeLink: 'warehouses/home' }, { name: 'ScreenNames.InternalSupplyRequests', routeLink: 'supply-chains/internal-requests' }]],
     ["MySupplyRequests", [{ name: 'ScreenNames.Home', routeLink: 'warehouses/home' }, { name: 'ScreenNames.MySupplyRequests', routeLink: 'supply-chains/my-requests' }]],

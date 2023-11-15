@@ -1,0 +1,103 @@
+<div class="container-fluid">
+    <!-- <app-page-header [pageTitle]="firstPageTitle" [coloredPageTitle]="coloredPageTitle"></app-page-header> -->
+
+    <div class="container ">
+        <div class="d-flex row">
+
+
+            <div class="col-md-12 col-lg-6 col-xl-6 mb-2">
+
+                <form [formGroup]="withdrawProductForm">
+                    <div class="header d-flex flex-column align-items-start fw-bold mb-3">
+                        <span class="block mb-2"> {{'ProductAdditionScreen.Message' | translate}}
+                        </span>
+                    </div>
+                    <div class=" row mb-2">
+                        <div class="col-md-12 col-lg-12 col-xl-12">
+                            <label for="number" class="mb-1 d-flex">{{'ProductAdditionScreen.ProductNumber' |
+                                translate}}</label>
+                            <input id="number" class="form-control" type="text" formControlName="number">
+                            <div *ngIf="withdrawProductForm.controls.number.invalid && (withdrawProductForm.controls.number.dirty || withdrawProductForm.controls.number.touched)"
+                                class="alert p-0 m-1 h6">
+
+                                <div class="p-0 m-0" *ngIf="withdrawProductForm.controls.number.errors?.['required']">
+                                    {{'ProductAdditionScreen.ProductNumber' | translate}}
+                                    {{'GeneralMessages.Required' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <app-loading *ngIf="isLoading"></app-loading>
+
+                    <!-- scanning section -->
+                    <div class="scanner-container" class="mt-2"
+                        [ngStyle]="{'visiblity': !isLoading? 'visible': 'hidden'}">
+                        <div id="reader" width="600px" class="mt-2"></div>
+                    </div>
+
+                    <div class=" row mb-2">
+                        <div class="col-md-12 col-lg-12 col-xl-12">
+                            <div class="btn secondary-action" (click)="onWihdrawButtonClick()">
+                                <app-loading-button [processing]="isProcessing">
+                                    {{'ProductAdditionScreen.WithdrawButton' | translate}}
+                                </app-loading-button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+            <div class=" col-md-12 col-lg-6 col-xl-6 mt-2  ">
+                <div class="products row border rounded-2 mx-2 ">
+                    <div class="d-flex justify-content-center  pt-3">
+                        <div class="w-75">
+                            <table class="table table-borderless">
+                                <thead>
+                                    <tr class="text-center border-bottom">
+                                        <th scope="col" colspan="1"></th>
+                                        <th scope="col" colspan="2">{{'ProductAdditionScreen.ProductNumber' |
+                                            translate}}</th>
+                                        <th scope="col" colspan="2"> {{'ProductAdditionScreen.ProductName' |
+                                            translate}}</th>
+                                        <th scope="col" colspan="1"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="text-center" *ngFor="let product of products; let i = index;">
+                                        <td style="width: 20px;">
+                                            <i class="fa-solid fa-x  text-danger"
+                                                (click)="onDeleteProduct(i)" style="vertical-align: middle;"></i>
+                                        </td>
+                                        <td colspan="2">{{product.number}}</td>
+                                        <td colspan="2">{{product.name}}</td>
+                                        <td style="width: 20px;"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- action button -->
+        <div class=" row mb-2 d-flex justify-content-center">
+
+            <div class="col-md-6 col-lg-6 col-xl-6">
+
+                <div class="btn" (click)="onSaveButtonClick()">
+                    <app-loading-button [processing]="isProcessing">
+                        {{'ProductAdditionScreen.SaveButton' | translate}}
+                    </app-loading-button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
