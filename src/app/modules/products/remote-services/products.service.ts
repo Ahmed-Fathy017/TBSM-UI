@@ -59,6 +59,15 @@ export class ProductsService extends AbstractRemoteService {
     return this.http.get(apiUrl, { params: queryParams });
   }
 
+  getAddProdcuctByNumber(productNumber: string) {
+    let apiUrl = this.apiURl + `warehouse/get_product`;
+
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("product_number", productNumber);
+
+    return this.http.get(apiUrl, { params: queryParams });
+  }
+
   withdrawProduct(requestDTO: object) {
     let apiUrl = this.apiURl + `warehouse/product_withdrawal`;
 

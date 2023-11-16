@@ -166,7 +166,7 @@ export class AddProductComponent extends SharedMessagesComponent implements OnIn
       let productNumber = this.withdrawProductForm.controls.number.value!;
       this.isProcessing = true;
       let quanitity = this.products.filter(i => i.number == productNumber)?.length + 1;
-      this.getProdcuctByNumber(productNumber, quanitity);
+      this.getAddProdcuctByNumber(productNumber);
     } else
       this.toastr.warning(this.invalidInputWarningMessage, this.invalidInputWarningHeader);
 
@@ -181,8 +181,8 @@ export class AddProductComponent extends SharedMessagesComponent implements OnIn
 
 
 
-  getProdcuctByNumber(productNumber: string, quanitity: number) {
-    let subscription = this.productsService.getProdcuctByNumber(productNumber, quanitity).subscribe(
+  getAddProdcuctByNumber(productNumber: string) {
+    let subscription = this.productsService.getAddProdcuctByNumber(productNumber).subscribe(
       (response: any) => {
         let product = response.data as Product;
         product.UIId = this.products?.length + 1;
