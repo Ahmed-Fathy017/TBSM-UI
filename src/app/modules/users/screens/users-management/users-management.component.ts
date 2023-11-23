@@ -175,6 +175,7 @@ export class UsersManagementComponent extends SharedMessagesComponent implements
       requestDTO.username = this.updateUserForm.controls.username.value!;
       requestDTO.password = this.updateUserForm.controls.password.value!;
       requestDTO.role_id = parseInt(this.updateUserForm.controls.role.value!);
+      requestDTO.status = this.selectedUser.status;
 
       this.updateUser(requestDTO);
       this.updateModalCloseButtonRef.nativeElement.click();
