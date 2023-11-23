@@ -275,7 +275,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
   }
 
   onUpdateConfirmationClick() {
-    let allRequiredPropertiesExist = this.selectedProduct.options.some(i => this.requiredPropertiesIds.every(j => j == i.property.id));
+    let allRequiredPropertiesExist = this.requiredPropertiesIds.every(i => this.selectedProduct.options.some(j => j.property.id == i))
     if (!allRequiredPropertiesExist) {
       this.toastr.warning(this.invalidInputCountMessage, this.invalidInputWarningHeader);
       return;
