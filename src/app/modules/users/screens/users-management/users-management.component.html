@@ -42,7 +42,7 @@
 
                     <label for="password" class="mb-1 d-flex"> {{'UsersManagementScreen.Password' | translate}}
                     </label>
-                    <input id="password" class="form-control" type="password" formControlName="password">
+                    <input id="password" class="form-control" type="password" formControlName="password" autocomplete="new-password">
 
                     <div *ngIf="createUserForm.controls.password.invalid && (createUserForm.controls.password.dirty || createUserForm.controls.password.touched)"
                         class="alert p-0 m-1 h6">
@@ -210,7 +210,7 @@
                             <label for="password01" class="mb-1 d-flex"> {{'UsersManagementScreen.Password' |
                                 translate}}
                             </label>
-                            <input id="password01" class="form-control" type="password" formControlName="password"
+                            <input id="password01" class="form-control" type="password" formControlName="password" autocomplete="new-password"
                                 (input)="onPasswordInput()">
 
                             <div *ngIf="updateUserForm.controls.password.invalid && (updateUserForm.controls.password.dirty || updateUserForm.controls.password.touched)"

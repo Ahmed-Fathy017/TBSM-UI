@@ -42,7 +42,7 @@
 
                     <label for="password" class="mb-1 d-flex"> {{'WarehousesManagementScreen.Password' | translate}}
                     </label>
-                    <input id="password" class="form-control" type="password" formControlName="password">
+                    <input id="password" class="form-control" type="password" formControlName="password" autocomplete="new-password">
 
                     <div *ngIf="createWarehouseForm.controls.password.invalid && (createWarehouseForm.controls.password.dirty || createWarehouseForm.controls.password.touched)"
                         class="alert p-0 m-1 h6">
@@ -190,7 +190,7 @@
                     <div class="col-md-12 col-lg-12 col-xl-12 mb-2">
                         <label for="passwordEdit" class="mb-1 d-flex"> {{'WarehousesManagementScreen.Password' |
                             translate}}</label>
-                        <input id="passwordEdit" class="form-control" type="password" formControlName="password" (input)="onPasswordInput()">
+                        <input id="passwordEdit" class="form-control" type="password" formControlName="password" (input)="onPasswordInput()" autocomplete="new-password">
 
                         <div *ngIf="updateWarehouseForm.controls.password.invalid && (updateWarehouseForm.controls.password.dirty || updateWarehouseForm.controls.password.touched)"
                             class="alert p-0 m-1 h6">

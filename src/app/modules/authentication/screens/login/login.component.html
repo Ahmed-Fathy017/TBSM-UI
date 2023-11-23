@@ -36,7 +36,7 @@
                                 <label for="password" class="d-flex ">{{'LoginScreen.Password' | translate }} </label>
 
                                 <input type="password" id="password" #password
-                                    formControlName="password"
+                                    formControlName="password" autocomplete="new-password"
                                     [ngClass]="{'inputerror': loginForm.controls.password.errors && loginForm.controls.password.touched}" />
                                 <div class="eye">
                                     <i class="far fa-eye-slash px-2 hidden" #hidden (click)="togglePassword()"></i>
