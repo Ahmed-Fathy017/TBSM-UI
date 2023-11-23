@@ -18,5 +18,7 @@ export class Department {
     lastSelectedPage: number | null = null; 
     minPage: number = 1;
 
+    isCollapsed: boolean = false;
+
     paginatedProducts:Product[] = [];
 }

@@ -58,8 +58,8 @@
     <div class="container mt-4" *ngIf="!isLoading">
         <div *ngFor="let item of productsList; let i = index">
             <div *ngIf="item.products && item.products.length > 0">
-                <div class="title p-3 mb-4 d-flex justify-content-between cursor-pointer" data-bs-toggle="collapse"
-                    [attr.data-bs-target]="'#collapse-' + i" aria-expanded="false" aria-controls="collapseExample">
+                <div class="title p-3 mb-4 d-flex justify-content-between cursor-pointer"
+                    (click)="item.isCollapsed = !item.isCollapsed">
                     <h5 class="fw-bold m-0">{{item.category}}</h5>
 
                     <div>
@@ -67,7 +67,7 @@
                     </div>
                 </div>
 
-                <div class="collapse show container " [id]="'collapse-' + i">
+                <div class="container" @fadeInOut *ngIf="!item.isCollapsed">
 
                     <div>
 

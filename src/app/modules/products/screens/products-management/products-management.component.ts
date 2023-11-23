@@ -24,11 +24,24 @@ import { LocalService } from 'src/app/modules/shared-components/services/local.s
 import { UserTypes } from 'src/app/modules/authentication/models/user-types';
 import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/services/screen-title-navigation.service';
 import { ToasterService } from 'src/app/modules/master-layout/services/toaster.service';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-products-management',
   templateUrl: './products-management.component.html',
-  styleUrls: ['./products-management.component.css']
+  styleUrls: ['./products-management.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      transition(':enter', [
+        style({ opacity: 1, height: 0, overflow: 'hidden' }),
+        animate('350ms', style({ opacity: 1, height: '*' })),
+      ]),
+      transition(':leave', [
+        style({ opacity: 1, height: '*', overflow: 'hidden' }),
+        animate('350ms', style({ opacity: 1, height: 0 })),
+      ]),
+    ])
+  ]
 })
 export class ProductsManagementComponent extends SharedMessagesComponent implements OnInit, OnDestroy, AfterViewInit {
 
