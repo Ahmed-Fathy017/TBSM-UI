@@ -135,40 +135,40 @@ export class WarehouseDetailsComponent extends SharedMessagesComponent implement
         i.backgroundColor = '#0D99FF';
         i.iconClass = 'fa-solid fa-box';
         i.iconUrl = '../../../../../assets/images/dashboard/package.svg';
-        i.visibility = this.hasProductsEmptyQuantityViewAuthority ? 'visible' : 'invisible';
-        i.display = this.hasProductsEmptyQuantityViewAuthority ? 'd-block' : 'd-none';
+        i.visibility = this.hasProductsEmptyQuantityViewAuthority && i.is_show == 1 ? 'visible' : 'invisible';
+        i.display = this.hasProductsEmptyQuantityViewAuthority && i.is_show == 1 ? 'd-block' : 'd-none';
         i.filter = 'empty-quantity';
       }
       else if (i.title == 'products_quantity_little') {
         i.backgroundColor = '#FFA629';
         i.iconClass = 'fa-solid fa-box';
         i.iconUrl = '../../../../../assets/images/dashboard/package.svg';
-        i.visibility = this.hasProductsLittleQuantityViewAuthority ? 'visible' : 'invisible';
-        i.display = this.hasProductsLittleQuantityViewAuthority ? 'd-block' : 'd-none';
+        i.visibility = this.hasProductsLittleQuantityViewAuthority && i.is_show == 1 ? 'visible' : 'invisible';
+        i.display = this.hasProductsLittleQuantityViewAuthority && i.is_show == 1 ? 'd-block' : 'd-none';
         i.filter = 'little-quantity';
       }
       else if (i.title == 'variable_temperature') {
         i.backgroundColor = '#F15A60';
         i.iconClass = 'fa-solid fa-temperature-three-quarters';
         i.iconUrl = '../../../../../assets/images/dashboard/temperature.svg';
-        i.visibility = this.hasProductsVariableTemperatureViewAuthority ? 'visible' : 'invisible';
-        i.display = this.hasProductsVariableTemperatureViewAuthority ? 'd-block' : 'd-none';
+        i.visibility = this.hasProductsVariableTemperatureViewAuthority && i.is_show == 1 ? 'visible' : 'invisible';
+        i.display = this.hasProductsVariableTemperatureViewAuthority && i.is_show == 1 ? 'd-block' : 'd-none';
         i.filter = 'variable-temperature';
       }
       else if (i.title == 'expiration_date_expired') {
         i.backgroundColor = '#0D99FF';
         i.iconClass = 'fa-solid fa-calendar-days';
         i.iconUrl = '../../../../../assets/images/dashboard/date.svg';
-        i.visibility = this.hasProductsExpiredViewAuthority ? 'visible' : 'invisible';
-        i.display = this.hasProductsExpiredViewAuthority ? 'd-block' : 'd-none';
+        i.visibility = this.hasProductsExpiredViewAuthority && i.is_show == 1 ? 'visible' : 'invisible';
+        i.display = this.hasProductsExpiredViewAuthority && i.is_show == 1 ? 'd-block' : 'd-none';
         i.filter = 'expired-date';
       }
       else if (i.title == 'expiration_date_about_expired') {
         i.backgroundColor = '#FFA629';
         i.iconClass = 'fa-solid fa-calendar-days';
         i.iconUrl = '../../../../../assets/images/dashboard/date.svg';
-        i.visibility = this.hasProductsAlmostExpiredViewAuthority ? 'visible' : 'invisible';
-        i.display = this.hasProductsAlmostExpiredViewAuthority ? 'd-block' : 'd-none';
+        i.visibility = this.hasProductsAlmostExpiredViewAuthority && i.is_show == 1 ? 'visible' : 'invisible';
+        i.display = this.hasProductsAlmostExpiredViewAuthority && i.is_show == 1 ? 'd-block' : 'd-none';
         i.filter = 'almost-expired-date';
       }
 

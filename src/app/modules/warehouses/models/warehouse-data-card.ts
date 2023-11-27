@@ -8,4 +8,5 @@ export interface WarehouseDataCard {
     visibility: string;
     display: string;
     filter: string;
+    is_show: number;
 }
