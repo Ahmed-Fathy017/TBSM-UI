@@ -11,6 +11,7 @@ import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/serv
 import { ToasterService } from 'src/app/modules/master-layout/services/toaster.service';
 import { LocalService } from 'src/app/modules/shared-components/services/local.service';
 import { Router } from '@angular/router';
+import { Permission } from '../../models/permission';
 
 @Component({
   selector: 'app-create-role',
@@ -144,7 +145,7 @@ export class CreateRoleComponent extends SharedMessagesComponent implements OnIn
           // to solve the problem of english words after
           // the arabic words
           if (group.group_name_en.toLowerCase() == 'categories')
-            group.permissions.reverse();
+            group.permissions.sort((a, b) => parseInt(a.id) - parseInt(b.id));
         });
 
         this.isLoadingPermissions = false;
