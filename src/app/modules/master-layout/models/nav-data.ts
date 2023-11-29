@@ -163,7 +163,7 @@ export var userNavbarData: INavbarData[] = [
                 routeLink: 'supply-chains/my-requests',
                 icon: 'fa-solid fa-circle',
                 label: 'SideNav.MySupplyRequests',
-                screenConfig: undefined,
+                screenConfig: 'Orders.all_supply_requests',
                 showInMenu: true
             }
         ]

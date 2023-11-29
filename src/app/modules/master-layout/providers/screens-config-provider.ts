@@ -5,7 +5,6 @@ export class ScreensConfigProvider {
     static WarehousesManagementScreen: string = 'admin';
     static PackagesManagementScreen: string = 'admin';
     static WarehouseDetailsScreen: string = 'admin';
-    static MyRequestsManagementScreen: string = 'user';
     static UserDashboardScreen: string = 'user';
     static ProductPrintScreen: string = 'public';
 
@@ -32,6 +31,7 @@ export class ScreensConfigProvider {
     // supply chains module screens
     static ExternalRequestsManagementScreen: string = 'Orders.external_supply_requests';
     static InternalRequestsManagementScreen: string = 'Orders.internal_supply_requests';
+    static MyRequestsManagementScreen: string = 'Orders.all_supply_requests';
 
     // departments module screens
     static DepartmentsManagementScreen: string = 'Categories.view';
