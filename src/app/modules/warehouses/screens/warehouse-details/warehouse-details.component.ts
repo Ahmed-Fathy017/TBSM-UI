@@ -124,12 +124,6 @@ export class WarehouseDetailsComponent extends SharedMessagesComponent implement
   }
 
   setupScreenView() {
-    // let dummyCard = <WarehouseDataCard>{};
-    // dummyCard.title = 'dummy';
-    // dummyCard.visibility = 'invisible';
-    // dummyCard.filter = '';
-
-    // this.cards.push(dummyCard)
     this.cards.map(i => {
       if (i.title == 'products_quantity_empty') {
         i.backgroundColor = '#0D99FF';

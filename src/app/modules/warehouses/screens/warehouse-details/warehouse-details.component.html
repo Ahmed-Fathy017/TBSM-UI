@@ -23,9 +23,14 @@
         </div>
     </div>
 
-    <div class="container py-2 logs-wrapper" *ngIf="!isLoadingWarehouseData && logs && logs.length > 0" (click)="onLogsSectionClick()">
-        <div class="logs py-4 px-3 d-flex flex-column">
+    <div class="container py-2 logs-wrapper" *ngIf="!isLoadingWarehouseData " (click)="onLogsSectionClick()">
+        <div class="logs py-4 px-3 d-flex flex-column" *ngIf="logs && logs.length > 0; else noLogs">
             <p *ngFor="let log of logs">{{log}}</p>
         </div>
+        <ng-template #noLogs>
+            <div class="logs">
+                <app-no-data class="d-flex justify-content-center align-items-sm-start  no-data"></app-no-data>
+            </div>
+        </ng-template>
     </div>
 </div>
