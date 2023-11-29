@@ -51,6 +51,17 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
 
   @ViewChild('updateModalCloseButtonRef') updateModalCloseButtonRef!: ElementRef;
 
+  permissions: string[] = [];
+
+  hasRefrigeratorCreationAuthority: boolean = true;
+  hasRefrigeratorDeletionAuthority: boolean = true;
+  hasRefrigeratorUpdatingAuthority: boolean = true;
+
+  refrigeratorCreateAuthorityPermission: string = 'Refrigerators.create';
+  refrigeratorDeletionAuthorityPermission: string = 'Refrigerators.delete';
+  refrigeratorUpdateAuthorityPermission: string = 'Refrigerators.update';
+
+
   constructor(
     private toastr: ToasterService,
     private refrigeratorsService: RefrigeratorsService,
@@ -61,7 +72,7 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
     this.screenTitleNavigationService.setScreenKey('RefrigeratorsManagement');
     this.isRtl = this.localService.getData('lang') != 'en' ? true : false;
     this.isAdmin = this.localService.getData('type') == UserTypes.ADMIN;
-
+    this.evaluateScreenPermissions();
   }
 
   ngOnInit(): void {
@@ -73,11 +84,11 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
   }
 
   onCreateButtonClick() {
-    Object.keys(this.createRefrigeratorForm.controls).forEach(field => {  
-      const control = this.createRefrigeratorForm.get(field);            
-      if (control instanceof FormControl) {             
+    Object.keys(this.createRefrigeratorForm.controls).forEach(field => {
+      const control = this.createRefrigeratorForm.get(field);
+      if (control instanceof FormControl) {
         control.markAsTouched({ onlySelf: true });
-      } 
+      }
     });
 
     let fromTemperature = parseFloat(this.createRefrigeratorForm.controls.fromTemperature.value!);
@@ -89,7 +100,7 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
     }
 
 
-    
+
 
     if (this.createRefrigeratorForm.valid) {
 
@@ -113,11 +124,11 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
   }
 
   onUpdateConfirmationClick() {
-    Object.keys(this.updateRefrigeratorForm.controls).forEach(field => {  
-      const control = this.createRefrigeratorForm.get(field);            
-      if (control instanceof FormControl) {             
+    Object.keys(this.updateRefrigeratorForm.controls).forEach(field => {
+      const control = this.createRefrigeratorForm.get(field);
+      if (control instanceof FormControl) {
         control.markAsTouched({ onlySelf: true });
-      } 
+      }
     });
 
     if (this.updateRefrigeratorForm.valid) {
@@ -145,6 +156,15 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
     this.deleteRefrigerator();
   }
 
+  // Functions
+  evaluateScreenPermissions() {
+    this.permissions = JSON.parse(this.localService.getData("permissions"));
+
+    this.hasRefrigeratorCreationAuthority = this.permissions.findIndex(i => i === this.refrigeratorCreateAuthorityPermission) != -1 ? true : false;
+    this.hasRefrigeratorDeletionAuthority = this.permissions.findIndex(i => i === this.refrigeratorDeletionAuthorityPermission) != -1 ? true : false;
+    this.hasRefrigeratorUpdatingAuthority = this.permissions.findIndex(i => i === this.refrigeratorUpdateAuthorityPermission) != -1 ? true : false;
+  }
+
   getRefrigerators() {
     this.isLoading = true;
     let subscription = this.refrigeratorsService.getRefrigerators().subscribe(
@@ -156,7 +176,7 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message,this.errorOperationHeader);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
         this.isLoading = false;
       }
     );
@@ -180,7 +200,7 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message,this.errorOperationHeader);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
       }
     );
 
@@ -210,7 +230,7 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message,this.errorOperationHeader);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
       }
     );
 
@@ -229,7 +249,7 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message,this.errorOperationHeader);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
       }
     );
 

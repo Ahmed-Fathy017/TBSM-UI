@@ -1,6 +1,6 @@
 <div class="container-fluid">
 
-    <div class="container" >
+    <div class="container" *ngIf="hasRefrigeratorCreationAuthority">
         <form action="" [formGroup]="createRefrigeratorForm">
 
             <div class=" row mb-1 ">
@@ -93,7 +93,7 @@
         </form>
     </div>
 
-    <app-page-header [pageTitle]="secondPageTitle" ></app-page-header>
+    <app-page-header [pageTitle]="secondPageTitle" *ngIf="hasRefrigeratorCreationAuthority"></app-page-header>
 
     <app-loading *ngIf="isLoading"></app-loading>
 
@@ -106,14 +106,16 @@
                     {{refrigerator.name}}
                 </div>
 
-                <div class="d-flex" >
+                <div class="d-flex">
                     <div class="mx-4 d-flex justify-content-center align-items-center ">20°</div>
                     <div class="mx-2 edit d-flex justify-content-center align-items-center rounded-2"
                         data-bs-toggle="modal" data-bs-target="#editModal"
-                        (click)="onUpdateButtonClick(refrigerator.id)"><i class="fa-solid fa-pen-to-square"></i></div>
+                        (click)="onUpdateButtonClick(refrigerator.id)" *ngIf="hasRefrigeratorUpdatingAuthority"><i
+                            class="fa-solid fa-pen-to-square"></i></div>
                     <div class="mx-2 delete d-flex justify-content-center align-items-center rounded-2"
                         data-bs-toggle="modal" data-bs-target="#deleteModal"
-                        (click)="onDeleteButtonClick(refrigerator.id)"><i class="fa-solid fa-trash-can"></i></div>
+                        (click)="onDeleteButtonClick(refrigerator.id)" *ngIf="hasRefrigeratorDeletionAuthority"><i
+                            class="fa-solid fa-trash-can"></i></div>
 
                 </div>
 

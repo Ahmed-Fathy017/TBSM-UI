@@ -3,12 +3,14 @@ export class ScreensConfigProvider {
     static LoginScreen: string = 'public';
     static AdminDashboardScreen: string = 'admin';
     static WarehousesManagementScreen: string = 'admin';
-    static RefrigeratorsManagementScreen: string = 'admin';
     static PackagesManagementScreen: string = 'admin';
     static WarehouseDetailsScreen: string = 'admin';
     static MyRequestsManagementScreen: string = 'user';
     static UserDashboardScreen: string = 'user';
     static ProductPrintScreen: string = 'public';
+
+    // refrigerators module screens
+    static RefrigeratorsManagementScreen: string = 'Refrigerators.view';
 
     // roles module screens
     static RolesManagementScreen: string = 'Roles.view';

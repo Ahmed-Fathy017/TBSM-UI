@@ -388,21 +388,12 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
   evaluateScreenPermissions() {
     this.permissions = JSON.parse(this.localService.getData("permissions"));
 
-    // if (this.isAdmin) {
-    //   this.hasProductViewingAuthority = true;
-    //   this.hasProductDeletionAuthority = true;
-    //   this.hasProductUpdatingAuthority = true;
-    //   this.hasProductBarcodePrintingAuthority = true;
-    //   this.hasProductSupplyDemandingAuthority = true;
-    //   this.hasProductIncreasingAuthority = true;
-    // } else {
     this.hasProductViewingAuthority = this.permissions.findIndex(i => i === this.productViewingAuthorityPermission) != -1 ? true : false;
     this.hasProductDeletionAuthority = this.permissions.findIndex(i => i === this.productDeletionAuthorityPermission) != -1 ? true : false;
     this.hasProductUpdatingAuthority = this.permissions.findIndex(i => i === this.productUpdatingAuthorityPermission) != -1 ? true : false;
     this.hasProductBarcodePrintingAuthority = this.permissions.findIndex(i => i === this.productBarcodePrintingAuthorityPermission) != -1 ? true : false;
     this.hasProductSupplyDemandingAuthority = this.permissions.findIndex(i => i === this.productSupplyDemandingAuthorityPermission) != -1 ? true : false;
     this.hasProductIncreasingAuthority = this.permissions.findIndex(i => i === this.productIncreasingAuthorityPermission) != -1 ? true : false;
-    // }
   }
 
   getProducts(requestDTO: GetProductsRequest) {

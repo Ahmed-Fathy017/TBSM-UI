@@ -48,7 +48,7 @@ export var userNavbarData: INavbarData[] = [
                 routeLink: 'management/refrigerators',
                 icon: 'fa-solid fa-circle',
                 label: 'SideNav.Refrigerators',
-                screenConfig: undefined,
+                screenConfig: 'Refrigerators.view',
                 showInMenu: true
             },
             {
