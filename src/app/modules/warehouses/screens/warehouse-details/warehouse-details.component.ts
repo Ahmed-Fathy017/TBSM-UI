@@ -41,12 +41,14 @@ export class WarehouseDetailsComponent extends SharedMessagesComponent implement
   hasProductsEmptyQuantityViewAuthority: boolean = true;
   hasProductsLittleQuantityViewAuthority: boolean = true;
   hasProductsVariableTemperatureViewAuthority: boolean = true;
+  hasLogsViewAuthority: boolean = true;
 
   productsAlmostExpiredViewAuthorityPermission: string = 'Main page.expiration_date_about_expired';
   productsExpiredViewAuthorityPermission: string = 'Main page.expiration_date_expired';
   productsEmptyQuantityViewAuthorityPermission: string = 'Main page.products_quantity_empty';
   productsLittleQuantityViewAuthorityPermission: string = 'Main page.products_quantity_little';
   productsVariableTemperatureViewAuthorityPermission: string = 'Main page.variable_temperature';
+  logsViewAuthorityPermission: string = 'Operations log.view';
 
   constructor(
     private warehousesService: WarehousesService,
@@ -97,6 +99,7 @@ export class WarehouseDetailsComponent extends SharedMessagesComponent implement
       this.hasProductsEmptyQuantityViewAuthority = this.permissions.findIndex(i => i === this.productsEmptyQuantityViewAuthorityPermission) != -1 ? true : false;
       this.hasProductsLittleQuantityViewAuthority = this.permissions.findIndex(i => i === this.productsLittleQuantityViewAuthorityPermission) != -1 ? true : false;
       this.hasProductsVariableTemperatureViewAuthority = this.permissions.findIndex(i => i === this.productsVariableTemperatureViewAuthorityPermission) != -1 ? true : false;
+      this.hasLogsViewAuthority = this.permissions.findIndex(i => i === this.logsViewAuthorityPermission) != -1 ? true : false;
     }
   }
 

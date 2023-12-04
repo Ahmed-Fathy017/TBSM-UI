@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    <div class="container py-2 logs-wrapper" *ngIf="!isLoadingWarehouseData " (click)="onLogsSectionClick()">
+    <div class="container py-2 logs-wrapper" *ngIf="!isLoadingWarehouseData && hasLogsViewAuthority" (click)="onLogsSectionClick()">
         <div class="logs py-4 px-3 d-flex flex-column" *ngIf="logs && logs.length > 0; else noLogs">
             <p *ngFor="let log of logs">{{log}}</p>
         </div>
