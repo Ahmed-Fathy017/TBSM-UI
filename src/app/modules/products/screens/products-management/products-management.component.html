@@ -110,7 +110,8 @@
                                                     <div class="action">
                                                         <div class="rounded-1 upload d-flex justify-content-center align-items-center mx-2 custom-padding"
                                                             data-bs-toggle="modal" data-bs-target="#supplyModal"
-                                                            (click)="onProductSupplyDemandButtonClick(item.id, product.id)">
+                                                            (click)="onProductSupplyDemandButtonClick(item.id, product.id)"
+                                                            *ngIf="hasProductSupplyDemandingAuthority">
                                                             <img src="../../../../../assets/images/products/supply.svg"
                                                                 alt="">
                                                         </div>
