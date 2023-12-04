@@ -1,7 +1,7 @@
 export class ScreensConfigProvider {
     // public screens has no configs
     static LoginScreen: string = 'public';
-    static AdminDashboardScreen: string = 'admin';
+    static AdminDashboardScreen: string = 'public';
     static WarehousesManagementScreen: string = 'admin';
     static PackagesManagementScreen: string = 'admin';
     static WarehouseDetailsScreen: string = 'admin';

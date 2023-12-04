@@ -29,22 +29,51 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
   }
 
   canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+    // Check if it's a child route
+    if (childRoute.routeConfig && childRoute.routeConfig.path && childRoute.firstChild?.data.config) {
+      let permissions: string[] = JSON.parse(this.localService.getData("permissions"));
+
+      if (!this.authenticationService.isAuthenticated()) {
+        this.logout();
+        return false;
+      }
+
+      let screenConfig = childRoute.firstChild?.data.config;
+      console.log(screenConfig)
+
+      if (screenConfig === 'public' ||
+        // screenConfig === undefined ||
+        (screenConfig === 'admin' && this.localService.getData('type') == UserTypes.ADMIN) ||
+        (screenConfig === 'user' && this.localService.getData('type') != UserTypes.ADMIN))
+        return true;
+
+      // this should be map key, value for O(1) execution enhancement
+      if (!permissions.find(i => i === screenConfig) ||
+        (screenConfig === 'admin' && this.localService.getData('type') != UserTypes.ADMIN) ||
+        (screenConfig === 'user' && this.localService.getData('type') == UserTypes.ADMIN)) {
+        this.router.navigate(['unauthorized']);
+        return false;
+      }
+
+      return true;
+    }
+
+    // It's the main route, proceed with your logic for the main route
     let permissions: string[] = JSON.parse(this.localService.getData("permissions"));
-    
+
     if (!this.authenticationService.isAuthenticated()) {
       this.logout();
       return false;
     }
 
-    let screenConfig = childRoute.firstChild?.data.config;
+    let screenConfig = childRoute.data.config;
 
     if (screenConfig === 'public' ||
-      screenConfig === undefined ||
       (screenConfig === 'admin' && this.localService.getData('type') == UserTypes.ADMIN) ||
       (screenConfig === 'user' && this.localService.getData('type') != UserTypes.ADMIN))
       return true;
 
-      // this should be map key, value for O(1) execution enhancement
+    // this should be map key, value for O(1) execution enhancement
     if (!permissions.find(i => i === screenConfig) ||
       (screenConfig === 'admin' && this.localService.getData('type') != UserTypes.ADMIN) ||
       (screenConfig === 'user' && this.localService.getData('type') == UserTypes.ADMIN)) {
@@ -54,6 +83,7 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
 
     return true;
   }
+
 
   logout() {
     this.localService.clearData();

@@ -36,6 +36,9 @@ export class AuthenticationService extends AbstractRemoteService {
     // Check whether the token is expired and return
     // true or false
     // return !this.jwtHelper.isTokenExpired(token);
-    return true;
+    if (token)
+      return true;
+    else
+      return false;
   }
 }
