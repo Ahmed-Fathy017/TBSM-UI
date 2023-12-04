@@ -128,7 +128,6 @@ export class LoginComponent implements OnInit {
           this.localStore.saveData('type', response.data.type.toLowerCase());
           this.localStore.saveData('id', String(response.data.id));
 
-
           if (this.localStore.getData('type') === UserTypes.ADMIN) {
             // saving the admin token in another variable in local storage
             // to use it again on resetting the views between admin and warehouse
@@ -142,8 +141,6 @@ export class LoginComponent implements OnInit {
 
             if (response.data?.package?.external_supply)
               this.localStore.saveData('isPackageAllowExternalSupply', String(response.data?.package?.external_supply));
-            else if (response.data?.parent?.package?.external_supply)
-              this.localStore.saveData('isPackageAllowExternalSupply', String(response.data?.parent?.package?.external_supply));
 
             this.setupUserPermissions(response);
             this.setupUserNavbarData();
