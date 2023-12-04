@@ -268,6 +268,8 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
     if (this.selectedDepartment)
       this.selectedProduct = this.selectedDepartment.products.find(i => i.id == productId)!;
 
+    console.log(this.selectedProduct)
+
     // deep cloning of latest snapshot of this.selectedProduct
     this.tempSelectedProduct = JSON.parse(JSON.stringify(this.selectedProduct))
 
@@ -300,6 +302,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
       requestDTO.category_id = parseInt(this.updateProductForm.controls.department.value!);
       requestDTO.options = this.selectedProduct.options;
       requestDTO.properties = this.selectedProduct.options.map(i => i.property);
+      requestDTO.chain_demand = this.updateProductForm.controls.externalSupply.value ? 1 : 0;
 
       this.updateProduct(requestDTO);
       this.updateModalCloseButtonRef.nativeElement.click();
@@ -542,6 +545,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
       this.updateProductForm.controls.quantity.setValue(String(this.selectedProduct.quantity));
       this.updateProductForm.controls.refrigerator.setValue(String(this.selectedProduct.refrigerator.id));
       this.updateProductForm.controls.department.setValue(String(this.selectedProduct.category.id));
+      this.updateProductForm.controls.externalSupply.setValue(Boolean(this.selectedProduct.chain_demand));
     }
 
     if (this.isEditMode)
@@ -608,7 +612,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
       (response: any) => {
 
         this.productRedirectLink = response.data;
-        
+
         this.localService.saveData('productInfo', JSON.stringify(response.data));
 
         if (!isNewlyCreatedProduct)

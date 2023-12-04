@@ -39,7 +39,6 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
       }
 
       let screenConfig = childRoute.firstChild?.data.config;
-      console.log(screenConfig)
 
       if (screenConfig === 'public' ||
         // screenConfig === undefined ||
