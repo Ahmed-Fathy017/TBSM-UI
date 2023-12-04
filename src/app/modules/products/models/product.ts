@@ -20,6 +20,8 @@ export class Product {
 
     properties: Property[] | null = [];
 
+    // UI flags
     UIId: number = 0;
+    isSupplyAllowed: boolean = true;
 }
 

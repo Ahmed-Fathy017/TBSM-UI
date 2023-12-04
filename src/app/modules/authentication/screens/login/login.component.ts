@@ -139,6 +139,7 @@ export class LoginComponent implements OnInit {
             this.navbarService.setWarehouseMode(false);
           }
           else if (this.localStore.getData('type') === UserTypes.WAREHOUSE) {
+            this.localStore.saveData('isPackageAllowExternalSupply', String(response.data?.package?.external_supply));
 
             this.setupUserPermissions(response);
             this.setupUserNavbarData();

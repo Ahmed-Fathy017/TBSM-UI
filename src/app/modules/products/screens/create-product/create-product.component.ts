@@ -54,7 +54,7 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
     externalSupply: new FormControl(false),
     property: new FormControl(''),
 
-     // Define a FormArray for dynamic controls
+    // Define a FormArray for dynamic controls
     //  dynamicControls: this.formBuilder.array([]),
   });
 
@@ -65,6 +65,8 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
 
   createdProductId: number = 0;
   isRtl: boolean = true;
+
+  hasExternalSupplyAuthority: boolean = true;
 
   constructor(
     private toastr: ToasterService,
@@ -82,6 +84,7 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
     super(translateService);
     this.screenTitleNavigationService.setScreenKey('CreateProduct');
     this.isRtl = this.localService.getData('lang') != 'en' ? true : false;
+    this.hasExternalSupplyAuthority = this.localService.getData('isPackageAllowExternalSupply') == '1' ? true : false;
   }
 
   ngOnInit(): void {

@@ -104,14 +104,17 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
   isAdmin: boolean = true;
 
   hasProductDeletionAuthority: boolean = true;
-  hasProductSupplyDemandingAuthority: boolean = true;
+  hasProductInternalSupplyDemandingAuthority: boolean = true;
+  hasProductExternalSupplyDemandingAuthority: boolean = true;
   hasProductIncreasingAuthority: boolean = true;
   hasProductBarcodePrintingAuthority: boolean = true;
   hasProductViewingAuthority: boolean = true;
   hasProductUpdatingAuthority: boolean = true;
+  hasPakcageExternalSupplyAuthority: boolean = true;
 
   productDeletionAuthorityPermission: string = 'Products.delete';
-  productSupplyDemandingAuthorityPermission: string = 'Products.demand_product';
+  productInternalSupplyDemandingAuthorityPermission: string = 'Products.demand_product_in';
+  productExternalSupplyDemandingAuthorityPermission: string = 'Products.demand_product_out';
   productIncreasingAuthorityPermission: string = 'Products.increase_product';
   productBarcodePrintingAuthorityPermission: string = 'Products.print_barcode';
   productViewingAuthorityPermission: string = 'Products.show_details';
@@ -395,8 +398,11 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
     this.hasProductDeletionAuthority = this.permissions.findIndex(i => i === this.productDeletionAuthorityPermission) != -1 ? true : false;
     this.hasProductUpdatingAuthority = this.permissions.findIndex(i => i === this.productUpdatingAuthorityPermission) != -1 ? true : false;
     this.hasProductBarcodePrintingAuthority = this.permissions.findIndex(i => i === this.productBarcodePrintingAuthorityPermission) != -1 ? true : false;
-    this.hasProductSupplyDemandingAuthority = this.permissions.findIndex(i => i === this.productSupplyDemandingAuthorityPermission) != -1 ? true : false;
     this.hasProductIncreasingAuthority = this.permissions.findIndex(i => i === this.productIncreasingAuthorityPermission) != -1 ? true : false;
+
+    this.hasProductInternalSupplyDemandingAuthority = this.permissions.findIndex(i => i === this.productInternalSupplyDemandingAuthorityPermission) != -1 ? true : false;
+    this.hasProductExternalSupplyDemandingAuthority = this.permissions.findIndex(i => i === this.productExternalSupplyDemandingAuthorityPermission) != -1 ? true : false;
+    this.hasPakcageExternalSupplyAuthority = this.localService.getData('isPackageAllowExternalSupply') == '1' ? true : false;
   }
 
   getProducts(requestDTO: GetProductsRequest) {
@@ -512,6 +518,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
       // will be in the right format (as updating requires object with property_id, value)
       // which are not supplied on retrieving the data initially, so I have to set them manually
       i.products.map(i => {
+        i.isSupplyAllowed = this.hasProductInternalSupplyDemandingAuthority || (this.hasPakcageExternalSupplyAuthority && this.hasPakcageExternalSupplyAuthority && Boolean(i.chain_demand));
         i.options.map(i => {
           i.property.property_id = i.property.id;
           i.property.value = i.value
