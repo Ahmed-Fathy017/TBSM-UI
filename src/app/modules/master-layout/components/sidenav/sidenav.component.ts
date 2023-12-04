@@ -61,7 +61,18 @@ export class SidenavComponent implements OnInit {
         let permissions = '';
 
         if (state) {
+          // resetting all showInMenu flag for items and sub-items
+          // to true so it will be shown for the admin user
+          // (can be enhanced by creating temp varaible array with all showInMenu with true values)
+          userNavbarData.map(i => {
+            i.showInMenu = true;
+            if (i.items && i.items.length > 0)
+              i.items.map(i => i.showInMenu = true);
+
+          });
+
           data = JSON.stringify(userNavbarData);
+          
           // permissions = JSON.stringify(secondaryAdminPermissions);
         }
         else {
