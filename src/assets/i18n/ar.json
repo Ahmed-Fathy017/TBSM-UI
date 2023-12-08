@@ -136,7 +136,8 @@
         "ViewAction": "عرض",
         "QRCodeAction": "طباعة",
         "SupplyAction": "طلب امداد",
-        "ProductCreatedSuccessMessage": " تم اضافة المنتج بنجاح" 
+        "ProductCreatedSuccessMessage": " تم اضافة المنتج بنجاح",
+        "InvalidQuantity": "الكمية المطلوبة غير متوفرة"
     },
     "CreateProductScreen": {
         "PrimaryTitle": "الرئيسية / المنتجات /",

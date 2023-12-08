@@ -418,7 +418,7 @@
 
 
 <!-- supply modal -->
-<div class="modal fade" id="supplyModal" tabindex="-1" aria-labelledby="supplyModalLabel" aria-hidden="true">
+<div class="modal fade" id="supplyModal" tabindex="-1" aria-labelledby="supplyModalLabel" aria-hidden="true" #supplyModal>
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
 
@@ -439,6 +439,15 @@
                         <label class="p-0" for="quantity">{{'ProductSupplyModal.Quantity' | translate}}</label>
                         <input type="number" name="quantity" id="quantity" class="form-control"
                             formControlName="quantity">
+
+                        <div *ngIf="supplyChainForm.controls.quantity.invalid && (supplyChainForm.controls.quantity.dirty || supplyChainForm.controls.quantity.touched)"
+                            class="alert p-0 m-1 h6">
+
+                            <div class="p-0 m-0" *ngIf="supplyChainForm.controls.quantity.errors?.['required']">
+                                {{'CreateProductScreen.Quantity' | translate}}
+                                {{'GeneralMessages.FeminineRequired' | translate}}
+                            </div>
+                        </div>
                     </div>
                 </form>
 

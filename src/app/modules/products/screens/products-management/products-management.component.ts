@@ -52,6 +52,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
   secondPageTitle: string = '';
 
   @ViewChild('editModal') editModal!: ElementRef;
+  @ViewChild('supplyModal') supplyModal!: ElementRef;
   @ViewChild('updateModalCloseButtonRef') updateModalCloseButtonRef!: ElementRef;
   @ViewChild('supplyModalCloseButtonRef') supplyModalCloseButtonRef!: ElementRef;
   @ViewChild('valueInput', { static: false }) valueInput!: ElementRef;
@@ -174,7 +175,8 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
   }
 
   ngAfterViewInit() {
-    this.setupModalCloseEventActions();
+    this.setupEditModalCloseEventActions();
+    this.setupSupplyModalCloseEventActions();
   }
 
   ngOnDestroy(): void {
@@ -340,14 +342,21 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
       }
     });
 
+    let requestedQuantity = parseInt(this.supplyChainForm.controls.quantity.value!);
+
+    if (requestedQuantity > this.selectedProduct.quantity) {
+      this.toastr.warning(this.invalidSupplyQuanity, this.invalidInputWarningHeader);
+      return;
+    }
+
     if (this.supplyChainForm.valid) {
       let requestDTO = new AddOrder();
       requestDTO.product_id = this.selectedProduct.id;
-      requestDTO.quantity = parseInt(this.supplyChainForm.controls.quantity.value!);
+      requestDTO.quantity = requestedQuantity;
       this.addOrderRequest(requestDTO);
       this.supplyModalCloseButtonRef.nativeElement.click();
-    } else
-      this.toastr.warning(this.invalidInputWarningMessage, this.invalidInputWarningHeader);
+      this.supplyChainForm.reset();
+    }
   }
 
   onProductBarcodeButtonClick(departmentId: number, productId: number) {
@@ -536,12 +545,21 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
     });
   }
 
-  setupModalCloseEventActions() {
+  setupEditModalCloseEventActions() {
     const modalElement = this.editModal.nativeElement;
     this.renderer.listen(modalElement, 'hidden.bs.modal', () => {
       // This code will be executed when the modal is closed
       // Perform any actions you want when the modal is closed here
       Object.assign(this.selectedProduct, this.tempSelectedProduct);
+    });
+  }
+
+  setupSupplyModalCloseEventActions() {
+    const modalElement = this.supplyModal.nativeElement;
+    this.renderer.listen(modalElement, 'hidden.bs.modal', () => {
+      // This code will be executed when the modal is closed
+      // Perform any actions you want when the modal is closed here
+      this.supplyChainForm.reset();
     });
   }
 

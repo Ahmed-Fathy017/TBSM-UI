@@ -137,7 +137,8 @@
         "ViewAction": "View",
         "QRCodeAction": "Print",
         "SupplyAction": "Request Supply",
-        "ProductCreatedSuccessMessage": "Product Added Successfully"
+        "ProductCreatedSuccessMessage": "Product Added Successfully",
+        "InvalidQuantity": "The requested quantity is unavailable"
     },
     "CreateProductScreen": {
         "PrimaryTitle": "Home / Products /",
@@ -238,7 +239,7 @@
         "SuccessImportOperationHeader":"Import",
         "Required": "Required",
         "FeminineRequired": "Required",
-        "PasswordLengthError": "Must contain at least 4 characters",
+        "PasswordLengthError": "Must contain at least 4 characters!",
         "NoData": "No Data Found"
     },
     "ScreenNames": {

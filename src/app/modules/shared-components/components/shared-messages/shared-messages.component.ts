@@ -24,6 +24,7 @@ export class SharedMessagesComponent implements OnInit, OnDestroy {
   successImportOperationHeader!: string;
 
   invalidReferigeratorTemperature!: string;
+  invalidSupplyQuanity!: string;
 
 
   constructor(private translate: TranslateService) {
@@ -51,22 +52,27 @@ export class SharedMessagesComponent implements OnInit, OnDestroy {
       'GeneralMessages.InvalidInputDuplicationMessage',
       'GeneralMessages.InvalidInputCountMessage',
 
-      'RefrigeratorsManagementScreen.InvalidTemperature']).subscribe((translation: any) => {
-        this.errorOperationHeader = translation['GeneralMessages.ErrorOperationHeader'];
-        this.successEditOperationHeader = translation['GeneralMessages.SuccessEditOperationHeader'];
-        this.successCreateOperationHeader = translation['GeneralMessages.SuccessCreateOperationHeader'];
-        this.successDeleteOperationHeader = translation['GeneralMessages.SuccessDeleteOperationHeader'];
-        this.successWithdrawOperationHeader = translation['GeneralMessages.SuccessWithdrawOperationHeader'];
-        this.successImportOperationHeader = translation['GeneralMessages.SuccessImportOperationHeader'];
+      'RefrigeratorsManagementScreen.InvalidTemperature',
+      
+      'ProductsManagmentScreen.InvalidQuantity'
+    ]).subscribe((translation: any) => {
+      this.errorOperationHeader = translation['GeneralMessages.ErrorOperationHeader'];
+      this.successEditOperationHeader = translation['GeneralMessages.SuccessEditOperationHeader'];
+      this.successCreateOperationHeader = translation['GeneralMessages.SuccessCreateOperationHeader'];
+      this.successDeleteOperationHeader = translation['GeneralMessages.SuccessDeleteOperationHeader'];
+      this.successWithdrawOperationHeader = translation['GeneralMessages.SuccessWithdrawOperationHeader'];
+      this.successImportOperationHeader = translation['GeneralMessages.SuccessImportOperationHeader'];
 
-        this.invalidInputWarningHeader = translation['GeneralMessages.InvalidInputWarningHeader'];
-        this.invalidInputWarningMessage = translation['GeneralMessages.InvalidInputWarningMessage'];
-        this.invalidInputDuplicationMessage = translation['GeneralMessages.InvalidInputDuplicationMessage'];
-        this.invalidInputCountMessage = translation['GeneralMessages.InvalidInputCountMessage'];
+      this.invalidInputWarningHeader = translation['GeneralMessages.InvalidInputWarningHeader'];
+      this.invalidInputWarningMessage = translation['GeneralMessages.InvalidInputWarningMessage'];
+      this.invalidInputDuplicationMessage = translation['GeneralMessages.InvalidInputDuplicationMessage'];
+      this.invalidInputCountMessage = translation['GeneralMessages.InvalidInputCountMessage'];
 
-        this.invalidReferigeratorTemperature = translation['RefrigeratorsManagementScreen.InvalidTemperature'];
+      this.invalidReferigeratorTemperature = translation['RefrigeratorsManagementScreen.InvalidTemperature'];
 
-      });
+      this.invalidSupplyQuanity = translation['ProductsManagmentScreen.InvalidQuantity'];
+
+    });
 
     this.subscription.add(subscribtion);
   }
