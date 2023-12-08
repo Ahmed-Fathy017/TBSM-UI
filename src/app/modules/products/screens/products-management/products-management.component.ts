@@ -271,8 +271,6 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
     if (this.selectedDepartment)
       this.selectedProduct = this.selectedDepartment.products.find(i => i.id == productId)!;
 
-    console.log(this.selectedProduct)
-
     // deep cloning of latest snapshot of this.selectedProduct
     this.tempSelectedProduct = JSON.parse(JSON.stringify(this.selectedProduct))
 
@@ -306,6 +304,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
       requestDTO.options = this.selectedProduct.options;
       requestDTO.properties = this.selectedProduct.options.map(i => i.property);
       requestDTO.chain_demand = this.updateProductForm.controls.externalSupply.value ? 1 : 0;
+      requestDTO.number = this.selectedProduct.number;
 
       this.updateProduct(requestDTO);
       this.updateModalCloseButtonRef.nativeElement.click();
