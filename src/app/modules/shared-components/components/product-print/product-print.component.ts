@@ -12,7 +12,7 @@ export class ProductPrintComponent implements OnInit, OnDestroy {
   ZebraBrowserPrintWrapper = require('zebra-browser-print-wrapper');
 
   lineColor = '#000000';
-  width = 2;
+  width = 3;
   height = 100;
   displayValue = true;
   fontOptions = '';
@@ -68,12 +68,21 @@ export class ProductPrintComponent implements OnInit, OnDestroy {
 
   async printJob() {
 
+    // Code 128 format
     const zpl = `
-    ^XA^CI27^FO160,40^BY3^BCN,90,N,N^FD>;${this.productInfo?.number}
+    ^XA^CI27^FO160,40^BY3^BC,90,N,N,N^FD>;${this.productInfo?.number}
     ^FS^FO90,150^CF0,18^FD ID:${this.productInfo?.number} / Receive: ${this.productInfo?.print_date!} (${this.productInfo?.print_time!}) 
     ^FS^FO90,170^CF0,18^FD ${this.productInfo?.productNameDepartment}
     ^FS^FO90,190^CF0,18^FD Expiry Date : ${this.productInfo?.expiration_date} 
     ^FS^CF0,18^FO200,10^FD TBSM - ${this.productInfo?.warehouse!} ^FS^XZ`;
+
+
+    // const zpl = `
+    // ^XA^CI27^FO160,40^BY3^BCN,90,N,N^FD>;${this.productInfo?.number}
+    // ^FS^FO90,150^CF0,18^FD ID:${this.productInfo?.number} / Receive: ${this.productInfo?.print_date!} (${this.productInfo?.print_time!}) 
+    // ^FS^FO90,170^CF0,18^FD ${this.productInfo?.productNameDepartment}
+    // ^FS^FO90,190^CF0,18^FD Expiry Date : ${this.productInfo?.expiration_date} 
+    // ^FS^CF0,18^FO200,10^FD TBSM - ${this.productInfo?.warehouse!} ^FS^XZ`;
 
     this.browserPrint.print(zpl);
   }
