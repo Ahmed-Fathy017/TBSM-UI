@@ -121,11 +121,11 @@ export class InventoryComponent extends SharedMessagesComponent implements OnIni
   }
 
   onImportButtonClick() {
-    Object.keys(this.inventoryImportForm.controls).forEach(field => {  
-      const control = this.inventoryImportForm.get(field);            
-      if (control instanceof FormControl) {             
+    Object.keys(this.inventoryImportForm.controls).forEach(field => {
+      const control = this.inventoryImportForm.get(field);
+      if (control instanceof FormControl) {
         control.markAsTouched({ onlySelf: true });
-      } 
+      }
     });
 
     if (this.inventoryImportForm.valid) {
@@ -137,11 +137,11 @@ export class InventoryComponent extends SharedMessagesComponent implements OnIni
   }
 
   onExportButtonClick() {
-    Object.keys(this.inventoryExportForm.controls).forEach(field => {  
-      const control = this.inventoryExportForm.get(field);            
-      if (control instanceof FormControl) {             
+    Object.keys(this.inventoryExportForm.controls).forEach(field => {
+      const control = this.inventoryExportForm.get(field);
+      if (control instanceof FormControl) {
         control.markAsTouched({ onlySelf: true });
-      } 
+      }
     });
 
     if (this.inventoryExportForm.valid)
@@ -205,7 +205,9 @@ export class InventoryComponent extends SharedMessagesComponent implements OnIni
     let departmentId = parseInt(this.inventoryImportForm.controls.department.value!);
     let subscription = this.inventoriesService.importExcelFile(departmentId, this.selectedFile).subscribe(
       (response: any) => {
-        this.toastr.success( response.message, this.successImportOperationHeader);
+        let message = response.message.replace('.', '');
+
+        this.toastr.success(message, this.successImportOperationHeader);
         this.isImporting = false;
       }, (error: any) => {
         if (error.error.errors && error.error.errors.length > 0)

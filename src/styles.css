@@ -275,6 +275,7 @@ body::-webkit-scrollbar {
     color: #333C48 !important;
     background-image: url('assets/images/toast-sucess.png') !important;
     box-shadow: none !important;
+    white-space: pre-line !important;
 }
 
 .toast-warning {
