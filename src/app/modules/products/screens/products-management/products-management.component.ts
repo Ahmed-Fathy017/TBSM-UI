@@ -130,6 +130,9 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
   createdProductId: string = '';
   productRedirectLink: string = '';
   successMessage: string = '';
+
+  filteredProductsArrayIndex: number = 0;
+
   @ViewChild('snackbar', { static: false }) snackbar!: ElementRef;
 
   // constructor
@@ -314,12 +317,13 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
       this.toastr.warning(this.invalidInputWarningMessage, this.invalidInputWarningHeader);
   }
 
-  onDeleteButtonClick(departmentId: number, productId: number, productIndex: number) {
+  onDeleteButtonClick(departmentId: number, productId: number, filteredProductsArrayIndex: number) {
     this.selectedDepartment = this.productsList.find(i => i.id == departmentId)!;
-    if (this.selectedDepartment)
+    if (this.selectedDepartment) {
       this.selectedProduct = this.selectedDepartment.products.find(i => i.id == productId)!;
-
-    this.selectedProductIndex = productIndex;
+      this.selectedProductIndex = this.selectedDepartment.products.findIndex(i => i.id == productId);
+      this.filteredProductsArrayIndex = filteredProductsArrayIndex;
+    }
   }
 
   onDeleteConfirmationButtonClick() {
@@ -613,8 +617,24 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
       (response: any) => {
         this.toastr.success(response.message, this.successDeleteOperationHeader);
 
-        this.productsList.find(i => i.id = this.selectedDepartment.id)?.products.splice(this.selectedProductIndex, 1);
-        this.productsList.map(i => i.lastSelectedPage = i.selectedPage);
+        // removal of product from both the original products array
+        // and from paginatedProducts array
+        this.selectedDepartment.products.splice(this.selectedProductIndex, 1);
+        this.selectedDepartment.paginatedProducts.splice(this.filteredProductsArrayIndex, 1);
+
+        this.productsList.map(i => {
+
+          // check for assigining the lastSelectedPage to be selectedPage - 1
+          // in case of removal of all the products in the paginated products array
+          // to prevent empty array on re pafination (ex. lastPage is 4 and after deletion 
+          // page 4 is empty so navigation will be to page 3)
+          if (i.id = this.selectedDepartment.id)
+            i.selectedPage = i.paginatedProducts.length > 0 ? i.selectedPage : i.selectedPage - 1;
+
+          i.lastSelectedPage = i.selectedPage;
+        });
+
+        // resetup of departments and products
         this.setupProductsList();
 
         this.isLoading = false;
