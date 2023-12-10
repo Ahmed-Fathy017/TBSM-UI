@@ -310,6 +310,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
       requestDTO.properties = this.selectedProduct.options.map(i => i.property);
       requestDTO.chain_demand = this.updateProductForm.controls.externalSupply.value ? 1 : 0;
       requestDTO.number = this.selectedProduct.number;
+      requestDTO.properties = this.selectedProduct.properties;
 
       this.updateProduct(requestDTO);
       this.updateModalCloseButtonRef.nativeElement.click();
@@ -374,6 +375,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
   onUpdateProperty(optionId: number, event: any) {
     let updatedProperty = this.selectedProduct.options?.find(i => i.id == optionId)!;
     updatedProperty.value = event.target.value;
+    updatedProperty.property.value = event.target.value;
   }
 
   onDeleteProperty(index: number) {
