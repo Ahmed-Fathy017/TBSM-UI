@@ -242,6 +242,9 @@ export class WarehousesManagementComponent extends SharedMessagesComponent imple
         this.localService.saveData('warehouseId', String(this.selectedWarehouse.id));
         this.localService.saveData('warehouseName', this.selectedWarehouse.warehouse_name);
 
+        if (response.data?.package?.external_supply)
+          this.localService.saveData('isPackageAllowExternalSupply', String(response.data?.package?.external_supply));
+
         // setting warehouse mode
         this.navbarService.setWarehouseMode(true);
 
