@@ -25,38 +25,35 @@
 
             <div class="container">
                 <div class="row permissions">
-                    <div class="col-md-6 col-lg-4 col-xl-3" *ngFor="let group of permissionGroups">
+                    <div class="col-md-6 col-lg-4 col-xl-3" *ngFor="let group of permissionGroups; index as i">
                         <div class="permission-card w-100 border rounded-top-4 rounded-bottom-4 p-0 mx-2 mb-4">
                             <div
                                 class="header h5 d-flex justify-content-between align-items-center fw-bold text-white rounded-top-4 px-3 py-3 mb-0">
-                                <div class="custom-margin">
-                                    {{lang != 'en'? group.group_name_ar : group.group_name_en}}
-                                </div>
+                                <label class="custom-margin" [attr.for]="i">
+                                    {{ lang != 'en' ? group.group_name_ar : group.group_name_en }}
+                                </label>
 
                                 <div class="custom-margin">
                                     <input class="form-check-input shadow-none mx-2" type="checkbox"
-                                        [checked]="group.checked"
+                                        [checked]="group.checked" [attr.id]="i"
                                         (change)="reevaluateGroupPermissionsCheckboxes(group.group_name_en)">
                                 </div>
                             </div>
                             <div class="content-wrapper mb-2" #contentWrapper>
                                 <div class="content py-1 px-3" *ngFor="let permission of group.permissions">
-                                    <div class="d-flex  justify-content-between flex-row-reverse ">
-                                        <label class="form-check-label h6 fw-bold pt-2" for="flexCheckIndeterminate01">
-                                            {{lang != 'en'? permission.name_ar : permission.name_en}}
-
+                                    <div class="d-flex justify-content-between flex-row-reverse">
+                                        <label class="form-check-label h6 fw-bold pt-2" [attr.for]="permission.id">
+                                            {{ lang != 'en' ? permission.name_ar : permission.name_en }}
                                         </label>
                                         <input class="form-check-input shadow-none mx-2" type="checkbox"
-                                            [checked]="permission.checked"
+                                            [attr.id]="permission.id" [checked]="permission.checked"
                                             (change)="reevaluateGroupCheckbox(group.group_name_en, permission.id)">
-
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
+
 
 
                 </div>
