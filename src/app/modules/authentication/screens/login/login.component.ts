@@ -121,8 +121,11 @@ export class LoginComponent implements OnInit {
         (response: any) => {
           // clearing data in case of login without logout
           // in order to reset views
-          this.localStore.clearData();
+          let lang = this.localStore.getData('lang');
 
+          this.localStore.clearData();
+          
+          this.localStore.saveData('lang', lang);
           this.localStore.saveData('token', response.auth_data.access_token);
           this.localStore.saveData('username', response.data.username);
           this.localStore.saveData('type', response.data.type.toLowerCase());
