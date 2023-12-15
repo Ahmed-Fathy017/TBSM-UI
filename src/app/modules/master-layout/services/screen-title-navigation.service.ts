@@ -16,6 +16,7 @@ export class ScreenTitleNavigationService {
     ["PropertiesManagement", [{ name: 'ScreenNames.Home', routeLink: 'dashboard' }, { name: 'ScreenNames.PropertiesManagement', routeLink: 'management/properties' }]],
     ["RolesManagement", [{ name: 'ScreenNames.Home', routeLink: 'dashboard' }, { name: 'ScreenNames.RolesManagement', routeLink: 'roles' }]],
     ["CreateRole", [{ name: 'ScreenNames.Home', routeLink: 'dashboard' }, { name: 'ScreenNames.CreateRole', routeLink: 'roles/create' }]],
+    // ["UpdateRole", [{ name: 'ScreenNames.Home', routeLink: 'dashboard' }, { name: 'ScreenNames.RolesManagement', routeLink: 'roles/update' }]],
     ["UsersManagement", [{ name: 'ScreenNames.Home', routeLink: 'dashboard' }, { name: 'ScreenNames.UsersManagement', routeLink: 'users' }]],
     ["ProductsManagement", [{ name: 'ScreenNames.Home', routeLink: 'dashboard' }, { name: 'ScreenNames.ProductsManagement', routeLink: 'products' }]],
     ["CreateProduct", [{ name: 'ScreenNames.Home', routeLink: 'dashboard' }, { name: 'ScreenNames.CreateProduct', routeLink: 'products/create' }]],
@@ -43,8 +44,8 @@ export class ScreenTitleNavigationService {
   }
 
   getTitleNavigationDetails(screenKey: string, additionalData: any = null): IScreenNavigator[] {
-    if (additionalData || screenKey === 'SelectedWarehouse')
-      this.screensMap.set('SelectedWarehouse', [{ name: 'ScreenNames.Home', routeLink: 'dashboard' }, { name: 'ScreenNames.WarehousesManagement', routeLink: 'warehouses' }, { name: `${additionalData?.name}`, routeLink: `warehouses/warehouse/${additionalData?.id}` }]);
+    if (additionalData || screenKey === 'UpdateRole')
+      this.screensMap.set("UpdateRole", [{ name: 'ScreenNames.Home', routeLink: 'dashboard' }, { name: 'ScreenNames.RolesManagement', routeLink: 'roles' }, { name: `${additionalData?.name}`, routeLink: `roles/update/${additionalData?.id}` }]);
 
     return this.screensMap.get(screenKey)!;
   }

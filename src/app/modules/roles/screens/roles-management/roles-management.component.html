@@ -13,6 +13,12 @@
 
                 <div class="d-flex">
 
+
+                    <div class="mx-2 edit d-flex justify-content-center align-items-center rounded-2"
+                        data-bs-toggle="modal" data-bs-target="#editPackageModal"
+                        (click)="onUpdateButtonClick(role.id, role.name)" *ngIf="hasUpdatingAuthority"><i
+                            class="fa-solid fa-pen-to-square"></i></div>
+
                     <div class="mx-2 delete d-flex justify-content-center align-items-center rounded-2"
                         data-bs-toggle="modal" data-bs-target="#deleteRoleModal" (click)="onDeleteButtonClick(role.id)"
                         *ngIf="hasDeletingAuthority"><i class="fa-solid fa-trash-can"></i></div>

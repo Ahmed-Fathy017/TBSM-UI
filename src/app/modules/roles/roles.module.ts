@@ -5,13 +5,15 @@ import { SharedComponentsModule } from '../shared-components/shared-components.m
 import { TranslateModule } from '@ngx-translate/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreateRoleComponent } from './screens/create-role/create-role.component';
+import { UpdateRoleComponent } from './screens/update-role/update-role.component';
 
 
 
 @NgModule({
   declarations: [
     RolesManagementComponent,
-    CreateRoleComponent
+    CreateRoleComponent,
+    UpdateRoleComponent
   ],
   imports: [
     CommonModule,

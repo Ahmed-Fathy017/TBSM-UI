@@ -35,4 +35,10 @@ export class RolesService extends AbstractRemoteService{
 
     return this.http.post(apiUrl, requestDTO);
   }
+
+  updateRole(requestDTO: Role) {
+    let apiUrl = this.apiURl + `warehouse/update_role/${requestDTO.id}`;
+
+    return this.http.post(apiUrl, requestDTO);
+  }
 }

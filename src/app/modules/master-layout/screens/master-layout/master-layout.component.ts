@@ -36,7 +36,7 @@ export class MasterLayoutComponent implements OnInit {
     this.screenTitleNavigationService.getScreenKey().subscribe((state) => {
       // This code will only run when the getScreenKey() observable emits a value
       if (this.screenTitleNavigationService.getTitleNavigationDetails(state)) {
-        this.screenNavigators = this.screenTitleNavigationService.getTitleNavigationDetails(state, { name: this.localService.getData('warehouseName'), id: this.localService.getData('warehouseId') });
+        this.screenNavigators = this.screenTitleNavigationService.getTitleNavigationDetails(state, { name: this.localService.getData('roleName'), id: this.localService.getData('roleId') });
       }
     });
 

@@ -11,6 +11,7 @@ import { ScreenTitleNavigationService } from 'src/app/modules/master-layout/serv
 import { ToasterService } from 'src/app/modules/master-layout/services/toaster.service';
 import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
 import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-roles-management',
@@ -52,9 +53,10 @@ export class RolesManagementComponent extends SharedMessagesComponent implements
     private toastr: ToasterService,
     private rolesService: RolesService,
     private localService: LocalService,
+    private router: Router,
     private screenTitleNavigationService: ScreenTitleNavigationService,
     private translateService: TranslateService) {
-      super(translateService);
+    super(translateService);
     this.screenTitleNavigationService.setScreenKey('RolesManagement');
     this.evaluateScreenPermissions();
   }
@@ -77,6 +79,12 @@ export class RolesManagementComponent extends SharedMessagesComponent implements
     this.deleteRole();
   }
 
+  onUpdateButtonClick(id: string, name: string) {
+    this.localService.saveData('roleId', String(id));
+    this.localService.saveData('roleName', name);
+    this.router.navigate([`roles/update/${id}`]);
+  }
+
   // functions
   evaluateScreenPermissions() {
     this.permissions = JSON.parse(this.localService.getData("permissions"));
@@ -95,7 +103,7 @@ export class RolesManagementComponent extends SharedMessagesComponent implements
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message,this.errorOperationHeader);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
         this.isLoadingRoles = false;
       }
     );
@@ -116,7 +124,7 @@ export class RolesManagementComponent extends SharedMessagesComponent implements
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message,this.errorOperationHeader);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
         this.isLoadingRoles = false;
       }
     );

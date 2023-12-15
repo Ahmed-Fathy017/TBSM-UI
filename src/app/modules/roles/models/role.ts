@@ -8,7 +8,6 @@ export class Role {
     role: string;
     permissions: string[];
 
-
     constructor() {
         this.id = '';
         this.name = '';

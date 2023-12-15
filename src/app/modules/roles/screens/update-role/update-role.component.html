@@ -1,0 +1,79 @@
+<div class="container-fluid ">
+
+    <div class="container ">
+        <form class="mb-4" [formGroup]="updateRoleForm">
+
+            <div class="row mb-4">
+                <div class="col-md-12 col-lg-12 col-xl-12">
+
+                    <label for="roleName" class="mb-1 d-flex">{{'RolesManagementScreen.RoleName' |
+                        translate}} </label>
+                    <input id="roleName" class="form-control" type="text" formControlName="roleName">
+
+                    <div *ngIf="updateRoleForm.controls.roleName.invalid && (updateRoleForm.controls.roleName.dirty || updateRoleForm.controls.roleName.touched)"
+                        class="alert p-0 m-1 h6">
+
+                        <div class="p-0 m-0" *ngIf="updateRoleForm.controls.roleName.errors?.['required']">
+                            {{'RolesManagementScreen.RoleName' | translate}}
+                            {{'GeneralMessages.Required' | translate}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <app-loading *ngIf="isLoadingPermissions"></app-loading>
+
+            <div class="container">
+                <div class="row permissions">
+                    <div class="col-md-6 col-lg-4 col-xl-3" *ngFor="let group of permissionGroups">
+                        <div class="permission-card w-100 border rounded-top-4 rounded-bottom-4 p-0 mx-2 mb-4">
+                            <div
+                                class="header h5 d-flex justify-content-between align-items-center fw-bold text-white rounded-top-4 px-3 py-3 mb-0">
+                                <div class="custom-margin">
+                                    {{lang != 'en'? group.group_name_ar : group.group_name_en}}
+                                </div>
+
+                                <div class="custom-margin">
+                                    <input class="form-check-input shadow-none mx-2" type="checkbox"
+                                        [checked]="group.checked"
+                                        (change)="reevaluateGroupPermissionsCheckboxes(group.group_name_en)">
+                                </div>
+                            </div>
+                            <div class="content-wrapper mb-2" #contentWrapper>
+                                <div class="content py-1 px-3" *ngFor="let permission of group.permissions">
+                                    <div class="d-flex  justify-content-between flex-row-reverse ">
+                                        <label class="form-check-label h6 fw-bold pt-2" for="flexCheckIndeterminate01">
+                                            {{lang != 'en'? permission.name_ar : permission.name_en}}
+
+                                        </label>
+                                        <input class="form-check-input shadow-none mx-2" type="checkbox"
+                                            [checked]="permission.checked"
+                                            (change)="reevaluateGroupCheckbox(group.group_name_en, permission.id)">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <div class=" row d-flex justify-content-end mb-4">
+
+                <div class="col-md-6 col-lg-6 col-xl-6">
+
+                    <div class="btn" (click)="onUpdateButtonClick()">
+                        <app-loading-button [processing]="isProcessing">
+                            {{'Modal.SaveChangesButton' | translate}}
+                        </app-loading-button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

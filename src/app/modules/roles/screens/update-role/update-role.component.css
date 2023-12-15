@@ -1,0 +1,119 @@
+.btn {
+    color: #ffffff;
+    background-color: #F15A60;
+    border-radius: 12px;
+    width: 100%;
+    margin-top: 1.65rem;
+}
+
+.btn:active {
+    background-color: #F15A60;
+    color: white;
+}
+
+.small-card {
+    box-shadow: 0px 4px 4px 0px #F6F6FB;
+    width: 200px;
+    font-size: 0.7rem;
+}
+
+.permission-card {
+    width: 32%;
+}
+
+.permissions .header {
+    background-color: #100F37;
+
+}
+
+/* .content-wrapper {
+    height: 200px;
+    overflow: auto;
+    font-size: 0.9rem;
+} */
+
+
+/************ Bootstrap Checkboxes Color Edit ************/
+.form-check-input {
+    width: 1.8rem;
+    height: 1.8rem;
+    color: #100F37 !important;
+    background-color: #ffffff !important;
+    
+
+}
+
+.header .form-check-input {
+    border: 2px solid #ffffff;
+    background-color: #100F37 !important;
+}
+
+.header .form-check-input:checked {
+    border: 2px solid #ffffff;
+    background-color: #100F37 !important;
+    background-image: url('../../../../../assets/images/common/check-white.png') !important;
+    background-size: 0.9rem;
+}
+
+.custom-margin {
+    margin: 0 5.5px !important;
+}
+
+.content .form-check-input {
+    border: solid 2px #100F37 !important;
+}
+
+.content .form-check-input:checked {
+    border: 2px solid #100F37;
+    color: #100F37;
+    background-image: url('../../../../../assets/images/common/check.svg') !important;
+    background-size: 0.9rem;
+}
+
+
+/* 
+.content-wrapper::-webkit-scrollbar {
+    width: 6px;
+    background-color: #F5F5F5;
+    border-radius: 5px;
+}
+
+.content-wrapper::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #F5F5F5;
+    border-radius: 5px;
+}
+
+.content-wrapper::-webkit-scrollbar-thumb {
+    background-color: #100F37;
+    border-radius: 2px;
+} */
+
+/* Ensure consistent alignment with the header */
+.content-wrapper {
+    height: 200px;
+    overflow-y: scroll;
+    /* Use 'scroll' instead of 'auto' to always show the scrollbar */
+    font-size: 0.9rem;
+}
+
+/* Adjust the scrollbar styles */
+.content-wrapper::-webkit-scrollbar {
+    width: 6px;
+}
+
+.content-wrapper::-webkit-scrollbar-track {
+    background-color: transparent;
+    /* Set the track background to transparent */
+}
+
+.content-wrapper::-webkit-scrollbar-thumb {
+    background-color: #100F37;
+    border-radius: 2px;
+}
+
+/* Ensure the content doesn't overflow horizontally */
+.content {
+    white-space: nowrap;
+    overflow-x: hidden;
+}

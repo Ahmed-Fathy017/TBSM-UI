@@ -14,6 +14,7 @@ export class ScreensConfigProvider {
     // roles module screens
     static RolesManagementScreen: string = 'Roles.view';
     static CreateRoleScreen: string = 'Roles.create';
+    static UpdateRoleScreen: string = 'Roles.update';
 
     // products module screens
     static ProductsManagementScreen: string = 'Products.view';
