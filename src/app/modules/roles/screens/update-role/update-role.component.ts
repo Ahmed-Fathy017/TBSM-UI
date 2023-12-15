@@ -67,7 +67,6 @@ export class UpdateRoleComponent extends SharedMessagesComponent implements OnIn
   ngOnInit(): void {
     this.roleId = this.activatedRoute.snapshot.paramMap.get('id')!;
 
-    this.isLoadingPermissions = true;
 
     this.getRoles();
   }
@@ -140,6 +139,8 @@ export class UpdateRoleComponent extends SharedMessagesComponent implements OnIn
   // functions
 
   getRoles() {
+    this.isLoadingPermissions = true;
+
     let subscription = this.rolesService.getRoles().subscribe(
       (response: any) => {
         this.roles = response.data;
