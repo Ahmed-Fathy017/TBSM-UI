@@ -107,7 +107,7 @@
                 </div>
 
                 <div class="d-flex">
-                    <div class="mx-4 d-flex justify-content-center align-items-center ">{{refrigerator.averageTemperature}}</div>
+                    <div class="mx-4 d-flex justify-content-center align-items-center ">{{refrigerator.current_temperature}}</div>
                     <div class="mx-2 edit d-flex justify-content-center align-items-center rounded-2"
                         data-bs-toggle="modal" data-bs-target="#editModal"
                         (click)="onUpdateButtonClick(refrigerator.id)" *ngIf="hasRefrigeratorUpdatingAuthority"><i

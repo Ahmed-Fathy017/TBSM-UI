@@ -3,5 +3,6 @@ export class Refrigerator {
     name: string = "";
     temperature_from: number = 0;
     temperature_to: number = 0;
-    averageTemperature: number = 0;
+    current_temperature: number = 0;
+    // averageTemperature: number = 0;
 }

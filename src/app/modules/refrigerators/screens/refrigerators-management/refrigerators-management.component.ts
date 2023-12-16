@@ -168,8 +168,6 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
       (response: any) => {
         this.refrigerators = response.data;
 
-        // calculating average temperatures for refrigerators preview
-        this.refrigerators.map(i => i.averageTemperature = parseInt(((i.temperature_from + i.temperature_to) / 2).toString()));
         this.isLoading = false;
         this.isProcessing = false;
       }, (error: any) => {
@@ -222,9 +220,6 @@ export class RefrigeratorsManagementComponent extends SharedMessagesComponent im
 
         let updatedRefrigerator = this.refrigerators.find(i => i.id == requestDTO.id);
         Object.assign(updatedRefrigerator!, response.data);
-
-        // calculating average temperatures for refrigerators preview
-        updatedRefrigerator!.averageTemperature = parseInt(((updatedRefrigerator!.temperature_from + updatedRefrigerator!.temperature_to) / 2).toString());
 
         this.isLoading = false;
       }, (error: any) => {
