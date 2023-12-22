@@ -100,6 +100,7 @@ export class CreateProductComponent extends SharedMessagesComponent implements O
 
   onPropetyOptionChange(event: any) {
     this.selectedProperty = this.properties.find(i => i.id == event.target.value)!;
+    this.valueInput.nativeElement.value = '';
   }
 
   onAddPropertyButtonClick() {
