@@ -1,6 +1,6 @@
 <div class="container-fluid">
 
-    <div class="container " >
+    <div class="container " *ngIf="hasCreationAuthority">
         <form action="" [formGroup]="createDepartmentForm">
 
             <div class=" row mb-2 ">
@@ -32,7 +32,7 @@
         </form>
     </div>
 
-    <app-page-header [pageTitle]="secondPageTitle" ></app-page-header>
+    <app-page-header [pageTitle]="secondPageTitle" *ngIf="hasCreationAuthority"></app-page-header>
 
     <app-loading *ngIf="isLoading"></app-loading>
 
@@ -48,10 +48,10 @@
                 <div class="d-flex" >
                     <div class="mx-2 edit d-flex justify-content-center align-items-center rounded-2"
                         data-bs-toggle="modal" data-bs-target="#editDepartmentModal"
-                        (click)="onUpdateButtonClick(department.id)"><i class="fa-solid fa-pen-to-square"></i></div>
+                        (click)="onUpdateButtonClick(department.id)"  *ngIf="hasUpdatingAuthority"><i class="fa-solid fa-pen-to-square"></i></div>
                     <div class="mx-2 delete d-flex justify-content-center align-items-center rounded-2"
                         data-bs-toggle="modal" data-bs-target="#deleteDepartmentModal"
-                        (click)="onDeleteButtonClick(department.id)"><i class="fa-solid fa-trash-can"></i></div>
+                        (click)="onDeleteButtonClick(department.id)" *ngIf="hasDeletingAuthority"><i class="fa-solid fa-trash-can"></i></div>
                 </div>
 
             </div>

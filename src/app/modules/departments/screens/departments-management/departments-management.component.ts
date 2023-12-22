@@ -44,6 +44,17 @@ export class DepartmentsManagementComponent extends SharedMessagesComponent impl
 
   isAdmin: boolean = false;
 
+  permissions: string[] = [];
+
+  hasCreationAuthority: boolean = true;
+  hasDeletingAuthority: boolean = true;
+  hasUpdatingAuthority: boolean = true;
+
+  creatinggAuthorityPermission: string = 'Categories.create';
+  deletingAuthorityPermission: string = 'Categories.delete';
+  updatingAuthorityPermission: string = 'Categories.update';
+
+
   constructor(private toastr: ToasterService,
     private departmentsService: DepartmentsService,
     private translateService: TranslateService,
@@ -52,6 +63,7 @@ export class DepartmentsManagementComponent extends SharedMessagesComponent impl
     super(translateService);
     this.screenTitleNavigationService.setScreenKey('DepartmentsManagement');
     this.isAdmin = this.localService.getData('type') == UserTypes.ADMIN;
+    this.evaluateScreenPermissions();
   }
 
   ngOnInit(): void {
@@ -122,6 +134,13 @@ export class DepartmentsManagementComponent extends SharedMessagesComponent impl
   }
 
 
+  evaluateScreenPermissions() {
+    this.permissions = JSON.parse(this.localService.getData("permissions"));
+    
+    this.hasCreationAuthority = this.permissions.findIndex(i => i === this.creatinggAuthorityPermission) != -1 ? true : false;
+    this.hasDeletingAuthority = this.permissions.findIndex(i => i === this.deletingAuthorityPermission) != -1 ? true : false;
+    this.hasUpdatingAuthority = this.permissions.findIndex(i => i === this.updatingAuthorityPermission) != -1 ? true : false;
+  }
 
   getDepartments() {
     this.isLoading = true;
