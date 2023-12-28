@@ -183,6 +183,7 @@ export class PropertiesManagementComponent extends SharedMessagesComponent imple
         this.properties = response.data;
         this.isProcessing = false;
         this.createPropertyForm.reset();
+        this.createPropertyForm.controls.required.setValue(false);
         this.isLoading = false;
       }, (error: any) => {
         if (error.error.errors && error.error.errors.length > 0)
