@@ -204,6 +204,13 @@ export class OperationLogsComponent extends SharedMessagesComponent implements O
         else {
           this.logs.data = response.data;
 
+
+          this.logs.data.push(...response.data);
+          this.logs.data.push(...response.data);
+          this.logs.data.push(...response.data);
+
+
+
           this.setupPagination();
         }
 

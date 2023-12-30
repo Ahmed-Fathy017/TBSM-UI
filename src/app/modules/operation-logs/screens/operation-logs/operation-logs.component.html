@@ -85,7 +85,7 @@
                     <a class="page-link">{{logs.minPage}}</a>
                 </li>
 
-                <li class="page-item fw-bold"
+                <li class="page-more fw-bold"
                     *ngIf="showFirstPageNavigator"
                     (click)="onPreviousMoreClick()"><a class="page-link">...</a></li>
                 <!-- more previous pages -->
@@ -95,7 +95,7 @@
                         [ngClass]="{'active-page': logs.selectedPage === page}">{{page}}</a></li>
 
                 <!-- more next pages -->
-                <li class="page-item fw-bold" (click)="onNextMoreClick()"
+                <li class="page-more fw-bold" (click)="onNextMoreClick()"
                     *ngIf="showLastPageNavigator">
                     <a class="page-link">...</a>
                 </li>

@@ -234,6 +234,34 @@ body::-webkit-scrollbar {
     border-radius: 0;
 }
 
+.page-item:hover a {
+    color: #F15A60;
+    border-bottom: 2px solid #F15A60;
+    border-width: 2px;
+}
+
+.page-more {
+    background-color: #ffffff;
+    cursor: pointer;
+}
+
+.page-more a {
+    background-color: #ffffff;
+    color: #100F37;
+    text-decoration: none;
+    border: none;
+    box-shadow: none;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+}
+
+.page-more:hover a {
+    color: #F15A60;
+    border-bottom: 2px solid transparent;
+    border-width: 2px;
+    background-color: #ffffff;
+}
+
 .navigator {
     background-color: #F15A6040 !important;
 }
@@ -243,11 +271,7 @@ body::-webkit-scrollbar {
     border-bottom: 2px solid transparent !important;
 }
 
-.page-item:hover a {
-    color: #F15A60;
-    border-bottom: 2px solid #F15A60;
-    border-width: 2px;
-}
+
 
 .active-page {
     color: #F15A60 !important;
