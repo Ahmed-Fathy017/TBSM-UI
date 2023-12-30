@@ -259,7 +259,6 @@ body::-webkit-scrollbar {
     color: #F15A60;
     border-bottom: 2px solid transparent;
     border-width: 2px;
-    background-color: #ffffff;
 }
 
 .navigator {
