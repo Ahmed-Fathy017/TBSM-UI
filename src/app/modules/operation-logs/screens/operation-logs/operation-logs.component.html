@@ -10,30 +10,12 @@
                     <label for="fromDate" class="mb-1 d-flex">{{'OprationsLogsScreen.FromDate' |
                         translate}} </label>
                     <input id="fromDate" class="form-control" type="date" formControlName="fromDate">
-
-                    <!-- <div *ngIf="operationLogsForm.controls.fromDate.invalid && (operationLogsForm.controls.fromDate.dirty || operationLogsForm.controls.fromDate.touched)"
-                        class="alert p-0 m-1 h6">
-
-                        <div class="p-0 m-0" *ngIf="operationLogsForm.controls.fromDate.errors?.['required']">
-                            {{'OprationsLogsScreen.FromDate' | translate}}
-                            {{'GeneralMessages.Required' | translate}}
-                        </div>
-                    </div> -->
                 </div>
                 <div class="col-md-6 col-lg-3 col-xl-3">
 
                     <label for="toDate" class="mb-1 d-flex">{{'OprationsLogsScreen.ToDate' |
                         translate}} </label>
                     <input id="toDate" class="form-control" type="date" formControlName="toDate">
-
-                    <!-- <div *ngIf="operationLogsForm.controls.toDate.invalid && (operationLogsForm.controls.toDate.dirty || operationLogsForm.controls.toDate.touched)"
-                        class="alert p-0 m-1 h6">
-
-                        <div class="p-0 m-0" *ngIf="operationLogsForm.controls.toDate.errors?.['required']">
-                            {{'OprationsLogsScreen.ToDate' | translate}}
-                            {{'GeneralMessages.Required' | translate}}
-                        </div>
-                    </div> -->
                 </div>
 
                 <div class="col-md-6 col-lg-3 col-xl-3">
@@ -96,8 +78,31 @@
                         <span class="sr-only">Previous</span>
                     </a>
                 </li>
+
+                <!-- more previous pages -->
+                <li class="page-item fw-bold" (click)="onFirstPageNavigatorClick()"
+                    *ngIf="showFirstPageNavigator">
+                    <a class="page-link">{{logs.minPage}}</a>
+                </li>
+
+                <li class="page-item fw-bold"
+                    *ngIf="showFirstPageNavigator"
+                    (click)="onPreviousMoreClick()"><a class="page-link">...</a></li>
+                <!-- more previous pages -->
+
                 <li class="page-item fw-bold" *ngFor="let page of logs.pages" (click)="onPageChange(page)"><a
-                        class="page-link" [ngClass]="{'active-page': logs.selectedPage === page}">{{page}}</a></li>
+                        class="page-link"
+                        [ngClass]="{'active-page': logs.selectedPage === page}">{{page}}</a></li>
+
+                <!-- more next pages -->
+                <li class="page-item fw-bold" (click)="onNextMoreClick()"
+                    *ngIf="showLastPageNavigator">
+                    <a class="page-link">...</a>
+                </li>
+                <li class="page-item fw-bold" (click)="onLastPageNavigatorClick()"
+                    *ngIf="showLastPageNavigator"><a
+                        class="page-link">{{logs.pagesCount}}</a></li>
+                <!-- more next pages -->
 
                 <li class="page-item" (click)="onNextPageClick()">
                     <a class="page-link navigator rounded-2 fw-bold" aria-label="Next">
