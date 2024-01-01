@@ -1,8 +1,6 @@
 import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { Package } from 'src/app/modules/packages/models/package';
-import { PackagesService } from 'src/app/modules/packages/remote-services/packages.service';
 import { ProductsService } from '../../remote-services/products.service';
 import { Department } from 'src/app/modules/departments/models/department';
 import { Product } from '../../models/product';
@@ -15,7 +13,6 @@ import { PropertiesService } from 'src/app/modules/properties/remote-services/pr
 import { Property } from '../../models/property';
 import { Option } from '../../models/option'
 import { GetProductsRequest } from '../../models/get-products-request';
-import { ProductSearchItems } from '../../models/product-search-items';
 import { ProductFilters } from '../../models/products-filter';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -111,6 +108,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
   hasProductBarcodePrintingAuthority: boolean = true;
   hasProductViewingAuthority: boolean = true;
   hasProductUpdatingAuthority: boolean = true;
+  hasProductQuantityViewAuthority: boolean = true;
   hasPakcageExternalSupplyAuthority: boolean = true;
 
   productDeletionAuthorityPermission: string = 'Products.delete';
@@ -120,6 +118,8 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
   productBarcodePrintingAuthorityPermission: string = 'Products.print_barcode';
   productViewingAuthorityPermission: string = 'Products.show_details';
   productUpdatingAuthorityPermission: string = 'Products.update';
+  productQuantityViewAuthorityPermission: string = 'Products.quantity';
+
 
   isEditMode: boolean = true;
 
@@ -413,6 +413,7 @@ export class ProductsManagementComponent extends SharedMessagesComponent impleme
     this.hasProductUpdatingAuthority = this.permissions.findIndex(i => i === this.productUpdatingAuthorityPermission) != -1 ? true : false;
     this.hasProductBarcodePrintingAuthority = this.permissions.findIndex(i => i === this.productBarcodePrintingAuthorityPermission) != -1 ? true : false;
     this.hasProductIncreasingAuthority = this.permissions.findIndex(i => i === this.productIncreasingAuthorityPermission) != -1 ? true : false;
+    this.hasProductQuantityViewAuthority = this.permissions.findIndex(i => i === this.productQuantityViewAuthorityPermission) != -1 ? true : false;
 
     this.hasProductInternalSupplyDemandingAuthority = this.permissions.findIndex(i => i === this.productInternalSupplyDemandingAuthorityPermission) != -1 ? true : false;
     this.hasProductExternalSupplyDemandingAuthority = this.permissions.findIndex(i => i === this.productExternalSupplyDemandingAuthorityPermission) != -1 ? true : false;

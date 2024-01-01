@@ -1,12 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { OperationLogs } from '../../models/operation-logs';
-// import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { OperationLogsService } from '../../remote-services/operation-logs.service';
 import { GetOperationLogs } from '../../models/get-operations-logs';
-import { Workbook } from 'exceljs';
-import { saveAs } from 'file-saver';
 import { OperationTypes } from '../../models/operation-types';
 import { SharedMessagesComponent } from 'src/app/modules/shared-components/components/shared-messages/shared-messages.component';
 import { TranslateService } from '@ngx-translate/core';
@@ -52,6 +49,25 @@ export class OperationLogsComponent extends SharedMessagesComponent implements O
 
   isSearchApplied: boolean = false;
 
+  // pagination related variables
+  step: number = 1;
+
+  get showFirstPageNavigator(): boolean {
+    return this.logs.pagesCount > this.logs.maxDisplayedPagesCount && this.logs.selectedPage > this.logs.maxDisplayedPagesCount
+  }
+
+  get showLastPageNavigator(): boolean {
+    let maxPageNumberBeforeLastPageDisplay = 0;
+    if (this.logs.pagesCount % this.logs.maxDisplayedPagesCount > 0) {
+      let division = Math.floor(this.logs.pagesCount / this.logs.maxDisplayedPagesCount);
+      maxPageNumberBeforeLastPageDisplay = division * this.logs.maxDisplayedPagesCount;
+    }
+    else
+      maxPageNumberBeforeLastPageDisplay = this.logs.pagesCount - this.logs.maxDisplayedPagesCount;
+
+    return this.logs.pagesCount > this.logs.maxDisplayedPagesCount && this.logs.selectedPage <= maxPageNumberBeforeLastPageDisplay;
+  }
+
   constructor(private toastr: ToasterService,
     private operationLogsService: OperationLogsService,
     private translateService: TranslateService,
@@ -71,13 +87,6 @@ export class OperationLogsComponent extends SharedMessagesComponent implements O
   }
 
   onSearchButtonClick() {
-    // Object.keys(this.operationLogsForm.controls).forEach(field => {  
-    //   const control = this.operationLogsForm.get(field);            
-    //   if (control instanceof FormControl) {             
-    //     control.markAsTouched({ onlySelf: true });
-    //   } 
-    // });
-
     if (this.operationLogsForm.valid) {
       let requestDTO: GetOperationLogs = new GetOperationLogs();
 
@@ -94,25 +103,11 @@ export class OperationLogsComponent extends SharedMessagesComponent implements O
   }
 
   onExportButtonClick() {
-    // if (this.logs.data.length > 0) {
-
-    //   let reportData = {
-    //     title: 'Operation Logs Report',
-    //     data: this.logs.data,
-    //     headers: ['Operation']
-    //   }
-
-    //   this.isProcessing = true;
-    //   this.exportExcel(reportData);
-    // }
-    // else
-    //   this.toastr.info('لا توجد بيانات');
-
-    Object.keys(this.operationLogsForm.controls).forEach(field => {  
-      const control = this.operationLogsForm.get(field);            
-      if (control instanceof FormControl) {             
+    Object.keys(this.operationLogsForm.controls).forEach(field => {
+      const control = this.operationLogsForm.get(field);
+      if (control instanceof FormControl) {
         control.markAsTouched({ onlySelf: true });
-      } 
+      }
     });
 
     if (this.operationLogsForm.valid) {
@@ -141,15 +136,61 @@ export class OperationLogsComponent extends SharedMessagesComponent implements O
   onNextPageClick() {
 
     let nextPageNumber = this.logs.selectedPage + 1;
-    if (nextPageNumber <= this.logs.pagesCount)
+    if (nextPageNumber <= this.logs.pagesCount) {
+      let maxDisplayedPage = Math.max(...this.logs.pages);
+      if (this.logs.selectedPage == maxDisplayedPage)
+        this.logs.pages = this.returnIncrementedPages(maxDisplayedPage);
+
       this.onPageChange(nextPageNumber)
+    }
+  }
+
+  onNextMoreClick() {
+    let maxDisplayedPage = Math.max(...this.logs.pages);
+
+    if (maxDisplayedPage != this.logs.pagesCount) {
+      this.logs.pages = this.returnIncrementedPages(maxDisplayedPage);
+      this.onPageChange(maxDisplayedPage + 1);
+    }
   }
 
   onPreviousPageClick() {
 
     let previousPageNumber = this.logs.selectedPage - 1;
-    if (previousPageNumber >= this.logs.minPage)
-      this.onPageChange(previousPageNumber)
+    if (previousPageNumber >= this.logs.minPage) {
+      let minDisplayedPage = Math.min(...this.logs.pages);
+      if (this.logs.selectedPage == minDisplayedPage)
+        this.logs.pages = this.returnDecrementedPages(minDisplayedPage - this.logs.maxDisplayedPagesCount);
+
+      this.onPageChange(previousPageNumber);
+    }
+  }
+
+  onPreviousMoreClick() {
+    let minDisplayedPage = Math.min(...this.logs.pages);
+    if (minDisplayedPage != this.logs.minPage) {
+      this.logs.pages = this.returnDecrementedPages(minDisplayedPage - this.logs.maxDisplayedPagesCount);
+      this.onPageChange(minDisplayedPage - 1);
+    }
+  }
+
+  onFirstPageNavigatorClick() {
+    this.logs.pages = this.returnDecrementedPages(this.logs.minPage);
+
+    this.onPageChange(this.logs.minPage);
+  }
+
+  onLastPageNavigatorClick() {
+    let maxPageNumberBeforeLastPageDisplay = 0;
+    if (this.logs.pagesCount % this.logs.maxDisplayedPagesCount > 0) {
+      let division = Math.floor(this.logs.pagesCount / this.logs.maxDisplayedPagesCount);
+      maxPageNumberBeforeLastPageDisplay = division * this.logs.maxDisplayedPagesCount;
+    }
+    else
+      maxPageNumberBeforeLastPageDisplay = this.logs.pagesCount - this.logs.maxDisplayedPagesCount;
+
+    this.logs.pages = this.returnIncrementedPages(maxPageNumberBeforeLastPageDisplay);
+    this.onPageChange(this.logs.pagesCount);
   }
 
   // functions
@@ -162,6 +203,7 @@ export class OperationLogsComponent extends SharedMessagesComponent implements O
           window.open(response.data, "_blank");
         else {
           this.logs.data = response.data;
+
           this.setupPagination();
         }
 
@@ -174,7 +216,7 @@ export class OperationLogsComponent extends SharedMessagesComponent implements O
         if (error.error.errors && error.error.errors.length > 0)
           this.toastr.error(error.error.errors[0].value, error.error.message);
         else
-          this.toastr.error(error.error.message,this.errorOperationHeader);
+          this.toastr.error(error.error.message, this.errorOperationHeader);
       }
     );
 
@@ -183,80 +225,38 @@ export class OperationLogsComponent extends SharedMessagesComponent implements O
 
   setupPagination() {
     this.logs.pagesCount = Math.ceil(this.logs.data.length / this.pageSize);
-    this.logs.pages = Array.from({ length: this.logs.pagesCount }, (_, index) => index + 1);
+    this.logs.pages = this.returnIncrementedPages(0);
+
     this.logs.selectedPage = this.logs.lastSelectedPage ?? 1;
     this.logs.minPage = 1;
 
     this.onPageChange(this.logs.selectedPage);
   }
 
+  returnIncrementedPages(start: number) {
+    let pages: number[] = [];
 
-  // exportExcel(excelData: any) {
-  //   console.log(excelData)
-  //   //Title, Header & Data
-  //   const title = excelData.title;
-  //   const header = excelData.headers
-  //   const data = excelData.data;
+    for (let i = 0; i < this.logs.maxDisplayedPagesCount; i++) {
+      let pageNumber = (start + 1) + this.step * i;
+      // checks if the page number is more than the maximum pages count 
+      // or not and so to prevent (eg. 9 10 11 12 while the maximum pages count is 10)
+      // so the display will be 9 10 only as required
+      if (pageNumber <= this.logs.pagesCount)
+        pages.push(pageNumber);
+      else
+        break;
+    }
 
-  //   //Create a workbook with a worksheet
-  //   let workbook = new Workbook();
-  //   let worksheet = workbook.addWorksheet('Operation Logs Report');
+    return pages;
+  }
 
-  //   // Define a custom font for Arabic text
-  //   const arabicFont = { name: 'Arial', family: 2, size: 12, bold: false, italic: false };
+  returnDecrementedPages(start: number) {
+    let pages: number[] = [];
+    for (let i = 0; i < this.logs.maxDisplayedPagesCount; i++) {
+      let pageNumber = start + this.step * i;
+      pages.push(pageNumber);
+    }
 
-  //   // Set the worksheet direction to RTL for Arabic text
-  //   worksheet.views = [{ rightToLeft: true }];
-
-  //   // Date
-  //   let d = new Date();
-  //   let date = d.getDate() + '-' + d.getMonth() + '-' + d.getFullYear() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
-
-  //   //Adding Header Row
-  //   let headerRow = worksheet.addRow(header);
-  //   headerRow.eachCell((cell, number) => {
-  //     cell.fill = {
-  //       type: 'pattern',
-  //       pattern: 'solid',
-  //       fgColor: { argb: '4167B8' },
-  //       bgColor: { argb: '' }
-  //     }
-  //     cell.font = {
-  //       bold: true,
-  //       color: { argb: 'FFFFFF' },
-  //       size: 12
-  //     }
-  //   })
-
-  //   //Adding Data with Conditional Formatting
-  //   data.forEach((d: any) => {
-  //     console.log(d)
-  //     worksheet.addRow([d]).font = arabicFont; // Add Arabic text and apply font settings;
-  //   }
-  //   );
-
-  //   worksheet.getColumn(1).width = 100;
-  //   worksheet.addRow([]);
-
-  //   //Footer Row
-  //   let footerRow = worksheet.addRow(['Operation Logs Report Generated at ' + date]);
-  //   footerRow.getCell(1).fill = {
-  //     type: 'pattern',
-  //     pattern: 'solid',
-  //     fgColor: { argb: 'FFB050' }
-  //   };
-
-  //   //Merge Cells
-  //   // worksheet.mergeCells(`A${footerRow.number}:F${footerRow.number}`);
-
-  //   //Generate & Save Excel File
-  //   workbook.xlsx.writeBuffer().then((data) => {
-  //     let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-  //     saveAs(blob, title + '.xlsx');
-  //   })
-
-  //   this.isProcessing = false;
-
-  // }
-
+    return pages;
+  }
 }

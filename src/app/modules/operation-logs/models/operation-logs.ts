@@ -6,6 +6,7 @@ export class OperationLogs {
 
     // UI properties
     pagesCount:number =  0;
+    maxDisplayedPagesCount: number = 4;
     pages: number[] = [];
     selectedPage: number = 1;
     // takes the reference for the last selected page before deletion, 
