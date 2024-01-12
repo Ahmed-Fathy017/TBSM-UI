@@ -79,12 +79,14 @@ export class ProductPrintComponent implements OnInit, OnDestroy {
     ^XZ`;
 
 
+    // old implementation and new format (Code 128 format)
     // `^XA^CI27^FO160,40^BY3^BC,90,N,N,N^FD>;${this.productInfo?.number}
     // ^FS^FO90,150^CF0,18^FD ID:${this.productInfo?.number} / Receive: ${this.productInfo?.print_date!} (${this.productInfo?.print_time!}) 
     // ^FS^FO90,170^CF0,18^FD ${this.productInfo?.productNameDepartment}
     // ^FS^FO90,190^CF0,18^FD Expiry Date : ${this.productInfo?.expiration_date} 
     // ^FS^CF0,18^FO200,10^FD TBSM - ${this.productInfo?.warehouse!} ^FS^XZ`;
 
+    // old implementation and old format
     // const zpl = `
     // ^XA^CI27^FO160,40^BY3^BCN,90,N,N^FD>;${this.productInfo?.number}
     // ^FS^FO90,150^CF0,18^FD ID:${this.productInfo?.number} / Receive: ${this.productInfo?.print_date!} (${this.productInfo?.print_time!}) 
